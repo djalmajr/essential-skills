@@ -1,0 +1,28 @@
+{
+  "skills": [
+    {
+      "source": "zomme/essential-skills",
+      "skills": [
+        "daily",
+        "delivery-management",
+        "epic",
+        "intake",
+        "onboarding",
+        "plan",
+        "post-impl",
+        "proto-ui",
+        "refinement",
+        "retro",
+        "roadmap-planning",
+        "scan-review",
+        "scrum-ceremonies",
+        "scrum-planning",
+        "sprint-metrics",
+        "sprint-planning",
+        "sprint-review",
+        "status-report",
+        "story"
+      ]
+    }
+  ]
+}

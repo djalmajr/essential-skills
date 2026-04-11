@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# OS
+.DS_Store
+*.swp
+*~
+
+# Editor
+.vscode/
+.idea/
+
+# Skills (installed via npx skills add)
+.claude/
+.c cursor/
+.codeium/
+.copilot/
+.codex/
+.roo/
+.gemini/
+.trae/
+.kiro/
+.continue/
+.agents/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Lock files
+skills-lock.json
+.skill-lock.json
+
+# Temp
+tmp/
+temp/
