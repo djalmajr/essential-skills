@@ -50,7 +50,7 @@ You've just implemented rate limiting on the API and want a quality gate before 
 
    **Quality:**
    - ✅ Tests cover rate-limited and unrestricted scenarios
-   - [x] Functions are small and focused
+   - ✅ Functions are small and focused
    - ❌ Duplicated timestamp comparison logic in two places — flagged
 
 4. The skill produces a report with issues grouped by category, red flags highlighted, and actionable suggestions:
