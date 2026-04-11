@@ -1,127 +1,128 @@
 # Essential Skills — Zomme Delivery Framework
 
-Coleção de skills para acompanhamento de entregas ágeis com agentes de IA (opencode).
+Skills for agile delivery management powered by AI agents (opencode).
 
 ## Installing
 
 ```bash
-# Todas as skills
+# All skills
 npx skills add zomme/essential-skills --all
 
-# Skills específicas
-npx skills add zomme/essential-skills --skill delivery-daily --skill scrum-plan
+# Specific skills
+npx skills add zomme/essential-skills --skill agile-daily --skill agile-plan
 ```
 
 ## Skills (22)
 
-| # | Skill | Categoria |
-|---|-------|-----------|
-| 1 | delivery-daily | Delivery |
-| 2 | delivery-status-report | Delivery |
-| 3 | delivery-post-impl | Delivery |
-| 4 | delivery-delivery | Delivery |
-| 5 | scrum-plan | Scrum |
-| 6 | scrum-story | Scrum |
-| 7 | scrum-epic | Scrum |
-| 8 | scrum-refinement | Scrum |
-| 9 | scrum-roadmap | Scrum |
-| 10 | scrum-planning-router | Scrum |
-| 11 | scrum-ceremonies-router | Scrum |
-| 12 | scrum-sprint-planning | Scrum |
-| 13 | scrum-sprint-review | Scrum |
-| 14 | scrum-sprint-metrics | Scrum |
-| 15 | scrum-retro | Scrum |
-| 16 | quality-scan-review | Quality |
-| 17 | quality-proto-ui | Quality |
-| 18 | intake | Intake |
-| 19 | onboarding | Intake |
+| # | Skill | Category |
+|---|-------|----------|
+| 1 | agile-daily | Agile |
+| 2 | agile-status-report | Agile |
+| 3 | agile-post-impl | Agile |
+| 4 | agile-delivery | Agile |
+| 5 | agile-plan | Agile |
+| 6 | agile-story | Agile |
+| 7 | agile-epic | Agile |
+| 8 | agile-refinement | Agile |
+| 9 | agile-roadmap | Agile |
+| 10 | agile-planning-router | Agile |
+| 11 | agile-ceremonies-router | Agile |
+| 12 | agile-sprint-planning | Agile |
+| 13 | agile-sprint-review | Agile |
+| 14 | agile-sprint-metrics | Agile |
+| 15 | agile-retro | Agile |
+| 16 | agile-scan-review | Agile |
+| 17 | agile-proto | Agile |
+| 18 | agile-intake | Agile |
+| 19 | agile-onboarding | Agile |
 | 20 | wiki-ingest | Wiki |
 | 21 | wiki-lint | Wiki |
 | 22 | wiki-query | Wiki |
 
-## Wiki (Padrão Karpathy)
+## Wiki (Karpathy Pattern)
 
-Este projeto usa o padrão **LLM Wiki** para manter conhecimento organizacional versionado e consultável por IA.
+This project uses the **LLM Wiki** pattern to maintain versioned, AI-consultable organizational knowledge.
 
-### Como funciona
+### How it works
 
-Cada projeto que instala essas skills cria sua própria `wiki/` local. As skills ingiram fontes (notas, decisões, documentos) e a IA consulta a wiki antes de responder sobre o domínio.
+Each project that installs these skills creates its own local `wiki/`. Skills ingest sources (notes, decisions, documents) and the AI consults the wiki before answering domain questions.
 
-### Estrutura criada pelo projeto
+### Structure created by the project
 
 ```
 wiki/
-├── CONVENTIONS.md   # Schema, frontmatter, operações
-├── index.md         # Catálogo navegável
-├── log.md           # Histórico de operações
-├── sources/         # Sumários de fontes ingeridas
-├── business/        # Regras de negócio (audience: business)
-├── ops/             # Procedimentos operacionais (audience: ops)
-└── patterns/       # Padrões identificados na prática
-raw/                 # Fontes originais (antes de ingestão)
+├── CONVENTIONS.md   # Schema, frontmatter, operations
+├── index.md         # Navigable catalog
+├── log.md           # Operation history
+├── sources/         # Source summaries
+├── business/        # Business rules (audience: business)
+├── ops/             # Operational procedures (audience: ops)
+└── patterns/       # Patterns identified in practice
+raw/                 # Original sources (before ingestion)
 ```
 
-### Skills Wiki
+### Wiki Skills
 
-| Skill | Quando usar |
+| Skill | When to use |
 |-------|-------------|
-| `/wiki-ingest` | Ingerir nova fonte na wiki (documentos, notas, decisões) |
-| `/wiki-query` | Perguntar sobre algo que está na wiki |
-| `/wiki-lint` | Auditar e manter a wiki organizada |
+| `/wiki-ingest` | Ingest new source into wiki (documents, notes, decisions) |
+| `/wiki-query` | Ask about something in the wiki |
+| `/wiki-lint` | Audit and organize the wiki |
 
-### Setup no projeto
+### Project setup
 
-Ao instalar em um novo projeto, crie a estrutura inicial:
+When installing in a new project, create the initial structure:
 
 ```bash
 mkdir -p wiki/sources raw
 touch wiki/CONVENTIONS.md wiki/index.md wiki/log.md
 ```
 
-O AGENTS.md do projeto instrui a IA a consultar a wiki antes de responder sobre o domínio.
+The project's AGENTS.md instructs the AI to consult the wiki before answering domain questions.
 
-Inspirado em [LLM Wiki — Karpathy](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
+Inspired by [LLM Wiki — Karpathy](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
 
-## Documentação
+## Documentation
 
-[`docs/`](docs/) — guias de uso organizados por categoria.
+[`docs/`](docs/) — usage guides organized by category.
 
-## Fluxo
+## Workflow
 
 ```
-intake → scrum-roadmap → scrum-refinement → scrum-epic/scrum-story/scrum-plan
-                                                              ↓
-                                                    quality-scan-review (opcional)
-                                                              ↓
-                                              delivery-daily / delivery-status-report
-                                                              ↓
-                                              delivery-post-impl → scrum-sprint-review
-                                                              ↓
-                                                          scrum-retro
-                                                              ↓
-                                                scrum-sprint-metrics → próximo ciclo
+agile-intake → agile-roadmap → agile-refinement → agile-epic/agile-story/agile-plan
+                                                                    ↓
+                                                      agile-scan-review (optional)
+                                                                    ↓
+                                                    agile-daily / agile-status-report
+                                                                    ↓
+                                                    agile-post-impl → agile-sprint-review
+                                                                    ↓
+                                                                agile-retro
+                                                                    ↓
+                                                      agile-sprint-metrics → next cycle
 ```
 
 ## Stack
 
-- opencode como agente de IA
-- Bun como runtime
-- Scrum leve + IA como par
+- opencode as AI agent
+- Bun as runtime
+- Lean Scrum + AI as pair
 
-## Como usar
+## How to use
 
-Cada skill é ativada com `/skill-name`:
+Each skill is invoked with `/skill-name`:
 
 ```
-/delivery-daily
-/scrum-refinement
-/scrum-plan
-/scrum-story
+/agile-intake
+/agile-refinement
+/agile-plan
+/agile-story
+/agile-daily
 /wiki-query
 /wiki-ingest
 ```
 
-Para saber qual skill usar:
-- `/delivery-delivery` — qual acompanhamento
-- `/scrum-planning-router` — qual artefato de planejamento
-- `/scrum-ceremonies-router` — qual cerimônia
+To know which skill to use:
+- `/agile-delivery` — which tracking type
+- `/agile-planning-router` — which planning artifact
+- `/agile-ceremonies-router` — which ceremony

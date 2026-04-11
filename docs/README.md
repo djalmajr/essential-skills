@@ -1,70 +1,75 @@
 # Essential Skills — Documentation
 
-Guias de uso organizados por categoria.
+Usage guides organized by category.
 
-## Delivery
+## Agile — Delivery
 
-| Skill | Uso |
-|-------|-----|
-| [delivery-daily](delivery/delivery-daily.md) | Status diário: progresso, bloqueios, próximo passo |
-| [delivery-status-report](delivery/delivery-status-report.md) | Consolidado de período/marcos |
-| [delivery-post-impl](delivery/delivery-post-impl.md) | Fechamento de entrega com verificação |
-| [delivery-delivery](delivery/delivery-delivery.md) | Roteador: qual acompanhamento usar |
+| Skill | Usage |
+|-------|-------|
+| [agile-daily](agile/agile-daily.md) | Daily status: progress, blockers, next step |
+| [agile-status-report](agile/agile-status-report.md) | Period/milestone consolidated status |
+| [agile-post-impl](agile/agile-post-impl.md) | Delivery closure with verification |
+| [agile-delivery](agile/agile-delivery.md) | Router: which tracking type to use |
 
-## Scrum
+## Agile — Planning
 
-| Skill | Uso |
-|-------|-----|
-| [scrum-plan](scrum/scrum-plan.md) | Mudança pequena (XS/S) → plano de execução |
-| [scrum-story](scrum/scrum-story.md) | Entrega média (M) → story com critérios de aceite |
-| [scrum-epic](scrum/scrum-epic.md) | Iniciativa grande → backlog de stories + roadmap |
-| [scrum-refinement](scrum/scrum-refinement.md) | Backlog grande → stories executáveis |
-| [scrum-roadmap](scrum/scrum-roadmap.md) | Roadmap trimestral ou por epic |
-| [scrum-planning-router](scrum/scrum-planning-router.md) | Roteador: qual artefato de planejamento usar |
-| [scrum-ceremonies-router](scrum/scrum-ceremonies-router.md) | Roteador: qual cerimônia Scrum usar |
-| [scrum-sprint-planning](scrum/scrum-sprint-planning.md) | Planejar ciclo: objetivo, itens, capacidade |
-| [scrum-sprint-review](scrum/scrum-sprint-review.md) | Review + demo para stakeholders |
-| [scrum-sprint-metrics](scrum/scrum-sprint-metrics.md) | Métricas objetivas da sprint |
-| [scrum-retro](scrum/scrum-retro.md) | Retrospectiva com ações de melhoria |
+| Skill | Usage |
+|-------|-------|
+| [agile-plan](agile/agile-plan.md) | Small change (XS/S) → execution plan |
+| [agile-story](agile/agile-story.md) | Medium delivery (M) → story with acceptance criteria |
+| [agile-epic](agile/agile-epic.md) | Large initiative → story backlog + roadmap |
+| [agile-refinement](agile/agile-refinement.md) | Large backlog → executable stories |
+| [agile-roadmap](agile/agile-roadmap.md) | Quarterly or epic roadmap |
+| [agile-planning-router](agile/agile-planning-router.md) | Router: which planning artifact to use |
 
-## Quality
+## Agile — Ceremonies
 
-| Skill | Uso |
-|-------|-----|
-| [quality-scan-review](quality/quality-scan-review.md) | Revisar código antes de commit/PR |
-| [quality-proto-ui](quality/quality-proto-ui.md) | Protótipos UI interativos |
+| Skill | Usage |
+|-------|-------|
+| [agile-ceremonies-router](agile/agile-ceremonies-router.md) | Router: which Scrum ceremony to run |
+| [agile-sprint-planning](agile/agile-sprint-planning.md) | Plan cycle: objective, items, capacity |
+| [agile-sprint-review](agile/agile-sprint-review.md) | Review + demo for stakeholders |
+| [agile-sprint-metrics](agile/agile-sprint-metrics.md) | Objective sprint metrics |
+| [agile-retro](agile/agile-retro.md) | Retrospective with improvement actions |
 
-## Intake
+## Agile — Quality
 
-| Skill | Uso |
-|-------|-----|
-| [intake](intake/intake.md) | Problemas vagos → documento de intake |
-| [onboarding](intake/onboarding.md) | Onboarding de novos membros |
+| Skill | Usage |
+|-------|-------|
+| [agile-scan-review](agile/agile-scan-review.md) | Review code before commit/PR |
+| [agile-proto](agile/agile-proto.md) | Interactive UI prototypes |
 
-## Wiki (Padrão Karpathy)
+## Agile — Intake
 
-Sistema de conhecimento organizacional mantido pela IA.
+| Skill | Usage |
+|-------|-------|
+| [agile-intake](agile/agile-intake.md) | Vague problems → structured intake document |
+| [agile-onboarding](agile/agile-onboarding.md) | New member onboarding |
 
-| Skill | Uso |
-|-------|-----|
-| `wiki-ingest` | Ingerir nova fonte na wiki |
-| `wiki-query` | Perguntar sobre algo na wiki |
-| `wiki-lint` | Auditar e organizar a wiki |
+## Wiki (Karpathy Pattern)
 
-**Nota:** As skills wiki operam na pasta `wiki/` do projeto. Cada projeto cria sua própria wiki local.
+AI-maintained organizational knowledge system.
 
-## Fluxo Completo
+| Skill | Usage |
+|-------|-------|
+| [wiki-ingest](wiki/wiki-ingest.md) | Ingest new source into wiki |
+| [wiki-query](wiki/wiki-query.md) | Ask about something in the wiki |
+| [wiki-lint](wiki/wiki-lint.md) | Audit and organize the wiki |
+
+**Note:** Wiki skills operate on the project's own `wiki/` folder. Each project manages its own local wiki.
+
+## Complete Workflow
 
 ```
-intake → scrum-roadmap → scrum-refinement → scrum-epic/scrum-story/scrum-plan
-                                                              ↓
-                                                    quality-scan-review (opcional)
-                                                              ↓
-                                              delivery-daily / delivery-status-report
-                                                              ↓
-                                              delivery-post-impl → scrum-sprint-review
-                                                              ↓
-                                                          scrum-retro
-                                                              ↓
-                                                scrum-sprint-metrics → próximo ciclo
+agile-intake → agile-roadmap → agile-refinement → agile-epic/agile-story/agile-plan
+                                                                    ↓
+                                                      agile-scan-review (optional)
+                                                                    ↓
+                                                    agile-daily / agile-status-report
+                                                                    ↓
+                                                    agile-post-impl → agile-sprint-review
+                                                                    ↓
+                                                                agile-retro
+                                                                    ↓
+                                                      agile-sprint-metrics → next cycle
 ```
