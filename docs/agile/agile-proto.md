@@ -1,62 +1,75 @@
-# Proto UI
+# agile-proto
 
-Creates interactive UI prototypes with Bun + React + shadcn/ui + Tailwind v4.
+Creates standalone interactive UI prototypes using Bun + React + shadcn/ui + Tailwind v4, designed to validate UI flows before committing to implementation. Prototypes live in a self-contained `client-proto/` directory with their own build tooling, component library, and routing.
 
 ## When to use
 
-- "Create prototype", "mockup screens"
-- Explore UI flows before implementing
-- Validate ideas with stakeholders
-- Test shadcn components
+- You need to validate a UI flow before implementing it in production
+- You want an interactive prototype instead of static mockups
+- You're exploring a user journey (login flow, checkout, onboarding wizard)
+- Someone asks to "prototype", "create proto", or "mockup screens"
+- You need to demo a feature concept to stakeholders
 
 ## When NOT to use
 
-- Production implementation
-- Project needing complex backend
-- Static prototype (without interactivity)
+- You need production code — prototypes are throwaway; use `/agile-story` then `/agile-plan` instead
+- You need static documentation — use a wiki or design tool
+- You're tracking delivery — use `/agile-daily` or `/agile-status-report`
+- You need to test business logic or APIs — prototypes mock data, not real backends
 
-## Stack
+## End-to-end examples
 
-- **Bun** — dev server with HMR, native JSX/TSX
-- **React 19** — components
-- **shadcn/ui** — component library
-- **Tailwind CSS v4** — styling
-- **wouter** — client-side routing
-- **Biome** — linting and formatting
+### Example 1: Prototyping a new onboarding wizard
 
-## How to use
+The design team wants to validate a 4-step onboarding wizard before engineering builds it:
 
-```bash
-# 1. Create project directory
-mkdir -p my-proto/client-proto && cd my-proto/client-proto
+1. Start by invoking: `/agile-proto onboarding wizard with 4 steps`
+2. The skill checks if `client-proto/` exists. If not, it bootstraps the full stack: Bun project, React 19, shadcn/ui, Tailwind v4, wouter router, Icon component, Biome linter.
+3. It creates the route files:
+   - `src/routes/onboarding/step-1.tsx` — Account info
+   - `src/routes/onboarding/step-2.tsx` — Team setup
+   - `src/routes/onboarding/step-3.tsx` — Integration preferences
+   - `src/routes/onboarding/step-4.tsx` — Confirmation
+   - `src/routes/onboarding/OnboardingShell.tsx` — Layout with progress bar
+4. It uses shadcn components: `Button`, `Input`, `Select`, `Card`, `Progress`, `Stepper`.
+5. It uses `<Icon icon="lucide:arrow-right" />` for navigation icons — **never** `lucide-react` directly.
+6. Mock data is inline in the route files — pre-filled forms, hardcoded team list.
+7. Run: `cd client-proto && bun run dev` → opens at `http://localhost:3000`
+8. Stakeholders click through the wizard and validate the flow.
 
-# 2. Bootstrap
-npx proto-ui
+### Example 2: Prototyping a settings page with tabs
 
-# 3. Run
-bun src/index.html
-```
+You need to validate the info architecture for a settings page with tabs:
 
-## Structure
+1. Start by invoking: `/agile-proto settings page with account, notifications, and billing tabs`
+2. The skill creates:
+   - `src/routes/settings/SettingsShell.tsx` — Tab layout with `<Tabs>` from shadcn
+   - `src/routes/settings/account.tsx` — Account form
+   - `src/routes/settings/notifications.tsx` — Notification toggles
+   - `src/routes/settings/billing.tsx` — Billing info
+3. All forms are pre-filled with mock data.
+4. Routing via wouter: `<Route path="/settings" component={SettingsShell} />`
+5. Biome check passes: `cd client-proto && bun run check`
 
-```
-client-proto/
-├── src/
-│   ├── index.html      # Entry point
-│   ├── index.tsx       # createRoot + Router
-│   ├── index.css       # Tailwind + design tokens
-│   ├── components/ui/  # shadcn components
-│   └── routes/         # Pages
-├── components.json     # shadcn config
-└── biome.json          # Biome config
-```
+## Key stack rules
 
-## Tip
+- **Self-contained:** `client-proto/` has its own `package.json`, `tsconfig.json`, `biome.json`, `bunfig.toml`
+- **shadcn components only:** Never recreate components that shadcn provides. All 57+ components are pre-installed.
+- **Icons via `<Icon>`:** Use `<Icon icon="lucide:search" />`. Never import from `lucide-react`.
+- **Routing via wouter:** `Switch`, `Route`, `useLocation`, `Link`.
+- **Design tokens in index.css** via CSS custom properties + Tailwind `@theme inline`.
+- **Mock data inline:** Forms pre-filled, lists hardcoded. Data lives in the route file.
+- **One route per file:** Feature-based organization (`routes/settings/account.tsx`).
 
-Proto is for **UX validation**, not for production. Keep it simple and focused on the flow you're testing.
+## Tips & pitfalls
 
-## Available components
+- Prototypes are throwaway. Don't architect for reuse — architect for clarity.
+- Never import from `lucide-react`. Always use `<Icon icon="lucide:xxx" />`.
+- Never leave blank forms. Pre-fill all mock data so reviewers can click through real scenarios.
+- Root container must have `overflow: hidden` and `height: 100%`. Only the content area scrolls.
+- Run `bun run check` (Biome) before sharing — if it doesn't pass, the prototype has issues.
 
-57+ shadcn/ui components: Button, Dialog, DropdownMenu, Form, Input, Select, Table, Tabs, etc.
+## Chaining
 
-See `client-proto/src/components/ui/` for the complete list.
+- **Before:** `/agile-intake` (capture the need), `/agile-story` (if the prototype validates a story)
+- **After:** Once the flow is validated, use `/agile-story` or `/agile-plan` to plan the real implementation.

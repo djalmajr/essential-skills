@@ -58,24 +58,6 @@ AI-maintained organizational knowledge system.
 
 **Note:** Wiki skills operate on the project's own `wiki/` folder. Each project manages its own local wiki.
 
-## Complete Workflow
+## Workflow
 
-```mermaid
-flowchart TD
-    A[intake] --> B[roadmap]
-    B --> C[refinement]
-    C --> D[epic]
-    C --> E[story]
-    C --> F[plan]
-    D -.-> G[scan-review]
-    E -.-> G
-    F -.-> G
-    G --> H[daily]
-    G --> I[status-report]
-    H -.-> J[post-impl]
-    I -.-> J
-    J --> K[sprint-review]
-    K --> L[retro]
-    L --> M[sprint-metrics]
-    M --> next[Next Cycle]
-```
+The complete workflow diagram is in [`agile/`](agile/README.md) — the entry point for understanding how skills connect.

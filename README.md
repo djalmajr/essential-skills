@@ -84,33 +84,7 @@ Inspired by [LLM Wiki — Karpathy](https://gist.github.com/karpathy/442a6bf5559
 
 ## Documentation
 
-[`docs/`](docs/) — usage guides organized by category.
-
-## Workflow
-
-```mermaid
-flowchart TD
-    A[agile-intake] --> B[agile-roadmap]
-    B --> C[agile-refinement]
-    C --> D[agile-epic]
-    C --> E[agile-story]
-    C --> F[agile-plan]
-    D -.-> G[agile-scan-review]
-    E -.-> G
-    F -.-> G
-    G --> H[agile-daily]
-    G --> I[agile-status-report]
-    H -.-> J[agile-post-impl]
-    I -.-> J
-    J --> K[agile-sprint-review]
-    K --> L[agile-retro]
-    L --> M[agile-sprint-metrics]
-    M --> next[Next Cycle]
-
-    style G fill:#f9f,stroke:#333,stroke-width:2px
-    style H fill:#bbf,stroke:#333,stroke-width:2px
-    style I fill:#bbf,stroke:#333,stroke-width:2px
-```
+[`docs/`](docs/) — usage guides organized by category. Workflow diagram in [`docs/agile/`](docs/agile/README.md).
 
 ## Stack
 
