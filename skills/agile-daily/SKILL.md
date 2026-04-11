@@ -66,6 +66,12 @@ Use `~/.agents/templates/daily-delivery.md` as base.
 
 ## Relationship with the flow
 
-```
-/plan → execution → /daily → /daily → ... → /post-impl → /retro
+```mermaid
+flowchart LR
+    A[plan] --> B[execution]
+    B --> C[daily]
+    C --> D[daily]
+    D --> E[...]
+    E --> F[post-impl]
+    F --> G[retro]
 ```

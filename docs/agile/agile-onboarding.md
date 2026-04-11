@@ -20,14 +20,19 @@ Guides new members through the agile workflow with AI, in a practical and progre
 **Objective:** know what exists and why.
 
 1. Present the complete flow:
-   ```
-   intake → roadmap → refinement → epic/story/plan
-                                         ↓
-                                   scan-review
-                                         ↓
-                                   daily/status/post-impl
-                                         ↓
-                                     retro
+   ```mermaid
+   flowchart LR
+       A[intake] --> B[roadmap]
+       B --> C[refinement]
+       C --> D{epic or story or plan}
+       D --> E[epic]
+       D --> F[story]
+       D --> G[plan]
+       E -.-> H[scan-review]
+       F -.-> H
+       G -.-> H
+       H --> I{daily or status or post-impl}
+       I --> J[retro]
    ```
 
 2. Explain the role division:

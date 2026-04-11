@@ -105,8 +105,14 @@ Every plan must contain:
 
 ## Relationship with the flow
 
-```
-/intake → /refinement → /epic → /story → /plan → execution → /post-impl
+```mermaid
+flowchart LR
+    A[intake] --> B[refinement]
+    B --> C[epic]
+    C --> D[story]
+    D --> E[plan]
+    E --> F[execution]
+    F --> G[post-impl]
 ```
 
 This skill is the last step before execution. For larger problems, use `/story` or `/epic`. To close the delivery, use `/post-impl`.

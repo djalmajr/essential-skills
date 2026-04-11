@@ -117,8 +117,13 @@ Every story must contain:
 
 ## Relationship with the flow
 
-```
-/intake → /refinement → /epic → /story → /plan → execution
+```mermaid
+flowchart LR
+    A[intake] --> B[refinement]
+    B --> C[epic]
+    C --> D[story]
+    D --> E[plan]
+    E --> F[execution]
 ```
 
 This skill acts after epic (or directly after intake for M items). For execution plan, use `/plan`. For small items, use `/plan` directly.

@@ -57,8 +57,13 @@ Use `~/.agents/templates/roadmap.md` as base.
 
 ## Relationship with the flow
 
-```
-/intake → /roadmap → /refinement → /epic → /story → /plan
+```mermaid
+flowchart LR
+    A[intake] --> B[roadmap]
+    B --> C[refinement]
+    C --> D[epic]
+    D --> E[story]
+    E --> F[plan]
 ```
 
 This skill connects strategy and execution. For refinement, use `/refinement`. For epics, use `/epic`.

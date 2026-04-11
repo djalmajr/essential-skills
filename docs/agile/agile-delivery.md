@@ -42,6 +42,12 @@ Every update should reflect **real state**, not optimistic intent. "I will do" i
 
 ## Flow relationship
 
-```
-/plan → execution → /daily → ... → /status-report → /post-impl → /retro
+```mermaid
+flowchart LR
+    A[plan] --> B[execution]
+    B --> C[daily]
+    C --> D[...]
+    D --> E[status-report]
+    E --> F[post-impl]
+    F --> G[retro]
 ```

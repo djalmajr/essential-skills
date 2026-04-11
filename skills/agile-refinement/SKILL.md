@@ -113,8 +113,15 @@ Use `~/.agents/templates/refinement.md` as base for the artifact.
 
 ## Relationship with the flow
 
-```
-/intake → /refinement → /epic or /story → /plan → execution
+```mermaid
+flowchart LR
+    A[intake] --> B[refinement]
+    B --> C{epic or story}
+    C --> D[epic]
+    C --> E[story]
+    D --> F[plan]
+    E --> F
+    F --> G[execution]
 ```
 
 This skill acts between intake and creation of epics/stories. For problem capture, use `/intake`. For story detailing, use `/story`. For epics, use `/epic`.

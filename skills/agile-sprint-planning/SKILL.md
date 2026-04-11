@@ -92,6 +92,14 @@ Use `~/.agents/templates/sprint-planning.md` as base.
 
 ## Relationship with the flow
 
-```
-/retro → /sprint-planning → /story or /plan → execution → /daily → /post-impl
+```mermaid
+flowchart LR
+    A[retro] --> B[sprint-planning]
+    B --> C{story or plan}
+    C --> D[story]
+    C --> E[plan]
+    D --> F[execution]
+    E --> F
+    F --> G[daily]
+    G --> H[post-impl]
 ```

@@ -33,8 +33,18 @@ Every ceremony must generate a **clear and reusable artifact**. If the discussio
 
 ## Flow relationship
 
-```
-/refinement → /epic or /story
-/sprint-planning → /story or /plan → execution
-/retro → improvement actions → next cycle
+```mermaid
+flowchart LR
+    A[refinement] --> B{epic or story}
+    B --> C[epic]
+    B --> D[story]
+    
+    E[sprint-planning] --> F{story or plan}
+    F --> G[story]
+    F --> H[plan]
+    G --> I[execution]
+    H --> I
+    
+    J[retro] --> K[improvement actions]
+    K --> L[next cycle]
 ```

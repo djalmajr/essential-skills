@@ -32,7 +32,20 @@ Use this skill to guide new team members through the agile + AI flow, in a pract
 **Objective:** know what exists and why.
 
 1. Present the complete flow:
-   `intake -> roadmap -> refinement -> epic/story -> plan -> issue -> daily -> status -> report -> retro`
+   ```mermaid
+   flowchart LR
+       A[intake] --> B[roadmap]
+       B --> C[refinement]
+       C --> D{epic or story or plan}
+       D --> E[epic]
+       D --> F[story]
+       D --> G[plan]
+       E --> H[scan-review]
+       F --> H
+       G --> H
+       H --> I{daily or status or post-impl}
+       I --> J[retro]
+   ```
 
 2. Explain the role division:
    - Human: decides, validates, controls git, communicates

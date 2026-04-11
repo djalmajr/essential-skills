@@ -121,8 +121,13 @@ Every epic must contain:
 
 ## Relationship with the flow
 
-```
-/intake → /refinement → /epic → /story → /plan → execution
+```mermaid
+flowchart LR
+    A[intake] --> B[refinement]
+    B --> C[epic]
+    C --> D[story]
+    D --> E[plan]
+    E --> F[execution]
 ```
 
 This skill acts after refinement and before detailing individual stories. For refinement, use `/refinement`. For detailing a story, use `/story`.

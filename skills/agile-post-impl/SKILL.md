@@ -75,6 +75,9 @@ Use `~/.agents/templates/post-implementation-report.md` as base.
 
 ## Relationship with the flow
 
-```
-/plan → execution → /post-impl → /retro
+```mermaid
+flowchart LR
+    A[plan] --> B[execution]
+    B --> C[post-impl]
+    C --> D[retro]
 ```

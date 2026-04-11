@@ -75,6 +75,9 @@ Use `~/.agents/templates/status-report.md` as base.
 
 ## Relationship with the flow
 
-```
-/daily → ... → /status-report → /post-impl or /sprint-review
+```mermaid
+flowchart LR
+    A[daily] --> B[...]
+    B --> C[status-report]
+    C --> D{post-impl or sprint-review}
 ```

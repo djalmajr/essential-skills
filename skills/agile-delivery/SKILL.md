@@ -50,8 +50,14 @@ This skill organizes three types of tracking, each with a dedicated skill:
 
 ## Relationship with the flow
 
-```
-/plan → execution → /daily → ... → /status-report → /post-impl → /retro
+```mermaid
+flowchart LR
+    A[plan] --> B[execution]
+    B --> C[daily]
+    C --> D[...]
+    D --> E[status-report]
+    E --> F[post-impl]
+    F --> G[retro]
 ```
 
 This skill is a router for tracking. For the specific type, use `/daily`, `/status-report`, or `/post-impl`.

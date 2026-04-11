@@ -51,10 +51,20 @@ This skill organizes three ceremonies, each with a dedicated skill:
 
 ## Relationship with the flow
 
-```
-/refinement → /epic or /story
-/sprint-planning → /story or /plan → execution
-/retro → improvement actions → next cycle
+```mermaid
+flowchart LR
+    A[refinement] --> B{epic or story}
+    B --> C[epic]
+    B --> D[story]
+    
+    E[sprint-planning] --> F{story or plan}
+    F --> G[story]
+    F --> H[plan]
+    G --> I[execution]
+    H --> I
+    
+    J[retro] --> K[improvement actions]
+    K --> L[next cycle]
 ```
 
 This skill is a router for ceremonies. For the specific ceremony, use `/refinement`, `/sprint-planning`, or `/retro`.

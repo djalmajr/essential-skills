@@ -60,16 +60,22 @@ AI-maintained organizational knowledge system.
 
 ## Complete Workflow
 
-```
-agile-intake → agile-roadmap → agile-refinement → agile-epic/agile-story/agile-plan
-                                                                    ↓
-                                                      agile-scan-review (optional)
-                                                                    ↓
-                                                    agile-daily / agile-status-report
-                                                                    ↓
-                                                    agile-post-impl → agile-sprint-review
-                                                                    ↓
-                                                                agile-retro
-                                                                    ↓
-                                                      agile-sprint-metrics → next cycle
+```mermaid
+flowchart TD
+    A[intake] --> B[roadmap]
+    B --> C[refinement]
+    C --> D[epic]
+    C --> E[story]
+    C --> F[plan]
+    D -.-> G[scan-review]
+    E -.-> G
+    F -.-> G
+    G --> H[daily]
+    G --> I[status-report]
+    H -.-> J[post-impl]
+    I -.-> J
+    J --> K[sprint-review]
+    K --> L[retro]
+    L --> M[sprint-metrics]
+    M --> next[Next Cycle]
 ```

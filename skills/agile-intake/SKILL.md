@@ -105,8 +105,14 @@ Use `~/.agents/templates/intake.md` as base for the artifact.
 
 ## Relationship with the flow
 
-```
-/intake → /roadmap or /refinement or /epic or /story or /plan
+```mermaid
+flowchart LR
+    A[intake] --> B{roadmap or refinement or epic or story or plan}
+    B --> C[roadmap]
+    B --> D[refinement]
+    B --> E[epic]
+    B --> F[story]
+    B --> G[plan]
 ```
 
 This skill is the entry point of the flow. It captures the problem and directs to the correct skill. For decision between artifacts, you can also use `/scrum-planning`. For ceremonies, use `/scrum-ceremonies`.

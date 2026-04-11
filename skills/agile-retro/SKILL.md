@@ -84,6 +84,9 @@ Use `~/.agents/templates/retro.md` as base.
 
 ## Relationship with the flow
 
-```
-/post-impl → /retro → improvement actions → next cycle
+```mermaid
+flowchart LR
+    A[post-impl] --> B[retro]
+    B --> C[improvement actions]
+    C --> D[next cycle]
 ```
