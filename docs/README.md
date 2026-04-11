@@ -46,6 +46,18 @@ Guias de uso organizados por categoria.
 | [intake](intake/intake.md) | Problemas vagos → documento de intake |
 | [onboarding](intake/onboarding.md) | Onboarding de novos membros |
 
+## Wiki (Padrão Karpathy)
+
+Sistema de conhecimento organizacional mantido pela IA.
+
+| Skill | Uso |
+|-------|-----|
+| `wiki-ingest` | Ingerir nova fonte na wiki |
+| `wiki-query` | Perguntar sobre algo na wiki |
+| `wiki-lint` | Auditar e organizar a wiki |
+
+**Nota:** As skills wiki operam na pasta `wiki/` do projeto. Cada projeto cria sua própria wiki local.
+
 ## Fluxo Completo
 
 ```

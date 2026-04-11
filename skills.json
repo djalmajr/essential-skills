@@ -21,7 +21,10 @@
         "sprint-planning",
         "sprint-review",
         "status-report",
-        "story"
+        "story",
+        "wiki-ingest",
+        "wiki-lint",
+        "wiki-query"
       ]
     }
   ]
