@@ -20,16 +20,17 @@ Create standalone interactive prototypes to validate UI flows before implementat
 ```
 {app}/client-proto/
 ├── index.html          # HTML entry with CDN imports, importmap, z-proto shell
-├── index.js            # App entry: scenes, hash routing, render
-├── index.css           # z-proto scroll containment overrides
-├── components/         # Shared components (app-shell, layouts, etc.)
-│   └── app-shell.js    # Optional: sidebar + header layout
+├── index.js            # App entry: scenes, wouter routing, render
+├── index.css           # z-proto overrides + shadcn theme
+├── components/         # Reusable Preact component wrappers
+│   └── ui.js           # Button, Card, Input, Badge, Icon, etc.
 └── routes/             # One file per scene/page
     ├── home.js
+    ├── dashboard.js
+    ├── music.js
+    ├── tasks.js
     ├── settings.js
-    └── inbox/
-        ├── list.js
-        └── thread.js
+    └── components.js   # shadcn → daisyUI mapping reference
 ```
 
 ## Bootstrapping
@@ -43,9 +44,10 @@ cp -r ~/.claude/skills/agile-proto/templates/ my-app/client-proto/
 Or create files manually following the templates. The key files are:
 
 1. `index.html` — loads all CDN dependencies and defines the z-proto shell
-2. `index.js` — defines SCENES array and hash-based routing
-3. `index.css` — z-proto scroll containment overrides
-4. `routes/home.js` — example page using daisyUI components
+2. `index.js` — defines SCENES array with wouter path-based routing
+3. `index.css` — z-proto overrides + custom shadcn/shadcn-dark themes
+4. `components/ui.js` — reusable Preact wrappers (Button, Card, Input, Badge, Icon, etc.)
+5. `routes/*.js` — example pages (dashboard, music, tasks, settings, components reference)
 
 ## Key files
 
@@ -70,15 +72,14 @@ Or create files manually following the templates. The key files are:
           "~/": "/",
           "htm/preact": "https://esm.sh/htm@3/preact?external=preact",
           "preact": "https://esm.sh/preact@10",
-          "preact/": "https://esm.sh/preact@10/"
+          "preact/": "https://esm.sh/preact@10/",
+          "wouter-preact": "https://esm.sh/wouter-preact@3?external=preact"
         }
       }
     </script>
     <link rel="stylesheet" href="/index.css">
-    <style type="text/tailwindcss">
-      @theme inline {
-        --font-sans: 'Inter', sans-serif;
-      }
+    <style>
+      :root { --font-sans: 'Inter', sans-serif; }
     </style>
   </head>
   <body class="font-sans antialiased">
@@ -103,46 +104,47 @@ Or create files manually following the templates. The key files are:
 
 The `shadcn` theme is defined in `index.css` and provides a neutral, shadcn-like palette (near-black primary, subtle borders). Change `data-theme="shadcn"` to `data-theme="shadcn-dark"` for dark mode, or any built-in daisyUI theme.
 
-### Scene routing pattern (index.js)
+### Routing pattern (index.js)
+
+Uses wouter-preact for path-based routing. SCENES array defines all routes. SceneNav renders in z-proto-header via createPortal.
 
 ```js
-import { html, render } from "htm/preact";
-import { Fragment } from "preact";
-import { createPortal } from "preact/compat";
-import { useEffect, useState } from "preact/hooks";
-import { HomePage } from "./routes/home.js";
+import { Route, Switch, useLocation } from "wouter-preact";
+import { DashboardPage } from "./routes/dashboard.js";
 
 const SCENES = [
-  { id: "home", label: "Home", Component: HomePage },
-  // { id: "settings", label: "Settings", Component: SettingsPage },
+  { path: "/", label: "Dashboard", Component: DashboardPage },
+  { path: "/settings", label: "Settings", Component: SettingsPage },
 ];
 
-// Hash-based routing: #home, #settings, etc.
-function getSceneFromHash() {
-  const hash = window.location.hash.replace(/^#/, "");
-  return SCENES.find((s) => s.id === hash) || SCENES[0];
-}
+// In App: wouter Switch + Route for rendering
+html`<${Switch}>${SCENES.map(s => html`<${Route} path=${s.path} component=${s.Component} />`)}<//>`;
 ```
 
-### Route file pattern (routes/home.js)
+**Important:** Serve with SPA mode (`bunx serve -s .`) so all paths resolve to `index.html`.
+
+### Route file pattern (routes/dashboard.js)
+
+Routes import reusable components from `~/components/ui.js`:
 
 ```js
 import { html } from "htm/preact";
+import { Button, Card, CardBody, Icon } from "~/components/ui.js";
 
-export function HomePage() {
+export function DashboardPage() {
   return html`
-    <div class="flex flex-col h-full overflow-y-auto p-6 space-y-4">
+    <div class="flex flex-col flex-1 w-full h-full overflow-y-auto p-6 space-y-4">
       <h1 class="text-2xl font-bold">Dashboard</h1>
-      <button class="btn btn-primary">
-        <iconify-icon icon="lucide:plus" width="16"></iconify-icon>
+      <${Button}>
+        <${Icon} icon="lucide:plus" />
         New item
-      </button>
-      <div class="card bg-base-100 shadow-sm border border-base-300">
-        <div class="card-body">
+      <//>
+      <${Card}>
+        <${CardBody}>
           <h2 class="card-title">Card title</h2>
           <p>Card content with mock data.</p>
-        </div>
-      </div>
+        <//>
+      <//>
     </div>
   `;
 }
@@ -154,51 +156,40 @@ Serve `client-proto/` with any static server. No build step needed:
 
 ```bash
 cd client-proto
-bunx serve .           # or: python3 -m http.server 3000
+bunx serve -s .        # -s for SPA mode (all paths serve index.html)
 ```
 
-## daisyUI components
+## Component wrappers (components/ui.js)
 
-Use daisyUI classes directly in htm templates — no component imports needed:
+Import reusable Preact wrappers instead of raw daisyUI classes:
 
 ```js
+import { Button, Card, CardBody, CardTitle, CardActions,
+         Input, Select, Textarea, Field, Badge, Alert,
+         Avatar, Toggle, Checkbox, Radio, Separator,
+         TabsList, Tab, Skeleton, Tooltip, Icon } from "~/components/ui.js";
+
 // Buttons
-html`<button class="btn btn-primary">Primary</button>`
-html`<button class="btn btn-outline btn-sm">Small outline</button>`
+html`<${Button} variant="primary" size="sm">Save<//>`
+html`<${Button} variant="outline">Cancel<//>`
+html`<${Button} variant="ghost" size="icon"><${Icon} icon="lucide:x" /><//>`
 
 // Cards
-html`
-  <div class="card bg-base-100 shadow-sm border border-base-300">
-    <div class="card-body">
-      <h2 class="card-title">Title</h2>
-      <p>Content</p>
-    </div>
-  </div>
-`
+html`<${Card}><${CardBody}><${CardTitle}>Title<//><p>Content</p><//><//>`
 
-// Inputs
-html`<input type="text" class="input input-bordered w-full" value="Pre-filled" />`
-html`<select class="select select-bordered w-full"><option selected>Option 1</option></select>`
+// Forms
+html`<${Field} label="Email" hint="We'll never share your email."><${Input} type="email" /><//>`
+html`<${Select}><option>Option 1</option><//>`
 
-// Badges, Alerts, Toggles, Tabs
-html`<div class="badge badge-primary">Badge</div>`
-html`<div role="alert" class="alert alert-info"><iconify-icon icon="lucide:info" width="20"></iconify-icon><span>Message</span></div>`
-html`<input type="checkbox" class="toggle toggle-primary" checked />`
+// Badges, Alerts, Icons
+html`<${Badge} variant="outline">Status<//>`
+html`<${Alert} variant="info" icon="lucide:info">Message<//>`
+html`<${Icon} icon="lucide:search" size=${16} />`
 ```
 
-Full reference: https://daisyui.com/components/
+Variants follow shadcn naming: `default`, `primary`, `secondary`, `destructive`, `outline`, `ghost`, `link`.
 
-## Icons
-
-Use `<iconify-icon>` web component with any Iconify set:
-
-```html
-<iconify-icon icon="lucide:search" width="16"></iconify-icon>
-<iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
-<iconify-icon icon="mdi:github" width="20"></iconify-icon>
-```
-
-**Never use `lucide-react` or any icon package.** The iconify-icon web component loads icons on demand from CDN.
+Full daisyUI reference: https://daisyui.com/components/
 
 ## z-proto features
 
@@ -242,14 +233,15 @@ document.documentElement.setAttribute("data-theme", "shadcn-dark");
 1. **Zero build tools.** Everything via CDN. No package.json, no bundler, no install step.
 2. **CDN order matters.** Load `themes.css` → `daisyui.css` → `@tailwindcss/browser`. Reversing breaks styles.
 3. **Never use `@plugin` in browser.** `@tailwindcss/browser` does not support plugins. Load daisyUI via `<link>` CSS.
-4. **daisyUI classes.** Use `btn`, `card`, `input`, `badge`, etc. Never recreate components that daisyUI provides.
-5. **Icons via `<iconify-icon>`.** Never import from `lucide-react` or any icon package.
+4. **Use component wrappers.** Import `Button`, `Card`, `Input`, etc. from `~/components/ui.js`. They wrap daisyUI classes with shadcn-like API.
+5. **Icons via `<Icon>`.** `<${Icon} icon="lucide:search" />`. Never import from `lucide-react`.
 6. **Preact + htm.** Use `html` tagged templates, not JSX. Files are `.js`, not `.tsx`.
-7. **Hash routing.** Scenes defined in SCENES array, navigated via `#scene-id`.
+7. **wouter routing.** Path-based with `Route` + `Switch` from `wouter-preact`. Serve with `-s` (SPA mode).
 8. **Mock data inline.** Forms pre-filled, lists hardcoded. Data lives in the route file.
 9. **One route per file.** Feature-based: `routes/settings.js`, `routes/inbox/list.js`.
 10. **Scroll containment.** Use `index.css` overrides. Only the content area scrolls.
 11. **Use `shadcn` theme.** Default to `data-theme="shadcn"` for shadcn-like appearance.
+12. **Route roots fill container.** Every route root div must have `flex-1 w-full h-full`.
 
 ## Discovery
 
@@ -265,11 +257,12 @@ Before creating a proto:
 - [ ] `client-proto/` is self-contained (no external deps besides CDN)
 - [ ] CDN order: themes.css → daisyui.css → @tailwindcss/browser
 - [ ] `data-theme="shadcn"` set on `<html>`
-- [ ] Static server starts successfully (`bunx serve .`)
-- [ ] daisyUI classes render correctly (btn has bg, card has border)
-- [ ] Tailwind utilities work (flex, p-6, space-y-4, etc.)
+- [ ] Static server starts with SPA mode (`bunx serve -s .`)
+- [ ] Component wrappers imported from `~/components/ui.js`
+- [ ] daisyUI + Tailwind utilities render correctly
 - [ ] z-proto shell shows toolbar with presets and zoom
-- [ ] Icons render via `<iconify-icon>`
+- [ ] Icons render via `<Icon>` component (wraps `<iconify-icon>`)
 - [ ] All forms are pre-filled with mock data
-- [ ] Scene navigation works via hash routing
+- [ ] wouter routing works (path-based, not hash)
+- [ ] Route root divs have `flex-1 w-full h-full`
 - [ ] No `lucide-react`, no `react`, no `package.json`, no `@plugin`
