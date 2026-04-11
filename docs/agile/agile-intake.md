@@ -59,11 +59,11 @@ A designer asks "can we add dark mode to the settings page?":
 ```mermaid
 flowchart LR
     A[agile-intake] --> B{next artifact}
-    B --> C[/agile-roadmap]
-    B --> D[/agile-refinement]
-    B --> E[/agile-epic]
-    B --> F[/agile-story]
-    B --> G[/agile-plan]
+    B --> C[agile-roadmap]
+    B --> D[agile-refinement]
+    B --> E[agile-epic]
+    B --> F[agile-story]
+    B --> G[agile-plan]
 ```
 
 ## Tips & pitfalls

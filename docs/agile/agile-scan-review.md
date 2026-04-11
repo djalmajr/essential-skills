@@ -28,28 +28,28 @@ You've just implemented rate limiting on the API and want a quality gate before 
 3. It reads the complete diff and applies the checklist:
 
    **Security:**
-   - [x] Inputs validated (rate limit config is type-checked)
-   - [x] No injection vectors
-   - [x] No hardcoded secrets
-   - [x] Auth/authorization correct (middleware applied after auth)
-   - [x] No sensitive data in logs
+   - ✅ Inputs validated (rate limit config is type-checked)
+   - ✅ No injection vectors
+   - ✅ No hardcoded secrets
+   - ✅ Auth/authorization correct (middleware applied after auth)
+   - ✅ No sensitive data in logs
 
    **Project Coherence:**
-   - [x] Follows existing middleware pattern
-   - [x] Uses existing config module instead of creating a new one
-   - [x] Naming consistent with codebase
+   - ✅ Follows existing middleware pattern
+   - ✅ Uses existing config module instead of creating a new one
+   - ✅ Naming consistent with codebase
    - ❌ Imports sorted incorrectly — flagged
 
    **Over-engineering:**
-   - [x] No premature abstractions
+   - ✅ No premature abstractions
    - ❌ Custom RateLimitError class created when existing HttpError suffices — flagged
 
    **Scope:**
-   - [x] Code does only what was requested (rate limiting)
+   - ✅ Code does only what was requested (rate limiting)
    - ❌ Added a `/health` endpoint refactor in the same PR — flagged as scope creep
 
    **Quality:**
-   - [x] Tests cover rate-limited and unrestricted scenarios
+   - ✅ Tests cover rate-limited and unrestricted scenarios
    - [x] Functions are small and focused
    - ❌ Duplicated timestamp comparison logic in two places — flagged
 

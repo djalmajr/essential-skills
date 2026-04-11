@@ -50,11 +50,11 @@ The team wants: "Build a notification system for order status changes":
 ```mermaid
 flowchart LR
     A[agile-intake] --> B[agile-planning-router]
-    B --> C[/agile-plan]
+    B --> C[agile-plan]
     C --> D[plan]
-    B --> E[/agile-story]
+    B --> E[agile-story]
     E --> F[story]
-    B --> G[/agile-epic]
+    B --> G[agile-epic]
     G --> H[epic]
 ```
 
