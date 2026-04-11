@@ -1,293 +1,275 @@
 ---
 name: agile-proto
-description: Create interactive UI prototypes with Bun + React + shadcn/ui + Tailwind v4. Use when asked to "prototype", "create proto", "mockup screens", "interactive prototype", or when exploring UI flows before implementation.
+description: Create interactive UI prototypes with CDN-only stack (z-proto + daisyUI + Preact + Tailwind v4). Use when asked to "prototype", "create proto", "mockup screens", "interactive prototype", or when exploring UI flows before implementation.
 ---
 
 # Interactive UI Prototyping
 
-Create standalone interactive prototypes to validate UI flows before implementation.
+Create standalone interactive prototypes to validate UI flows before implementation. Zero build tools — everything runs from CDN.
 
 ## Stack
 
-- **Bun fullstack** (`bun src/index.html`) — dev server with HMR, JSX/TSX native
-- **React 19** — standard JSX components
-- **shadcn/ui** — full component library installed via CLI
-- **Tailwind CSS v4** — via `bun-plugin-tailwind`
-- **wouter** — lightweight client-side routing
-- **@zomme/bun-plugin-iconify** — build-time icon collection from `@iconify/json`
-- **Icon component** (`@/components/icon`) — renders SVG icons from `virtual:icons` registry
-- **Biome** (pinned version) — linting, formatting, import sorting
+- **z-proto** — web component shell with responsive presets, zoom, resize handles, and Figma capture
+- **daisyUI v5** — component library CSS (btn, card, input, badge, etc.) with custom shadcn-like theme
+- **Tailwind CSS v4** — via `@tailwindcss/browser` CDN for utility classes (flex, p-6, etc.)
+- **Preact + htm** — lightweight rendering via importmap + esm.sh
+- **iconify-icon** — web component for icons (any Iconify set: lucide, mdi, etc.)
 
 ## Directory structure
 
 ```
 {app}/client-proto/
-├── biome.json
-├── bunfig.toml
-├── components.json
-├── package.json
-├── tsconfig.json
-├── .vscode/settings.json
-└── src/
-    ├── @types/virtual.d.ts  # virtual:icons type declaration
-    ├── index.html           # HTML entry (links index.css + index.tsx)
-    ├── index.tsx             # createRoot + IconProvider + Router + render
-    ├── index.css             # @import "tailwindcss" + design tokens
-    ├── utils/cn.ts           # cn() = twMerge(clsx(...))
-    ├── hooks/                # Custom hooks (use-mobile.ts, etc.)
-    ├── components/
-    │   ├── app-shell.tsx     # Layout shell (sidebar, nav, etc.)
-    │   ├── icon.tsx          # Icon + IconProvider (virtual:icons registry)
-    │   └── ui/               # shadcn components (57+)
-    └── routes/
-        ├── auth/login.tsx
-        ├── auth/register.tsx
-        ├── templates/list.tsx
-        └── ...
+├── index.html          # HTML entry with CDN imports, importmap, z-proto shell
+├── index.js            # App entry: scenes, hash routing, render
+├── index.css           # z-proto scroll containment overrides
+├── components/         # Shared components (app-shell, layouts, etc.)
+│   └── app-shell.js    # Optional: sidebar + header layout
+└── routes/             # One file per scene/page
+    ├── home.js
+    ├── settings.js
+    └── inbox/
+        ├── list.js
+        └── thread.js
 ```
 
 ## Bootstrapping
 
+Copy templates from `skills/agile-proto/templates/` into the project's `client-proto/` directory:
+
 ```bash
-mkdir -p my-app/client-proto && cd my-app/client-proto
-
-# 1. Init project
-bun init -y
-
-# 2. Install deps
-bun add react react-dom wouter tailwindcss bun-plugin-tailwind \
-  clsx tailwind-merge class-variance-authority radix-ui
-bun add -d @biomejs/biome@2.4.10 @types/react @types/react-dom \
-  @zomme/bun-plugin-iconify @iconify/json
-
-# 3. Create tsconfig.json
-cat > tsconfig.json << 'EOF'
-{
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "jsx": "react-jsx",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] }
-  },
-  "include": ["src/**/*"]
-}
-EOF
-
-# 4. Create bunfig.toml
-cat > bunfig.toml << 'EOF'
-[serve.static]
-plugins = ["@zomme/bun-plugin-iconify", "bun-plugin-tailwind"]
-
-[plugins.iconify]
-dirs = ["src"]
-EOF
-
-# 5. Install shadcn
-bunx shadcn@latest init
-bunx shadcn@latest add --all --yes
-
-# 6. Create src structure
-mkdir -p src/{@types,components/ui,routes,hooks,utils}
-
-# 7. Add scripts to package.json
-# "dev": "bun src/index.html"
-# "check": "biome check src/"
-# "fix": "biome check --write --unsafe src/"
-# "format": "biome format --write src/"
-# "lint": "biome lint src/"
+cp -r ~/.claude/skills/agile-proto/templates/ my-app/client-proto/
 ```
+
+Or create files manually following the templates. The key files are:
+
+1. `index.html` — loads all CDN dependencies and defines the z-proto shell
+2. `index.js` — defines SCENES array and hash-based routing
+3. `index.css` — z-proto scroll containment overrides
+4. `routes/home.js` — example page using daisyUI components
 
 ## Key files
 
-### src/@types/virtual.d.ts
-
-```ts
-declare module "virtual:icons" {
-  interface IconData {
-    body: string
-    height: number
-    width: number
-  }
-  export const registry: Record<string, IconData>
-}
-```
-
-### src/components/icon.tsx
-
-```tsx
-import { createContext, type ReactNode, type SVGProps, useContext } from "react"
-
-export interface IconData {
-  body: string
-  height: number
-  width: number
-}
-
-export type IconRegistry = Record<string, IconData>
-
-const IconRegistryContext = createContext<IconRegistry | null>(null)
-
-export interface IconProviderProps {
-  children: ReactNode
-  registry: IconRegistry
-}
-
-export function IconProvider({ children, registry }: IconProviderProps) {
-  return <IconRegistryContext.Provider value={registry}>{children}</IconRegistryContext.Provider>
-}
-
-export function useIconRegistry(): IconRegistry | null {
-  return useContext(IconRegistryContext)
-}
-
-export type IconProps = SVGProps<SVGSVGElement> & {
-  icon: string | IconData
-}
-
-export function Icon({ icon, className, ...props }: IconProps) {
-  const registry = useIconRegistry()
-  const data = typeof icon === "string" ? registry?.[icon] : icon
-
-  if (data) {
-    return (
-      <svg
-        aria-hidden="true"
-        className={className}
-        dangerouslySetInnerHTML={{ __html: data.body }}
-        height="1em"
-        viewBox={`0 0 ${data.width} ${data.height}`}
-        width="1em"
-        xmlns="http://www.w3.org/2000/svg"
-        {...props}
-      />
-    )
-  }
-
-  return (
-    <svg aria-hidden="true" className={className} height="1em" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <rect fill="currentColor" height="24" opacity="0.3" rx="4" width="24" x="0" y="0" />
-    </svg>
-  )
-}
-```
-
-### src/index.html
+### index.html
 
 ```html
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en" data-theme="shadcn">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proto — AppName</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/daisyui.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2/dist/iconify-icon.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/gh/djalmajr/z-proto@main/src/z-proto.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "~/": "/",
+          "htm/preact": "https://esm.sh/htm@3/preact?external=preact",
+          "preact": "https://esm.sh/preact@10",
+          "preact/": "https://esm.sh/preact@10/"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="/index.css">
+    <style type="text/tailwindcss">
+      @theme inline {
+        --font-sans: 'Inter', sans-serif;
+      }
+    </style>
   </head>
   <body class="font-sans antialiased">
-    <div id="root" style="display:flex;flex:1;min-height:100vh"></div>
-    <script type="module" src="./index.tsx"></script>
+    <z-proto>
+      <z-proto-header></z-proto-header>
+      <z-proto-body title="Proto — AppName">
+        <div id="app" class="flex flex-1 overflow-hidden"></div>
+      </z-proto-body>
+    </z-proto>
+    <script type="module" src="/index.js"></script>
   </body>
 </html>
 ```
 
-### src/index.tsx
+**CRITICAL: CDN load order matters.**
 
-```tsx
-import { registry } from "virtual:icons"
-import { createRoot } from "react-dom/client"
-import { Route, Switch, useLocation } from "wouter"
-import { IconProvider } from "@/components/icon"
-import { TooltipProvider } from "@/components/ui/tooltip"
-// import routes...
+1. `daisyui@5/themes.css` — theme CSS variables (FIRST)
+2. `daisyui@5/daisyui.css` — component classes (SECOND)
+3. `@tailwindcss/browser@4` — utility classes (THIRD, must be AFTER daisyUI)
 
-function App() {
-  return (
-    <IconProvider registry={registry}>
-      <TooltipProvider>
-        <Switch>
-          <Route path="/" component={HomePage} />
-        </Switch>
-      </TooltipProvider>
-    </IconProvider>
-  )
+`@tailwindcss/browser` does NOT support `@plugin`. Never use `@plugin` in `<style type="text/tailwindcss">`.
+
+The `shadcn` theme is defined in `index.css` and provides a neutral, shadcn-like palette (near-black primary, subtle borders). Change `data-theme="shadcn"` to `data-theme="shadcn-dark"` for dark mode, or any built-in daisyUI theme.
+
+### Scene routing pattern (index.js)
+
+```js
+import { html, render } from "htm/preact";
+import { Fragment } from "preact";
+import { createPortal } from "preact/compat";
+import { useEffect, useState } from "preact/hooks";
+import { HomePage } from "./routes/home.js";
+
+const SCENES = [
+  { id: "home", label: "Home", Component: HomePage },
+  // { id: "settings", label: "Settings", Component: SettingsPage },
+];
+
+// Hash-based routing: #home, #settings, etc.
+function getSceneFromHash() {
+  const hash = window.location.hash.replace(/^#/, "");
+  return SCENES.find((s) => s.id === hash) || SCENES[0];
 }
-
-createRoot(document.getElementById("root")!).render(<App />)
 ```
 
-### src/utils/cn.ts
+### Route file pattern (routes/home.js)
 
-```ts
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+```js
+import { html } from "htm/preact";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+export function HomePage() {
+  return html`
+    <div class="flex flex-col h-full overflow-y-auto p-6 space-y-4">
+      <h1 class="text-2xl font-bold">Dashboard</h1>
+      <button class="btn btn-primary">
+        <iconify-icon icon="lucide:plus" width="16"></iconify-icon>
+        New item
+      </button>
+      <div class="card bg-base-100 shadow-sm border border-base-300">
+        <div class="card-body">
+          <h2 class="card-title">Card title</h2>
+          <p>Card content with mock data.</p>
+        </div>
+      </div>
+    </div>
+  `;
 }
 ```
 
 ## Running
 
+Serve `client-proto/` with any static server. No build step needed:
+
 ```bash
 cd client-proto
-bun run dev    # http://localhost:3000
+bunx serve .           # or: python3 -m http.server 3000
 ```
+
+## daisyUI components
+
+Use daisyUI classes directly in htm templates — no component imports needed:
+
+```js
+// Buttons
+html`<button class="btn btn-primary">Primary</button>`
+html`<button class="btn btn-outline btn-sm">Small outline</button>`
+
+// Cards
+html`
+  <div class="card bg-base-100 shadow-sm border border-base-300">
+    <div class="card-body">
+      <h2 class="card-title">Title</h2>
+      <p>Content</p>
+    </div>
+  </div>
+`
+
+// Inputs
+html`<input type="text" class="input input-bordered w-full" value="Pre-filled" />`
+html`<select class="select select-bordered w-full"><option selected>Option 1</option></select>`
+
+// Badges, Alerts, Toggles, Tabs
+html`<div class="badge badge-primary">Badge</div>`
+html`<div role="alert" class="alert alert-info"><iconify-icon icon="lucide:info" width="20"></iconify-icon><span>Message</span></div>`
+html`<input type="checkbox" class="toggle toggle-primary" checked />`
+```
+
+Full reference: https://daisyui.com/components/
 
 ## Icons
 
-Use the `<Icon>` component with any Iconify icon set:
+Use `<iconify-icon>` web component with any Iconify set:
 
-```tsx
-import { Icon } from "@/components/icon"
-
-<Icon icon="lucide:search" className="text-[14px]" />
-<Icon icon="lucide:arrow-left" className="text-[18px] text-muted-foreground" />
-<Icon icon="mdi:github" className="text-xl" />
-<Icon icon="circle-flags:br" className="text-2xl" />
+```html
+<iconify-icon icon="lucide:search" width="16"></iconify-icon>
+<iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+<iconify-icon icon="mdi:github" width="20"></iconify-icon>
 ```
 
-The `@zomme/bun-plugin-iconify` scans `src/` at build-time, collects all `icon="xxx:yyy"` references, and generates a `virtual:icons` module with only the icons actually used. Zero runtime overhead.
+**Never use `lucide-react` or any icon package.** The iconify-icon web component loads icons on demand from CDN.
 
-**Never use `lucide-react` directly.** Always use `<Icon icon="lucide:xxx" />`.
+## z-proto features
+
+The `<z-proto>` shell provides:
+
+- **Device presets:** Desktop, iPhone, iPad, Pixel, Galaxy, Surface
+- **Responsive mode:** Manual width/height with drag handles
+- **Zoom:** 50%, 75%, 92%, 100%, 125%
+- **Figma capture:** Add `figma-key="YOUR_KEY"` to `<z-proto>` for Figma export
+- **Scene navigation:** Rendered in `<z-proto-header>` via createPortal
+
+### z-proto slots
+
+```html
+<z-proto figma-key="optional-figma-key">
+  <z-proto-header><!-- scene nav portaled here --></z-proto-header>
+  <z-proto-body title="Window Title" width="390" height="844">
+    <div id="app"><!-- app renders here --></div>
+  </z-proto-body>
+</z-proto>
+```
+
+## Themes
+
+The templates include custom `shadcn` and `shadcn-dark` themes in `index.css`. Switch via `data-theme` on `<html>`:
+
+```html
+<html data-theme="shadcn">       <!-- light, shadcn-like -->
+<html data-theme="shadcn-dark">  <!-- dark, shadcn-like -->
+<html data-theme="light">        <!-- daisyUI default light -->
+```
+
+To toggle at runtime:
+
+```js
+document.documentElement.setAttribute("data-theme", "shadcn-dark");
+```
 
 ## Rules
 
-1. **Self-contained.** client-proto has its own package.json, tsconfig, biome, bunfig. No dependency on root project files.
-2. **Use shadcn components.** Never recreate components that exist in shadcn. All 57+ components are pre-installed.
-3. **Icons via `<Icon>` component.** `<Icon icon="lucide:search" />`. Never import from `lucide-react` directly.
-4. **Routing via wouter.** `Switch`, `Route`, `useLocation`, `Link`.
-5. **Design tokens** in index.css via CSS custom properties + Tailwind `@theme inline`.
-6. **Biome pinned.** `@biomejs/biome` as exact devDependency (no `^`). Schema version matches.
-7. **Biome on save.** Imports sorted alphabetically, formatted automatically.
-8. **No blank lines between imports.** No blank lines between JSX tags.
-9. **Tailwind canonical classes.** Use `group-has-data-[x=y]` not `group-has-[[data-x=y]]`.
-10. **Mock data inline.** Forms pre-filled, lists hardcoded. Keep data in the route file.
-11. **One route per file.** Feature-based: `routes/templates/list.tsx`, `routes/auth/login.tsx`.
-12. **Overflow control.** Root container `overflow: hidden` + `height: 100%`. Only content area scrolls.
+1. **Zero build tools.** Everything via CDN. No package.json, no bundler, no install step.
+2. **CDN order matters.** Load `themes.css` → `daisyui.css` → `@tailwindcss/browser`. Reversing breaks styles.
+3. **Never use `@plugin` in browser.** `@tailwindcss/browser` does not support plugins. Load daisyUI via `<link>` CSS.
+4. **daisyUI classes.** Use `btn`, `card`, `input`, `badge`, etc. Never recreate components that daisyUI provides.
+5. **Icons via `<iconify-icon>`.** Never import from `lucide-react` or any icon package.
+6. **Preact + htm.** Use `html` tagged templates, not JSX. Files are `.js`, not `.tsx`.
+7. **Hash routing.** Scenes defined in SCENES array, navigated via `#scene-id`.
+8. **Mock data inline.** Forms pre-filled, lists hardcoded. Data lives in the route file.
+9. **One route per file.** Feature-based: `routes/settings.js`, `routes/inbox/list.js`.
+10. **Scroll containment.** Use `index.css` overrides. Only the content area scrolls.
+11. **Use `shadcn` theme.** Default to `data-theme="shadcn"` for shadcn-like appearance.
 
 ## Discovery
 
 Before creating a proto:
 
 1. Check if `client-proto/` already exists in the project.
-2. Read `client-proto/package.json` and `client-proto/components.json` for context.
-3. Read `.agents/rules/` for project-specific conventions (design tokens, spacing, etc.).
-4. If no proto exists, bootstrap following the steps above.
+2. If it exists, read `client-proto/index.html` and `client-proto/index.js` for context.
+3. Read `.agents/rules/` for project-specific conventions.
+4. If no proto exists, copy templates from `skills/agile-proto/templates/`.
 
 ## Checklist
 
-- [ ] client-proto is self-contained (own package.json, tsconfig, biome)
-- [ ] `bun run dev` starts successfully
-- [ ] shadcn components installed (`components.json` present)
-- [ ] Design tokens applied in index.css
-- [ ] `<Icon>` component + `IconProvider` + `virtual:icons` wired
-- [ ] Icons use `<Icon icon="lucide:xxx" />`, no lucide-react imports
-- [ ] Routing via wouter
-- [ ] Biome check passes (`bun run check`)
-- [ ] Biome pinned as exact devDependency
-- [ ] No lucide-react, no iconify-icon, no htm, no importmap, no esm.sh
+- [ ] `client-proto/` is self-contained (no external deps besides CDN)
+- [ ] CDN order: themes.css → daisyui.css → @tailwindcss/browser
+- [ ] `data-theme="shadcn"` set on `<html>`
+- [ ] Static server starts successfully (`bunx serve .`)
+- [ ] daisyUI classes render correctly (btn has bg, card has border)
+- [ ] Tailwind utilities work (flex, p-6, space-y-4, etc.)
+- [ ] z-proto shell shows toolbar with presets and zoom
+- [ ] Icons render via `<iconify-icon>`
+- [ ] All forms are pre-filled with mock data
+- [ ] Scene navigation works via hash routing
+- [ ] No `lucide-react`, no `react`, no `package.json`, no `@plugin`

@@ -1,6 +1,6 @@
 # agile-proto
 
-Creates standalone interactive UI prototypes using Bun + React + shadcn/ui + Tailwind v4, designed to validate UI flows before committing to implementation. Prototypes live in a self-contained `client-proto/` directory with their own build tooling, component library, and routing.
+Creates standalone interactive UI prototypes using a zero-build CDN stack: z-proto shell + daisyUI (with shadcn-like theme) + Preact/htm + Tailwind v4. Prototypes validate UI flows before committing to implementation. Everything runs from CDN — no package.json, no bundler, no install step.
 
 ## When to use
 
@@ -27,23 +27,24 @@ Example: `/agile-proto login-flow`
 
 ## End-to-end examples
 
-### Example 1: Prototyping a new onboarding wizard
+### Example 1: Prototyping an onboarding wizard
 
 The design team wants to validate a 4-step onboarding wizard before engineering builds it:
 
 1. Start by invoking: `/agile-proto onboarding wizard with 4 steps`
-2. The skill checks if `client-proto/` exists. If not, it bootstraps the full stack: Bun project, React 19, shadcn/ui, Tailwind v4, wouter router, Icon component, Biome linter.
-3. It creates the route files:
-   - `src/routes/onboarding/step-1.tsx` — Account info
-   - `src/routes/onboarding/step-2.tsx` — Team setup
-   - `src/routes/onboarding/step-3.tsx` — Integration preferences
-   - `src/routes/onboarding/step-4.tsx` — Confirmation
-   - `src/routes/onboarding/OnboardingShell.tsx` — Layout with progress bar
-4. It uses shadcn components: `Button`, `Input`, `Select`, `Card`, `Progress`, `Stepper`.
-5. It uses `<Icon icon="lucide:arrow-right" />` for navigation icons — **never** `lucide-react` directly.
-6. Mock data is inline in the route files — pre-filled forms, hardcoded team list.
-7. Run: `cd client-proto && bun run dev` → opens at `http://localhost:3000`
-8. Stakeholders click through the wizard and validate the flow.
+2. The skill copies templates from `skills/agile-proto/templates/` into `client-proto/`.
+3. It creates route files using Preact + htm + daisyUI classes:
+   - `routes/onboarding/step-1.js` — Account info
+   - `routes/onboarding/step-2.js` — Team setup
+   - `routes/onboarding/step-3.js` — Integration preferences
+   - `routes/onboarding/step-4.js` — Confirmation
+4. Each step uses daisyUI: `btn`, `input`, `select`, `card`, `steps` (progress indicator).
+5. Icons via `<iconify-icon icon="lucide:arrow-right" width="16">`.
+6. Mock data is inline — pre-filled forms, hardcoded team list.
+7. Scenes are added to the SCENES array in `index.js` with hash navigation.
+8. Serve with `bun --serve .` or `python3 -m http.server 3000`.
+9. z-proto shell shows responsive presets — test on iPhone, iPad, Desktop.
+10. Stakeholders click through the wizard and validate the flow.
 
 ### Example 2: Prototyping a settings page with tabs
 
@@ -51,31 +52,57 @@ You need to validate the info architecture for a settings page with tabs:
 
 1. Start by invoking: `/agile-proto settings page with account, notifications, and billing tabs`
 2. The skill creates:
-   - `src/routes/settings/SettingsShell.tsx` — Tab layout with `<Tabs>` from shadcn
-   - `src/routes/settings/account.tsx` — Account form
-   - `src/routes/settings/notifications.tsx` — Notification toggles
-   - `src/routes/settings/billing.tsx` — Billing info
-3. All forms are pre-filled with mock data.
-4. Routing via wouter: `<Route path="/settings" component={SettingsShell} />`
-5. Biome check passes: `cd client-proto && bun run check`
+   - `routes/settings.js` — Tab layout using daisyUI `tabs tabs-bordered`
+   - Three tab content sections: Account form, Notification toggles, Billing info
+3. All forms pre-filled with mock data using daisyUI classes.
+4. Each tab is a scene in the SCENES array for easy navigation.
+
+### Example 3: Prototyping a messaging inbox
+
+You need to validate an inbox layout with conversation list and thread view:
+
+1. Start by invoking: `/agile-proto messaging inbox with list and thread views`
+2. The skill creates:
+   - `components/app-shell.js` — Sidebar + header layout (custom Preact component)
+   - `routes/inbox/list.js` — Conversation list with search, filters, badges
+   - `routes/inbox/thread.js` — Message thread with composer
+3. Uses daisyUI `card`, `badge`, `input`, `btn`, `avatar`, `chat` components.
+4. Mock conversations with realistic data (names, timestamps, message previews).
+5. z-proto with `figma-key` for Figma capture if design team needs the screens.
 
 ## Key stack rules
 
-- **Self-contained:** `client-proto/` has its own `package.json`, `tsconfig.json`, `biome.json`, `bunfig.toml`
-- **shadcn components only:** Never recreate components that shadcn provides. All 57+ components are pre-installed.
-- **Icons via `<Icon>`:** Use `<Icon icon="lucide:search" />`. Never import from `lucide-react`.
-- **Routing via wouter:** `Switch`, `Route`, `useLocation`, `Link`.
-- **Design tokens in index.css** via CSS custom properties + Tailwind `@theme inline`.
-- **Mock data inline:** Forms pre-filled, lists hardcoded. Data lives in the route file.
-- **One route per file:** Feature-based organization (`routes/settings/account.tsx`).
+- **Zero build tools:** Everything via CDN. No package.json, no bundler.
+- **CDN order matters:** `themes.css` → `daisyui.css` → `@tailwindcss/browser`. Reversing breaks styles.
+- **Never use `@plugin`:** `@tailwindcss/browser` does not support plugins. Load daisyUI via `<link>` CSS.
+- **daisyUI classes:** Use `btn`, `card`, `input`, `badge`, etc. Never recreate components.
+- **shadcn theme:** Default to `data-theme="shadcn"` for neutral, shadcn-like appearance.
+- **Icons via `<iconify-icon>`:** Never import from `lucide-react` or any icon package.
+- **Preact + htm:** Use `html` tagged templates, not JSX. Files are `.js`, not `.tsx`.
+- **Hash routing:** Scenes in SCENES array, navigated via `#scene-id`.
+- **Mock data inline:** Forms pre-filled, lists hardcoded. Data in the route file.
+- **One route per file:** Feature-based: `routes/settings.js`, `routes/inbox/list.js`.
+
+## Workflow integration
+
+```mermaid
+flowchart LR
+    A[agile-intake] --> B[agile-proto]
+    B --> C{Flow validated?}
+    C -- Yes --> D[agile-story]
+    D --> E[agile-plan]
+    C -- No --> F[Iterate proto]
+    F --> B
+```
 
 ## Tips & pitfalls
 
 - Prototypes are throwaway. Don't architect for reuse — architect for clarity.
-- Never import from `lucide-react`. Always use `<Icon icon="lucide:xxx" />`.
 - Never leave blank forms. Pre-fill all mock data so reviewers can click through real scenarios.
-- Root container must have `overflow: hidden` and `height: 100%`. Only the content area scrolls.
-- Run `bun run check` (Biome) before sharing — if it doesn't pass, the prototype has issues.
+- Use z-proto device presets to test responsive layouts (iPhone, iPad, Desktop).
+- The content area inside z-proto must handle its own scroll — use `overflow-y-auto` on the main container.
+- Serve with any static server — `bun --serve .`, `python3 -m http.server`, `npx serve`.
+- daisyUI themes: change `data-theme="light"` on `<html>` to switch (dark, cupcake, forest, etc.).
 
 ## Chaining
 
