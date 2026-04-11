@@ -9,30 +9,30 @@ Coleção de skills para acompanhamento de entregas ágeis com agentes de IA (op
 npx skills add zomme/essential-skills --all
 
 # Skills específicas
-npx skills add zomme/essential-skills --skill daily --skill plan
+npx skills add zomme/essential-skills --skill delivery-daily --skill scrum-plan
 ```
 
 ## Skills (22)
 
 | # | Skill | Categoria |
 |---|-------|-----------|
-| 1 | daily | Delivery |
-| 2 | status-report | Delivery |
-| 3 | post-impl | Delivery |
-| 4 | delivery-management | Delivery |
-| 5 | plan | Planning |
-| 6 | story | Planning |
-| 7 | epic | Planning |
-| 8 | refinement | Planning |
-| 9 | roadmap-planning | Planning |
-| 10 | scrum-planning | Planning |
-| 11 | scrum-ceremonies | Ceremonies |
-| 12 | sprint-planning | Ceremonies |
-| 13 | sprint-review | Ceremonies |
-| 14 | sprint-metrics | Ceremonies |
-| 15 | retro | Ceremonies |
-| 16 | scan-review | Quality |
-| 17 | proto-ui | Quality |
+| 1 | delivery-daily | Delivery |
+| 2 | delivery-status-report | Delivery |
+| 3 | delivery-post-impl | Delivery |
+| 4 | delivery-delivery | Delivery |
+| 5 | scrum-plan | Scrum |
+| 6 | scrum-story | Scrum |
+| 7 | scrum-epic | Scrum |
+| 8 | scrum-refinement | Scrum |
+| 9 | scrum-roadmap | Scrum |
+| 10 | scrum-planning-router | Scrum |
+| 11 | scrum-ceremonies-router | Scrum |
+| 12 | scrum-sprint-planning | Scrum |
+| 13 | scrum-sprint-review | Scrum |
+| 14 | scrum-sprint-metrics | Scrum |
+| 15 | scrum-retro | Scrum |
+| 16 | quality-scan-review | Quality |
+| 17 | quality-proto-ui | Quality |
 | 18 | intake | Intake |
 | 19 | onboarding | Intake |
 | 20 | wiki-ingest | Wiki |
@@ -57,8 +57,8 @@ wiki/
 ├── sources/         # Sumários de fontes ingeridas
 ├── business/        # Regras de negócio (audience: business)
 ├── ops/             # Procedimentos operacionais (audience: ops)
-└── patterns/        # Padrões identificados na prática
-raw/                 # Fontes originais (antes de ingerir)
+└── patterns/       # Padrões identificados na prática
+raw/                 # Fontes originais (antes de ingestão)
 ```
 
 ### Skills Wiki
@@ -89,17 +89,17 @@ Inspirado em [LLM Wiki — Karpathy](https://gist.github.com/karpathy/442a6bf555
 ## Fluxo
 
 ```
-intake → roadmap → refinement → epic/story/plan
-                                      ↓
-                              scan-review (opcional)
-                                      ↓
-                              daily / status-report
-                                      ↓
-                              post-impl → sprint-review
-                                      ↓
-                                  retro
-                                      ↓
-                          sprint-metrics → próximo ciclo
+intake → scrum-roadmap → scrum-refinement → scrum-epic/scrum-story/scrum-plan
+                                                              ↓
+                                                    quality-scan-review (opcional)
+                                                              ↓
+                                              delivery-daily / delivery-status-report
+                                                              ↓
+                                              delivery-post-impl → scrum-sprint-review
+                                                              ↓
+                                                          scrum-retro
+                                                              ↓
+                                                scrum-sprint-metrics → próximo ciclo
 ```
 
 ## Stack
@@ -113,16 +113,15 @@ intake → roadmap → refinement → epic/story/plan
 Cada skill é ativada com `/skill-name`:
 
 ```
-/intake
-/refinement
-/plan
-/story
-/daily
+/delivery-daily
+/scrum-refinement
+/scrum-plan
+/scrum-story
 /wiki-query
 /wiki-ingest
 ```
 
 Para saber qual skill usar:
-- `/delivery-management` — qual acompanhamento
-- `/scrum-planning` — qual artefato de planejamento
-- `/scrum-ceremonies` — qual cerimônia
+- `/delivery-delivery` — qual acompanhamento
+- `/scrum-planning-router` — qual artefato de planejamento
+- `/scrum-ceremonies-router` — qual cerimônia
