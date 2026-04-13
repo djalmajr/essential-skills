@@ -16,6 +16,7 @@
         "agile-router",
         "agile-onboarding",
         "agile-proto",
+        "agile-tdd",
         "wiki-ingest",
         "wiki-lint",
         "wiki-query"

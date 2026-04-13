@@ -57,6 +57,7 @@ Each skill README contains full documentation with examples, tips, and chaining 
 | Skill | Usage |
 |-------|-------|
 | [refinement](../../skills/agile-refinement/README.md) | Validate planning artifacts + review code |
+| [tdd](../../skills/agile-tdd/README.md) | TDD cycle + pragmatic testing strategy |
 
 ### Delivery & Tracking
 

@@ -12,9 +12,9 @@ npx skills add zomme/essential-skills --all
 npx skills add zomme/essential-skills --skill agile-epic --skill agile-task
 ```
 
-## Skills (16)
+## Skills (17)
 
-### Agile (13)
+### Agile (14)
 
 | Skill | Purpose |
 |-------|---------|
@@ -31,6 +31,7 @@ npx skills add zomme/essential-skills --skill agile-epic --skill agile-task
 | agile-router | Guidance on which skill to use |
 | agile-onboarding | New member onboarding guide |
 | agile-proto | Interactive UI prototypes |
+| agile-tdd | TDD cycle + pragmatic testing strategy |
 
 ### Wiki (3)
 
