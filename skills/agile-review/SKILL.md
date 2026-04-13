@@ -1,10 +1,10 @@
 ---
-name: agile-sprint-review
+name: agile-review
 description: Prepares sprint review and demo of deliveries for stakeholders. Use when the sprint has ended and it is necessary to present what was delivered, what changed in scope, what is pending, and what decisions are needed.
 compatibility: opencode
 metadata:
   audience: engineering
-  workflow: sprint-review
+  workflow: review
 ---
 
 # Sprint Review
@@ -37,8 +37,8 @@ Write the artifact in the user's language. If the user communicates in Portugues
 Gather information from:
 
 - Issues completed in the sprint
-- Post-implementation reports generated
-- Dailies and status reports from the period
+- Status closure reports generated
+- Status checkpoints and consolidation reports from the period
 - Registered scope changes
 
 For each delivered item, register:
@@ -73,11 +73,11 @@ Use the template below to document the review.
 
 ## Template
 
-Use `~/.agents/templates/sprint-review.md` as base for the artifact.
+Use `~/.agents/templates/review.md` as base for the artifact.
 
 ## Rules
 
-- The review shows what *was delivered*, not what *is in progress*. For status of work in progress, use `delivery-management`.
+- The review shows what *was delivered*, not what *is in progress*. For status of work in progress, use `/status`.
 - Be honest about what was not delivered and why. Hiding cut items breaks trust.
 - The demo must be verifiable — stakeholders must be able to confirm the result is real.
 - Collected feedback must become backlog item or action, never just meeting notes.
@@ -85,8 +85,15 @@ Use `~/.agents/templates/sprint-review.md` as base for the artifact.
 
 ## Relationship with the flow
 
-In the stitched flow, the sprint review connects execution to feedback:
+```mermaid
+flowchart LR
+    A["/planning"] --> B[execution]
+    B --> C["/status"]
+    C --> D["/metrics"]
+    D --> E["/review"]
+    E --> F["/retro"]
+```
 
-`sprint planning -> execution -> post-implementation reports -> sprint review -> retro`
+In the stitched flow, the sprint review connects execution to feedback: planning -> execution -> status -> metrics -> review -> retro.
 
-For planning and retro ceremonies, use `scrum-ceremonies`. For status during the sprint, use `delivery-management`.
+For status tracking during the sprint, use `/status`. For quantitative data, use `/metrics`.

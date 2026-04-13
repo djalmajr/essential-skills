@@ -24,21 +24,21 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 - Make the problem or opportunity explicit before planning
 - Identify constraints, premises, and open questions
-- Define the next step in the flow: `/roadmap`, `/refinement`, `/story`, or `/task-plan`
+- Define the next step in the flow: `/roadmap`, `/epic`, or `/task`
 - Avoid work starting without clarity about what is being solved
 
 ## When to use
 
 - Someone brings an idea, need, or problem without defined scope
-- The request is too vague to become a story or plan directly
+- The request is too vague to become an epic or task directly
 - There is uncertainty about size, priority, or approach
 - It is the first contact with a new problem
 
 ## When NOT to use
 
-- The problem is already clear and scope is defined — use `/story` or `/task-plan` directly
-- The work has already been refined — go to `/story` or `/task-plan`
-- It's a trivial fix — use `/task-plan` directly
+- The problem is already clear and scope is defined — use `/epic` or `/task` directly
+- The work has already been decomposed — go to `/epic` or `/task`
+- It's a trivial fix — use `/task` directly
 
 ## Intake process
 
@@ -66,14 +66,14 @@ Fill in the template with collected information:
 
 Based on size and clarity:
 
-- Large and strategic problem → `/roadmap` → then `/refinement`
-- Large but operational problem with broad scope → `/refinement`
-- Medium problem with reasonable scope → `/refinement` (or `/story` if already well-decomposed)
-- Small and clear problem → `/task-plan`
+- Large and strategic problem → `/roadmap` → then `/epic`
+- Large but operational problem with broad scope → `/epic`
+- Medium problem with reasonable scope → `/epic` (to decompose into stories)
+- Small and clear problem → `/task`
 
 Register the recommendation in the intake and confirm with the user.
 
-> **Flow rule:** For large or complex items, refinement is mandatory before creating epics or stories. Only small, localized items can skip directly to `/task-plan`.
+> **Flow rule:** For large or complex items, decomposition via `/epic` is mandatory before execution. Only small, localized items can skip directly to `/task`.
 
 ### 4. Save the intake
 
@@ -86,10 +86,8 @@ Register the recommendation in the intake and confirm with the user.
 After user confirmation, offer to generate the next artifact following the official flow:
 
 - Large/strategic → "Do you want me to create the `/roadmap`?"
-- Large/operational → "Do you want me to run `/refinement` to decompose into stories?"
-- Small/clear → "Do you want me to create the `/task-plan`?"
-
-> **Never offer `/epic` or `/story` directly from intake for large or complex items.** These must pass through `/refinement` first to ensure proper decomposition.
+- Large/operational → "Do you want me to run `/epic` to decompose into stories?"
+- Small/clear → "Do you want me to create the `/task`?"
 
 ### 6. Validate
 
@@ -103,7 +101,7 @@ Before closing the intake, confirm:
 
 - Never jump straight to implementation from an intake. The intake generates the next artifact, not code.
 - If the user insists on starting without clarity, register the risks and ask if they want to proceed anyway.
-- The intake should be short — 10 to 15 minutes of conversation maximum. If it takes longer, the problem probably needs `/refinement`.
+- The intake should be short — 10 to 15 minutes of conversation maximum. If it takes longer, the problem probably needs `/epic` decomposition.
 - Keep the tone of discovery, not detailed planning.
 
 ## Template
@@ -114,12 +112,10 @@ Use `~/.agents/templates/intake.md` as base for the artifact.
 
 ```mermaid
 flowchart LR
-    A[intake] --> B{roadmap or refinement or epic or story or plan}
-    B --> C[roadmap]
-    B --> D[refinement]
-    B --> E[epic]
-    B --> F[story]
-    B --> G["task-plan"]
+    A["/intake"] --> B{next step}
+    B --> C["/roadmap"]
+    B --> D["/epic"]
+    B --> E["/task"]
 ```
 
-This skill is the entry point of the flow. It captures the problem and directs to the correct skill. For decision between artifacts, you can also use `/scrum-planning`. For ceremonies, use `/scrum-ceremonies`.
+This skill is the entry point of the flow. It captures the problem and directs to the correct skill. For guidance on which skill to use, you can also use `/router`.

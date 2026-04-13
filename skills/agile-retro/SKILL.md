@@ -1,6 +1,6 @@
 ---
 name: agile-retro
-description: Conducts retrospective with learnings and improvement actions. Use when a cycle, sprint, or delivery has ended and the team needs to reflect on what worked and what needs to change.
+description: Conducts retrospective with learnings and improvement actions. Use when a cycle, sprint, or delivery has ended and the team needs to reflect on what worked and what needs to change. Also absorbs post-implementation reflection aspects.
 compatibility: opencode
 metadata:
   audience: engineering
@@ -13,7 +13,7 @@ Use this skill to conduct a retrospective that transforms reflection into concre
 
 Initial context received via slash: $ARGUMENTS
 
-If `$ARGUMENTS` is filled, use as reference (e.g., period, sprint, initiative).
+If `$ARGUMENTS` is filled, use as reference (e.g., period, sprint, initiative, delivery).
 If empty, ask which period or delivery will be analyzed.
 
 ## Language
@@ -26,14 +26,31 @@ Write the artifact in the user's language. If the user communicates in Portugues
 - Identify what worked and what didn't (and why)
 - Generate few clear actions with owner and deadline
 - Feed process improvement, not just historical memory
+- Reflect on delivery outcomes (what was planned vs what happened)
+
+## When to use
+
+- A sprint or delivery cycle has ended
+- The team needs to reflect on what worked and what needs to change
+- Before starting the next sprint — retro feeds sprint planning
+- After closing a significant delivery (via `/status` closure mode)
+- Per-delivery reflection (what the old `/post-impl` reflection covered)
+- Per-sprint reflection (standard retrospective)
+
+## When NOT to use
+
+- Mid-sprint status — use `/status` (checkpoint mode) instead
+- Planning the next sprint — use `/planning` instead (but retro should feed into it)
+- Closing a delivery with verification — use `/status` (closure mode) first, then retro
+- You need metrics/data — use `/metrics` first, then retro
 
 ## Process
 
 ### 1. Collect inputs
 
 Consult:
-- Post-implementation reports from the period
-- Dailies and status reports
+- Status closure reports from the period
+- Status checkpoints and consolidation reports
 - Sprint review (if it exists)
 - Sprint metrics (if it exists)
 - User or stakeholder feedback
@@ -49,7 +66,15 @@ Consult:
 - **What didn't work:** what caused friction, delay, or rework
 - **Why:** root cause, not just symptom
 
-### 4. Define actions
+### 4. Reflect on delivery outcomes
+
+When running after a delivery closure:
+- What was planned vs what was delivered
+- Which decisions were right and which should change
+- What would you do differently next time
+- Technical debt or risks introduced
+
+### 5. Define actions
 
 - Limit to 2-3 actions per retro (focus > quantity)
 - Each action must have:
@@ -58,7 +83,7 @@ Consult:
   - Deadline
   - How to verify the improvement happened
 
-### 5. Connect to next cycle
+### 6. Connect to next cycle
 
 - How will these actions be observed in the next sprint/delivery?
 - Does any action become a backlog item?
@@ -70,9 +95,9 @@ Consult:
 
 ## Chaining
 
-- If actions generate new stories: suggest `/story` or `/task-plan`
+- If actions generate new tasks: suggest `/task` or `/epic`
 - If actions change process: suggest updating rules or skills
-- If the cycle restarts: suggest `/sprint-planning`
+- If the cycle restarts: suggest `/planning`
 
 ## Reference template
 
@@ -90,7 +115,9 @@ Use `~/.agents/templates/retro.md` as base.
 
 ```mermaid
 flowchart LR
-    A[post-impl] --> B[retro]
+    A["/status<br>(closure)"] --> B["/retro"]
     B --> C[improvement actions]
-    C --> D[next cycle]
+    C --> D["/planning"]
 ```
+
+This skill closes the feedback loop. For closing deliveries, use `/status` (closure mode) first. For metrics data, use `/metrics` first. The next cycle starts with `/planning`.

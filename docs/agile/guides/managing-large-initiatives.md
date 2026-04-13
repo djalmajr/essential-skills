@@ -2,11 +2,11 @@
 
 End-to-end scenarios showing how to take a large initiative from strategic direction to coordinated execution across multiple stories. These skills bridge the gap between "we need to do X" and "here are the stories, in order, with dependencies."
 
-**Skills covered:** intake, roadmap, refinement, epic, story, task-plan, status-report
+**Skills covered:** intake, roadmap, epic, task, status
 
 ---
 
-## Scenario A — Strategic initiative: Payment system overhaul
+## Scenario A -- Strategic initiative: Payment system overhaul
 
 The company needs to migrate from a legacy payment provider (15% transaction failure rate) to Stripe. This affects billing, invoices, payouts, and webhooks. Timeline: Q2 2026.
 
@@ -23,7 +23,7 @@ The intake structures:
 - **Constraints:** No downtime during migration, PCI compliance required, Stripe SAML+OIDC only
 - **Open questions:** Which Stripe plan tier? Audit requirements? Migration path for existing customers?
 
-**Recommendation:** "This is a large, strategic problem → `/roadmap` to plan the quarters, then `/refinement` to break it down."
+**Recommendation:** "This is a large, strategic problem -> `/roadmap` to plan the quarters, then `/epic` to decompose it."
 
 Save to: `planning/payment-migration/intake.md`
 
@@ -49,19 +49,21 @@ The skill reads the intake and structures the initiative roadmap:
 - Legacy provider decommission (depends on Phase 1+2)
 - *Validation:* Zero transactions through legacy provider
 
-**Critical path:** Stripe integration → webhook handler → payout reconciliation → legacy decommission
+**Critical path:** Stripe integration -> webhook handler -> payout reconciliation -> legacy decommission
 
 **Risks:** PCI audit in Q2 may conflict with Phase 2; Stripe API rate limits during migration batch
 
 Save to: `planning/payment-system-overhaul/roadmap.md`
 
-### Step 3: Refine into stories
+### Step 3: Decompose into stories with epic
 
 ```
-/refinement payment-migration
+/epic payment-migration
 ```
 
-The skill reads the intake and roadmap, then decomposes by vertical value slice:
+The skill reads the intake and roadmap, then decomposes by vertical value slice into files:
+
+**00-overview.md** -- the epic overview with backlog:
 
 | Story | Size | Dependencies | Phase |
 |-------|------|-------------|-------|
@@ -71,68 +73,48 @@ The skill reads the intake and roadmap, then decomposes by vertical value slice:
 | Customer migration | large | Story 1 | 2 |
 | Legacy decommission | small | Stories 1-4 | 3 |
 
+**01-stripe-provider.md** -- Story 1 with context, acceptance criteria, and tasks
+**02-webhook-handler.md** -- Story 2
+**03-payout-reconciliation.md** -- Story 3
+**04-customer-migration.md** -- Story 4
+**05-legacy-decommission.md** -- Story 5
+
 **Implementation order:** Story 1 first (unblocks all), Stories 2+3 in parallel after Story 1, Story 4 after Story 1, Story 5 last.
 
-**Open decisions:** Customer migration strategy (big bang vs progressive rollout?), Stripe plan tier.
+Save to: `planning/payment-migration/epics/01-payment-overhaul/`
 
-Save to: `planning/payment-migration/refinement.md`
+### Step 4: Execute stories
 
-### Step 4: Structure the epic
-
-```
-/epic payment-system-overhaul
-```
-
-The skill reads the refinement and builds the coordinated backlog:
-
-- **Story 1:** Stripe provider integration (small, no deps) — Phase 1
-- **Story 2:** Webhook event handler (medium, depends on 1) ��� Phase 1
-- **Story 3:** Payout reconciliation (medium, depends on 1, 2) — Phase 2
-- **Story 4:** Customer migration (large, depends on 1) — Phase 2
-- **Story 5:** Legacy decommission (small, depends on 1-4) — Phase 3
-
-Each story has: objective, size, dependencies, phase, and acceptance criteria summary.
-
-Save to: `planning/payment-system-overhaul/epic.md`
-
-### Step 5: Detail and execute stories
-
-For each story in the epic, detail it with `/story` then create a `/task-plan`:
+For each story in the epic, create execution plans with `/task`:
 
 ```
-/story webhook event handler
+/task planning/payment-migration/epics/01-payment-overhaul/02-webhook-handler.md
 ```
 
-The story maps: files, acceptance criteria (idempotency, signature verification, status updates), tasks, and verification.
+The task reads the story file and adds detailed execution tasks, file mappings, and verification steps.
 
-```
-/task-plan webhook-event-handler
-```
-
-The plan maps exact files, verifiable tasks, and a checklist for execution.
-
-### Step 6: Track progress mid-initiative
+### Step 5: Track progress mid-initiative
 
 Two weeks in, the product owner asks "where are we?"
 
 ```
-/status-report payment-system-overhaul
+/status report payment-system-overhaul
 ```
 
-The report consolidates from dailies, plans, and the epic:
+The report consolidates from checkpoints, plans, and the epic:
 
-- **Completed:** Story 1 (Stripe integration), Story 2 (Webhook handler) — 80% done, pending retry logic
-- **In progress:** Story 3 (Payout reconciliation) — started, blocked on bank API docs
+- **Completed:** Story 1 (Stripe integration), Story 2 (Webhook handler) -- 80% done, pending retry logic
+- **In progress:** Story 3 (Payout reconciliation) -- started, blocked on bank API docs
 - **Deviations:** Story 2 scope expanded (added idempotency, approved mid-sprint)
 - **Risks:** Bank API documentation delayed (owner: infra team, action: follow-up Monday)
 - **Decisions needed:** Customer migration in Phase 2 or Phase 3?
 - **Next steps:** Complete webhook retry logic (Friday), unblock bank API docs (Monday)
 
-Save to: `planning/payment-system-overhaul/status-report-2026-04-25.md`
+Save to: `planning/payment-system-overhaul/status/report-2026-04-25.md`
 
 ---
 
-## Scenario B — Quarterly objective: Reduce onboarding drop-off by 40%
+## Scenario B -- Quarterly objective: Reduce onboarding drop-off by 40%
 
 Product sets a Q2 OKR: "Reduce onboarding funnel drop-off from 60% to 36%."
 
@@ -152,16 +134,16 @@ The intake captures: current funnel data (60% drop-off at step 3 of 5), hypothes
 
 The roadmap positions this alongside other Q2 initiatives:
 
-- **Initiative 1:** Onboarding optimization (this) — primary metric: drop-off rate
-- **Initiative 2:** Payments MVP — primary metric: first transaction
-- **Initiative 3:** Infra reliability — primary metric: uptime
+- **Initiative 1:** Onboarding optimization (this) -- primary metric: drop-off rate
+- **Initiative 2:** Payments MVP -- primary metric: first transaction
+- **Initiative 3:** Infra reliability -- primary metric: uptime
 
 **Order:** Quick onboarding wins first (unblocks data collection), then deeper changes guided by analytics.
 
-### Step 3: Refinement
+### Step 3: Epic
 
 ```
-/refinement onboarding drop-off
+/epic onboarding drop-off
 ```
 
 Decomposed by user value slice:
@@ -175,17 +157,15 @@ Decomposed by user value slice:
 
 **Critical path:** Stories 1+2 first (quick wins, no deps), then Story 3, then Story 4.
 
-### Step 4: Epic (if needed)
-
-With 4 stories, 2 of which are trivial, this doesn't need a full epic. Stories 1 and 2 go directly to `/task-plan`. Stories 3 and 4 get `/story` with acceptance criteria.
+With 4 stories, 2 of which are trivial, Stories 1 and 2 go directly to `/task`. Stories 3 and 4 have richer acceptance criteria in their story files.
 
 **Key insight:** Not every initiative needs every artifact. Use proportional tooling.
 
-### Step 5: Status reports at milestones
+### Step 4: Status reports at milestones
 
 After week 2 (quick wins shipped):
 ```
-/status-report onboarding-optimization
+/status report onboarding-optimization
 ```
 
 - Completed: signup simplification (-12% drop-off, better than expected), progress indicator (-3% drop-off)
@@ -196,9 +176,9 @@ After week 2 (quick wins shipped):
 
 ## Key takeaways
 
-1. **Roadmap before refinement:** Strategic direction first, then decomposition
+1. **Roadmap before epic:** Strategic direction first, then decomposition
 2. **Vertical slices, not layers:** "Stripe integration" (good) vs "backend changes" (bad)
-3. **Epic coordinates, doesn't replace:** Each story still needs its own detail
-4. **Status reports consolidate:** Mid-initiative visibility with facts, not intentions
-5. **Proportional tooling:** Small initiative with clear stories? Skip the epic. Large initiative with dependencies? Use the full pipeline.
-6. **Dependencies are explicit:** In the refinement, epic, and roadmap — never implicit
+3. **Epic decomposes directly:** No separate refinement step for decomposition -- epic creates the story files
+4. **Status consolidation provides visibility:** Mid-initiative visibility with facts, not intentions
+5. **Proportional tooling:** Small initiative with clear stories? Use smaller story files. Large initiative with dependencies? Use the full pipeline.
+6. **Dependencies are explicit:** In the epic overview and roadmap -- never implicit

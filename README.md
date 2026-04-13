@@ -1,6 +1,6 @@
 # Essential Skills — Zomme Delivery Framework
 
-Skills for agile delivery management powered by AI agents (opencode).
+Skills for agile delivery management powered by AI agents.
 
 ## Installing
 
@@ -9,35 +9,44 @@ Skills for agile delivery management powered by AI agents (opencode).
 npx skills add zomme/essential-skills --all
 
 # Specific skills
-npx skills add zomme/essential-skills --skill agile-daily --skill agile-plan
+npx skills add zomme/essential-skills --skill agile-epic --skill agile-task
 ```
 
-## Skills (22)
+## Skills (16)
 
-| # | Skill | Category |
-|---|-------|----------|
-| 1 | agile-daily | Agile |
-| 2 | agile-status-report | Agile |
-| 3 | agile-post-impl | Agile |
-| 4 | agile-delivery | Agile |
-| 5 | agile-plan | Agile |
-| 6 | agile-story | Agile |
-| 7 | agile-epic | Agile |
-| 8 | agile-refinement | Agile |
-| 9 | agile-roadmap | Agile |
-| 10 | agile-planning-router | Agile |
-| 11 | agile-ceremonies-router | Agile |
-| 12 | agile-sprint-planning | Agile |
-| 13 | agile-sprint-review | Agile |
-| 14 | agile-sprint-metrics | Agile |
-| 15 | agile-retro | Agile |
-| 16 | agile-scan-review | Agile |
-| 17 | agile-proto | Agile |
-| 18 | agile-intake | Agile |
-| 19 | agile-onboarding | Agile |
-| 20 | wiki-ingest | Wiki |
-| 21 | wiki-lint | Wiki |
-| 22 | wiki-query | Wiki |
+### Agile (13)
+
+| Skill | Purpose |
+|-------|---------|
+| agile-intake | Capture vague problems into structured intake documents |
+| agile-roadmap | Quarterly or initiative roadmap |
+| agile-epic | Decompose initiative into stories with tasks |
+| agile-task | Detail a task with context and execution checklist |
+| agile-refinement | Validate planning artifacts + review code |
+| agile-status | Track progress: checkpoint, consolidation, or closure |
+| agile-planning | Plan a sprint: objective, items, capacity |
+| agile-review | Sprint review and demo for stakeholders |
+| agile-metrics | Objective sprint metrics |
+| agile-retro | Retrospective with improvement actions |
+| agile-router | Guidance on which skill to use |
+| agile-onboarding | New member onboarding guide |
+| agile-proto | Interactive UI prototypes |
+
+### Wiki (3)
+
+| Skill | Purpose |
+|-------|---------|
+| wiki-ingest | Ingest new source into wiki (documents, notes, decisions) |
+| wiki-query | Ask about something in the wiki |
+| wiki-lint | Audit and organize the wiki |
+
+## Flow
+
+```
+intake → roadmap → epic → task → execution → status → retro
+                    ↑                           ↑
+                refinement                  refinement
+```
 
 ## Wiki (Karpathy Pattern)
 
@@ -57,7 +66,7 @@ wiki/
 ├── sources/         # Source summaries
 ├── business/        # Business rules (audience: business)
 ├── ops/             # Operational procedures (audience: ops)
-└── patterns/       # Patterns identified in practice
+└── patterns/        # Patterns identified in practice
 raw/                 # Original sources (before ingestion)
 ```
 
@@ -86,27 +95,17 @@ Inspired by [LLM Wiki — Karpathy](https://gist.github.com/karpathy/442a6bf5559
 
 [`docs/`](docs/) — usage guides organized by category. Workflow diagram in [`docs/agile/`](docs/agile/README.md).
 
-## Stack
-
-- opencode as AI agent
-- Bun as runtime
-- Lean Scrum + AI as pair
-
 ## How to use
 
 Each skill is invoked with `/skill-name`:
 
 ```
 /agile-intake
+/agile-epic
+/agile-task
 /agile-refinement
-/agile-plan
-/agile-story
-/agile-daily
+/agile-status
 /wiki-query
-/wiki-ingest
 ```
 
-To know which skill to use:
-- `/agile-delivery` — which tracking type
-- `/agile-planning-router` — which planning artifact
-- `/agile-ceremonies-router` — which ceremony
+Not sure which skill to use? Try `/agile-router`.

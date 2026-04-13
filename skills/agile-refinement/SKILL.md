@@ -1,132 +1,167 @@
 ---
 name: agile-refinement
-description: Breaks large intakes or backlogs into executable stories with clear dependencies. Use when a problem has been captured (intake) but still needs to be decomposed before execution.
+description: Validates planning artifacts and reviews code for quality, consistency, and completeness. Use to lint planning documents (cross-references, dependencies, format) or to review changed code (security, coherence, scope, quality).
 compatibility: opencode
 metadata:
   audience: engineering
-  workflow: refinement
+  workflow: validation
 ---
 
 # Refinement
 
-Use this skill to transform an intake, backlog, or large initiative into executable stories with clear dependencies, order, and acceptance criteria.
+Use this skill to validate planning artifacts and review code quality. It operates in two modes: planning lint and code review.
 
 Initial context received via slash: $ARGUMENTS
 
-If `$ARGUMENTS` is filled (e.g., file path, text, reference), use as starting point.
-If empty, ask which initiative or intake will be refined.
+If `$ARGUMENTS` is filled (e.g., file path, branch, "planning", "code"), use as starting point to determine mode.
+If empty, ask the user what they want to validate: planning artifacts or code changes.
 
 ## Language
 
-Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use. Templates are in English — translate headers and content to match.
+Write any report output in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use.
 
 ## Objective
 
-- Break large items into proportional and executable stories
-- Make dependencies, unblocks, and risks explicit
-- Define implementation order
-- Produce backlog ready for execution (each story with objective, size, and dependency)
+- Validate planning artifacts for consistency, completeness, and correctness
+- Review code changes for security, coherence, scope, and quality
+- Catch issues before they become problems in execution
+- Provide actionable, specific feedback — not generic observations
 
 ## When to use
 
-- After an `/intake` that recommended refinement
-- When a backlog item is too large or complex to execute directly
-- When there is ambiguity about scope, dependencies, or order
-- Before creating an epic with several stories
+- Before starting implementation — lint the planning artifacts
+- Before committing code — review the diff
+- When opening a pull request — quality gate
+- When reviewing AI-generated code — human-equivalent review
+- Periodically — check for stale content, broken cross-references, or orphaned artifacts
+- When merging or completing an epic — validate all pieces fit together
 
 ## When NOT to use
 
-- The item is already clear and fits in a story — use `/story` directly
-- The item is small and localized — use `/task-plan` directly
-- The problem hasn't been captured yet — use `/intake` first
+- Creating planning artifacts — use `/intake`, `/epic`, `/task`, `/roadmap`
+- Decomposing work into stories — use `/epic` (which now handles decomposition)
+- Tracking delivery progress — use `/status`
+- Planning a sprint — use `/planning`
 
-## Process
+## Mode 1: Planning Lint
 
-### 1. Analyze input material
+Validates planning artifacts against the following checks:
 
-Read the provided intake, backlog, or description. Identify:
+### Cross-references
+- [ ] Origin fields point to existing files
+- [ ] Referenced epics, stories, and tasks exist
+- [ ] File paths in cross-references are correct and files are present
 
-- What is the macro problem/objective
-- Which areas are impacted
-- Which constraints are already known
-- What is the estimated scope and complexity
+### Dependencies
+- [ ] Declared dependencies between stories/tasks exist
+- [ ] No circular dependencies
+- [ ] Dependency order is consistent with the roadmap/epic sequence
 
-### 2. Identify decomposition axes
+### Completeness
+- [ ] Required sections are present (Context, Files, Detail, Tasks, Verification)
+- [ ] No empty required fields
+- [ ] Acceptance criteria are defined and verifiable
+- [ ] Tasks are specific and actionable (not vague)
 
-Break by **vertical value slice**, not by technical layer:
+### Consistency
+- [ ] Sizing is consistent across related artifacts (stories within an epic)
+- [ ] Status fields are up to date
+- [ ] Naming conventions match across files
 
-- Each story must deliver something observable
-- Prefer independent stories when possible
-- Identify dependencies between stories (what unblocks what)
+### Format
+- [ ] File naming follows convention (`00-overview.md`, `NN-story-name.md`)
+- [ ] Folder structure follows convention (`planning/<initiative>/epics/NN-<epic>/`)
+- [ ] Templates are properly filled (no leftover placeholder text)
 
-### 3. Propose story backlog
+### Scope conflicts
+- [ ] No overlapping scope between stories in the same epic
+- [ ] Out-of-scope items are not referenced as tasks
 
-For each story, register:
+### Stale content
+- [ ] No artifacts with all tasks completed but status still "in progress"
+- [ ] No referenced files that have been deleted or moved
+- [ ] No plans older than 30 days with incomplete tasks and no recent daily
 
-- Name and objective
-- Estimated scope (small, medium, or large)
-- Dependencies (which stories it depends on)
-- What validates it (summarized acceptance criteria)
+### Process
 
-### 4. Define implementation order
+1. Identify the scope: a single file, an epic folder, or the entire `planning/` tree.
+2. Read all artifacts in scope.
+3. Run each check category above.
+4. Produce an inline report grouped by category with specific issues and locations.
 
-- Group by sprint or phase
-- Identify what can run in parallel
-- Highlight the critical path
+## Mode 2: Code Review
 
-### 5. Record decisions and pending items
+Reviews changed code applying the checklist from `~/.agents/rules/code-review.md`:
 
-- Decisions made during refinement
-- Questions that remained open
-- Identified risks
+### Security
+- [ ] Inputs validated and sanitized
+- [ ] No SQL injection, XSS, command injection, or SSRF
+- [ ] No hardcoded secrets
+- [ ] Authentication and authorization correct when applicable
+- [ ] Sensitive data not exposed in logs or responses
 
-## Where to save
+### Project Coherence
+- [ ] Follows repository patterns and conventions
+- [ ] Uses existing components, utilities, and helpers
+- [ ] Did not reinvent the wheel
+- [ ] Naming consistent with codebase
+- [ ] Imports follow project conventions
 
-- If part of an initiative with a folder in `planning/`: save at `planning/<initiative>/epics/NN-<epic-name>/refinement.md`
-- If standalone refinement: present inline and confirm with user
+### Over-engineering
+- [ ] No premature abstractions
+- [ ] No error handling for impossible scenarios
+- [ ] No generalization for hypothetical requirements
 
-> NN is a zero-padded sequential number (01, 02, ...). Ask the user for the epic name if not clear from context.
+### Scope
+- [ ] Code does only what was requested
+- [ ] No refactoring of unrelated code
+- [ ] No additional features not requested
 
-## Cross-reference
+### Quality
+- [ ] Tests cover acceptance scenarios
+- [ ] Code readable without explanatory comments
+- [ ] Small functions with single responsibility
+- [ ] No logic duplication
+- [ ] Errors handled at system boundaries
 
-Always include at the top of the artifact:
+### Completeness
+- [ ] Lint passes
+- [ ] Typecheck passes
+- [ ] Tests pass
+- [ ] Diff read in full
 
-```
-**Origin:** `planning/<initiative>/intake.md` (or reference of where it came from)
-```
+### Process
 
-## Chaining
+1. Identify the scope: branch, files, or working tree changes.
+2. Read the complete diff before issuing any output.
+3. Apply each check category.
+4. Produce an inline report grouped by category.
+5. Highlight red flags that justify immediate rejection.
 
-At the end of refinement, offer the next step:
+## Output
 
-- If refinement generated several stories → suggest `/epic` to structure the backlog
-- If it generated 1-2 simple stories → suggest `/story` to detail
-- If it generated only 1 small item → suggest `/task-plan`
-
-Ask the user which path to follow.
-
-## Reference template
-
-Use `~/.agents/templates/refinement.md` as base for the artifact.
+This skill does NOT produce a saved artifact. It produces an inline report with:
+- Issues grouped by category
+- Severity: red flag (reject), warning (fix before proceeding), info (consider)
+- Specific file and line references where applicable
+- Actionable suggestions for each issue
 
 ## Rules
 
-- Never jump straight to implementation from refinement. Refinement generates stories or epic, not code.
-- Break by behavior/delivery, not by technical layer.
-- Each story must have a clear objective and estimated size.
-- Dependencies must be explicit, not implicit.
-- If an item cannot be broken, register as risk (very large story).
+- Read everything in scope before producing any output.
+- Be specific. "Code looks bad" is not actionable. "Replace `RateLimitError` with `HttpError` on line 42 of `src/middleware/rate-limit.ts`" is.
+- AI code review does not replace human code review. This is an additional gate.
+- Planning lint can be run at any time — it's a health check, not a ceremony.
+- Never produce vague, generic feedback. Every issue must be verifiable.
 
 ## Relationship with the flow
 
 ```mermaid
 flowchart LR
-    A[intake] --> B[roadmap]
-    B --> C[refinement]
-    C --> D{epic or story or plan}
-    D --> E[epic]
-    D --> F[story]
-    D --> G["task-plan"]
+    A["/epic"] --> B["/refinement<br>(planning lint)"]
+    C["/task"] --> D[execution]
+    D --> E["/refinement<br>(code review)"]
+    E --> F["/status"]
 ```
 
-This skill acts between roadmap and creation of epics/stories/task plans. It is a **mandatory step** — never skip from roadmap directly to epic. For problem capture, use `/intake`. For story detailing, use `/story`. For epics, use `/epic`.
+This skill validates artifacts and code at any point in the flow. For creating planning artifacts, use `/epic` or `/task`. For tracking delivery, use `/status`.

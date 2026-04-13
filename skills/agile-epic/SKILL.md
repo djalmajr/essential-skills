@@ -1,6 +1,6 @@
 ---
 name: agile-epic
-description: Structures large initiatives into story backlog with roadmap, dependencies, and verification. Use when work requires several coordinated stories, has dependencies between deliveries, or needs a roadmap.
+description: Structures large initiatives into a decomposed backlog with roadmap, dependencies, and verification. Generates an overview file plus individual story files with tasks. Use when work requires several coordinated stories, has dependencies between deliveries, or needs a roadmap.
 compatibility: opencode
 metadata:
   audience: engineering
@@ -9,11 +9,11 @@ metadata:
 
 # Epic
 
-Use this skill to transform a refinement or large initiative into a structured epic with story backlog, roadmap, and acceptance criteria.
+Use this skill to transform an intake, roadmap, or large initiative into a structured epic with decomposed stories, a roadmap, and acceptance criteria.
 
 Initial context received via slash: $ARGUMENTS
 
-If `$ARGUMENTS` is filled (e.g., refinement path, intake, or description), use as starting point.
+If `$ARGUMENTS` is filled (e.g., intake path, description, initiative name), use as starting point.
 If empty, ask which initiative will be structured.
 
 ## Language
@@ -22,35 +22,54 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 ## Objective
 
-- Structure story backlog with dependencies and order
-- Define epic roadmap (phases, unblocks, intermediate validations)
+- Decompose large initiatives into proportional, executable stories
+- Structure a story backlog with dependencies and order
+- Define an epic roadmap (phases, unblocks, intermediate validations)
 - Ensure each story can be planned and executed separately
-- Produce artifact that guides execution without replacing individual plans
+- Produce artifacts that guide execution without replacing individual task plans
 
 ## When to use
 
-- After a `/refinement` that generated several stories
-- When the initiative is large, requiring multiple coordinated stories
-- When there are dependencies between deliveries that need coordination
-- When a roadmap is needed to guide the sequence
+- After an `/intake` or `/roadmap` identified a large initiative
+- When the initiative requires multiple coordinated stories
+- When there are dependencies between deliveries that need sequencing
+- When a roadmap is needed to guide the delivery order
+- For medium-to-large work that needs richer structure than a simple `/task`
 
 ## When NOT to use
 
-- The work fits in a single story — use `/story`
-- The work is localized and small — use `/task-plan`
-- The problem hasn't been analyzed yet — use `/intake` or `/refinement` first
+- The work is small and localized — use `/task` directly
+- The problem hasn't been captured yet — use `/intake` first
+- You need strategic direction — use `/roadmap` first
+- You need to validate existing artifacts — use `/refinement`
 
 ## Process
 
 ### 1. Analyze context
 
-Read the refinement, intake, or provided material. Identify:
+Read the intake, roadmap, or provided material. Identify:
 
 - Macro problem and objective
-- Stories already identified (from refinement)
+- Which areas are impacted
 - Constraints and premises
+- Estimated scope and complexity
 
-### 2. Structure the epic
+### 2. Decompose into stories
+
+Break by **vertical value slice**, not by technical layer:
+
+- Each story must deliver something observable
+- Prefer independent stories when possible
+- Identify dependencies between stories (what unblocks what)
+
+For each story, define:
+
+- Name and objective (1 line)
+- Estimated scope (small, medium, or large)
+- Dependencies (which stories it depends on)
+- Summarized acceptance criteria
+
+### 3. Structure the epic overview
 
 Fill in the required sections:
 
@@ -59,17 +78,6 @@ Fill in the required sections:
 - **Roadmap:** phases/sprints, what unblocks what, intermediate validations
 - **Risks:** what could go wrong and how to mitigate
 - **Epic acceptance criteria:** how to know the initiative is complete
-
-### 3. Detail each story (summary)
-
-For each story in the backlog, register:
-
-- Name and objective (1 line)
-- Estimated scope (small, medium, or large)
-- Depends on (which stories)
-- Status (not started, in progress, completed)
-
-The full detail of each story will be done with `/story`.
 
 ### 4. Define roadmap
 
@@ -86,46 +94,66 @@ When the team has 2+ developers:
 - Assign stories to tracks when possible
 - Use Mermaid `gantt` diagrams to visualize parallel work across tracks
 
+### 6. Generate files
+
+The epic produces multiple files:
+
+```
+planning/<initiative>/epics/NN-<epic-name>/
+├── 00-overview.md         (the epic overview: context, backlog, roadmap, risks)
+├── 01-story-name.md       (first story: context + tasks inline)
+├── 02-story-name.md       (second story: context + tasks inline)
+└── ...
+```
+
+- `00-overview.md` contains the epic-level context, story backlog summary, roadmap, risks, and acceptance criteria.
+- Each `NN-story-name.md` contains the story context, acceptance criteria, files, tasks, and verification — all in one file.
+
+> NN is a zero-padded sequential number. Each epic gets its own folder under `epics/`.
+
 ## Where to save
 
-- Save at `planning/<initiative>/epics/NN-<epic-name>/epic.md`
+- Epic folder: `planning/<initiative>/epics/NN-<epic-name>/`
 - If the initiative doesn't have a folder in `planning/`, ask the user for the name
-
-> NN is a zero-padded sequential number matching the refinement. Each epic gets its own folder under `epics/`.
 
 ## Cross-reference
 
-Always include at the top of the artifact:
+Always include at the top of `00-overview.md`:
 
 ```
 **Origin:** `planning/<initiative>/intake.md`
-**Refinement:** `planning/<initiative>/epics/NN-<epic-name>/refinement.md`
+```
+
+Each story file includes:
+
+```
+**Origin:** `planning/<initiative>/epics/NN-<epic-name>/00-overview.md`
 ```
 
 ## Chaining
 
 At the end of the epic, offer:
 
-- "Do you want me to detail a story with `/story`?"
-- "Do you want to start with Story 1 using `/task-plan`?"
+- "Do you want me to create the execution plan for Story 1 with `/task`?"
+- "Do you want me to validate the artifacts with `/refinement`?"
 
 Ask the user which story they want to detail first.
 
 ## Reference template
 
-Use `~/.agents/templates/epic.md` as base for the artifact.
+Use `~/.agents/templates/epic.md` as base for the overview artifact.
 
 ## Rules
 
-- The epic does not replace stories or plans. It organizes the backlog and guides the sequence.
+- The epic now handles decomposition directly — there is no separate refinement step for decomposing. Use `/refinement` only for validation/lint.
+- Break by behavior/delivery (vertical slices), not by technical layer.
 - Each story in the backlog must have a clear objective and be executable separately.
 - The roadmap must show dependencies, not just chronological order.
 - Epic acceptance criteria must be verifiable.
 - Update story statuses as the epic progresses.
+- Each story file must contain enough context to be planned and executed independently.
 
-## Required sections
-
-Every epic must contain:
+## Required sections for 00-overview.md
 
 1. **Context** (problem, AS-IS, TO-BE, out of scope)
 2. **Story backlog** (list with objective, size, dependency, status)
@@ -133,15 +161,24 @@ Every epic must contain:
 4. **Epic acceptance criteria**
 5. **Risks**
 
+## Required sections for NN-story-name.md
+
+1. **Context** (problem, objective, value, constraints)
+2. **Files** (exact paths, action, reason)
+3. **Detail** (AS-IS, TO-BE, scope, acceptance criteria, dependencies)
+4. **Tasks** (verifiable checklist in vertical phases)
+5. **Verification** (commands, validations, evidence)
+
 ## Relationship with the flow
 
 ```mermaid
 flowchart LR
-    A[intake] --> B[refinement]
-    B --> C[epic]
-    C --> D[story]
-    D --> E["task-plan"]
-    E --> F[execution]
+    A["/intake"] --> B["/roadmap"]
+    B --> C["/epic"]
+    C --> D["/task"]
+    D --> E[execution]
+    E --> F["/status"]
+    F --> G["/retro"]
 ```
 
-This skill acts after refinement and before detailing individual stories. For refinement, use `/refinement`. For detailing a story, use `/story`.
+This skill acts after intake/roadmap and before task-level execution. For validating artifacts, use `/refinement`. For execution plans, use `/task`.

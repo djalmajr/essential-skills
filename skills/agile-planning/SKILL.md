@@ -1,5 +1,5 @@
 ---
-name: agile-sprint-planning
+name: agile-planning
 description: Plans sprint by selecting items from backlog, defining objective, capacity, and execution order. Use at the beginning of a work cycle to align what will be done.
 compatibility: opencode
 metadata:
@@ -39,8 +39,8 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 Consult:
 - Epic with pending stories
-- Refinement with proposed items
 - Retro with pending improvement actions
+- Backlog items that have been validated via `/refinement`
 
 ### 3. Select items
 
@@ -58,7 +58,7 @@ Each item must have:
 - Files/areas mapped
 - Verifiable acceptance criteria
 
-If an item doesn't have DoR, it doesn't enter the sprint — goes back to refinement.
+If an item doesn't have DoR, it doesn't enter the sprint — needs decomposition via `/epic` or validation via `/refinement`.
 
 ### 5. Order execution
 
@@ -87,12 +87,13 @@ When 2+ developers are available:
 
 ## Chaining
 
-- To detail the first story: suggest `/story` or `/task-plan`
-- For items that need refinement: suggest `/refinement`
+- To detail the first item: suggest `/task` for the first story in the backlog
+- For items that need decomposition: suggest `/epic`
+- For items that need validation: suggest `/refinement`
 
 ## Reference template
 
-Use `~/.agents/templates/sprint-planning.md` as base.
+Use `~/.agents/templates/planning.md` as base.
 
 ## Rules
 
@@ -106,12 +107,12 @@ Use `~/.agents/templates/sprint-planning.md` as base.
 
 ```mermaid
 flowchart LR
-    A[retro] --> B[sprint-planning]
-    B --> C{story or plan}
-    C --> D[story]
-    C --> E["task-plan"]
-    D --> F[execution]
-    E --> F
-    F --> G[daily]
-    G --> H[post-impl]
+    A["/retro"] --> B["/planning"]
+    B --> C["/task"]
+    C --> D[execution]
+    D --> E["/status"]
+    E --> F["/review"]
+    F --> G["/retro"]
 ```
+
+This skill starts the sprint cycle. For decomposing work, use `/epic`. For execution plans, use `/task`. For tracking during the sprint, use `/status`.

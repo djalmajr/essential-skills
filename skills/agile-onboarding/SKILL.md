@@ -34,17 +34,12 @@ Use this skill to guide new team members through the agile + AI flow, in a pract
 1. Present the complete flow:
    ```mermaid
    flowchart LR
-       A[intake] --> B[roadmap]
-       B --> C[refinement]
-       C --> D{epic or story or plan}
-       D --> E[epic]
-       D --> F[story]
-       D --> G[plan]
-       E --> H[scan-review]
-       F --> H
-       G --> H
-       H --> I{daily or status or post-impl}
-       I --> J[retro]
+       A["/intake"] --> B["/roadmap"]
+       B --> C["/epic"]
+       C --> D["/task"]
+       D --> E[execution]
+       E --> F["/status"]
+       F --> G["/retro"]
    ```
 
 2. Explain the role division:
@@ -52,10 +47,22 @@ Use this skill to guide new team members through the agile + AI flow, in a pract
    - AI: structures, implements, verifies, reports
 
 3. Show the decision tree:
-   - When to use simple plan vs story vs epic
+   - When to use task vs epic
    - Scope assessment (small to large)
 
-4. Show the available skills and how to invoke each one.
+4. Show the available skills and how to invoke each one:
+   - `/intake` — capture problems
+   - `/roadmap` — strategic direction
+   - `/epic` — decompose and structure initiatives
+   - `/task` — execution plans
+   - `/refinement` — validate artifacts and review code
+   - `/status` — track progress (checkpoint, consolidation, closure)
+   - `/planning` — sprint planning
+   - `/review` — sprint review and demo
+   - `/metrics` — sprint metrics
+   - `/retro` — retrospective
+   - `/proto` — interactive prototypes
+   - `/router` — guidance on which skill to use
 
 ### Day 2: Practical exercise — intake and planning
 
@@ -64,14 +71,14 @@ Use this skill to guide new team members through the agile + AI flow, in a pract
 Suggested exercise:
 
 1. The new member chooses a small, real problem (bug, improvement, task)
-2. Uses the `intake` skill to structure the problem
+2. Uses the `/intake` skill to structure the problem
 3. Decides the correct artifact with the decision tree
-4. Uses `scrum-planning` to create the plan or story
+4. Uses `/router` to validate the choice, then creates the plan with `/task` or `/epic`
 5. The mentor/tech lead reviews and gives feedback
 
 ### Day 3: Practical exercise — execution with TDD
 
-**Objective:** implement something using the plan -> TDD -> verification flow.
+**Objective:** implement something using the task -> TDD -> verification flow.
 
 Suggested exercise:
 
@@ -82,37 +89,37 @@ Suggested exercise:
    - AI implements (green)
    - Dev requests refactoring if necessary
 3. Run verifications (lint, types, tests)
-4. Review the diff before committing
+4. Run `/refinement` (code review mode) to review the diff before committing
 
 ### Day 4: Practical exercise — tracking
 
-**Objective:** generate daily and close with post-implementation report.
+**Objective:** generate status updates and close with a report.
 
-1. Use `delivery-management` to generate the daily delivery
-2. Simulate a status report
-3. Close the delivery with post-implementation report
-4. Review the complete chain: plan -> execution -> daily -> report
+1. Use `/status` (checkpoint mode) to generate a progress update
+2. Simulate a `/status` (consolidation mode) report for the period
+3. Close the delivery with `/status` (closure mode)
+4. Review the complete chain: task -> execution -> status -> closure
 
 ### Day 5: Reflection and autonomy
 
 **Objective:** assess if the new member is ready to operate autonomously.
 
 1. The new member conducts an intake alone
-2. Creates plan or story without mentor help
+2. Creates plan or epic without mentor help
 3. Implements with TDD
-4. Closes with report
+4. Closes with status report
 5. Mentor validates and gives final feedback
 
 ## Onboarding checklist
 
 - [ ] Understands the complete flow (intake to retro)
 - [ ] Knows how to choose the right artifact (decision tree)
-- [ ] Can create plan or story with AI support
+- [ ] Can create task or epic with AI support
 - [ ] Knows how to use TDD with AI as pair
-- [ ] Knows how to generate daily and post-implementation report
+- [ ] Knows how to generate status updates and closure reports
 - [ ] Understands the responsibility division (human vs AI)
 - [ ] Knows which skills are available and when to use each one
-- [ ] Completed at least one full cycle (intake -> report) with supervision
+- [ ] Completed at least one full cycle (intake -> closure) with supervision
 
 ## Adaptation by profile
 
@@ -121,12 +128,12 @@ Suggested exercise:
 - Extra exercise: implement a small feature from scratch using the flow
 
 ### For managers / scrum masters
-- Focus on: roadmap, refinement, sprint planning, retro, status reports
-- Extra exercise: conduct a refinement and sprint planning with AI support
+- Focus on: roadmap, epic decomposition, sprint planning, retro, status reports
+- Extra exercise: conduct an epic decomposition and sprint planning with AI support
 
 ### For tech leads
 - Both focuses: planning and execution
-- Extra exercise: review AI-generated code and give constructive feedback
+- Extra exercise: review AI-generated code with `/refinement` and give constructive feedback
 
 ## Rules
 
@@ -137,4 +144,4 @@ Suggested exercise:
 
 ## Relationship with the flow
 
-This skill acts as the entry point to all others. After onboarding, the member should be able to invoke `scrum-planning`, `tdd`, `delivery-management`, and `scrum-ceremonies` autonomously.
+This skill acts as the entry point to all others. After onboarding, the member should be able to invoke `/router`, `/task`, `/status`, `/planning`, and `/retro` autonomously.

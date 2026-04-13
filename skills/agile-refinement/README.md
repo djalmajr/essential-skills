@@ -1,21 +1,22 @@
 # agile-refinement
 
-Breaks large intakes or backlog items into proportional, executable stories with clear dependencies, sizing, and implementation order. Use when a problem has been captured (intake) but is too big or ambiguous to execute directly — it decomposes by vertical value slice, not by technical layer.
+Validates planning artifacts and reviews code for quality, consistency, and completeness. Operates in two modes: planning lint (check cross-references, dependencies, completeness, consistency, format, scope conflicts, stale content) and code review (security, coherence, over-engineering, scope, quality). Use at any point in the flow as a quality gate.
 
 ## When to use
 
-- After an `/agile-intake` that recommended refinement (large or complex)
-- A backlog item is too large to execute directly
-- There's ambiguity about scope, dependencies, or execution order
-- Before creating an epic with several stories that need coordination
-- You need to break down a quarterly objective into deliverable stories
+- Before starting implementation -- lint the planning artifacts for issues
+- Before committing code -- review the diff for security, coherence, and quality
+- When opening a pull request -- quality gate
+- After AI-generated code needs human-equivalent review
+- Periodically -- check for stale content, broken cross-references, or orphaned artifacts
+- When merging or completing an epic -- validate all pieces fit together
 
 ## When NOT to use
 
-- The item is already clear and fits in a story — use `/agile-story` directly
-- The item is small and localized — use `/agile-task-plan` directly
-- The problem hasn't been captured yet — use `/agile-intake` first
-- You already have stories that just need execution plans — use `/agile-task-plan`
+- Creating planning artifacts -- use `/agile-intake`, `/agile-epic`, `/agile-task`, or `/agile-roadmap`
+- Decomposing work into stories -- use `/agile-epic` (which handles decomposition directly)
+- Tracking delivery progress -- use `/agile-status`
+- Planning a sprint -- use `/agile-planning`
 
 ## How to use
 
@@ -23,63 +24,57 @@ Breaks large intakes or backlog items into proportional, executable stories with
 /agile-refinement
 ```
 
-Example: `/agile-refinement auth-migration`
+Example: `/agile-refinement planning` or `/agile-refinement code`
 
 ## End-to-end examples
 
-### Example 1: Refining a large intake into stories
+### Example 1: Linting planning artifacts before a sprint
 
-After running `/agile-intake` for "migrate payments to Stripe," the intake recommends refinement:
+Before sprint planning, you want to validate that all epic stories are consistent:
 
-1. Start by invoking: `/agile-refinement payment-migration`
-2. The skill reads `planning/payment-migration/intake.md` and identifies: macro problem (migrate from legacy provider), impacted areas (billing, invoices, payouts, webhook), constraints (no downtime, PCI compliance).
-3. The skill proposes decomposition by vertical value slice:
-   - **Story 1:** Stripe provider setup (small) — no deps, foundational
-   - **Story 2:** Webhook event handler (medium) — depends on Story 1
-   - **Story 3:** Customer migration (medium) — depends on Story 1
-   - **Story 4:** Payout reconciliation (large) — depends on Stories 1, 2
-   - **Story 5:** Legacy decommission (small) — depends on Stories 1-4
-4. It defines the implementation order: Story 1 first (unblocks others), Stories 2 and 3 in parallel, then Story 4, then Story 5.
-5. It records open decisions (need to confirm Stripe plan tier) and risks (PCI audit in Q2).
-6. Save to: `planning/payment-migration/refinement.md`
-7. The skill offers: "Do you want me to structure this into an `/agile-epic`?" or "These 5 stories are clear enough — use `/agile-story` to detail them."
+1. Start by invoking: `/agile-refinement planning/payment-migration/epics/01-payment-overhaul/`
+2. The skill reads all files in the epic folder.
+3. It checks cross-references (Origin fields), dependencies (no circular deps), completeness (required sections present), consistency (sizing matches), format (naming conventions), and stale content.
+4. It produces an inline report: "Story 03 references a dependency on Story 06 which doesn't exist. Story 02 is missing acceptance criteria. Story 04 has tasks completed but status is still 'not started'."
+5. You fix the issues before sprint planning.
 
-### Example 2: Refining a quarterly objective
+### Example 2: Code review before committing
 
-The team has a Q2 objective: "Reduce onboarding drop-off by 40%":
+You've just implemented rate limiting and want a quality gate:
 
-1. Start by invoking: `/agile-refinement reduce onboarding drop-off`
-2. The skill reads the intake and asks clarifying questions about the current funnel data.
-3. It decomposes by user value slice:
-   - **Story 1:** Simplify signup form (small) — remove 3 optional fields
-   - **Story 2:** Add progress indicator to wizard (small) — standalone
-   - **Story 3:** Implement email verification reminders (medium) — depends on email service
-   - **Story 4:** Build onboarding analytics dashboard (medium) — depends on Story 3 for data
-4. It identifies the critical path: Stories 1 and 2 first (quick wins), then Story 3, then Story 4.
-5. Save to: `planning/onboarding-dropoff/refinement.md`
+1. Start by invoking: `/agile-refinement`
+2. The skill reads the complete diff.
+3. It applies the code review checklist: security, coherence, over-engineering, scope, quality, completeness.
+4. It produces a report with flagged issues and actionable suggestions.
+5. You address the issues and re-run the review.
+
+## Output
+
+This skill does NOT produce a saved artifact. It produces an inline report with:
+- Issues grouped by category
+- Severity levels (red flag, warning, info)
+- Specific file and line references
+- Actionable suggestions
 
 ## Workflow integration
 
 ```mermaid
 flowchart LR
-    A[agile-intake] --> B[agile-refinement]
-    B --> C{epic or story}
-    C --> D[agile-epic]
-    C --> E[agile-story]
-    D --> F[agile-task-plan]
-    E --> F
-    F --> G[execution]
+    A["/agile-epic"] --> B["/agile-refinement<br>(planning lint)"]
+    C["/agile-task"] --> D[execution]
+    D --> E["/agile-refinement<br>(code review)"]
+    E --> F["/agile-status"]
 ```
 
 ## Tips & pitfalls
 
-- Never jump straight to implementation from refinement. Refinement produces stories or an epic, not code.
-- Break by behavior/delivery (vertical slices), not by technical layer. "Stripe setup" is a good story; "backend changes" is not.
-- Each story must have a clear objective and estimated size. If it can't be sized, it's not decomposed enough.
-- Dependencies must be explicit. "Story B depends on Story A" — don't leave these implicit.
-- If an item cannot be broken down further, register it as a risk (very large story) rather than pretending it's manageable.
+- Read everything in scope before producing any output.
+- Be specific with feedback. "Code looks bad" is not actionable. "Replace RateLimitError with HttpError on line 42" is.
+- AI code review does not replace human code review -- it's an additional gate.
+- Planning lint can be run at any time as a health check.
+- Focus on security and scope first -- these cause the most real problems.
 
 ## Chaining
 
-- **Before:** `/agile-intake` (capture the problem), `/agile-roadmap` (strategic direction)
-- **After:** If refinement produced several coordinated stories → `/agile-epic`. If 1-2 simple stories → `/agile-story`. If only 1 small item → `/agile-task-plan`.
+- **Before:** Any planning or execution skill (refinement validates their output)
+- **After:** Fix the issues found, then proceed with the flow (commit, sprint planning, etc.)

@@ -6,26 +6,26 @@ Skills for agile delivery management powered by AI agents.
 
 ```mermaid
 flowchart TD
-    A[intake] --> B[roadmap]
-    B --> C[refinement]
-    C --> D[epic]
-    C --> E[story]
-    C --> F[plan]
-    D -.-> G[scan-review]
-    E -.-> G
-    F -.-> G
-    G --> H[daily]
-    G --> I[status-report]
-    H -.-> J[post-impl]
-    I -.-> J
-    J --> K[sprint-review]
-    K --> L[retro]
-    L --> M[sprint-metrics]
-    M --> next[Next Cycle]
+    A["/intake"] --> B["/roadmap"]
+    B --> C["/epic"]
+    C --> D["/task"]
+    D --> E[execution]
+    E --> F["/status<br>(checkpoint)"]
+    F --> G["/status<br>(consolidation)"]
+    G --> H["/status<br>(closure)"]
+    H --> I["/metrics"]
+    I --> J["/review"]
+    J --> K["/retro"]
+    K --> L["/planning"]
+    L --> D
 
-    style G fill:#f9f,stroke:#333,stroke-width:2px
+    M["/refinement"] -.-> C
+    M -.-> E
+
+    style M fill:#f9f,stroke:#333,stroke-width:2px
+    style F fill:#bbf,stroke:#333,stroke-width:2px
+    style G fill:#bbf,stroke:#333,stroke-width:2px
     style H fill:#bbf,stroke:#333,stroke-width:2px
-    style I fill:#bbf,stroke:#333,stroke-width:2px
 ```
 
 ## Guides
@@ -34,9 +34,9 @@ Scenario-based guides showing how skills chain together in real situations.
 
 | Guide                                                              | What you'll learn                                                 |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------- |
-| [From Idea to Delivery](guides/from-idea-to-delivery.md)           | End-to-end: intake → plan/story → scan-review → daily → post-impl |
-| [Managing Large Initiatives](guides/managing-large-initiatives.md) | Epic-scale: roadmap → refinement → epic → stories → status-report |
-| [Sprint Lifecycle](guides/sprint-lifecycle.md)                     | Ceremonies: planning → daily → review → metrics → retro           |
+| [From Idea to Delivery](guides/from-idea-to-delivery.md)           | End-to-end: intake -> epic/task -> refinement -> status           |
+| [Managing Large Initiatives](guides/managing-large-initiatives.md) | Epic-scale: roadmap -> epic -> task -> status                     |
+| [Sprint Lifecycle](guides/sprint-lifecycle.md)                     | Ceremonies: planning -> status -> review -> metrics -> retro      |
 | [Getting Started](guides/getting-started.md)                       | Onboarding, prototyping, decision trees, and cheat sheet          |
 
 ## Skills
@@ -47,38 +47,37 @@ Each skill README contains full documentation with examples, tips, and chaining 
 
 | Skill | Usage |
 |-------|-------|
-| [intake](../../skills/agile-intake/README.md) | Vague problems → structured intake document |
-| [planning-router](../../skills/agile-planning-router/README.md) | Router: plan vs story vs epic |
-| [plan](../../skills/agile-plan/README.md) | Small, localized change → execution plan |
-| [story](../../skills/agile-story/README.md) | Medium-sized delivery → story with acceptance criteria |
-| [epic](../../skills/agile-epic/README.md) | Large initiative → story backlog + roadmap |
-| [refinement](../../skills/agile-refinement/README.md) | Large backlog → executable stories |
-| [roadmap](../../skills/agile-roadmap/README.md) | Quarterly or epic roadmap |
+| [intake](../../skills/agile-intake/README.md) | Vague problems -> structured intake document |
+| [roadmap](../../skills/agile-roadmap/README.md) | Quarterly or initiative roadmap |
+| [epic](../../skills/agile-epic/README.md) | Large initiative -> story backlog + roadmap |
+| [task](../../skills/agile-task/README.md) | Small, localized change -> execution plan |
+
+### Validation & Review
+
+| Skill | Usage |
+|-------|-------|
+| [refinement](../../skills/agile-refinement/README.md) | Validate planning artifacts + review code |
 
 ### Delivery & Tracking
 
 | Skill | Usage |
 |-------|-------|
-| [daily](../../skills/agile-daily/README.md) | Daily status: progress, blockers, next step |
-| [status-report](../../skills/agile-status-report/README.md) | Period/milestone consolidated status |
-| [post-impl](../../skills/agile-post-impl/README.md) | Delivery closure with verification |
-| [delivery](../../skills/agile-delivery/README.md) | Router: daily vs status-report vs post-impl |
+| [status](../../skills/agile-status/README.md) | Progress tracking: checkpoint, consolidation, closure |
 
 ### Sprint Ceremonies
 
 | Skill | Usage |
 |-------|-------|
-| [ceremonies-router](../../skills/agile-ceremonies-router/README.md) | Router: which ceremony to run |
-| [sprint-planning](../../skills/agile-sprint-planning/README.md) | Plan cycle: objective, items, capacity |
-| [sprint-review](../../skills/agile-sprint-review/README.md) | Review + demo for stakeholders |
-| [sprint-metrics](../../skills/agile-sprint-metrics/README.md) | Objective sprint metrics |
+| [planning](../../skills/agile-planning/README.md) | Plan cycle: objective, items, capacity |
+| [review](../../skills/agile-review/README.md) | Review + demo for stakeholders |
+| [metrics](../../skills/agile-metrics/README.md) | Objective sprint metrics |
 | [retro](../../skills/agile-retro/README.md) | Retrospective with improvement actions |
 
-### Quality & Prototyping
+### Routing & Prototyping
 
 | Skill | Usage |
 |-------|-------|
-| [scan-review](../../skills/agile-scan-review/README.md) | Review code before commit/PR |
+| [router](../../skills/agile-router/README.md) | Guidance on which skill to use |
 | [proto](../../skills/agile-proto/README.md) | Interactive UI prototypes |
 
 ### Onboarding
