@@ -82,8 +82,8 @@ When 2+ developers are available:
 
 ## Where to save
 
-- `planning/sprints/sprint-YYYY-MM-DD.md`
-- Or `planning/<initiative>/sprint.md` if the sprint is dedicated to an initiative
+- `planning/<initiative>/sprints/sprint-YYYY-MM-DD.md` (co-located with the initiative)
+- `planning/sprints/sprint-YYYY-MM-DD.md` (if the sprint spans multiple initiatives)
 
 ## Chaining
 
