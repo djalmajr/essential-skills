@@ -62,7 +62,7 @@ Run and record actual results:
 
 ## Chaining
 
-- If there are next steps that become new stories: suggest `/story` or `/plan`
+- If there are next steps that become new stories: suggest `/story` or `/task-plan`
 - If the period ended: suggest `/retro`
 - If part of an epic: update story status in the epic
 

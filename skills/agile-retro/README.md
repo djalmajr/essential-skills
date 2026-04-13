@@ -76,4 +76,4 @@ flowchart LR
 ## Chaining
 
 - **Before:** `/agile-post-impl` (close deliveries first), `/agile-sprint-metrics` (get data for the retro)
-- **After:** Improvement actions may become `/agile-story` or `/agile-plan` items. Process changes feed back into `/agile-sprint-planning`. The next cycle starts with `/agile-sprint-planning`.
+- **After:** Improvement actions may become `/agile-story` or `/agile-task-plan` items. Process changes feed back into `/agile-sprint-planning`. The next cycle starts with `/agile-sprint-planning`.

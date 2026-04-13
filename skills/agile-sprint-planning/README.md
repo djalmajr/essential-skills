@@ -39,16 +39,16 @@ After Sprint 23's retro identified improvement actions and the backlog has refin
    "Sprint 24: Deliver payout reconciliation and begin customer migration."
 
    **Step 2 — Review backlog:**
-   - Story 3: Payout reconciliation (M) — depends on Story 2 ✅
-   - Story 4: Customer migration (L) — depends on Story 1 ✅
-   - Retro action: Add external dependency check to DoR (XS)
+   - Story 3: Payout reconciliation (medium) — depends on Story 2 ✅
+   - Story 4: Customer migration (large) — depends on Story 1 ✅
+   - Retro action: Add external dependency check to DoR (small)
 
    **Step 3 — Select items:**
    | Item | Size | Value | Dependencies |
    |---|---|---|---|
-   | Payout reconciliation | M | Unblocks provider decommission | None |
-   | Customer migration (start) | L | Critical path | Stripe setup ✅ |
-   | DoR update: external deps | XS | Process improvement | None |
+   | Payout reconciliation | medium | Unblocks provider decommission | None |
+   | Customer migration (start) | large | Critical path | Stripe setup ✅ |
+   | DoR update: external deps | small | Process improvement | None |
 
    **Step 4 — Validate Definition of Ready:**
    - Payout reconciliation: objective ✅, scope ✅, files mapped ✅, acceptance criteria ✅ — **Ready**
@@ -56,8 +56,8 @@ After Sprint 23's retro identified improvement actions and the backlog has refin
    - DoR update: Ready ✅
 
    **Step 5 — Order execution:**
-   1. DoR update (XS, quick win)
-   2. Payout reconciliation (M, critical path)
+   1. DoR update (small, quick win)
+   2. Payout reconciliation (medium, critical path)
    3. Customer migration start (partial, while reconciliation finishes)
 
    **Step 6 — Commitments:**
@@ -85,7 +85,7 @@ flowchart LR
     A[agile-retro] --> B[agile-sprint-planning]
     B --> C{story or plan}
     C --> D[agile-story]
-    C --> E[agile-plan]
+    C --> E[agile-task-plan]
     D --> F[execution]
     E --> F
     F --> G[agile-daily]
@@ -103,4 +103,4 @@ flowchart LR
 ## Chaining
 
 - **Before:** `/agile-refinement` (ensure items have DoR), `/agile-retro` (improvement actions become sprint items)
-- **After:** `/agile-story` or `/agile-plan` (detail the first sprint item), then execution begins
+- **After:** `/agile-story` or `/agile-task-plan` (detail the first sprint item), then execution begins

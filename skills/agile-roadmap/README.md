@@ -11,7 +11,7 @@ Structures quarterly roadmaps and initiative-level roadmaps that connect strateg
 
 ## When NOT to use
 
-- Creating a detailed execution plan — use `/agile-plan` or `/agile-story` instead
+- Creating a detailed execution plan — use `/agile-task-plan` or `/agile-story` instead
 - Breaking down a large item into stories — use `/agile-refinement` instead
 - Structuring a multi-story initiative — use `/agile-epic` instead
 - Tracking in-progress deliveries — use `/agile-daily` or `/agile-status-report`
@@ -67,7 +67,7 @@ flowchart LR
     B --> C[agile-refinement]
     C --> D[agile-epic]
     D --> E[agile-story]
-    E --> F[agile-plan]
+    E --> F[agile-task-plan]
 ```
 
 ## Tips & pitfalls

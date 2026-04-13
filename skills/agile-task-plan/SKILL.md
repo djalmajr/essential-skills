@@ -1,13 +1,13 @@
 ---
-name: agile-plan
-description: Creates simple execution plan for localized changes. Use when the work is small and localized, involves few files, and can be executed in a single implementation cycle.
+name: agile-task-plan
+description: Creates simple execution task plan for localized changes. Use when the work is small and localized, involves few files, and can be executed in a single implementation cycle.
 compatibility: opencode
 metadata:
   audience: engineering
-  workflow: plan
+  workflow: task-plan
 ---
 
-# Plan
+# Task Plan
 
 Use this skill to create a simple execution plan, ready to implement.
 
@@ -67,18 +67,17 @@ Use ExitPlanMode to present the plan. Wait for explicit confirmation before impl
 
 ## Where to save
 
-- Save at `.agents/plans/<name>.md`
-- If part of an initiative and the story is in `planning/`: reference the story in context
-- **Naming convention:** when the plan comes from an epic story, use `eN-sN-<description>.md` where N is the epic number and sN is the story number within that epic. Example: `e1-s2-multi-provider.md` (Epic 1, Story 2).
+- If part of an initiative: `planning/<initiative>/epics/NN-<epic-name>/NN-<story-name>/01-task-plan.md`
+- If standalone: `.agents/plans/<name>.md` (fallback for items without epic/story)
 
-> Plans are execution artifacts. They reference their parent story via the Origin field but are stored separately in `.agents/plans/` for AI agent consumption.
+> Task plans are execution artifacts. They reference their parent story via the Origin field. When part of an initiative, they are co-located inside the story folder for better traceability.
 
 ## Cross-reference
 
 If the plan comes from a story or epic, include at the top:
 
 ```
-**Origin:** `planning/<initiative>/epics/NN-<epic-name>/stories/NN-<story-name>.md` or `planning/<initiative>/epics/NN-<epic-name>/epic.md`
+**Origin:** `planning/<initiative>/epics/NN-<epic-name>/NN-<story-name>/00-story.md` or `planning/<initiative>/epics/NN-<epic-name>/epic.md`
 ```
 
 ## Chaining
@@ -89,7 +88,7 @@ After plan confirmation:
 
 ## Reference template
 
-Use `~/.agents/templates/plan.md` as base.
+Use `~/.agents/templates/task-plan.md` as base.
 
 ## Required sections
 
@@ -117,9 +116,10 @@ flowchart LR
     A[intake] --> B[refinement]
     B --> C[epic]
     C --> D[story]
-    D --> E[plan]
+    D --> E["task-plan"]
     E --> F[execution]
     F --> G[post-impl]
 ```
 
 This skill is the last step before execution. For larger problems, use `/story` or `/epic`. To close the delivery, use `/post-impl`.
+

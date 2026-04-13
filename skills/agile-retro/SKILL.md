@@ -70,7 +70,7 @@ Consult:
 
 ## Chaining
 
-- If actions generate new stories: suggest `/story` or `/plan`
+- If actions generate new stories: suggest `/story` or `/task-plan`
 - If actions change process: suggest updating rules or skills
 - If the cycle restarts: suggest `/sprint-planning`
 

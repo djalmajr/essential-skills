@@ -53,7 +53,7 @@ Use this skill to guide new team members through the agile + AI flow, in a pract
 
 3. Show the decision tree:
    - When to use simple plan vs story vs epic
-   - Light sizing (XS to XL)
+   - Scope assessment (small to large)
 
 4. Show the available skills and how to invoke each one.
 

@@ -87,7 +87,7 @@ When 2+ developers are available:
 
 ## Chaining
 
-- To detail the first story: suggest `/story` or `/plan`
+- To detail the first story: suggest `/story` or `/task-plan`
 - For items that need refinement: suggest `/refinement`
 
 ## Reference template
@@ -109,7 +109,7 @@ flowchart LR
     A[retro] --> B[sprint-planning]
     B --> C{story or plan}
     C --> D[story]
-    C --> E[plan]
+    C --> E["task-plan"]
     D --> F[execution]
     E --> F
     F --> G[daily]

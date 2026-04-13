@@ -77,7 +77,7 @@ flowchart LR
     B --> D[agile-story]
     E[agile-sprint-planning] --> F{story or plan}
     F --> G[agile-story]
-    F --> H[agile-plan]
+    F --> H[agile-task-plan]
     G --> I[execution]
     H --> I
     J[agile-retro] --> K[improvement actions]

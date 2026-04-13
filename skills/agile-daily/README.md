@@ -52,7 +52,7 @@ You're working on a small bug fix and want a checkpoint:
 
 ```mermaid
 flowchart LR
-    A[agile-plan] --> B[execution]
+    A[agile-task-plan] --> B[execution]
     B --> C[agile-daily]
     C --> D[agile-daily]
     D --> E[...]
@@ -69,5 +69,5 @@ flowchart LR
 
 ## Chaining
 
-- **Before:** `/agile-plan` or `/agile-story` (the daily tracks progress against a plan or story)
+- **Before:** `/agile-task-plan` or `/agile-story` (the daily tracks progress against a plan or story)
 - **After:** If a critical blocker exists — escalate or adjust the plan. If the delivery is closing — `/agile-post-impl`. If the period needs consolidation — `/agile-status-report`.

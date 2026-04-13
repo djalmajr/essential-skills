@@ -13,7 +13,7 @@ Reviews changed code against a structured checklist covering security, coherence
 ## When NOT to use
 
 - Tracking delivery progress — use `/agile-daily` instead
-- Planning new work — use `/agile-plan` or `/agile-story` instead
+- Planning new work — use `/agile-task-plan` or `/agile-story` instead
 - Writing code — this is a review skill, not a coding skill
 - Creating documentation — use the wiki or README skills
 
@@ -102,5 +102,5 @@ You used AI to generate a notification module and want to verify it before commi
 
 ## Chaining
 
-- **Before:** `/agile-plan` or `/agile-story` (implement the plan first)
+- **Before:** `/agile-task-plan` or `/agile-story` (implement the plan first)
 - **After:** If all checks pass → commit and then `/agile-post-impl` to close. If issues found → fix and re-review.

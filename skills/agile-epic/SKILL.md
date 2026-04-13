@@ -37,7 +37,7 @@ Write the artifact in the user's language. If the user communicates in Portugues
 ## When NOT to use
 
 - The work fits in a single story — use `/story`
-- The work is localized and small — use `/plan`
+- The work is localized and small — use `/task-plan`
 - The problem hasn't been analyzed yet — use `/intake` or `/refinement` first
 
 ## Process
@@ -107,7 +107,7 @@ Always include at the top of the artifact:
 At the end of the epic, offer:
 
 - "Do you want me to detail a story with `/story`?"
-- "Do you want to start with Story 1 using `/plan`?"
+- "Do you want to start with Story 1 using `/task-plan`?"
 
 Ask the user which story they want to detail first.
 
@@ -140,7 +140,7 @@ flowchart LR
     A[intake] --> B[refinement]
     B --> C[epic]
     C --> D[story]
-    D --> E[plan]
+    D --> E["task-plan"]
     E --> F[execution]
 ```
 

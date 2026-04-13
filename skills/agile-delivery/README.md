@@ -11,7 +11,7 @@ Orchestrates delivery tracking by routing you to the right tracking skill — da
 ## When NOT to use
 
 - You already know which tracking format you need — invoke `/agile-daily`, `/agile-status-report`, or `/agile-post-impl` directly
-- You need to plan work — use `/agile-sprint-planning` or `/agile-plan` instead
+- You need to plan work — use `/agile-sprint-planning` or `/agile-task-plan` instead
 - You need to create a new artifact — use `/agile-intake` or `/agile-story` instead
 
 ## How to use
@@ -58,7 +58,7 @@ You just finished implementing the password reset feature and want to formally c
 
 ```mermaid
 flowchart LR
-    A[agile-plan] --> B[execution]
+    A[agile-task-plan] --> B[execution]
     B --> C[agile-daily]
     C --> D[...]
     D --> E[agile-status-report]

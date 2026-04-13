@@ -15,7 +15,7 @@ flowchart TD
     A[New problem or request] --> B{Is the problem clear?}
     B -- No --> C["/intake"]
     B -- Yes --> D{What size?}
-    D -- Small, localized --> E["/plan"]
+    D -- Small, localized --> E["/task-plan"]
     D -- Medium, several files --> F["/story"]
     D -- Large, needs decomposition --> J
     C --> H{Intake recommends...}
@@ -45,7 +45,7 @@ flowchart TD
 |---|---|
 | Capture a vague problem | `/intake` |
 | Decide plan vs story vs epic | `/planning-router` |
-| Plan a small, localized change | `/plan` |
+| Plan a small, localized change | `/task-plan` |
 | Detail a medium-sized delivery | `/story` |
 | Break down a large item before creating an epic | `/refinement` |
 | Structure a large initiative | `/epic` (after `/refinement`) |
@@ -76,7 +76,7 @@ A new backend dev joins the team and needs to learn the flow.
 ```
 
 **Day 1 — Understand the model:**
-- Walk through the complete flow: intake → roadmap → refinement → epic/story/plan → execution → daily → post-impl → retro
+- Walk through the complete flow: intake → roadmap → refinement → epic/story/task-plan → execution → daily → post-impl → retro
 - Explain role division: human decides, AI structures
 - Show the decision tree above
 - List all available skills

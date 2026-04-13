@@ -36,7 +36,7 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 ## When NOT to use
 
-- Small and localized work — use `/plan`
+- Small and localized work — use `/task-plan`
 - Initiative with several stories — use `/epic` first
 - Problem not yet analyzed — use `/intake` or `/refinement`
 
@@ -78,25 +78,26 @@ Each criterion must be:
 
 ## Where to save
 
-- If part of an initiative: `planning/<initiative>/epics/NN-<epic-name>/stories/NN-<story-name>.md`
-- If standalone story: `.agents/plans/<name>.md`
+- Story as folder: `planning/<initiative>/epics/NN-<epic-name>/NN-<story-name>/00-story.md`
+- Standalone story: `.agents/plans/<name>.md`
+
 - Ask the user if there's doubt
 
-> NN is a zero-padded sequential number **within the epic** (01, 02, ...), restarting at 01 for each epic. Stories are grouped inside their parent epic folder. Do not use global numbering across epics.
+> NN is a zero-padded sequential number **within the epic** (01, 02, ...), restarting at 01 for each epic. Each story gets its own folder under the parent epic, containing `00-story.md` and (after planning) `01-task-plan.md`.
 
 ## Cross-reference
 
 Always include at the top:
 
 ```
-**Origin:** `planning/<initiative>/epics/NN-<epic-name>/epic.md` (or reference of where it came from)
+**Origin:** `planning/<initiative>/epics/NN-<epic-name>/epic.md` (or reference of where the story came from)
 ```
 
 ## Chaining
 
 At the end of the story, offer:
 
-- "Do you want me to create the execution plan with `/plan`?"
+- "Do you want me to create the execution plan with `/task-plan`?"
 - "Do you want me to create the GitHub issue?"
 
 ## Reference template
@@ -128,8 +129,8 @@ flowchart LR
     A[intake] --> B[refinement]
     B --> C[epic]
     C --> D[story]
-    D --> E[plan]
+    D --> E["task-plan"]
     E --> F[execution]
 ```
 
-This skill acts after epic (or directly after intake for medium-complexity items). For execution plan, use `/plan`. For small items, use `/plan` directly.
+This skill acts after epic (or directly after intake for medium-complexity items). For execution plan, use `/task-plan`. For small items, use `/task-plan` directly.

@@ -12,9 +12,9 @@ Transforms vague problems, initial ideas, or unstructured requests into clear in
 
 ## When NOT to use
 
-- The problem is already clear with defined scope — use `/agile-story` or `/agile-plan` directly
+- The problem is already clear with defined scope — use `/agile-story` or `/agile-task-plan` directly
 - The work has already been refined with stories identified — use `/agile-epic` or `/agile-story`
-- It's a trivial fix (rename a variable, fix a typo) — use `/agile-plan` directly
+- It's a trivial fix (rename a variable, fix a typo) — use `/agile-task-plan` directly
 - You need to track delivery progress — use `/agile-daily` or `/agile-status-report`
 
 ## How to use
@@ -59,7 +59,7 @@ A designer asks "can we add dark mode to the settings page?":
 
 1. Start by invoking: `/agile-intake dark mode settings page`
 2. The skill asks clarifying questions. The answers are straightforward — it's a small, clear UX change.
-3. The skill recommends: "This is small and clear → `/agile-plan` directly. No need for refinement or story."
+3. The skill recommends: "This is small and clear → `/agile-task-plan` directly. No need for refinement or story."
 4. Presented inline (no file saved — too small for a folder).
 
 ## Workflow integration
@@ -71,7 +71,7 @@ flowchart LR
     B --> D[agile-refinement]
     B --> E[agile-epic]
     B --> F[agile-story]
-    B --> G[agile-plan]
+    B --> G[agile-task-plan]
 ```
 
 ## Tips & pitfalls
@@ -84,4 +84,4 @@ flowchart LR
 ## Chaining
 
 - **Before:** Nothing — intake is the entry point.
-- **After:** Routes to `/agile-roadmap` (large/strategic), `/agile-refinement` (large/operational), `/agile-epic` (already refined), `/agile-story` (medium/clear), or `/agile-plan` (small/obvious).
+- **After:** Routes to `/agile-roadmap` (large/strategic), `/agile-refinement` (large/operational), `/agile-epic` (already refined), `/agile-story` (medium/clear), or `/agile-task-plan` (small/obvious).

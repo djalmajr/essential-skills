@@ -2,7 +2,7 @@
 
 End-to-end scenarios showing how skills chain together to take a problem from first contact to formal closure. Each scenario uses a different domain and team size to show flexibility.
 
-**Skills covered:** intake, planning-router, plan, story, scan-review, daily, delivery, post-impl
+**Skills covered:** intake, planning-router, task-plan, story, scan-review, daily, delivery, post-impl
 
 ---
 
@@ -24,22 +24,22 @@ The skill asks clarifying questions. You provide:
 
 The intake structures: context (security bug), objective (tokens expire after 1h), value signal (close vulnerability).
 
-**Recommendation:** "This is small, clear, and localized → `/plan` directly."
+**Recommendation:** "This is small, clear, and localized → `/task-plan` directly."
 
 ### Step 2: Route to the right artifact
 
-Since intake already recommended `/plan`, you skip the router. But if unsure:
+Since intake already recommended `/task-plan`, you skip the router. But if unsure:
 
 ```
 /planning-router password reset token expiry
 ```
 
-The router evaluates: "1 area, few files, simple validation. This is a small, localized change → `/plan`."
+The router evaluates: "1 area, few files, simple validation. This is a small, localized change → `/task-plan`."
 
 ### Step 3: Create the execution plan
 
 ```
-/plan password reset tokens not expiring
+/task-plan password reset tokens not expiring
 ```
 
 The skill explores the codebase and produces:
@@ -179,7 +179,7 @@ A designer reports: "The submit button on the settings page says 'Salvar' but sh
 This is trivial — no intake needed.
 
 ```
-/plan fix submit button label on settings page
+/task-plan fix submit button label on settings page
 ```
 
 The skill produces a 3-task plan:
@@ -217,7 +217,7 @@ The report consolidates: 3 of 7 stories completed, 1 blocker (SSO provider API),
 
 ## Key takeaways
 
-1. **Proportional artifacts:** Small changes → plan, medium deliveries → story, trivial → plan without intake
+1. **Proportional artifacts:** Small changes → task-plan, medium deliveries → story, trivial → task-plan without intake
 2. **Intake is optional:** Skip it when the problem is already clear
 3. **Scan-review before committing:** Catches scope creep, security issues, over-engineering
 4. **Daily tracks real state:** Blockers have owners and actions, not just "blocked on X"

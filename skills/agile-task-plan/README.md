@@ -1,17 +1,17 @@
-# agile-plan
+# agile-task-plan
 
-Creates a simple, proportionally-sized execution plan for localized changes (size XS or S). It maps exact files, defines verifiable tasks, and produces a checklist-ready artifact that can be implemented immediately. It's the last step before writing code.
+Creates a simple, proportionally-sized execution task plan for small and localized changes. It maps exact files, defines verifiable tasks, and produces a checklist-ready artifact that can be implemented immediately. It's the last step before writing code.
 
 ## When to use
 
-- Small and localized work (XS or S) — a bug fix, a config change, a single feature
+- Small and localized work — a bug fix, a config change, a single feature
 - Few impacted files and a single implementation cycle
-- A story from an epic or refinement that needs an operational plan before coding
+- A story from an epic or refinement that needs an operational task plan before coding
 - The problem is already clear and you just need to map out what to change
 
 ## When NOT to use
 
-- Medium or large work (M+) — use `/agile-story` or `/agile-epic` instead
+- Medium or large work — use `/agile-story` or `/agile-epic` instead
 - The problem isn't clear yet — use `/agile-intake` first
 - Multiple dependent deliveries — use `/agile-epic` instead
 - You need to break down a large initiative — use `/agile-refinement` first
@@ -19,10 +19,10 @@ Creates a simple, proportionally-sized execution plan for localized changes (siz
 ## How to use
 
 ```
-/agile-plan
+/agile-task-plan
 ```
 
-Example: `/agile-plan add-button-component`
+Example: `/agile-task-plan add-button-component`
 
 ## End-to-end examples
 
@@ -30,7 +30,7 @@ Example: `/agile-plan add-button-component`
 
 A bug report shows password reset tokens never expire:
 
-1. Start by invoking: `/agile-plan password reset tokens not expiring`
+1. Start by invoking: `/agile-task-plan password reset tokens not expiring`
 2. The skill asks: "What's the problem? Any context or issue reference?"
 3. You provide: "Bug: password reset tokens don't expire. Users can use old tokens indefinitely. Security risk."
 4. The skill asks to explore the code. It identifies the relevant files:
@@ -51,7 +51,7 @@ A bug report shows password reset tokens never expire:
 
 The team wants to add rate limiting to all public endpoints:
 
-1. Start by invoking: `/agile-plan add rate limiting to public API endpoints`
+1. Start by invoking: `/agile-task-plan add rate limiting to public API endpoints`
 2. The skill explores the codebase, finds the middleware stack, and identifies files.
 3. It creates the plan with tasks: configure rate limiter, add middleware, add tests, verify in staging.
 4. Save to: `.agents/plans/rate-limiting.md`
@@ -64,7 +64,7 @@ flowchart LR
     A[agile-intake] --> B[agile-refinement]
     B --> C[agile-epic]
     C --> D[agile-story]
-    D --> E[agile-plan]
+    D --> E["agile-task-plan"]
     E --> F[execution]
     F --> G[agile-post-impl]
 ```

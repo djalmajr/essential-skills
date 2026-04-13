@@ -2,7 +2,7 @@
 
 End-to-end scenarios showing how to take a large initiative from strategic direction to coordinated execution across multiple stories. These skills bridge the gap between "we need to do X" and "here are the stories, in order, with dependencies."
 
-**Skills covered:** intake, roadmap, refinement, epic, story, plan, status-report
+**Skills covered:** intake, roadmap, refinement, epic, story, task-plan, status-report
 
 ---
 
@@ -97,7 +97,7 @@ Save to: `planning/payment-system-overhaul/epic.md`
 
 ### Step 5: Detail and execute stories
 
-For each story in the epic, detail it with `/story` then create a `/plan`:
+For each story in the epic, detail it with `/story` then create a `/task-plan`:
 
 ```
 /story webhook event handler
@@ -106,7 +106,7 @@ For each story in the epic, detail it with `/story` then create a `/plan`:
 The story maps: files, acceptance criteria (idempotency, signature verification, status updates), tasks, and verification.
 
 ```
-/plan webhook-event-handler
+/task-plan webhook-event-handler
 ```
 
 The plan maps exact files, verifiable tasks, and a checklist for execution.
@@ -177,7 +177,7 @@ Decomposed by user value slice:
 
 ### Step 4: Epic (if needed)
 
-With 4 stories, 2 of which are trivial, this doesn't need a full epic. Stories 1 and 2 go directly to `/plan`. Stories 3 and 4 get `/story` with acceptance criteria.
+With 4 stories, 2 of which are trivial, this doesn't need a full epic. Stories 1 and 2 go directly to `/task-plan`. Stories 3 and 4 get `/story` with acceptance criteria.
 
 **Key insight:** Not every initiative needs every artifact. Use proportional tooling.
 

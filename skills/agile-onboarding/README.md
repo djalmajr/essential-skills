@@ -11,7 +11,7 @@ Guides new team members through the agile + AI workflow in a progressive, hands-
 
 ## When NOT to use
 
-- You just need to plan work — use `/agile-sprint-planning` or `/agile-plan` instead
+- You just need to plan work — use `/agile-sprint-planning` or `/agile-task-plan` instead
 - You need to create an artifact — use the specific skill (intake, story, etc.)
 - You want to track progress — use `/agile-daily` instead
 - You need a code review — use `/agile-scan-review` instead
@@ -32,8 +32,8 @@ A new backend dev joins the team and needs to learn the flow:
 
 1. Start by invoking: `/agile-onboarding`
 2. The skill presents the 5-day trail:
-   - **Day 1 — Understand the model:** Walk through the complete flow (intake → roadmap → refinement → epic/story/plan → execution → daily → post-impl → retro). Explain role division (human decides, AI structures). Show the decision tree for planning artifacts. List all available skills.
-   - **Day 2 — Practical exercise (intake + planning):** The new dev picks a real small problem (e.g., "add rate limiting to the API"). They run `/agile-intake rate limiting`, then use `/agile-planning-router` to decide it's an S → `/agile-plan`. The mentor reviews the plan.
+   - **Day 1 — Understand the model:** Walk through the complete flow (intake → roadmap → refinement → epic/story/task-plan → execution → daily → post-impl → retro). Explain role division (human decides, AI structures). Show the decision tree for planning artifacts. List all available skills.
+   - **Day 2 — Practical exercise (intake + planning):** The new dev picks a real small problem (e.g., "add rate limiting to the API"). They run `/agile-intake rate limiting`, then use `/agile-task-planning-router` to decide it's an S → `/agile-task-plan`. The mentor reviews the plan.
    - **Day 3 — Practical exercise (TDD):** The dev implements the rate limiting plan using TDD with AI as pair: write failing test (red), implement (green), refactor. Run lint, typecheck, tests. Review the diff.
    - **Day 4 — Practical exercise (tracking):** The dev generates a `/agile-daily` for the rate limiting work, simulates a `/agile-status-report` for the week, and closes with `/agile-post-impl`.
    - **Day 5 — Reflection and autonomy:** The dev does a full solo cycle: intake → plan → TDD → daily → post-impl. The mentor validates and gives final feedback.
@@ -75,7 +75,7 @@ flowchart LR
     C --> D{epic or story or plan}
     D --> E[agile-epic]
     D --> F[agile-story]
-    D --> G[agile-plan]
+    D --> G[agile-task-plan]
     E --> H[agile-scan-review]
     F --> H
     G --> H
@@ -94,4 +94,4 @@ flowchart LR
 ## Chaining
 
 - **Before:** Nothing — onboarding is the entry point before any other skill.
-- **After:** The new member should be able to use `/agile-planning-router`, `/agile-daily`, `/agile-delivery`, `/agile-ceremonies-router`, and `/agile-scan-review` autonomously.
+- **After:** The new member should be able to use `/agile-task-planning-router`, `/agile-daily`, `/agile-delivery`, `/agile-ceremonies-router`, and `/agile-scan-review` autonomously.

@@ -37,7 +37,7 @@ Write the artifact in the user's language. If the user communicates in Portugues
 ## When NOT to use
 
 - The item is already clear and fits in a story — use `/story` directly
-- The item is small and localized — use `/plan` directly
+- The item is small and localized — use `/task-plan` directly
 - The problem hasn't been captured yet — use `/intake` first
 
 ## Process
@@ -101,7 +101,7 @@ At the end of refinement, offer the next step:
 
 - If refinement generated several stories → suggest `/epic` to structure the backlog
 - If it generated 1-2 simple stories → suggest `/story` to detail
-- If it generated only 1 small item → suggest `/plan`
+- If it generated only 1 small item → suggest `/task-plan`
 
 Ask the user which path to follow.
 
@@ -126,7 +126,7 @@ flowchart LR
     C --> D{epic or story or plan}
     D --> E[epic]
     D --> F[story]
-    D --> G[plan]
+    D --> G["task-plan"]
 ```
 
-This skill acts between roadmap and creation of epics/stories/plans. It is a **mandatory step** — never skip from roadmap directly to epic. For problem capture, use `/intake`. For story detailing, use `/story`. For epics, use `/epic`.
+This skill acts between roadmap and creation of epics/stories/task plans. It is a **mandatory step** — never skip from roadmap directly to epic. For problem capture, use `/intake`. For story detailing, use `/story`. For epics, use `/epic`.

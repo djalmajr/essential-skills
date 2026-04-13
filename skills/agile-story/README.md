@@ -1,10 +1,10 @@
 # agile-story
 
-Details a vertical delivery (size M) with clear acceptance criteria, task breakdown, file mapping, and verification strategy. Use when the work involves several files, needs richer acceptance criteria than a simple plan, and must be executable without additional inference — every story should be self-contained enough that anyone can implement it.
+Details a medium-sized vertical delivery with clear acceptance criteria, task breakdown, file mapping, and verification strategy. Use when the work involves several files, needs richer acceptance criteria than a simple plan, and must be executable without additional inference — every story should be self-contained enough that anyone can implement it.
 
 ## When to use
 
-- Work with size M — several files, moderate validation needed
+- Medium-sized work — several files, moderate validation needed
 - A vertical delivery that needs richer acceptance criteria
 - A story from an epic that needs to be detailed before execution
 - A bug fix with regression risk that needs structured verification
@@ -12,7 +12,7 @@ Details a vertical delivery (size M) with clear acceptance criteria, task breakd
 
 ## When NOT to use
 
-- Small localized work (XS or S) — use `/agile-plan` instead
+- Small and localized work — use `/agile-task-plan` instead
 - Multi-story initiatives needing coordination — use `/agile-epic` first
 - The problem hasn't been analyzed yet — use `/agile-intake` or `/agile-refinement` first
 - You just need a quick tracking update — use `/agile-daily`
@@ -73,7 +73,7 @@ The payments epic has a story "Webhook event handler" that needs detail before i
    - Manual: Send test webhook via Stripe CLI, verify order status updates
 
 3. Save to: `planning/payment-system-overhaul/stories/webhook-event-handler.md`
-4. The skill offers: "Do you want to create the execution plan with `/agile-plan`?"
+4. The skill offers: "Do you want to create the execution plan with `/agile-task-plan`?"
 
 ### Example 2: Standalone story for a notification system
 
@@ -92,7 +92,7 @@ flowchart LR
     A[agile-intake] --> B[agile-refinement]
     B --> C[agile-epic]
     C --> D[agile-story]
-    D --> E[agile-plan]
+    D --> E[agile-task-plan]
     E --> F[execution]
 ```
 
@@ -107,4 +107,4 @@ flowchart LR
 ## Chaining
 
 - **Before:** `/agile-intake` (capture problem), `/agile-epic` (structure backlog), `/agile-refinement` (decompose)
-- **After:** `/agile-plan` (create execution plan), `/agile-scan-review` (review code before commit), `/agile-post-impl` (close delivery)
+- **After:** `/agile-task-plan` (create execution plan), `/agile-scan-review` (review code before commit), `/agile-post-impl` (close delivery)

@@ -24,7 +24,7 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 - Make the problem or opportunity explicit before planning
 - Identify constraints, premises, and open questions
-- Define the next step in the flow: `/roadmap`, `/refinement`, `/story`, or `/plan`
+- Define the next step in the flow: `/roadmap`, `/refinement`, `/story`, or `/task-plan`
 - Avoid work starting without clarity about what is being solved
 
 ## When to use
@@ -36,9 +36,9 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 ## When NOT to use
 
-- The problem is already clear and scope is defined — use `/story` or `/plan` directly
-- The work has already been refined — go to `/story` or `/plan`
-- It's a trivial fix — use `/plan` directly
+- The problem is already clear and scope is defined — use `/story` or `/task-plan` directly
+- The work has already been refined — go to `/story` or `/task-plan`
+- It's a trivial fix — use `/task-plan` directly
 
 ## Intake process
 
@@ -69,11 +69,11 @@ Based on size and clarity:
 - Large and strategic problem → `/roadmap` → then `/refinement`
 - Large but operational problem with broad scope → `/refinement`
 - Medium problem with reasonable scope → `/refinement` (or `/story` if already well-decomposed)
-- Small and clear problem → `/plan`
+- Small and clear problem → `/task-plan`
 
 Register the recommendation in the intake and confirm with the user.
 
-> **Flow rule:** For large or complex items, refinement is mandatory before creating epics or stories. Only small, localized items can skip directly to `/plan`.
+> **Flow rule:** For large or complex items, refinement is mandatory before creating epics or stories. Only small, localized items can skip directly to `/task-plan`.
 
 ### 4. Save the intake
 
@@ -87,7 +87,7 @@ After user confirmation, offer to generate the next artifact following the offic
 
 - Large/strategic → "Do you want me to create the `/roadmap`?"
 - Large/operational → "Do you want me to run `/refinement` to decompose into stories?"
-- Small/clear → "Do you want me to create the `/plan`?"
+- Small/clear → "Do you want me to create the `/task-plan`?"
 
 > **Never offer `/epic` or `/story` directly from intake for large or complex items.** These must pass through `/refinement` first to ensure proper decomposition.
 
@@ -119,7 +119,7 @@ flowchart LR
     B --> D[refinement]
     B --> E[epic]
     B --> F[story]
-    B --> G[plan]
+    B --> G["task-plan"]
 ```
 
 This skill is the entry point of the flow. It captures the problem and directs to the correct skill. For decision between artifacts, you can also use `/scrum-planning`. For ceremonies, use `/scrum-ceremonies`.

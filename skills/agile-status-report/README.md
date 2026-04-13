@@ -15,7 +15,7 @@ Consolidates the progress of a period or milestone into an objective report show
 - Quick daily status — use `/agile-daily` instead
 - Closing a completed delivery — use `/agile-post-impl` instead
 - End-of-sprint reflection — use `/agile-retro` for process, `/agile-sprint-review` for results
-- Planning new work — use `/agile-plan` or `/agile-story` instead
+- Planning new work — use `/agile-task-plan` or `/agile-story` instead
 
 ## How to use
 

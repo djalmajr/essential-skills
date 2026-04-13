@@ -13,7 +13,7 @@ Generates a post-implementation report that formally closes a delivery by compar
 
 - Mid-delivery status — use `/agile-daily` or `/agile-status-report` instead
 - Tracking ongoing progress — use `/agile-daily` instead
-- Planning new work — use `/agile-plan` or `/agile-story` instead
+- Planning new work — use `/agile-task-plan` or `/agile-story` instead
 - Conducting a retrospective — use `/agile-retro` instead (but post-impl feeds into retro)
 
 ## How to use
@@ -57,7 +57,7 @@ Story "Stripe provider integration" from the payments epic is done:
 
 ```mermaid
 flowchart LR
-    A[agile-plan] --> B[execution]
+    A[agile-task-plan] --> B[execution]
     B --> C[agile-post-impl]
     C --> D[agile-retro]
 ```
@@ -72,5 +72,5 @@ flowchart LR
 
 ## Chaining
 
-- **Before:** `/agile-plan` or `/agile-story` (the plan/story being closed), `/agile-daily` (tracking during execution)
-- **After:** If next steps become new stories → `/agile-story` or `/agile-plan`. If the cycle ended → `/agile-retro`. If part of an epic → update story status in the epic.
+- **Before:** `/agile-task-plan` or `/agile-story` (the plan/story being closed), `/agile-daily` (tracking during execution)
+- **After:** If next steps become new stories → `/agile-story` or `/agile-task-plan`. If the cycle ended → `/agile-retro`. If part of an epic → update story status in the epic.
