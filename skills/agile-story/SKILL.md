@@ -82,7 +82,7 @@ Each criterion must be:
 - If standalone story: `.agents/plans/<name>.md`
 - Ask the user if there's doubt
 
-> NN is a zero-padded sequential number within the epic. Stories are grouped inside their parent epic folder.
+> NN is a zero-padded sequential number **within the epic** (01, 02, ...), restarting at 01 for each epic. Stories are grouped inside their parent epic folder. Do not use global numbering across epics.
 
 ## Cross-reference
 

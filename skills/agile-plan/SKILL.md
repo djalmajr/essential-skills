@@ -69,6 +69,7 @@ Use ExitPlanMode to present the plan. Wait for explicit confirmation before impl
 
 - Save at `.agents/plans/<name>.md`
 - If part of an initiative and the story is in `planning/`: reference the story in context
+- **Naming convention:** when the plan comes from an epic story, use `eN-sN-<description>.md` where N is the epic number and sN is the story number within that epic. Example: `e1-s2-multi-provider.md` (Epic 1, Story 2).
 
 > Plans are execution artifacts. They reference their parent story via the Origin field but are stored separately in `.agents/plans/` for AI agent consumption.
 
