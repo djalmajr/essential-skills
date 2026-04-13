@@ -2,7 +2,7 @@
 
 End-to-end scenarios showing how skills chain together to take a problem from first contact to formal closure. Each scenario uses a different domain and team size to show flexibility.
 
-**Skills covered:** intake, router, task, epic, refinement, status
+**Skills covered:** intake, router, task, epic, refinement, status, tdd
 
 ---
 
@@ -191,7 +191,85 @@ Implement, verify, commit. No status tracking, no closure -- proportional to the
 
 ---
 
-## Scenario D -- Uncertain scope (router)
+## Scenario D -- New feature with TDD
+
+A PM asks: "We need a `DiscountService` that calculates discounts based on customer tier and promo codes."
+
+### Step 1: Plan with `/task`
+
+```
+/task discount service with tier + promo codes
+```
+
+The skill produces a task file with context, files, acceptance criteria, and an initial checklist (design the API, implement, test, document).
+
+### Step 2: Implement with `/agile-tdd`
+
+Instead of jumping into code, use TDD to drive the implementation:
+
+```
+/agile-tdd discount service
+```
+
+The skill drives the Red-Green-Refactor cycle:
+
+**Red (failing test):**
+```ts
+// src/services/discount.test.ts
+test("calculates 10% discount for silver tier", () => {
+  const result = calculateDiscount({ tier: "silver", subtotal: 100 });
+  expect(result).toBe(10);
+});
+```
+
+Run `bun test` -> fails (function does not exist).
+
+**Green (minimum code):**
+```ts
+// src/services/discount.ts
+export function calculateDiscount({ tier, subtotal }) {
+  if (tier === "silver") return subtotal * 0.1;
+  return 0;
+}
+```
+
+Run `bun test` -> passes.
+
+**Refactor:**
+Extract tier rates to a constant. Tests still pass.
+
+**Next cycle (Red):**
+Add a test for promo codes. Fails. Write minimum code. Refactor. Repeat.
+
+### Step 3: Integration test
+
+Once unit tests cover the core logic, add an integration test that hits the DB:
+
+```ts
+// tests/integration/discount.test.ts
+test("applies discount from DB-stored promo code", async () => {
+  await db.insert(promoCodes).values({ code: "SUMMER10", discount: 10 });
+  const result = await applyPromoCode("SUMMER10", 100);
+  expect(result).toBe(90);
+});
+```
+
+### Step 4: Verify and close
+
+```
+bun test --coverage
+```
+
+Check coverage against targets (80%+ for services). Run `/agile-refinement` to review test quality, then `/agile-status` (closure) to wrap up.
+
+**Outcome:**
+- 12 unit tests, 3 integration tests, all passing
+- 87% coverage on `discount.ts` (above target)
+- Implementation driven by tests from day 1 -- no dead code, no untested paths
+
+---
+
+## Scenario E -- Uncertain scope (router)
 
 Someone asks: "What's the status on the auth refactor?"
 
