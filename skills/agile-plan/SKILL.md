@@ -70,12 +70,14 @@ Use ExitPlanMode to present the plan. Wait for explicit confirmation before impl
 - Save at `.agents/plans/<name>.md`
 - If part of an initiative and the story is in `planning/`: reference the story in context
 
+> Plans are execution artifacts. They reference their parent story via the Origin field but are stored separately in `.agents/plans/` for AI agent consumption.
+
 ## Cross-reference
 
 If the plan comes from a story or epic, include at the top:
 
 ```
-**Origin:** `planning/<initiative>/stories/<name>.md` or `planning/<initiative>/epic.md`
+**Origin:** `planning/<initiative>/epics/NN-<epic-name>/stories/NN-<story-name>.md` or `planning/<initiative>/epics/NN-<epic-name>/epic.md`
 ```
 
 ## Chaining

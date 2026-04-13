@@ -78,16 +78,18 @@ Each criterion must be:
 
 ## Where to save
 
-- If part of an initiative: `planning/<initiative>/stories/<name>.md`
+- If part of an initiative: `planning/<initiative>/epics/NN-<epic-name>/stories/NN-<story-name>.md`
 - If standalone story: `.agents/plans/<name>.md`
 - Ask the user if there's doubt
+
+> NN is a zero-padded sequential number within the epic. Stories are grouped inside their parent epic folder.
 
 ## Cross-reference
 
 Always include at the top:
 
 ```
-**Origin:** `planning/<initiative>/epic.md` (or reference of where it came from)
+**Origin:** `planning/<initiative>/epics/NN-<epic-name>/epic.md` (or reference of where it came from)
 ```
 
 ## Chaining

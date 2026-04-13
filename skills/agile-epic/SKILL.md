@@ -88,8 +88,10 @@ When the team has 2+ developers:
 
 ## Where to save
 
-- Save at `planning/<initiative>/epic.md`
+- Save at `planning/<initiative>/epics/NN-<epic-name>/epic.md`
 - If the initiative doesn't have a folder in `planning/`, ask the user for the name
+
+> NN is a zero-padded sequential number matching the refinement. Each epic gets its own folder under `epics/`.
 
 ## Cross-reference
 
@@ -97,7 +99,7 @@ Always include at the top of the artifact:
 
 ```
 **Origin:** `planning/<initiative>/intake.md`
-**Refinement:** `planning/<initiative>/refinement.md`
+**Refinement:** `planning/<initiative>/epics/NN-<epic-name>/refinement.md`
 ```
 
 ## Chaining

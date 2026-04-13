@@ -82,8 +82,10 @@ For each story, register:
 
 ## Where to save
 
-- If part of an initiative with a folder in `planning/`: save at `planning/<initiative>/refinement.md`
+- If part of an initiative with a folder in `planning/`: save at `planning/<initiative>/epics/NN-<epic-name>/refinement.md`
 - If standalone refinement: present inline and confirm with user
+
+> NN is a zero-padded sequential number (01, 02, ...). Ask the user for the epic name if not clear from context.
 
 ## Cross-reference
 
