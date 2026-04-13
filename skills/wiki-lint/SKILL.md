@@ -1,81 +1,85 @@
 ---
 name: wiki-lint
-description: "Verificação de saúde e manutenção da wiki. Ativa quando o usuário pede para auditar, verificar, limpar ou organizar a base de conhecimento."
+description: "Health check and maintenance of the wiki. Activates when the user asks to audit, verify, clean up, or organize the knowledge base."
 ---
 
-# Lint — Verificação de saúde da wiki
+# Lint — Wiki health check
 
-Siga `wiki/CONVENTIONS.md` para convenções de formato, frontmatter e links.
+Follow `wiki/CONVENTIONS.md` for format conventions, frontmatter, and links.
+
+## Language
+
+Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use.
 
 ## Checklist
 
-Percorra os itens em ordem. Se o usuário pediu algo específico (ex.: "só os links"), foque naquela parte.
+Go through the items in order. If the user asked for something specific (e.g., "just the links"), focus on that part.
 
-### 1. Cross-refs quebradas
-- Links relativos `[texto](./path.md)` que apontam para páginas inexistentes.
-- Corrija o link OU crie a página faltante.
+### 1. Broken cross-refs
+- Relative links `[text](./path.md)` that point to nonexistent pages.
+- Fix the link OR create the missing page.
 
-### 2. Páginas órfãs
-- Páginas wiki (exceto `CONVENTIONS.md`, `index.md`, `log.md`) sem inbound link no `wiki/index.md`.
-- Se tem conteúdo válido → adicione ao `index.md`.
-- Se irrelevante → sugira exclusão ao humano.
+### 2. Orphan pages
+- Wiki pages (except `CONVENTIONS.md`, `index.md`, `log.md`) with no inbound link in `wiki/index.md`.
+- If it has valid content → add it to `index.md`.
+- If irrelevant → suggest deletion to the human.
 
 ### 3. Frontmatter
-Todas as páginas wiki devem ter:
+All wiki pages must have:
 
-| Campo | Obrigatório | Validação |
+| Field | Required | Validation |
 |---|---|---|
-| `title` | sim | Presente e não vazio |
-| `audience` | sim | Um de: `business`, `dev`, `ops`, `mixed` |
-| `sources` | sim | Lista não vazia |
-| `updated` | sim | Data ISO. Flag se > 90 dias |
-| `tags` | sim | Lista não vazia |
-| `status` | sim | Um de: `draft`, `stable`, `stale` |
+| `title` | yes | Present and not empty |
+| `audience` | yes | One of: `business`, `dev`, `ops`, `mixed` |
+| `sources` | yes | Non-empty list |
+| `updated` | yes | ISO date. Flag if > 90 days |
+| `tags` | yes | Non-empty list |
+| `status` | yes | One of: `draft`, `stable`, `stale` |
 
-### 4. Consistência raw/ ↔ wiki/sources/
-Cruze `raw/index.md` com `wiki/sources/`:
-- **Fontes sem sumário** — referenciadas em `raw/index.md` como ingeridas mas sem `<slug>.md`.
-- **Sumários sem fonte** — `wiki/sources/<slug>.md` cujo `sources:` aponta para arquivo inexistente.
+### 4. raw/ ↔ wiki/sources/ consistency
+Cross-reference `raw/index.md` with `wiki/sources/`:
+- **Sources without summary** — referenced in `raw/index.md` as ingested but missing `<slug>.md`.
+- **Summaries without source** — `wiki/sources/<slug>.md` whose `sources:` points to a nonexistent file.
 
-### 5. Cross-refs faltando
-- Termos/conceitos mencionados no texto que já têm página wiki mas não estão linkados.
-- Sugira ao humano (não corrija automaticamente — pode gerar ruído).
+### 5. Missing cross-refs
+- Terms/concepts mentioned in the text that already have a wiki page but are not linked.
+- Suggest to the human (do not fix automatically — it may introduce noise).
 
-### 6. Contradições
-- Compare páginas sobre o mesmo tema.
-- Se houver afirmações contraditórias → sinalize com nota na página.
+### 6. Contradictions
+- Compare pages about the same topic.
+- If there are contradictory statements → flag with a note on the page.
 
-### 7. Status desatualizado
-- `draft` que poderia ser `stable` (conteúdo completo e validado).
-- `stable` com `updated` > 90 dias → considerar marcar como `stale`.
+### 7. Outdated status
+- `draft` that could be `stable` (complete and validated content).
+- `stable` with `updated` > 90 days → consider marking as `stale`.
 
-### 8. Estatísticas do index.md
-- Contagem de páginas condiz com a realidade?
-- Descrições das páginas estão atualizadas?
+### 8. index.md statistics
+- Does the page count match reality?
+- Are page descriptions up to date?
 
-## Comportamento
+## Behavior
 
-- **Correções simples** (frontmatter, links, `updated`) → faça automaticamente.
-- **Mudanças de conteúdo** → pergunte ao humano antes.
-- **Resposta ao humano**: foque no acionável:
-  1. Pendentes que precisam de decisão humana
-  2. Oportunidades de melhoria
-  3. Resumo numérico (total problemas / correções automáticas)
-- **Não liste** todas as correções automáticas na resposta — o detalhe vai para o `log.md`.
+- **Simple fixes** (frontmatter, links, `updated`) → do them automatically.
+- **Content changes** → ask the human first.
+- **Response to the human**: focus on the actionable:
+  1. Pending items that need a human decision
+  2. Improvement opportunities
+  3. Numerical summary (total issues / automatic fixes)
+- **Do not list** all automatic fixes in the response — the detail goes into `log.md`.
 
-## Registro
+## Logging
 
-Atualize `wiki/log.md` (inserir **no topo**, após o header):
+Update `wiki/log.md` (insert **at the top**, after the header):
 
 ```
-## [YYYY-MM-DD] lint | verificação de saúde
+## [YYYY-MM-DD] lint | health check
 
-### Correções automáticas
+### Automatic fixes
 - ...
 
-### Pendentes (decisão humana)
+### Pending (human decision)
 - ...
 
-### Sugestões
+### Suggestions
 - ...
 ```

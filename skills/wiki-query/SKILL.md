@@ -1,40 +1,44 @@
 ---
 name: wiki-query
-description: "Responde perguntas sobre a base de conhecimento da wiki. Ativa quando o usuário pergunta sobre conceitos, processos, entidades ou qualquer conteúdo da wiki."
+description: "Answers questions about the wiki knowledge base. Activates when the user asks about concepts, processes, entities, or any wiki content."
 ---
 
-# Query — Perguntar sobre a wiki
+# Query — Ask about the wiki
 
-Siga `wiki/CONVENTIONS.md` para convenções de formato, links e idioma.
+Follow `wiki/CONVENTIONS.md` for format conventions, links, and language.
 
-## Passos
+## Language
 
-1. **Consulte `wiki/index.md`** para localizar páginas relevantes à pergunta.
-   - Use a tabela "Por tópico" para encontrar rapidamente onde está o conteúdo.
-   - Se necessário, busque com grep por termos específicos nas páginas wiki.
+Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use.
 
-2. **Leia as páginas identificadas** e siga links relacionados para contexto.
+## Steps
 
-3. **Sintetize a resposta** em pt-BR:
-   - Resposta direta à pergunta.
-   - Cite as páginas wiki usadas com links: `[página](wiki/path.md)`.
-   - Se houver contradições entre fontes, apresente os pontos de vista.
-   - Se a informação **não existir** na wiki, diga explicitamente e sugira fontes que poderiam ser ingeridas.
+1. **Consult `wiki/index.md`** to locate pages relevant to the question.
+   - Use the "By topic" table to quickly find where the content lives.
+   - If needed, search with grep for specific terms in the wiki pages.
 
-4. **Avalie se a resposta tem valor duradouro:**
-   - Se a resposta sintetiza múltiplas páginas de forma nova e útil → ofereça salvar como página em `wiki/sources/` (sumário transversal) ou como nova seção em página existente.
-   - Se é uma resposta simples pontual → não precisa salvar.
+2. **Read the identified pages** and follow related links for context.
 
-5. **Registre no log** (apenas se a query gerou atualização na wiki):
+3. **Synthesize the answer**:
+   - Direct answer to the question.
+   - Cite the wiki pages used with links: `[page](wiki/path.md)`.
+   - If there are contradictions between sources, present the different viewpoints.
+   - If the information **does not exist** in the wiki, say so explicitly and suggest sources that could be ingested.
+
+4. **Assess whether the answer has lasting value:**
+   - If the answer synthesizes multiple pages in a new and useful way → offer to save it as a page in `wiki/sources/` (cross-cutting summary) or as a new section in an existing page.
+   - If it is a simple one-off answer → no need to save.
+
+5. **Log** (only if the query resulted in a wiki update):
    ```
-   ## [YYYY-MM-DD] query | <resumo da pergunta>
-   - Páginas consultadas: ...
-   - Resultado salvo: sim/não (qual página, se sim)
+   ## [YYYY-MM-DD] query | <question summary>
+   - Pages consulted: ...
+   - Result saved: yes/no (which page, if yes)
    ```
 
-## Regras
+## Rules
 
-- Responda **primeiro com base na wiki** — não re-sintetize do zero a partir de código ou fontes externas quando a resposta já existe.
-- Se não encontrar a informação, sugira quais fontes poderiam ser ingeridas para cobrir a lacuna.
-- Sempre cite as páginas wiki usadas.
-- Se a pergunta revelar uma lacuna, sugira páginas que poderiam ser criadas (mas não crie automaticamente — deixe para o ingest).
+- Answer **first based on the wiki** — do not re-synthesize from scratch using code or external sources when the answer already exists.
+- If you cannot find the information, suggest which sources could be ingested to cover the gap.
+- Always cite the wiki pages used.
+- If the question reveals a gap, suggest pages that could be created (but do not create them automatically — leave that for ingest).
