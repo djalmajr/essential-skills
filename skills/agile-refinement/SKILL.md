@@ -16,6 +16,10 @@ Initial context received via slash: $ARGUMENTS
 If `$ARGUMENTS` is filled (e.g., file path, text, reference), use as starting point.
 If empty, ask which initiative or intake will be refined.
 
+## Language
+
+Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use. Templates are in English — translate headers and content to match.
+
 ## Objective
 
 - Break large items into proportional and executable stories
@@ -26,7 +30,7 @@ If empty, ask which initiative or intake will be refined.
 ## When to use
 
 - After an `/intake` that recommended refinement
-- When a backlog item is too large (L or XL) to execute directly
+- When a backlog item is too large or complex to execute directly
 - When there is ambiguity about scope, dependencies, or order
 - Before creating an epic with several stories
 
@@ -45,7 +49,7 @@ Read the provided intake, backlog, or description. Identify:
 - What is the macro problem/objective
 - Which areas are impacted
 - Which constraints are already known
-- What is the estimated size (L? XL?)
+- What is the estimated scope and complexity
 
 ### 2. Identify decomposition axes
 
@@ -60,7 +64,7 @@ Break by **vertical value slice**, not by technical layer:
 For each story, register:
 
 - Name and objective
-- Estimated size (XS, S, M, L)
+- Estimated scope (small, medium, or large)
 - Dependencies (which stories it depends on)
 - What validates it (summarized acceptance criteria)
 
@@ -115,13 +119,12 @@ Use `~/.agents/templates/refinement.md` as base for the artifact.
 
 ```mermaid
 flowchart LR
-    A[intake] --> B[refinement]
-    B --> C{epic or story}
-    C --> D[epic]
-    C --> E[story]
-    D --> F[plan]
-    E --> F
-    F --> G[execution]
+    A[intake] --> B[roadmap]
+    B --> C[refinement]
+    C --> D{epic or story or plan}
+    D --> E[epic]
+    D --> F[story]
+    D --> G[plan]
 ```
 
-This skill acts between intake and creation of epics/stories. For problem capture, use `/intake`. For story detailing, use `/story`. For epics, use `/epic`.
+This skill acts between roadmap and creation of epics/stories/plans. It is a **mandatory step** — never skip from roadmap directly to epic. For problem capture, use `/intake`. For story detailing, use `/story`. For epics, use `/epic`.

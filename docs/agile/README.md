@@ -2,6 +2,20 @@
 
 Skills for agile delivery management powered by AI agents.
 
+## Language
+
+All artifacts (intake, roadmap, epic, story, plan, etc.) must be written in **the user's language**:
+- If the user communicates in Portuguese, write the entire artifact in Portuguese with correct grammar and accents.
+- If the user communicates in English, write in English.
+- **When in doubt, ask the user** which language they prefer before generating the artifact.
+- Templates are in English as reference structure. Translate section headers and content to match the user's language.
+- Technical terms, code identifiers, tool references (`/plan`, `/story`, etc.), and file paths remain unchanged regardless of language.
+
+## Mermaid diagrams
+
+Use Mermaid diagrams for flows, dependencies, timelines, and architecture. Never use ASCII art.
+- Use `<br>` for line breaks inside node labels, **never** `\n`. Example: `A["Line 1<br>Line 2"]`.
+
 ## Workflow
 
 ```mermaid
@@ -32,12 +46,12 @@ flowchart TD
 
 Scenario-based guides showing how skills chain together in real situations.
 
-| Guide | What you'll learn |
-|-------|-------------------|
-| [From Idea to Delivery](guides/from-idea-to-delivery.md) | End-to-end: intake → plan/story → scan-review → daily → post-impl |
+| Guide                                                              | What you'll learn                                                 |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| [From Idea to Delivery](guides/from-idea-to-delivery.md)           | End-to-end: intake → plan/story → scan-review → daily → post-impl |
 | [Managing Large Initiatives](guides/managing-large-initiatives.md) | Epic-scale: roadmap → refinement → epic → stories → status-report |
-| [Sprint Lifecycle](guides/sprint-lifecycle.md) | Ceremonies: planning → daily → review → metrics → retro |
-| [Getting Started](guides/getting-started.md) | Onboarding, prototyping, decision trees, and cheat sheet |
+| [Sprint Lifecycle](guides/sprint-lifecycle.md)                     | Ceremonies: planning → daily → review → metrics → retro           |
+| [Getting Started](guides/getting-started.md)                       | Onboarding, prototyping, decision trees, and cheat sheet          |
 
 ## Skills
 

@@ -16,6 +16,10 @@ Initial context received via slash: $ARGUMENTS
 If `$ARGUMENTS` is filled (e.g., file path, text, issue reference, URL), use as starting point for the intake.
 If empty, start by asking for a short description of the problem.
 
+## Language
+
+Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use. Templates are in English — translate headers and content to match.
+
 ## Objective
 
 - Make the problem or opportunity explicit before planning
@@ -62,12 +66,14 @@ Fill in the template with collected information:
 
 Based on size and clarity:
 
-- Large and strategic problem → `/roadmap`
-- Large but operational problem (L/XL) → `/refinement`
-- Medium problem with reasonable scope (M) → `/story`
-- Small and clear problem (XS/S) → `/plan`
+- Large and strategic problem → `/roadmap` → then `/refinement`
+- Large but operational problem with broad scope → `/refinement`
+- Medium problem with reasonable scope → `/refinement` (or `/story` if already well-decomposed)
+- Small and clear problem → `/plan`
 
 Register the recommendation in the intake and confirm with the user.
+
+> **Flow rule:** For large or complex items, refinement is mandatory before creating epics or stories. Only small, localized items can skip directly to `/plan`.
 
 ### 4. Save the intake
 
@@ -77,12 +83,13 @@ Register the recommendation in the intake and confirm with the user.
 
 ### 5. Chain
 
-After user confirmation, offer to generate the next artifact:
+After user confirmation, offer to generate the next artifact following the official flow:
 
-- "Do you want me to run `/refinement` to break into stories?"
-- "Do you want me to create the `/epic` directly?"
-- "Do you want me to create the `/story`?"
-- "Do you want me to create the `/plan`?"
+- Large/strategic → "Do you want me to create the `/roadmap`?"
+- Large/operational → "Do you want me to run `/refinement` to decompose into stories?"
+- Small/clear → "Do you want me to create the `/plan`?"
+
+> **Never offer `/epic` or `/story` directly from intake for large or complex items.** These must pass through `/refinement` first to ensure proper decomposition.
 
 ### 6. Validate
 

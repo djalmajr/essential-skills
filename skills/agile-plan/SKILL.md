@@ -1,6 +1,6 @@
 ---
 name: agile-plan
-description: Creates simple execution plan for localized changes. Use when the work is small (XS or S), involves few files, and can be executed in a single implementation cycle.
+description: Creates simple execution plan for localized changes. Use when the work is small and localized, involves few files, and can be executed in a single implementation cycle.
 compatibility: opencode
 metadata:
   audience: engineering
@@ -16,6 +16,10 @@ Initial context received via slash: $ARGUMENTS
 If `$ARGUMENTS` is filled (e.g., story reference, description, issue), use as starting point.
 If empty, ask what will be planned.
 
+## Language
+
+Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use. Templates are in English — translate headers and content to match.
+
 ## Objective
 
 - Create a clear and proportionally simple execution plan
@@ -25,7 +29,7 @@ If empty, ask what will be planned.
 
 ## When to use
 
-- Small and localized work (XS, S)
+- Small and localized work — few files, low risk, single-cycle delivery
 - Few impacted files
 - Can be executed in a single cycle
 - Story already detailed that needs an operational plan
@@ -98,7 +102,7 @@ Every plan must contain:
 
 - Every plan must be presented before implementation (ExitPlanMode).
 - Only implement after explicit user confirmation.
-- Don't create a plan for work that needs a story (size M+).
+- Don't create a plan for work that needs a story (moderate or larger scope with several files).
 - Files must have exact paths.
 - Tasks must be verifiable, not vague.
 - When completed, update `[ ]` to `[x]` according to actual progress.

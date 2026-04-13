@@ -16,6 +16,10 @@ Initial context received via slash: $ARGUMENTS
 If `$ARGUMENTS` is filled, use as reference (e.g., plan, story, issue).
 If empty, try to identify the active plan or ask.
 
+## Language
+
+Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use. Templates are in English — translate headers and content to match.
+
 ## Objective
 
 - Consolidate what was delivered against the original plan

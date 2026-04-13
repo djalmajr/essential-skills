@@ -16,6 +16,10 @@ Initial context received via slash: $ARGUMENTS
 If `$ARGUMENTS` is filled (e.g., refinement path, intake, or description), use as starting point.
 If empty, ask which initiative will be structured.
 
+## Language
+
+Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use. Templates are in English — translate headers and content to match.
+
 ## Objective
 
 - Structure story backlog with dependencies and order
@@ -26,7 +30,7 @@ If empty, ask which initiative will be structured.
 ## When to use
 
 - After a `/refinement` that generated several stories
-- When the initiative has size L or XL
+- When the initiative is large, requiring multiple coordinated stories
 - When there are dependencies between deliveries that need coordination
 - When a roadmap is needed to guide the sequence
 
@@ -61,7 +65,7 @@ Fill in the required sections:
 For each story in the backlog, register:
 
 - Name and objective (1 line)
-- Estimated size (XS to XL)
+- Estimated scope (small, medium, or large)
 - Depends on (which stories)
 - Status (not started, in progress, completed)
 
@@ -73,6 +77,14 @@ The full detail of each story will be done with `/story`.
 - Show what can run in parallel
 - Highlight the critical path
 - Include intermediate validations (milestones)
+
+### 5. Consider collaborative work
+
+When the team has 2+ developers:
+- Identify parallel tracks or lanes so devs can work simultaneously
+- Define interface contracts between tracks (types, schemas, APIs) to minimize blocking
+- Assign stories to tracks when possible
+- Use Mermaid `gantt` diagrams to visualize parallel work across tracks
 
 ## Where to save
 

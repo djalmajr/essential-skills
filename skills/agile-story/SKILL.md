@@ -1,6 +1,6 @@
 ---
 name: agile-story
-description: Details a vertical delivery with acceptance criteria, tasks, and verification. Use when the work has size M, involves several files, and needs richer acceptance and verification than a simple plan.
+description: Details a vertical delivery with acceptance criteria, tasks, and verification. Use when the work involves several files with moderate complexity and needs richer acceptance and verification than a simple plan.
 compatibility: opencode
 metadata:
   audience: engineering
@@ -16,6 +16,10 @@ Initial context received via slash: $ARGUMENTS
 If `$ARGUMENTS` is filled (e.g., epic reference, description, issue), use as starting point.
 If empty, ask what will be detailed.
 
+## Language
+
+Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use. Templates are in English — translate headers and content to match.
+
 ## Objective
 
 - Detail a vertical delivery with clear scope, acceptance, and verification
@@ -25,14 +29,14 @@ If empty, ask what will be detailed.
 
 ## When to use
 
-- Work with size M (several files, moderate validation)
+- Medium-sized vertical delivery — several files, moderate validation and complexity
 - Vertical delivery that needs richer acceptance criteria
 - Story from an epic that needs to be detailed before execution
 - Bug fix with regression risk
 
 ## When NOT to use
 
-- Small and localized work (XS, S) — use `/plan`
+- Small and localized work — use `/plan`
 - Initiative with several stories — use `/epic` first
 - Problem not yet analyzed — use `/intake` or `/refinement`
 
@@ -126,4 +130,4 @@ flowchart LR
     E --> F[execution]
 ```
 
-This skill acts after epic (or directly after intake for M items). For execution plan, use `/plan`. For small items, use `/plan` directly.
+This skill acts after epic (or directly after intake for medium-complexity items). For execution plan, use `/plan`. For small items, use `/plan` directly.

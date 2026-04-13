@@ -15,23 +15,28 @@ flowchart TD
     A[New problem or request] --> B{Is the problem clear?}
     B -- No --> C[/intake]
     B -- Yes --> D{What size?}
-    D -- XS/S --> E[/plan]
-    D -- M --> F[/story]
-    D -- L/XL --> G[/epic]
+    D -- Small, localized --> E[/plan]
+    D -- Medium, several files --> F[/story]
+    D -- Large, needs decomposition --> J
     C --> H{Intake recommends...}
     H -- Strategic --> I[/roadmap]
-    H -- Needs decomposition --> J[/refinement]
+    I --> J[/refinement]
+    H -- Needs decomposition --> J
     H -- Clear enough --> D
+    J --> G{Refinement output}
+    G -- Multiple stories --> K[/epic]
+    G -- 1-2 stories --> F
+    G -- Small item --> E
 
-    K[Need to track progress?] --> L{What kind?}
-    L -- Quick daily --> M[/daily]
-    L -- Period consolidation --> N[/status-report]
-    L -- Delivery closure --> O[/post-impl]
+    L[Need to track progress?] --> M{What kind?}
+    M -- Quick daily --> N[/daily]
+    M -- Period consolidation --> O[/status-report]
+    M -- Delivery closure --> P[/post-impl]
 
-    P[Need a ceremony?] --> Q{Where in cycle?}
-    Q -- Starting sprint --> R[/sprint-planning]
-    Q -- Sprint ended --> S[/sprint-review then /retro]
-    Q -- Backlog unclear --> T[/refinement]
+    Q[Need a ceremony?] --> R{Where in cycle?}
+    R -- Starting sprint --> S[/sprint-planning]
+    R -- Sprint ended --> T[/sprint-review then /retro]
+    R -- Backlog unclear --> J
 ```
 
 ### Cheat sheet
@@ -40,11 +45,11 @@ flowchart TD
 |---|---|
 | Capture a vague problem | `/intake` |
 | Decide plan vs story vs epic | `/planning-router` |
-| Plan a small fix (XS/S) | `/plan` |
-| Detail a medium delivery (M) | `/story` |
-| Structure a large initiative (L/XL) | `/epic` |
-| Break down a large item | `/refinement` |
-| Set strategic direction | `/roadmap` |
+| Plan a small, localized change | `/plan` |
+| Detail a medium-sized delivery | `/story` |
+| Break down a large item before creating an epic | `/refinement` |
+| Structure a large initiative | `/epic` (after `/refinement`) |
+| Set strategic direction | `/roadmap` (then `/refinement`) |
 | Quick daily status | `/daily` |
 | Period/milestone consolidation | `/status-report` |
 | Close a delivery formally | `/post-impl` |
@@ -79,7 +84,7 @@ A new backend dev joins the team and needs to learn the flow.
 **Day 2 — Practical exercise (intake + planning):**
 - Pick a real small problem (e.g., "add rate limiting to the API")
 - Run `/intake rate limiting` → skill asks questions, structures the problem
-- Use `/planning-router` to decide: it's size S → `/plan`
+- Use `/planning-router` to decide: it's a small change → `/plan`
 - Create the plan. Mentor reviews.
 
 **Day 3 — Practical exercise (TDD + execution):**
@@ -184,17 +189,9 @@ Don't know if you need a plan, story, or epic?
 /planning-router add multi-language support to onboarding
 ```
 
-The router evaluates: "Multi-language touches i18n, translation files, UI components, content management. Size L → `/epic`."
+The router evaluates: "Multi-language touches i18n, translation files, UI components, content management. This is a large initiative — I recommend structuring it as an `/epic`."
 
-**Light sizing reference:**
-
-| Size | Files | Validation | Artifact |
-|------|-------|-----------|----------|
-| XS | 1 file | Minimal | `/plan` |
-| S | Few files | Simple | `/plan` |
-| M | Several files | Moderate AC | `/story` |
-| L | Many files, deps | Multiple stories | `/epic` |
-| XL | Cross-team | Coordination needed | `/epic` |
+The router considers factors like the number of files involved, cross-team coordination, and validation complexity to recommend the right artifact.
 
 ### Ceremonies router
 
@@ -231,3 +228,4 @@ The router asks what type of tracking:
 3. **Prototype before implementing:** Validate UI flows interactively, then transition to real stories
 4. **When in doubt, use routers:** `/planning-router`, `/ceremonies-router`, `/delivery` guide you to the right skill
 5. **The decision tree is your compass:** Print it, bookmark it, reference it until it's second nature
+6. **Refinement is mandatory:** Large items must go through `/refinement` before `/epic`. Never skip from `/roadmap` directly to `/epic`

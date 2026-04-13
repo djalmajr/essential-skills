@@ -16,6 +16,10 @@ Initial context received via slash: $ARGUMENTS
 If `$ARGUMENTS` is filled, use as starting point (e.g., intake, initiative list, period).
 If empty, ask for the roadmap objective.
 
+## Language
+
+Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use. Templates are in English — translate headers and content to match.
+
 ## Scope
 - `quarterly roadmap`: direction alignment, period objectives, and macro priorities
 - `roadmap by epic`: phases, stories, unblocks, and delivery order for an initiative
@@ -45,11 +49,20 @@ If empty, ask for the roadmap objective.
 - Quarterly roadmap: `planning/roadmaps/Q<N>-YYYY.md`
 - Initiative roadmap: `planning/<initiative>/roadmap.md`
 
+## Collaborative work
+
+When the team has 2+ developers, the roadmap should:
+- Identify parallel tracks (e.g., Backend, Frontend, AI Engineering) so devs can work simultaneously
+- Define interface contracts between tracks to minimize blocking
+- Show which stories/phases can run in parallel in the timeline
+- Ask about team size and composition during roadmap creation
+
 ## Chaining
 
-At the end of the roadmap, offer:
-- "Do you want me to run `/refinement` for the first initiative?"
-- "Do you want me to create the `/epic`?"
+At the end of the roadmap, offer **only** `/refinement`:
+- "Do you want me to run `/refinement` to decompose the first initiative into stories?"
+
+> **Important:** The roadmap identifies initiatives at a macro level. Each initiative must pass through `/refinement` before becoming an epic, story, or plan. Never skip refinement from the roadmap.
 
 ## Template
 

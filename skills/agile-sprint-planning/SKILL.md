@@ -16,6 +16,10 @@ Initial context received via slash: $ARGUMENTS
 If `$ARGUMENTS` is filled, use as reference (e.g., epic, backlog, period).
 If empty, ask which backlog or initiative will be planned.
 
+## Language
+
+Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use. Templates are in English — translate headers and content to match.
+
 ## Objective
 
 - Declare the sprint objective
@@ -62,10 +66,18 @@ If an item doesn't have DoR, it doesn't enter the sprint — goes back to refine
 - What can run in parallel?
 - What is the critical path?
 
-### 6. Register commitments
+### 6. Distribute across team
 
-- Available capacity (days, constraints)
-- Sprint commitment (selected items)
+When 2+ developers are available:
+- Assign items to developers or tracks (e.g., Backend, Frontend)
+- Identify items that can be worked on simultaneously
+- Define interface contracts or mocks to avoid blocking between tracks
+- Use Mermaid diagrams to visualize parallel assignments
+
+### 7. Register commitments
+
+- Available capacity (days, constraints, number of developers)
+- Sprint commitment (selected items, assigned to whom)
 - What is left out (postponed items)
 
 ## Where to save
