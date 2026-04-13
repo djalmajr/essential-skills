@@ -13,29 +13,29 @@ How to onboard into the agile + AI workflow, choose the right skill, and validat
 ```mermaid
 flowchart TD
     A[New problem or request] --> B{Is the problem clear?}
-    B -- No --> C[/intake]
+    B -- No --> C["/intake"]
     B -- Yes --> D{What size?}
-    D -- Small, localized --> E[/plan]
-    D -- Medium, several files --> F[/story]
+    D -- Small, localized --> E["/plan"]
+    D -- Medium, several files --> F["/story"]
     D -- Large, needs decomposition --> J
     C --> H{Intake recommends...}
-    H -- Strategic --> I[/roadmap]
-    I --> J[/refinement]
+    H -- Strategic --> I["/roadmap"]
+    I --> J["/refinement"]
     H -- Needs decomposition --> J
     H -- Clear enough --> D
     J --> G{Refinement output}
-    G -- Multiple stories --> K[/epic]
+    G -- Multiple stories --> K["/epic"]
     G -- 1-2 stories --> F
     G -- Small item --> E
 
     L[Need to track progress?] --> M{What kind?}
-    M -- Quick daily --> N[/daily]
-    M -- Period consolidation --> O[/status-report]
-    M -- Delivery closure --> P[/post-impl]
+    M -- Quick daily --> N["/daily"]
+    M -- Period consolidation --> O["/status-report"]
+    M -- Delivery closure --> P["/post-impl"]
 
     Q[Need a ceremony?] --> R{Where in cycle?}
-    R -- Starting sprint --> S[/sprint-planning]
-    R -- Sprint ended --> T[/sprint-review then /retro]
+    R -- Starting sprint --> S["/sprint-planning"]
+    R -- Sprint ended --> T["/sprint-review then /retro"]
     R -- Backlog unclear --> J
 ```
 
