@@ -34,7 +34,7 @@ Since intake already recommended `/plan`, you skip the router. But if unsure:
 /planning-router password reset token expiry
 ```
 
-The router evaluates: "1 area, few files, simple validation. Size XS → `/plan`."
+The router evaluates: "1 area, few files, simple validation. This is a small, localized change → `/plan`."
 
 ### Step 3: Create the execution plan
 
@@ -217,7 +217,7 @@ The report consolidates: 3 of 7 stories completed, 1 blocker (SSO provider API),
 
 ## Key takeaways
 
-1. **Proportional artifacts:** XS/S → plan, M → story, trivial → plan without intake
+1. **Proportional artifacts:** Small changes → plan, medium deliveries → story, trivial → plan without intake
 2. **Intake is optional:** Skip it when the problem is already clear
 3. **Scan-review before committing:** Catches scope creep, security issues, over-engineering
 4. **Daily tracks real state:** Blockers have owners and actions, not just "blocked on X"

@@ -65,11 +65,11 @@ The skill reads the intake and roadmap, then decomposes by vertical value slice:
 
 | Story | Size | Dependencies | Phase |
 |-------|------|-------------|-------|
-| Stripe provider setup | S | None | 1 |
-| Webhook event handler | M | Story 1 | 1 |
-| Payout reconciliation | M | Stories 1, 2 | 2 |
-| Customer migration | L | Story 1 | 2 |
-| Legacy decommission | S | Stories 1-4 | 3 |
+| Stripe provider setup | small | None | 1 |
+| Webhook event handler | medium | Story 1 | 1 |
+| Payout reconciliation | medium | Stories 1, 2 | 2 |
+| Customer migration | large | Story 1 | 2 |
+| Legacy decommission | small | Stories 1-4 | 3 |
 
 **Implementation order:** Story 1 first (unblocks all), Stories 2+3 in parallel after Story 1, Story 4 after Story 1, Story 5 last.
 
@@ -85,11 +85,11 @@ Save to: `planning/payment-migration/refinement.md`
 
 The skill reads the refinement and builds the coordinated backlog:
 
-- **Story 1:** Stripe provider integration (S, no deps) — Phase 1
-- **Story 2:** Webhook event handler (M, depends on 1) ��� Phase 1
-- **Story 3:** Payout reconciliation (M, depends on 1, 2) — Phase 2
-- **Story 4:** Customer migration (L, depends on 1) — Phase 2
-- **Story 5:** Legacy decommission (S, depends on 1-4) — Phase 3
+- **Story 1:** Stripe provider integration (small, no deps) — Phase 1
+- **Story 2:** Webhook event handler (medium, depends on 1) ��� Phase 1
+- **Story 3:** Payout reconciliation (medium, depends on 1, 2) — Phase 2
+- **Story 4:** Customer migration (large, depends on 1) — Phase 2
+- **Story 5:** Legacy decommission (small, depends on 1-4) — Phase 3
 
 Each story has: objective, size, dependencies, phase, and acceptance criteria summary.
 
@@ -168,10 +168,10 @@ Decomposed by user value slice:
 
 | Story | Size | Dependencies | Expected impact |
 |-------|------|-------------|-----------------|
-| Simplify signup form | S | None | -10% drop-off (remove 3 optional fields) |
-| Add progress indicator | XS | None | -5% drop-off (reduce uncertainty) |
-| Email verification reminders | M | Email service | -8% drop-off (recover abandoned signups) |
-| Onboarding analytics dashboard | M | Story 3 | Measure actual impact |
+| Simplify signup form | small | None | -10% drop-off (remove 3 optional fields) |
+| Add progress indicator | small | None | -5% drop-off (reduce uncertainty) |
+| Email verification reminders | medium | Email service | -8% drop-off (recover abandoned signups) |
+| Onboarding analytics dashboard | medium | Story 3 | Measure actual impact |
 
 **Critical path:** Stories 1+2 first (quick wins, no deps), then Story 3, then Story 4.
 

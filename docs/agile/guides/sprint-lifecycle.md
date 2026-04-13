@@ -106,9 +106,9 @@ The skill reads the epic (5 stories, 1-3 completed), retro actions, and backlog.
 
 | Item | Size | Dependencies | DoR check |
 |------|------|-------------|-----------|
-| Customer migration (start) | L | Stripe setup (done) | Objective yes, scope yes, files yes, AC *partial* — migration strategy still open |
-| DoR update: external deps | XS | None | Ready |
-| Legacy decommission | S | Stories 1-4 | Not ready (depends on migration) |
+| Customer migration (start) | large | Stripe setup (done) | Objective yes, scope yes, files yes, AC *partial* — migration strategy still open |
+| DoR update: external deps | small | None | Ready |
+| Legacy decommission | small | Stories 1-4 | Not ready (depends on migration) |
 
 **DoR validation:**
 - Customer migration: *Not fully ready* — migration strategy undecided. **Decision:** Start the groundwork (schema changes, migration script skeleton) while strategy is confirmed. Full migration in Sprint 25.
@@ -116,8 +116,8 @@ The skill reads the epic (5 stories, 1-3 completed), retro actions, and backlog.
 - Legacy decommission: Not ready — postponed.
 
 **Selected items:**
-1. DoR update (XS, quick win, retro action)
-2. Customer migration start (L partial, critical path)
+1. DoR update (small, quick win, retro action)
+2. Customer migration start (large, partial, critical path)
 
 **Capacity:** 8 dev-days (2 devs x 4 working days, accounting for meetings and code review).
 
@@ -138,9 +138,9 @@ A solo dev works in 1-week cycles on a SaaS product.
 ```
 
 The dev lists 3 items from the backlog:
-- Bug: date picker resets on timezone change (S)
-- Feature: add CSV export to admin panel (M)
-- Chore: update dependencies (XS)
+- Bug: date picker resets on timezone change (small)
+- Feature: add CSV export to admin panel (medium)
+- Chore: update dependencies (small)
 
 **Capacity:** 5 dev-days.
 
@@ -207,8 +207,8 @@ The router asks: "Where are you in the cycle?"
 ```
 
 The refinement takes 5 vague items and produces 8 sized stories:
-- 2 items were split (L → 2 M stories each)
-- 1 item was clear enough for a direct plan (S)
+- 2 items were split (large → 2 medium stories each)
+- 1 item was clear enough for a direct plan (small)
 - 2 items needed intake first (too vague → parked)
 
 ### First sprint planning

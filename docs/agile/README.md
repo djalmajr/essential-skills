@@ -63,9 +63,9 @@ Each skill README contains full documentation with examples, tips, and chaining 
 |-------|-------|
 | [intake](../../skills/agile-intake/README.md) | Vague problems → structured intake document |
 | [planning-router](../../skills/agile-planning-router/README.md) | Router: plan vs story vs epic |
-| [plan](../../skills/agile-plan/README.md) | Small change (XS/S) → execution plan |
-| [story](../../skills/agile-story/README.md) | Medium delivery (M) → story with acceptance criteria |
-| [epic](../../skills/agile-epic/README.md) | Large initiative (L/XL) → story backlog + roadmap |
+| [plan](../../skills/agile-plan/README.md) | Small, localized change → execution plan |
+| [story](../../skills/agile-story/README.md) | Medium-sized delivery → story with acceptance criteria |
+| [epic](../../skills/agile-epic/README.md) | Large initiative → story backlog + roadmap |
 | [refinement](../../skills/agile-refinement/README.md) | Large backlog → executable stories |
 | [roadmap](../../skills/agile-roadmap/README.md) | Quarterly or epic roadmap |
 
