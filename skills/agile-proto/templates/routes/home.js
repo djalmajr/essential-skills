@@ -1,85 +1,59 @@
 import { html } from "htm/preact";
-import { useState } from "preact/hooks";
-import { Button, Card, CardBody, CardTitle, CardActions, Input, Select, Field, Badge, Alert, Toggle, Icon } from "~/components/ui.js";
+import { Badge } from "~/components/ui/badge.js";
+import { Button } from "~/components/ui/button.js";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card.js";
+import { Icon } from "~/components/ui/icon.js";
 
 export function HomePage() {
-  const [count, setCount] = useState(0);
-
   return html`
-    <div class="flex flex-col flex-1 w-full h-full overflow-y-auto">
-      <!-- Hero -->
-      <div class="hero bg-base-200 py-12">
-        <div class="hero-content text-center">
-          <div class="max-w-md">
-            <h1 class="text-4xl font-bold">Hello Proto</h1>
-            <p class="py-4 text-base-content/70">
-              This is a prototype built with daisyUI + z-proto.
-              Edit routes/ to add your screens.
-            </p>
-            <${Button} onClick=${() => setCount((c) => c + 1)}>
-              <${Icon} icon="lucide:mouse-pointer-click" />
-              Clicked ${count} times
-            <//>
-          </div>
-        </div>
+    <div class="flex flex-col flex-1 w-full h-full overflow-y-auto p-6 space-y-6">
+      <div>
+        <h2 class="text-3xl font-bold tracking-tight">Welcome</h2>
+        <p class="text-muted-foreground text-sm mt-1">
+          Replace this scene with your main flow. Use the picker in the header to navigate between scenes.
+        </p>
       </div>
 
-      <!-- Component showcase -->
-      <div class="p-6 space-y-6 max-w-2xl mx-auto w-full">
-        <!-- Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <${Card}>
-          <${CardBody}>
-            <${CardTitle}>
-              <${Icon} icon="lucide:layout-dashboard" size=${20} />
-              Example Card
-            <//>
-            <p>Cards, buttons, inputs, badges — all from daisyUI.</p>
-            <${CardActions}>
-              <${Button} variant="outline" size="sm">Cancel<//>
-              <${Button} size="sm">Save<//>
-            <//>
-          <//>
-        <//>
-
-        <!-- Form example -->
-        <${Card}>
-          <${CardBody}>
-            <${CardTitle}>
-              <${Icon} icon="lucide:settings" size=${20} />
-              Settings
-            <//>
-            <${Field} label="Name">
-              <${Input} value="John Doe" />
-            <//>
-            <${Field} label="Email">
-              <${Input} type="email" value="john@example.com" />
-            <//>
-            <${Field} label="Role">
-              <${Select}>
-                <option selected>Admin</option>
-                <option>Editor</option>
-                <option>Viewer</option>
-              <//>
-            <//>
-            <div class="flex items-center gap-2 mt-2">
-              <${Toggle} checked />
-              <span class="text-sm">Receive notifications</span>
+          <${CardHeader}>
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <${CardTitle}>Quick start<//>
+                <${CardDescription}>Start by editing routes/home.js<//>
+              </div>
+              <${Badge} variant="outline">v1<//>
             </div>
           <//>
+          <${CardContent} className="space-y-2">
+            <p class="text-sm text-muted-foreground">
+              Each scene lives in <code class="text-foreground">routes/*.js</code>. Register it in <code class="text-foreground">index.js</code> inside <code class="text-foreground">SCENES</code>.
+            </p>
+            <${Button} size="sm" variant="outline">
+              <${Icon} icon="lucide:arrow-right" size=${14} />
+              See components
+            <//>
+          <//>
         <//>
 
-        <!-- Badges -->
-        <div class="flex flex-wrap gap-2">
-          <${Badge}>Primary<//>
-          <${Badge} variant="secondary">Secondary<//>
-          <${Badge} variant="outline">Outline<//>
-          <${Badge} variant="ghost">Ghost<//>
-          <${Badge} variant="destructive">Destructive<//>
-        </div>
-
-        <!-- Alert -->
-        <${Alert} variant="info" icon="lucide:info">
-          Prototypes are throwaway — don't architect for reuse.
+        <${Card}>
+          <${CardHeader}>
+            <${CardTitle}>Next steps<//>
+          <//>
+          <${CardContent}>
+            <ul class="text-sm space-y-2 list-disc pl-4 text-muted-foreground">
+              <li>Add scenes to <code class="text-foreground">SCENES</code></li>
+              <li>Customize the sidebar in <code class="text-foreground">components/app-shell.js</code></li>
+              <li>Adjust colors in <code class="text-foreground">index.css</code> (shadcn variables)</li>
+              <li>To export to Figma, set <code class="text-foreground">figma-key</code> in <code class="text-foreground">index.html</code></li>
+            </ul>
+          <//>
         <//>
       </div>
     </div>

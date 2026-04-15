@@ -1,268 +1,292 @@
 ---
 name: agile-proto
-description: Create interactive UI prototypes with CDN-only stack (z-proto + daisyUI + Preact + Tailwind v4). Use when asked to "prototype", "create proto", "mockup screens", "interactive prototype", or when exploring UI flows before implementation.
+description: Create interactive UI prototypes with a CDN-only stack (z-proto + Tailwind v4 + shadcn-style components + Preact). Use when asked to "prototype", "create proto", "mockup screens", "interactive prototype", or when exploring UI flows before implementation.
 ---
 
 # Interactive UI Prototyping
 
-Create standalone interactive prototypes to validate UI flows before implementation. Zero build tools — everything runs from CDN.
+Build standalone interactive prototypes to validate UI flows before implementation. Zero build tools — everything runs from CDN. Visual and API mirror the org's shadcn experience 1:1 (live reference: `apps/messaging/client-proto/`).
 
 ## Stack
 
-- **z-proto** — web component shell with responsive presets, zoom, resize handles, and Figma capture
-- **daisyUI v5** — component library CSS (btn, card, input, badge, etc.) with custom shadcn-like theme
-- **Tailwind CSS v4** — via `@tailwindcss/browser` CDN for utility classes (flex, p-6, etc.)
-- **Preact + htm** — lightweight rendering via importmap + esm.sh
-- **iconify-icon** — web component for icons (any Iconify set: lucide, mdi, etc.)
+- **z-proto** — web component shell (responsive presets, zoom, resize handles, Figma export button)
+- **Tailwind CSS v4** — `@tailwindcss/browser` + `@theme inline` mapping shadcn CSS variables
+- **shadcn components (55)** — one file per component in `components/ui/`, class strings copied verbatim from the original shadcn. Behavior delegated to native HTML5 (`<dialog>`, `<details>`, popover API, scroll-snap)
+- **Preact + htm** — rendering via importmap + esm.sh
+- **iconify-icon** — web component, wrapped by `<Icon>` in `components/ui/icon.js`
 
-## Directory structure
+> No daisyUI, no Radix. The 55 components in `components/ui/` cover the shadcn catalog — **always import from there, never recreate**.
+
+## Structure
 
 ```
 {app}/client-proto/
-├── index.html          # HTML entry with CDN imports, importmap, z-proto shell
-├── index.js            # App entry: scenes, wouter routing, render
-├── index.css           # z-proto overrides + shadcn theme
-├── components/         # Reusable Preact component wrappers
-│   └── ui.js           # Button, Card, Input, Badge, Icon, etc.
-└── routes/             # One file per scene/page
+├── index.html             # CDN imports, importmap, @theme inline, z-proto shell
+├── index.js               # SCENES + hash routing
+├── index.css              # z-proto overrides + shadcn variables (light)
+├── components/
+│   ├── app-shell.js       # shadcn sidebar + topbar (breadcrumbs/actions)
+│   └── ui/                # one file per shadcn component (55 components)
+│       ├── utils.js                # cn() helper
+│       ├── icon.js                 # <iconify-icon> wrapper
+│       │
+│       ├── # Layout / containers
+│       ├── aspect-ratio.js · button-group.js · card.js · empty.js
+│       ├── field.js · input-group.js · item.js · resizable.js · scroll-area.js
+│       │
+│       ├── # Behavioral (native HTML5)
+│       ├── accordion.js            # <details>/<summary>
+│       ├── alert-dialog.js         # <dialog role=alertdialog>
+│       ├── collapsible.js          # <details>
+│       ├── command.js              # static (real filtering needs JS)
+│       ├── context-menu.js         # oncontextmenu + fixed positioning
+│       ├── dialog.js               # <dialog> + .showModal()
+│       ├── drawer.js · sheet.js    # <dialog> with slide
+│       ├── dropdown-menu.js        # <details> styled as a menu
+│       ├── hover-card.js           # CSS :hover/:focus-within
+│       ├── menubar.js              # horizontal <details>
+│       ├── navigation-menu.js      # nav + group-hover
+│       ├── popover.js              # native popover API
+│       ├── tooltip.js              # CSS-only
+│       │
+│       ├── # Forms
+│       ├── checkbox.js · combobox.js   # <input list> + <datalist>
+│       ├── input.js · input-otp.js · mask-input.js
+│       ├── label.js · native-select.js · radio-group.js
+│       ├── select.js · slider.js   # <input type=range>
+│       ├── progress.js             # <progress>
+│       ├── switch.js · textarea.js · toggle.js · toggle-group.js
+│       │
+│       ├── # Data display / navigation
+│       ├── alert.js · avatar.js · badge.js · breadcrumb.js · button.js
+│       ├── calendar.js             # static 7×6 grid
+│       ├── carousel.js             # CSS scroll-snap
+│       ├── chart.js                # placeholders (BarChart/LineChart)
+│       ├── kbd.js · pagination.js · separator.js · sidebar.js
+│       ├── skeleton.js · sonner.js # static toast
+│       ├── spinner.js · table.js · tabs.js
+└── routes/                # one scene per file (shadcn demos)
     ├── home.js
     ├── dashboard.js
-    ├── music.js
-    ├── tasks.js
+    ├── tasks.js           # data table + dialog + dropdown
+    ├── music.js           # rich layout + tooltip
     ├── settings.js
-    └── components.js   # shadcn → daisyUI mapping reference
+    └── components.js      # live reference
 ```
+
+To add a new component: create `components/ui/<name>.js` with the class string copied from the original shadcn, importing `cn` from `./utils.js`. Same convention as shadcn (`@/components/ui/button`).
+
+### Philosophy: behavior via native DOM/CSS
+
+Inspired by the `spectre.css` philosophy: "interactive" components **don't use Radix nor JS positioning**. They delegate to HTML5/CSS:
+
+| shadcn component | Implementation here |
+|---|---|
+| Dialog / AlertDialog | `<dialog>` + `.showModal()` / `.close()` (`openDialog(id)` / `closeDialog(id)`) |
+| Drawer / Sheet | `<dialog>` positioned with slide classes |
+| Accordion / Collapsible | `<details>` + `<summary>` |
+| DropdownMenu / Menubar | `<details>` styled as an absolute menu + `onBlur` to close |
+| ContextMenu | `oncontextmenu` + `<div>` positioned with `position: fixed` |
+| Popover | native popover API (`popover` attr + `popovertarget`) — Chrome 114+, Safari 17+, Firefox 125+ |
+| HoverCard / Tooltip / NavigationMenu | `:hover` / `:focus-within` in CSS, no JS |
+| Combobox | `<input list>` + `<datalist>` |
+| Slider | `<input type="range">` |
+| Progress | `<progress>` |
+| Calendar | 7×6 grid (static) — for a real input, prefer `<input type="date">` |
+| Carousel | CSS scroll-snap |
+| Switch | `<label>` with `<input type="checkbox">` + `peer-checked:translate-x-*` |
+
+When complex interactivity is unavoidable (Command with real filtering, Toast with timing, Form with validation), the pattern is to render **the visual state** that the prototype needs; real behavior only when the scenario truly requires it.
 
 ## Bootstrapping
 
-Copy templates from `skills/agile-proto/templates/` into the project's `client-proto/` directory:
-
 ```bash
 cp -r ~/.claude/skills/agile-proto/templates/ my-app/client-proto/
+cd my-app/client-proto
+bunx serve -s .
 ```
 
-Or create files manually following the templates. The key files are:
+Templates ship with the shadcn theme applied, a working sidebar, hash routing across scenes, and `routes/components.js` as a live reference.
 
-1. `index.html` — loads all CDN dependencies and defines the z-proto shell
-2. `index.js` — defines SCENES array with wouter path-based routing
-3. `index.css` — z-proto overrides + custom shadcn/shadcn-dark themes
-4. `components/ui.js` — reusable Preact wrappers (Button, Card, Input, Badge, Icon, etc.)
-5. `routes/*.js` — example pages (dashboard, music, tasks, settings, components reference)
+## Testing the skill template
 
-## Key files
-
-### index.html
-
-```html
-<!DOCTYPE html>
-<html lang="en" data-theme="shadcn">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proto — AppName</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/daisyui.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2/dist/iconify-icon.min.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/gh/djalmajr/z-proto@main/src/z-proto.js"></script>
-    <script type="importmap">
-      {
-        "imports": {
-          "~/": "/",
-          "htm/preact": "https://esm.sh/htm@3/preact?external=preact",
-          "preact": "https://esm.sh/preact@10",
-          "preact/": "https://esm.sh/preact@10/",
-          "wouter-preact": "https://esm.sh/wouter-preact@3?external=preact"
-        }
-      }
-    </script>
-    <link rel="stylesheet" href="/index.css">
-    <style>
-      :root { --font-sans: 'Inter', sans-serif; }
-    </style>
-  </head>
-  <body class="font-sans antialiased">
-    <z-proto>
-      <z-proto-header></z-proto-header>
-      <z-proto-body title="Proto — AppName">
-        <div id="app" class="flex flex-1 overflow-hidden"></div>
-      </z-proto-body>
-    </z-proto>
-    <script type="module" src="/index.js"></script>
-  </body>
-</html>
-```
-
-**CRITICAL: CDN load order matters.**
-
-1. `daisyui@5/themes.css` — theme CSS variables (FIRST)
-2. `daisyui@5/daisyui.css` — component classes (SECOND)
-3. `@tailwindcss/browser@4` — utility classes (THIRD, must be AFTER daisyUI)
-
-`@tailwindcss/browser` does NOT support `@plugin`. Never use `@plugin` in `<style type="text/tailwindcss">`.
-
-The `shadcn` theme is defined in `index.css` and provides a neutral, shadcn-like palette (near-black primary, subtle borders). Change `data-theme="shadcn"` to `data-theme="shadcn-dark"` for dark mode, or any built-in daisyUI theme.
-
-### Routing pattern (index.js)
-
-Uses wouter-preact for path-based routing. SCENES array defines all routes. SceneNav renders in z-proto-header via createPortal.
-
-```js
-import { Route, Switch, useLocation } from "wouter-preact";
-import { DashboardPage } from "./routes/dashboard.js";
-
-const SCENES = [
-  { path: "/", label: "Dashboard", Component: DashboardPage },
-  { path: "/settings", label: "Settings", Component: SettingsPage },
-];
-
-// In App: wouter Switch + Route for rendering
-html`<${Switch}>${SCENES.map(s => html`<${Route} path=${s.path} component=${s.Component} />`)}<//>`;
-```
-
-**Important:** Serve with SPA mode (`bunx serve -s .`) so all paths resolve to `index.html`.
-
-### Route file pattern (routes/dashboard.js)
-
-Routes import reusable components from `~/components/ui.js`:
-
-```js
-import { html } from "htm/preact";
-import { Button, Card, CardBody, Icon } from "~/components/ui.js";
-
-export function DashboardPage() {
-  return html`
-    <div class="flex flex-col flex-1 w-full h-full overflow-y-auto p-6 space-y-4">
-      <h1 class="text-2xl font-bold">Dashboard</h1>
-      <${Button}>
-        <${Icon} icon="lucide:plus" />
-        New item
-      <//>
-      <${Card}>
-        <${CardBody}>
-          <h2 class="card-title">Card title</h2>
-          <p>Card content with mock data.</p>
-        <//>
-      <//>
-    </div>
-  `;
-}
-```
-
-## Running
-
-Serve `client-proto/` with any static server. No build step needed:
+To iterate on the templates without polluting any project:
 
 ```bash
-cd client-proto
-bunx serve -s .        # -s for SPA mode (all paths serve index.html)
+# run directly from the skill
+cd ~/.claude/skills/agile-proto/templates
+bunx serve -s .
+# opens http://localhost:3000 — navigate via #dashboard, #tasks, #music, etc.
+
+# or in a sandbox
+cp -r ~/.claude/skills/agile-proto/templates /tmp/proto-test
+cd /tmp/proto-test && bunx serve -s .
 ```
 
-## Component wrappers (components/ui.js)
+The `-s` flag (SPA mode) ensures `/` resolves to `index.html`; routing between scenes uses the hash. To test Figma export, you must use `localhost` (the clipboard API requires a secure context).
 
-Import reusable Preact wrappers instead of raw daisyUI classes:
+## Important patterns
 
-```js
-import { Button, Card, CardBody, CardTitle, CardActions,
-         Input, Select, Textarea, Field, Badge, Alert,
-         Avatar, Toggle, Checkbox, Radio, Separator,
-         TabsList, Tab, Skeleton, Tooltip, Icon } from "~/components/ui.js";
+### Hash routing (not wouter)
 
-// Buttons
-html`<${Button} variant="primary" size="sm">Save<//>`
-html`<${Button} variant="outline">Cancel<//>`
-html`<${Button} variant="ghost" size="icon"><${Icon} icon="lucide:x" /><//>`
+`index.js` keeps a `SCENES` array and a `useHashScene()` hook reacting to `window.location.hash`. To add a scene: create a file under `routes/`, import it, and add an entry to `SCENES` with `id`, `Component`, `activeUrl`, optionally `pageLabel`/`breadcrumbs`/`actions`.
 
-// Cards
-html`<${Card}><${CardBody}><${CardTitle}>Title<//><p>Content</p><//><//>`
+### Scene with AppShell
 
-// Forms
-html`<${Field} label="Email" hint="We'll never share your email."><${Input} type="email" /><//>`
-html`<${Select}><option>Option 1</option><//>`
+By default, every scene renders inside `<AppShell>` (sidebar + topbar). For a fullscreen scene with no chrome, mark the entry with `noShell: true`.
 
-// Badges, Alerts, Icons
-html`<${Badge} variant="outline">Status<//>`
-html`<${Alert} variant="info" icon="lucide:info">Message<//>`
-html`<${Icon} icon="lucide:search" size=${16} />`
-```
+### shadcn components — catalog
 
-Variants follow shadcn naming: `default`, `primary`, `secondary`, `destructive`, `outline`, `ghost`, `link`.
+**Before creating any component, check whether it already exists in `components/ui/`.** The 55 below cover the original shadcn (except `direction` — RTL provider — and `form` — needs `react-hook-form`). Always import from the corresponding file.
 
-Full daisyUI reference: https://daisyui.com/components/
+Legend: ⚠️ = visual-only (no runtime interactivity — purely for showing state in a prototype).
 
-## z-proto features
+| Component | Import |
+|---|---|
+| Accordion, AccordionItem | `~/components/ui/accordion.js` |
+| Alert, AlertTitle, AlertDescription | `~/components/ui/alert.js` |
+| AlertDialog, AlertDialogContent, ... + `openAlertDialog`/`closeAlertDialog` | `~/components/ui/alert-dialog.js` |
+| AspectRatio | `~/components/ui/aspect-ratio.js` |
+| Avatar, AvatarFallback | `~/components/ui/avatar.js` |
+| Badge | `~/components/ui/badge.js` |
+| Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator | `~/components/ui/breadcrumb.js` |
+| Button | `~/components/ui/button.js` |
+| ButtonGroup, ButtonGroupText, ButtonGroupSeparator | `~/components/ui/button-group.js` |
+| Calendar ⚠️ | `~/components/ui/calendar.js` |
+| Card, CardHeader, CardTitle, CardDescription, CardAction, CardContent, CardFooter | `~/components/ui/card.js` |
+| Carousel, CarouselContent, CarouselItem, CarouselPrevious ⚠️, CarouselNext ⚠️ | `~/components/ui/carousel.js` |
+| ChartContainer, BarChartPlaceholder ⚠️, LineChartPlaceholder ⚠️ | `~/components/ui/chart.js` |
+| Checkbox | `~/components/ui/checkbox.js` |
+| Collapsible, CollapsibleTrigger, CollapsibleContent | `~/components/ui/collapsible.js` |
+| Combobox | `~/components/ui/combobox.js` |
+| Command ⚠️ (no live filtering), CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandSeparator, CommandShortcut | `~/components/ui/command.js` |
+| ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuLabel, ContextMenuSeparator + `useContextMenu()` | `~/components/ui/context-menu.js` |
+| Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter + `openDialog`/`closeDialog` | `~/components/ui/dialog.js` |
+| Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter + `openDrawer`/`closeDrawer` | `~/components/ui/drawer.js` |
+| DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator | `~/components/ui/dropdown-menu.js` |
+| Empty, EmptyHeader, EmptyMedia, EmptyTitle, EmptyDescription, EmptyContent | `~/components/ui/empty.js` |
+| FieldSet, FieldLegend, FieldGroup, Field, FieldContent, FieldLabel, FieldDescription, FieldError, FieldSeparator | `~/components/ui/field.js` |
+| HoverCard, HoverCardTrigger, HoverCardContent | `~/components/ui/hover-card.js` |
+| Icon | `~/components/ui/icon.js` |
+| Input | `~/components/ui/input.js` |
+| InputGroup, InputGroupAddon, InputGroupInput, InputGroupText | `~/components/ui/input-group.js` |
+| InputOTP, InputOTPSeparator | `~/components/ui/input-otp.js` |
+| ItemGroup, Item, ItemMedia, ItemContent, ItemTitle, ItemDescription, ItemActions, ItemHeader, ItemFooter, ItemSeparator | `~/components/ui/item.js` |
+| Kbd | `~/components/ui/kbd.js` |
+| Label | `~/components/ui/label.js` |
+| MaskInput (alias for `Input` — no real mask; use `pattern` on `Input` directly) | `~/components/ui/mask-input.js` |
+| Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarSeparator, MenubarShortcut | `~/components/ui/menubar.js` |
+| NativeSelect, NativeSelectGroup, NativeSelectItem (aliases for `Select` — same impl) | `~/components/ui/native-select.js` |
+| NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink | `~/components/ui/navigation-menu.js` |
+| Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext, PaginationEllipsis | `~/components/ui/pagination.js` |
+| PopoverTrigger, PopoverContent | `~/components/ui/popover.js` |
+| Progress | `~/components/ui/progress.js` |
+| RadioGroup, RadioGroupItem | `~/components/ui/radio-group.js` |
+| ResizablePanelGroup, ResizablePanel, ResizableHandle | `~/components/ui/resizable.js` |
+| ScrollArea | `~/components/ui/scroll-area.js` |
+| Select, SelectGroup, SelectItem | `~/components/ui/select.js` |
+| Separator | `~/components/ui/separator.js` |
+| Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription, SheetFooter + `openSheet`/`closeSheet` | `~/components/ui/sheet.js` |
+| Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarTrigger ⚠️ (does not collapse — visual only), SidebarInset | `~/components/ui/sidebar.js` |
+| Skeleton | `~/components/ui/skeleton.js` |
+| Slider | `~/components/ui/slider.js` |
+| Toaster, Toast | `~/components/ui/sonner.js` |
+| Spinner | `~/components/ui/spinner.js` |
+| Switch | `~/components/ui/switch.js` |
+| Table, TableHeader, TableBody, TableFooter, TableRow, TableHead, TableCell, TableCaption | `~/components/ui/table.js` |
+| TabsList, TabsTrigger | `~/components/ui/tabs.js` |
+| Textarea | `~/components/ui/textarea.js` |
+| Toggle | `~/components/ui/toggle.js` |
+| ToggleGroup, ToggleGroupItem | `~/components/ui/toggle-group.js` |
+| Tooltip | `~/components/ui/tooltip.js` |
 
-The `<z-proto>` shell provides:
+Variants follow shadcn naming: `default`, `secondary`, `destructive`, `outline`, `ghost`, `link`. Sizes: `default`, `sm`, `lg`, `icon`, `icon-sm`, `icon-lg`.
 
-- **Device presets:** Desktop, iPhone, iPad, Pixel, Galaxy, Surface
-- **Responsive mode:** Manual width/height with drag handles
-- **Zoom:** 50%, 75%, 92%, 100%, 125%
-- **Figma capture:** Add `figma-key="YOUR_KEY"` to `<z-proto>` for Figma export
-- **Scene navigation:** Rendered in `<z-proto-header>` via createPortal
+**Live reference**: the `#components` route in the template renders all 55 with demos navigable from the sidebar. Use it as a smoke check when wiring up a new scene.
 
-### z-proto slots
+### When to create a new component
 
-```html
-<z-proto figma-key="optional-figma-key">
-  <z-proto-header><!-- scene nav portaled here --></z-proto-header>
-  <z-proto-body title="Window Title" width="390" height="844">
-    <div id="app"><!-- app renders here --></div>
-  </z-proto-body>
-</z-proto>
-```
+Only add a new file under `components/ui/` if:
+1. You verified — via the table above or by listing `components/ui/` — that **no equivalent exists**.
+2. The component is genuinely reusable (not a scene).
 
-## Themes
+Recipe: copy the original shadcn `.tsx` (`packages/ui/src/components/ui/<name>.tsx` in the org), port it to `htm/preact` keeping the class strings literal, import `cn` from `./utils.js`, delegate behavior to HTML5 when possible (see "Philosophy" above).
 
-The templates include custom `shadcn` and `shadcn-dark` themes in `index.css`. Switch via `data-theme` on `<html>`:
+### Theme
 
-```html
-<html data-theme="shadcn">       <!-- light, shadcn-like -->
-<html data-theme="shadcn-dark">  <!-- dark, shadcn-like -->
-<html data-theme="light">        <!-- daisyUI default light -->
-```
+Colors are defined as CSS variables in `index.css` (light mode: neutral palette with violet `--primary`). Tailwind v4 maps these variables to utilities via `@theme inline` in `index.html` — so `bg-primary`, `text-muted-foreground`, `border-sidebar-border`, etc. work out of the box.
 
-To toggle at runtime:
+To rebrand: edit `--primary` and `--ring` in `index.css`. For dark mode: duplicate the `:root` block as `[data-theme="dark"]` and set `data-theme` on `<html>`.
 
-```js
-document.documentElement.setAttribute("data-theme", "shadcn-dark");
-```
+### Scroll containment
+
+`index.css` already contains the z-proto override that pins the stage to the viewport and only allows scroll inside each scene. Every scene root must use `flex-1 w-full h-full overflow-y-auto`.
+
+## Figma export
+
+z-proto integrates with Figma's official `capture.js`. No third-party plugin required — Figma desktop natively recognizes the pasted payload.
+
+### How it works
+
+1. Set `figma-key="YOUR_KEY"` on `<z-proto>` in `index.html`. The key is generated the first time you use "Paste from Web" in Figma desktop.
+2. Click the "Figma" button in the z-proto header.
+3. z-proto adds `#figmacapture={key}&figmaselector=body` to the URL and reloads.
+4. Figma's `capture.js` (loaded at runtime) detects the hash, serializes the DOM with styles/assets/fonts, wraps it in a `text/html` payload with `(figh2d)` markers, and writes to the clipboard.
+5. In Figma desktop: `Cmd+V` → pastes as editable frames.
+
+### Prerequisites
+
+- HTTPS or `localhost` (clipboard API requires a secure context).
+- Clipboard permission granted to the browser.
+- Up-to-date Figma desktop (native `(figh2d)` payload reading).
+
+### Known limitation
+
+Figma's `capture.js` is an IIFE that only fires via `#figmacapture` in the URL — so the page reloads before each capture. This is a property of the official script, not of z-proto. Iterating with capture in a loop means accepting one reload per export.
+
+### Selector
+
+Default is `body` (covers the entire rendered scene, including z-proto chrome if visible). To capture only the scene content, change `figmaselector` in the hash to `#app` or another CSS selector.
 
 ## Rules
 
 1. **Zero build tools.** Everything via CDN. No package.json, no bundler, no install step.
-2. **CDN order matters.** Load `themes.css` → `daisyui.css` → `@tailwindcss/browser`. Reversing breaks styles.
-3. **Never use `@plugin` in browser.** `@tailwindcss/browser` does not support plugins. Load daisyUI via `<link>` CSS.
-4. **Use component wrappers.** Import `Button`, `Card`, `Input`, etc. from `~/components/ui.js`. They wrap daisyUI classes with shadcn-like API.
-5. **Icons via `<Icon>`.** `<${Icon} icon="lucide:search" />`. Never import from `lucide-react`.
-6. **Preact + htm.** Use `html` tagged templates, not JSX. Files are `.js`, not `.tsx`.
-7. **wouter routing.** Path-based with `Route` + `Switch` from `wouter-preact`. Serve with `-s` (SPA mode).
-8. **Mock data inline.** Forms pre-filled, lists hardcoded. Data lives in the route file.
-9. **One route per file.** Feature-based: `routes/settings.js`, `routes/inbox/list.js`.
-10. **Scroll containment.** Use `index.css` overrides. Only the content area scrolls.
-11. **Use `shadcn` theme.** Default to `data-theme="shadcn"` for shadcn-like appearance.
-12. **Route roots fill container.** Every route root div must have `flex-1 w-full h-full`.
+2. **Always import components from `~/components/ui/<name>.js`.** The shadcn catalog (55 components) is already implemented — see the "shadcn components — catalog" table. **Never recreate** Button, Dialog, Card, etc. locally. Never import from `lucide-react`, `@radix-ui`, daisyUI. For icons: `<${Icon} icon="lucide:..." />`. To add a component that demonstrably does not exist in the catalog, follow the recipe.
+3. **Preact + htm.** `html` tagged templates, not JSX. `.js` files, not `.tsx`.
+4. **Hash routing.** Scenes registered in `SCENES` in `index.js`. Each scene lives in `routes/*.js`.
+5. **AppShell by default.** Every scene renders inside `<AppShell>` (sidebar + topbar) — except when `noShell: true`.
+6. **Inline mock data.** Forms pre-filled, lists hardcoded. No fetching.
+7. **One scene per file.** Feature-based: `routes/inbox/list.js`, etc.
+8. **Scroll containment.** Every scene root needs `flex-1 w-full h-full overflow-y-auto`.
+9. **Colors via shadcn variables.** Use `bg-primary`, `text-muted-foreground`, `border-sidebar-border`. Don't use raw colors (`bg-violet-500`).
+10. **For Figma export.** Set `figma-key` on `<z-proto>`. The reload is part of the official flow.
 
 ## Discovery
 
 Before creating a proto:
 
-1. Check if `client-proto/` already exists in the project.
-2. If it exists, read `client-proto/index.html` and `client-proto/index.js` for context.
+1. Check whether `client-proto/` already exists in the project.
+2. If it does, read `client-proto/index.html`, `index.js`, and `components/app-shell.js` for context.
 3. Read `.agents/rules/` for project-specific conventions.
-4. If no proto exists, copy templates from `skills/agile-proto/templates/`.
+4. If it doesn't exist, copy templates from the skill.
+
+Before implementing a scene:
+
+1. Consult the "shadcn components — catalog" table above — the entire shadcn is ready in `components/ui/`.
+2. For each UI element of the scene (button, modal, sidebar, table, etc.), find the corresponding component.
+3. Only write custom markup for elements that aren't standard shadcn (scene-specific layout/structure).
 
 ## Checklist
 
-- [ ] `client-proto/` is self-contained (no external deps besides CDN)
-- [ ] CDN order: themes.css → daisyui.css → @tailwindcss/browser
-- [ ] `data-theme="shadcn"` set on `<html>`
-- [ ] Static server starts with SPA mode (`bunx serve -s .`)
-- [ ] Component wrappers imported from `~/components/ui.js`
-- [ ] daisyUI + Tailwind utilities render correctly
-- [ ] z-proto shell shows toolbar with presets and zoom
-- [ ] Icons render via `<Icon>` component (wraps `<iconify-icon>`)
-- [ ] All forms are pre-filled with mock data
-- [ ] wouter routing works (path-based, not hash)
-- [ ] Route root divs have `flex-1 w-full h-full`
-- [ ] No `lucide-react`, no `react`, no `package.json`, no `@plugin`
+- [ ] `client-proto/` is self-contained (no deps beyond CDN)
+- [ ] `index.html` loads Tailwind v4 and iconify-icon from CDN, with `@theme inline` mapping all shadcn variables
+- [ ] `index.css` contains the z-proto scroll override and the `:root` block with shadcn variables
+- [ ] `components/ui/` covers 55 shadcn components (one file each) with literal class strings and `cn` helper in `utils.js`. Behavior via native HTML5/CSS (`<dialog>`, `<details>`, popover API, scroll-snap, etc.)
+- [ ] `routes/components.js` lists every component in a navigable sidebar with short demos
+- [ ] **No scene recreates a component that already exists in `components/ui/`** (Button, Dialog, Card, Table, etc. are imported, not copy-pasted)
+- [ ] `components/app-shell.js` provides sidebar + topbar
+- [ ] Hash routing works and the scene picker appears in `<z-proto-header>`
+- [ ] Every scene root has `flex-1 w-full h-full overflow-y-auto`
+- [ ] Icons via `<Icon icon="lucide:..." />` (not `lucide-react`)
+- [ ] Forms pre-filled with mock data
+- [ ] (Optional) `figma-key` set on `<z-proto>` when Figma export is desired; Cmd+V in Figma desktop pastes as editable frames

@@ -1,85 +1,165 @@
 import { html, render } from "htm/preact";
 import { Fragment } from "preact";
 import { createPortal } from "preact/compat";
-import { Route, Switch, useLocation, Link } from "wouter-preact";
-
-// Import scenes
-import { HomePage } from "./routes/home.js";
-import { DashboardPage } from "./routes/dashboard.js";
-import { MusicPage } from "./routes/music.js";
-import { TasksPage } from "./routes/tasks.js";
-import { SettingsPage } from "./routes/settings.js";
+import { useEffect, useState } from "preact/hooks";
+import { AppShell } from "./components/app-shell.js";
+import { Button } from "./components/ui/button.js";
+import { Icon } from "./components/ui/icon.js";
 import { ComponentsPage } from "./routes/components.js";
+import { DashboardPage } from "./routes/dashboard.js";
+import { HomePage } from "./routes/home.js";
+import { MusicPage } from "./routes/music.js";
+import { SettingsPage } from "./routes/settings.js";
+import { TasksPage } from "./routes/tasks.js";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Scene definitions
+// Scenes — one per file in routes/. Each scene defines which sidebar item is
+// active (activeUrl), and optionally pageLabel/breadcrumbs/actions.
 // ─────────────────────────────────────────────────────────────────────────────
+
+function DashboardActions() {
+  return html`
+    <${Button} size="sm">
+      <${Icon} icon="lucide:plus" size=${14} />
+      New item
+    <//>
+  `;
+}
+
 const SCENES = [
-  { path: "/", label: "Dashboard", Component: DashboardPage },
-  { path: "/music", label: "Music App", Component: MusicPage },
-  { path: "/tasks", label: "Tasks", Component: TasksPage },
-  { path: "/settings", label: "Settings", Component: SettingsPage },
-  { path: "/components", label: "Components", Component: ComponentsPage },
-  { path: "/home", label: "Home Example", Component: HomePage },
+  {
+    id: "dashboard",
+    label: "Dashboard",
+    Component: DashboardPage,
+    activeUrl: "#dashboard",
+    pageLabel: "Dashboard",
+    actions: DashboardActions(),
+  },
+  {
+    id: "home",
+    label: "Home",
+    Component: HomePage,
+    activeUrl: "#home",
+    pageLabel: "Home",
+  },
+  {
+    id: "tasks",
+    label: "Tasks (data table demo)",
+    Component: TasksPage,
+    activeUrl: "#tasks",
+    pageLabel: "Tasks",
+  },
+  {
+    id: "music",
+    label: "Music (rich layout demo)",
+    Component: MusicPage,
+    activeUrl: "#music",
+    pageLabel: "Music",
+  },
+  {
+    id: "settings",
+    label: "Settings",
+    Component: SettingsPage,
+    activeUrl: "#settings",
+    pageLabel: "Settings",
+  },
+  {
+    id: "components",
+    label: "Components reference",
+    Component: ComponentsPage,
+    activeUrl: "#components",
+    pageLabel: "Components",
+  },
 ];
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Scene navigator (renders inside z-proto-header)
-// ─────────────────────────────────────────────────────────────────────────────
 const headerEl = document.querySelector("z-proto-header");
 
-function SceneNav() {
-  const [location, setLocation] = useLocation();
-  const idx = SCENES.findIndex((s) => s.path === location);
-  const currentIdx = idx >= 0 ? idx : 0;
-  const prev = () => setLocation(SCENES[(currentIdx - 1 + SCENES.length) % SCENES.length].path);
-  const next = () => setLocation(SCENES[(currentIdx + 1) % SCENES.length].path);
-  const current = SCENES[currentIdx];
+function getSceneFromHash() {
+  const hash = window.location.hash.replace(/^#/, "");
+  return SCENES.find((s) => s.id === hash) || SCENES[0];
+}
+
+function useHashScene() {
+  const [scene, setScene] = useState(getSceneFromHash);
+
+  useEffect(() => {
+    function onHashChange() {
+      setScene(getSceneFromHash());
+    }
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  function go(id) {
+    window.location.hash = id;
+  }
+
+  return [scene, go];
+}
+
+function SceneNav({ scene, go }) {
+  const idx = SCENES.findIndex((s) => s.id === scene.id);
+  const prev = () => go(SCENES[(idx - 1 + SCENES.length) % SCENES.length].id);
+  const next = () => go(SCENES[(idx + 1) % SCENES.length].id);
 
   return html`
     <div class="flex items-center gap-1">
       <button
         type="button"
         onClick=${prev}
-        class="px-1.5 py-0.5 rounded text-xs opacity-50 hover:opacity-100"
+        class="px-1.5 py-0.5 rounded text-xs text-muted-foreground hover:text-foreground"
+        title="Previous scene"
       >←</button>
       <select
-        value=${current.path}
-        onChange=${(e) => setLocation(e.target.value)}
+        value=${scene.id}
+        onChange=${(e) => go(e.target.value)}
         class="zp-select"
       >
-        ${SCENES.map((s) => html`<option value=${s.path}>${s.label}</option>`)}
+        ${SCENES.map((s) => html`<option value=${s.id}>${s.label}</option>`)}
       </select>
       <button
         type="button"
         onClick=${next}
-        class="px-1.5 py-0.5 rounded text-xs opacity-50 hover:opacity-100"
+        class="px-1.5 py-0.5 rounded text-xs text-muted-foreground hover:text-foreground"
+        title="Next scene"
       >→</button>
     </div>
   `;
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// App
-// ─────────────────────────────────────────────────────────────────────────────
 function App() {
+  const [scene, go] = useHashScene();
+  const Scene = scene.Component;
+
+  const body = scene.noShell
+    ? html`<${Scene} />`
+    : html`
+        <${AppShell}
+          activeUrl=${scene.activeUrl}
+          pageLabel=${scene.pageLabel}
+          title=${scene.title}
+          description=${scene.description}
+          breadcrumbs=${scene.breadcrumbs}
+          actions=${scene.actions}
+        >
+          <${Scene} />
+        <//>
+      `;
+
   return html`
     <${Fragment}>
-      ${headerEl && createPortal(html`<${SceneNav} />`, headerEl)}
-      <div class="flex flex-1 w-full min-h-0 min-w-0 overflow-hidden">
-        <${Switch}>
-          ${SCENES.map((s) => html`
-            <${Route} key=${s.path} path=${s.path} component=${s.Component} />
-          `)}
-        <//>
-      </div>
+      ${headerEl && createPortal(html`<${SceneNav} scene=${scene} go=${go} />`, headerEl)}
+      ${body}
     <//>
   `;
 }
 
 render(html`<${App} />`, document.getElementById("app"));
 
-// Force z-proto to recalculate window dimensions after first render.
+// Force z-proto to recompute window dimensions after first render.
+// Without this, on first render in desktop preset the vcRect is measured
+// before flex layout settles (Preact hasn't mounted yet) and content gets
+// clipped at the bottom until the user manually switches preset.
 requestAnimationFrame(() => {
   requestAnimationFrame(() => {
     const presetSelect = document.querySelector("z-proto [data-ref='preset']");

@@ -1,127 +1,132 @@
+// Demo inspired by https://ui.shadcn.com/examples/music
+// Showcases: album cards, playlists sidebar, tabs (visual), tooltip.
+
 import { html } from "htm/preact";
-import { useState } from "preact/hooks";
-import { Button, TabsList, Tab, Icon } from "~/components/ui.js";
-
-const PLAYLISTS = [
-  { icon: "lucide:play-circle", label: "Listen Now", active: true },
-  { icon: "lucide:layout-grid", label: "Browse" },
-  { icon: "lucide:radio", label: "Radio" },
-];
-
-const LIBRARY = [
-  { icon: "lucide:list-music", label: "Playlists" },
-  { icon: "lucide:music-2", label: "Songs" },
-  { icon: "lucide:user", label: "Made for You" },
-  { icon: "lucide:mic-2", label: "Artists" },
-  { icon: "lucide:disc-3", label: "Albums" },
-];
-
-const MY_PLAYLISTS = [
-  "Recently Added", "Recently Played", "Top Songs", "Top Albums",
-  "Top Artists", "Logic Discography", "Bedtime Beats", "Feeling Happy",
-];
+import { Button } from "~/components/ui/button.js";
+import { Icon } from "~/components/ui/icon.js";
+import { Separator } from "~/components/ui/separator.js";
+import { TabsList, TabsTrigger } from "~/components/ui/tabs.js";
+import { Tooltip } from "~/components/ui/tooltip.js";
 
 const ALBUMS = [
-  { title: "React Rendezvous", artist: "Ethan Byte", img: "bg-gradient-to-br from-rose-400 to-orange-300" },
-  { title: "Async Awakenings", artist: "Nina Netcode", img: "bg-gradient-to-br from-blue-400 to-cyan-300" },
-  { title: "The Art of Reusability", artist: "Lena Logic", img: "bg-gradient-to-br from-green-400 to-emerald-300" },
-  { title: "Stateful Symphony", artist: "Beth Binary", img: "bg-gradient-to-br from-purple-400 to-pink-300" },
+  { title: "React Rendezvous", artist: "Ethan Byte", color: "from-red-500 to-orange-500" },
+  { title: "Async Awakenings", artist: "Nina Netcode", color: "from-purple-500 to-pink-500" },
+  { title: "The Art of Reusability", artist: "Lena Logic", color: "from-blue-500 to-cyan-500" },
+  { title: "Stateful Symphony", artist: "Beth Binary", color: "from-emerald-500 to-teal-500" },
+  { title: "Thinking Components", artist: "Lena Logic", color: "from-amber-500 to-yellow-500" },
+  { title: "Functional Fury", artist: "Beth Binary", color: "from-fuchsia-500 to-rose-500" },
 ];
 
-const MADE_FOR_YOU = [
-  { title: "Thinking Components", artist: "Lena Logic", img: "bg-gradient-to-br from-amber-400 to-yellow-300" },
-  { title: "Functional Fury", artist: "Beth Binary", img: "bg-gradient-to-br from-red-400 to-rose-300" },
-  { title: "React Rendezvous", artist: "Ethan Byte", img: "bg-gradient-to-br from-indigo-400 to-blue-300" },
-  { title: "Stateful Symphony", artist: "Beth Binary", img: "bg-gradient-to-br from-teal-400 to-green-300" },
-  { title: "Async Awakenings", artist: "Nina Netcode", img: "bg-gradient-to-br from-fuchsia-400 to-purple-300" },
-  { title: "The Art of Reusability", artist: "Lena Logic", img: "bg-gradient-to-br from-sky-400 to-cyan-300" },
-];
-
-function NavItem({ icon, label, active }) {
+function AlbumCard({ album }) {
   return html`
-    <a class="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium ${active ? 'bg-base-200 text-base-content' : 'text-base-content/60 hover:bg-base-200 hover:text-base-content'}" href="#">
-      <${Icon} icon=${icon} />
-      ${label}
-    </a>
-  `;
-}
-
-function AlbumCard({ title, artist, img, wide }) {
-  return html`
-    <div class="space-y-3 ${wide ? 'w-[150px]' : 'w-[250px]'} shrink-0">
-      <div class="${img} ${wide ? 'aspect-[16/9]' : 'aspect-square'} rounded-md w-full overflow-hidden"></div>
+    <div class="space-y-3">
+      <${Tooltip} content="Play preview" side="top">
+        <div
+          class=${`relative aspect-square w-full rounded-md overflow-hidden bg-gradient-to-br ${album.color} shadow-md cursor-pointer group`}
+        >
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+            <${Icon} icon="lucide:play" size=${32} className="text-white opacity-0 group-hover:opacity-100" />
+          </div>
+        </div>
+      <//>
       <div>
-        <h4 class="text-sm font-medium leading-none">${title}</h4>
-        <p class="text-xs text-base-content/60 mt-1">${artist}</p>
+        <p class="text-sm font-medium leading-none truncate">${album.title}</p>
+        <p class="text-xs text-muted-foreground mt-1 truncate">${album.artist}</p>
       </div>
     </div>
   `;
 }
 
-export function MusicPage() {
-  const [tab, setTab] = useState("music");
+function PlaylistsSidebar() {
+  const playlists = [
+    "Recently Added", "Recently Played", "Top Songs", "Top Albums",
+    "Top Artists", "Logic Discography", "Bedtime Beats", "Feeling Happy",
+    "I miss Y2K Pop", "Runtober", "Mellow Days", "Eternal Sunshine",
+  ];
+  return html`
+    <aside class="w-[200px] shrink-0 border-r p-4 space-y-4 overflow-y-auto scrollbar-hidden">
+      <div>
+        <h3 class="text-xs font-semibold uppercase text-muted-foreground tracking-wide px-2 mb-2">Discover</h3>
+        <nav class="space-y-1 text-sm">
+          <a class="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-accent">
+            <${Icon} icon="lucide:list-music" />Listen Now
+          </a>
+          <a class="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-accent bg-accent">
+            <${Icon} icon="lucide:layout-grid" />Browse
+          </a>
+          <a class="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-accent">
+            <${Icon} icon="lucide:radio" />Radio
+          </a>
+        </nav>
+      </div>
+      <${Separator} />
+      <div>
+        <h3 class="text-xs font-semibold uppercase text-muted-foreground tracking-wide px-2 mb-2">Library</h3>
+        <nav class="space-y-1 text-sm">
+          <a class="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-accent">
+            <${Icon} icon="lucide:library" />Playlists
+          </a>
+          <a class="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-accent">
+            <${Icon} icon="lucide:music" />Songs
+          </a>
+          <a class="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-accent">
+            <${Icon} icon="lucide:user" />Artists
+          </a>
+        </nav>
+      </div>
+      <${Separator} />
+      <div>
+        <h3 class="text-xs font-semibold uppercase text-muted-foreground tracking-wide px-2 mb-2">Playlists</h3>
+        <nav class="space-y-0.5 text-sm">
+          ${playlists.map(
+            (name) => html`
+              <a key=${name} class="flex items-center gap-2 px-2 py-1 rounded-md hover:bg-accent text-muted-foreground hover:text-foreground">
+                <${Icon} icon="lucide:list-music" size=${14} />${name}
+              </a>
+            `,
+          )}
+        </nav>
+      </div>
+    </aside>
+  `;
+}
 
+export function MusicPage() {
   return html`
     <div class="flex flex-1 w-full h-full overflow-hidden">
-      <!-- Sidebar -->
-      <div class="w-[220px] border-r border-base-300 flex flex-col bg-base-100 shrink-0">
-        <div class="p-4 pb-2">
-          <h2 class="text-lg font-semibold tracking-tight px-3">Discover</h2>
-        </div>
-        <div class="px-4 space-y-1">
-          ${PLAYLISTS.map(p => html`<${NavItem} ...${p} />`)}
-        </div>
-        <div class="px-4 mt-6">
-          <h2 class="text-lg font-semibold tracking-tight px-3 mb-2">Library</h2>
-          <div class="space-y-1">
-            ${LIBRARY.map(l => html`<${NavItem} ...${l} />`)}
-          </div>
-        </div>
-        <div class="px-4 mt-6 flex-1 min-h-0 overflow-hidden">
-          <h2 class="text-lg font-semibold tracking-tight px-3 mb-2">Playlists</h2>
-          <div class="space-y-1 overflow-y-auto h-full pb-4 scrollbar-hidden">
-            ${MY_PLAYLISTS.map(name => html`
-              <a class="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-base-content/60 hover:bg-base-200 hover:text-base-content" href="#">
-                <${Icon} icon="lucide:list-music" size=${14} />
-                ${name}
-              </a>
-            `)}
-          </div>
-        </div>
-      </div>
+      <${PlaylistsSidebar} />
 
-      <!-- Main content -->
-      <div class="flex-1 flex flex-col overflow-y-auto min-w-0">
-        <div class="p-6 pb-0">
-          <div class="flex items-center justify-between">
-            <${TabsList}>
-              <${Tab} active=${tab === "music"} onClick=${() => setTab("music")}>Music<//>
-              <${Tab} active=${tab === "podcasts"} onClick=${() => setTab("podcasts")}>Podcasts<//>
-              <${Tab} active=${tab === "live"} onClick=${() => setTab("live")}>Live<//>
-            <//>
-            <${Button} size="sm">
-              <${Icon} icon="lucide:plus-circle" size=${14} />
-              Add music
-            <//>
-          </div>
+      <div class="flex-1 overflow-y-auto p-6 space-y-6">
+        <div class="flex items-center justify-between">
+          <${TabsList}>
+            <${TabsTrigger} active=${true}>Music<//>
+            <${TabsTrigger}>Podcasts<//>
+            <${TabsTrigger}>Live<//>
+          <//>
+          <${Button} size="sm">
+            <${Icon} icon="lucide:plus-circle" size=${14} />
+            Add music
+          <//>
         </div>
 
-        <div class="p-6 space-y-8">
-          <div>
-            <h2 class="text-2xl font-semibold tracking-tight">Listen Now</h2>
-            <p class="text-sm text-base-content/60 mt-1">Top picks for you. Updated daily.</p>
-            <div class="flex gap-4 mt-4 overflow-x-auto pb-2 scrollbar-hidden">
-              ${ALBUMS.map(a => html`<${AlbumCard} ...${a} />`)}
-            </div>
-          </div>
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight">Listen Now</h2>
+          <p class="text-muted-foreground text-sm mt-1">Top picks for you. Updated daily.</p>
+        </div>
 
-          <div>
-            <h2 class="text-2xl font-semibold tracking-tight">Made for You</h2>
-            <p class="text-sm text-base-content/60 mt-1">Your personal playlists. Updated daily.</p>
-            <div class="flex gap-4 mt-4 overflow-x-auto pb-2 scrollbar-hidden">
-              ${MADE_FOR_YOU.map(a => html`<${AlbumCard} ...${a} wide />`)}
-            </div>
-          </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+          ${ALBUMS.map((album) => html`<${AlbumCard} key=${album.title} album=${album} />`)}
+        </div>
+
+        <${Separator} />
+
+        <div>
+          <h2 class="text-xl font-semibold tracking-tight">Made for You</h2>
+          <p class="text-muted-foreground text-sm mt-1">Your personal playlists. Updated daily.</p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          ${ALBUMS.slice(0, 4).map((album) => html`<${AlbumCard} key=${album.title} album=${album} />`)}
         </div>
       </div>
     </div>
