@@ -28,6 +28,12 @@
   max-height: 100% !important;
   overflow: hidden !important;
 }
+/* iconify-icon is inline by default — force inline-flex so it participates   */
+/* in flex gap and aligns properly inside buttons and other flex containers.  */
+iconify-icon {
+  display: inline-flex !important;
+  flex-shrink: 0;
+}
 html, body {
   height: 100%;
   overflow: hidden;
@@ -68,7 +74,7 @@ input[data-slot="checkbox"]:checked {
   --popover-foreground: oklch(0.14 0 0);
   --primary: oklch(0.52 0.22 280);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.85 0.16 95);
+  --secondary: oklch(0.965 0.001 286.375);
   --secondary-foreground: oklch(0.14 0 0);
   --muted: oklch(0.967 0.001 286.375);
   --muted-foreground: oklch(0.552 0.016 285.938);
