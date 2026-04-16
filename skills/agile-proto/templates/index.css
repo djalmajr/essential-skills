@@ -28,6 +28,81 @@
   max-height: 100% !important;
   overflow: hidden !important;
 }
+/* ── Button component (data-slot="button") ──────────────────────────────── */
+/* All styles here so :hover works — inline styles would block pseudo-class. */
+[data-slot="button"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.15s;
+  height: 36px;
+  padding: 8px 16px;
+}
+[data-slot="button"]:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+[data-slot="button"][data-size="sm"]      { height: 32px; padding: 6px 12px; font-size: 13px; }
+[data-slot="button"][data-size="lg"]      { height: 40px; padding: 8px 24px; }
+[data-slot="button"][data-size="icon"]    { height: 36px; width: 36px; padding: 0; }
+[data-slot="button"][data-size="icon-sm"] { height: 32px; width: 32px; padding: 0; }
+[data-slot="button"][data-size="icon-lg"] { height: 40px; width: 40px; padding: 0; }
+
+[data-slot="button"][data-variant="default"] {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+[data-slot="button"][data-variant="default"]:hover { opacity: 0.9; }
+
+[data-slot="button"][data-variant="destructive"] {
+  background: var(--destructive);
+  color: white;
+}
+[data-slot="button"][data-variant="destructive"]:hover { opacity: 0.9; }
+
+[data-slot="button"][data-variant="outline"] {
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+[data-slot="button"][data-variant="outline"]:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+[data-slot="button"][data-variant="secondary"] {
+  background: var(--secondary);
+  color: var(--secondary-foreground);
+}
+[data-slot="button"][data-variant="secondary"]:hover { opacity: 0.8; }
+
+[data-slot="button"][data-variant="ghost"] {
+  background: transparent;
+  color: inherit;
+}
+[data-slot="button"][data-variant="ghost"]:hover {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+[data-slot="button"][data-variant="link"] {
+  background: transparent;
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+[data-slot="button"][data-variant="link"]:hover { opacity: 0.8; }
+
 /* iconify-icon is inline by default — force inline-flex so it participates   */
 /* in flex gap and aligns properly inside buttons and other flex containers.  */
 iconify-icon {
