@@ -40,7 +40,7 @@ Write the artifact in the user's language. If the user communicates in Portugues
 Consult:
 - Epic with pending stories
 - Retro with pending improvement actions
-- Backlog items that have been validated via `/refinement`
+- Backlog items that have been validated via `/agile-refinement`
 
 ### 3. Select items
 
@@ -58,7 +58,7 @@ Each item must have:
 - Files/areas mapped
 - Verifiable acceptance criteria
 
-If an item doesn't have DoR, it doesn't enter the sprint — needs decomposition via `/epic` or validation via `/refinement`.
+If an item doesn't have DoR, it doesn't enter the sprint — needs decomposition via `/agile-epic` or validation via `/agile-refinement`.
 
 ### 5. Order execution
 
@@ -87,9 +87,9 @@ When 2+ developers are available:
 
 ## Chaining
 
-- To detail the first item: suggest `/task` for the first story in the backlog
-- For items that need decomposition: suggest `/epic`
-- For items that need validation: suggest `/refinement`
+- To detail the first item: suggest `/agile-task` for the first story in the backlog
+- For items that need decomposition: suggest `/agile-epic`
+- For items that need validation: suggest `/agile-refinement`
 
 ## Reference template
 
@@ -107,12 +107,12 @@ Use `~/.agents/templates/planning.md` as base.
 
 ```mermaid
 flowchart LR
-    A["/retro"] --> B["/planning"]
-    B --> C["/task"]
+    A["/agile-retro"] --> B["/agile-planning"]
+    B --> C["/agile-task"]
     C --> D[execution]
-    D --> E["/status"]
-    E --> F["/review"]
-    F --> G["/retro"]
+    D --> E["/agile-status"]
+    E --> F["/agile-review"]
+    F --> G["/agile-retro"]
 ```
 
-This skill starts the sprint cycle. For decomposing work, use `/epic`. For execution plans, use `/task`. For tracking during the sprint, use `/status`.
+This skill starts the sprint cycle. For decomposing work, use `/agile-epic`. For execution plans, use `/agile-task`. For tracking during the sprint, use `/agile-status`.

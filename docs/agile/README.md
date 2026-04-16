@@ -6,20 +6,20 @@ Skills for agile delivery management powered by AI agents.
 
 ```mermaid
 flowchart TD
-    A["/intake"] --> B["/roadmap"]
-    B --> C["/epic"]
-    C --> D["/task"]
+    A["/agile-intake"] --> B["/agile-roadmap"]
+    B --> C["/agile-epic"]
+    C --> D["/agile-task"]
     D --> E[execution]
-    E --> F["/status<br>(checkpoint)"]
-    F --> G["/status<br>(consolidation)"]
-    G --> H["/status<br>(closure)"]
-    H --> I["/metrics"]
-    I --> J["/review"]
-    J --> K["/retro"]
-    K --> L["/planning"]
+    E --> F["/agile-status<br>(checkpoint)"]
+    F --> G["/agile-status<br>(consolidation)"]
+    G --> H["/agile-status<br>(closure)"]
+    H --> I["/agile-metrics"]
+    I --> J["/agile-review"]
+    J --> K["/agile-retro"]
+    K --> L["/agile-planning"]
     L --> D
 
-    M["/refinement"] -.-> C
+    M["/agile-refinement"] -.-> C
     M -.-> E
 
     style M fill:#f9f,stroke:#333,stroke-width:2px

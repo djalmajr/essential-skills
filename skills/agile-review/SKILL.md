@@ -77,7 +77,7 @@ Use `~/.agents/templates/review.md` as base for the artifact.
 
 ## Rules
 
-- The review shows what *was delivered*, not what *is in progress*. For status of work in progress, use `/status`.
+- The review shows what *was delivered*, not what *is in progress*. For status of work in progress, use `/agile-status`.
 - Be honest about what was not delivered and why. Hiding cut items breaks trust.
 - The demo must be verifiable — stakeholders must be able to confirm the result is real.
 - Collected feedback must become backlog item or action, never just meeting notes.
@@ -87,13 +87,13 @@ Use `~/.agents/templates/review.md` as base for the artifact.
 
 ```mermaid
 flowchart LR
-    A["/planning"] --> B[execution]
-    B --> C["/status"]
-    C --> D["/metrics"]
-    D --> E["/review"]
-    E --> F["/retro"]
+    A["/agile-planning"] --> B[execution]
+    B --> C["/agile-status"]
+    C --> D["/agile-metrics"]
+    D --> E["/agile-review"]
+    E --> F["/agile-retro"]
 ```
 
 In the stitched flow, the sprint review connects execution to feedback: planning -> execution -> status -> metrics -> review -> retro.
 
-For status tracking during the sprint, use `/status`. For quantitative data, use `/metrics`.
+For status tracking during the sprint, use `/agile-status`. For quantitative data, use `/agile-metrics`.

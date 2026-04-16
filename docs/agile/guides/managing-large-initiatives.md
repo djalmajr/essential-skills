@@ -23,7 +23,7 @@ The intake structures:
 - **Constraints:** No downtime during migration, PCI compliance required, Stripe SAML+OIDC only
 - **Open questions:** Which Stripe plan tier? Audit requirements? Migration path for existing customers?
 
-**Recommendation:** "This is a large, strategic problem -> `/roadmap` to plan the quarters, then `/epic` to decompose it."
+**Recommendation:** "This is a large, strategic problem -> `/agile-roadmap` to plan the quarters, then `/agile-epic` to decompose it."
 
 Save to: `planning/payment-migration/intake.md`
 
@@ -85,7 +85,7 @@ Save to: `planning/payment-migration/epics/01-payment-overhaul/`
 
 ### Step 4: Execute stories
 
-For each story in the epic, create execution plans with `/task`:
+For each story in the epic, create execution plans with `/agile-task`:
 
 ```
 /task planning/payment-migration/epics/01-payment-overhaul/02-webhook-handler.md
@@ -157,7 +157,7 @@ Decomposed by user value slice:
 
 **Critical path:** Stories 1+2 first (quick wins, no deps), then Story 3, then Story 4.
 
-With 4 stories, 2 of which are trivial, Stories 1 and 2 go directly to `/task`. Stories 3 and 4 have richer acceptance criteria in their story files.
+With 4 stories, 2 of which are trivial, Stories 1 and 2 go directly to `/agile-task`. Stories 3 and 4 have richer acceptance criteria in their story files.
 
 **Key insight:** Not every initiative needs every artifact. Use proportional tooling.
 

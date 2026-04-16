@@ -24,7 +24,7 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 - Make the problem or opportunity explicit before planning
 - Identify constraints, premises, and open questions
-- Define the next step in the flow: `/roadmap`, `/epic`, or `/task`
+- Define the next step in the flow: `/agile-roadmap`, `/agile-epic`, or `/agile-task`
 - Avoid work starting without clarity about what is being solved
 
 ## When to use
@@ -36,9 +36,9 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 ## When NOT to use
 
-- The problem is already clear and scope is defined — use `/epic` or `/task` directly
-- The work has already been decomposed — go to `/epic` or `/task`
-- It's a trivial fix — use `/task` directly
+- The problem is already clear and scope is defined — use `/agile-epic` or `/agile-task` directly
+- The work has already been decomposed — go to `/agile-epic` or `/agile-task`
+- It's a trivial fix — use `/agile-task` directly
 
 ## Intake process
 
@@ -66,14 +66,14 @@ Fill in the template with collected information:
 
 Based on size and clarity:
 
-- Large and strategic problem → `/roadmap` → then `/epic`
-- Large but operational problem with broad scope → `/epic`
-- Medium problem with reasonable scope → `/epic` (to decompose into stories)
-- Small and clear problem → `/task`
+- Large and strategic problem → `/agile-roadmap` → then `/agile-epic`
+- Large but operational problem with broad scope → `/agile-epic`
+- Medium problem with reasonable scope → `/agile-epic` (to decompose into stories)
+- Small and clear problem → `/agile-task`
 
 Register the recommendation in the intake and confirm with the user.
 
-> **Flow rule:** For large or complex items, decomposition via `/epic` is mandatory before execution. Only small, localized items can skip directly to `/task`.
+> **Flow rule:** For large or complex items, decomposition via `/agile-epic` is mandatory before execution. Only small, localized items can skip directly to `/agile-task`.
 
 ### 4. Save the intake
 
@@ -85,9 +85,9 @@ Register the recommendation in the intake and confirm with the user.
 
 After user confirmation, offer to generate the next artifact following the official flow:
 
-- Large/strategic → "Do you want me to create the `/roadmap`?"
-- Large/operational → "Do you want me to run `/epic` to decompose into stories?"
-- Small/clear → "Do you want me to create the `/task`?"
+- Large/strategic → "Do you want me to create the `/agile-roadmap`?"
+- Large/operational → "Do you want me to run `/agile-epic` to decompose into stories?"
+- Small/clear → "Do you want me to create the `/agile-task`?"
 
 ### 6. Validate
 
@@ -101,7 +101,7 @@ Before closing the intake, confirm:
 
 - Never jump straight to implementation from an intake. The intake generates the next artifact, not code.
 - If the user insists on starting without clarity, register the risks and ask if they want to proceed anyway.
-- The intake should be short — 10 to 15 minutes of conversation maximum. If it takes longer, the problem probably needs `/epic` decomposition.
+- The intake should be short — 10 to 15 minutes of conversation maximum. If it takes longer, the problem probably needs `/agile-epic` decomposition.
 - Keep the tone of discovery, not detailed planning.
 
 ## Template
@@ -112,10 +112,10 @@ Use `~/.agents/templates/intake.md` as base for the artifact.
 
 ```mermaid
 flowchart LR
-    A["/intake"] --> B{next step}
-    B --> C["/roadmap"]
-    B --> D["/epic"]
-    B --> E["/task"]
+    A["/agile-intake"] --> B{next step}
+    B --> C["/agile-roadmap"]
+    B --> D["/agile-epic"]
+    B --> E["/agile-task"]
 ```
 
-This skill is the entry point of the flow. It captures the problem and directs to the correct skill. For guidance on which skill to use, you can also use `/router`.
+This skill is the entry point of the flow. It captures the problem and directs to the correct skill. For guidance on which skill to use, you can also use `/agile-router`.

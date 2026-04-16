@@ -34,12 +34,12 @@ Use this skill to guide new team members through the agile + AI flow, in a pract
 1. Present the complete flow:
    ```mermaid
    flowchart LR
-       A["/intake"] --> B["/roadmap"]
-       B --> C["/epic"]
-       C --> D["/task"]
+       A["/agile-intake"] --> B["/agile-roadmap"]
+       B --> C["/agile-epic"]
+       C --> D["/agile-task"]
        D --> E[execution]
-       E --> F["/status"]
-       F --> G["/retro"]
+       E --> F["/agile-status"]
+       F --> G["/agile-retro"]
    ```
 
 2. Explain the role division:
@@ -51,18 +51,18 @@ Use this skill to guide new team members through the agile + AI flow, in a pract
    - Scope assessment (small to large)
 
 4. Show the available skills and how to invoke each one:
-   - `/intake` — capture problems
-   - `/roadmap` — strategic direction
-   - `/epic` — decompose and structure initiatives
-   - `/task` — execution plans
-   - `/refinement` — validate artifacts and review code
-   - `/status` — track progress (checkpoint, consolidation, closure)
-   - `/planning` — sprint planning
-   - `/review` — sprint review and demo
-   - `/metrics` — sprint metrics
-   - `/retro` — retrospective
-   - `/proto` — interactive prototypes
-   - `/router` — guidance on which skill to use
+   - `/agile-intake` — capture problems
+   - `/agile-roadmap` — strategic direction
+   - `/agile-epic` — decompose and structure initiatives
+   - `/agile-task` — execution plans
+   - `/agile-refinement` — validate artifacts and review code
+   - `/agile-status` — track progress (checkpoint, consolidation, closure)
+   - `/agile-planning` — sprint planning
+   - `/agile-review` — sprint review and demo
+   - `/agile-metrics` — sprint metrics
+   - `/agile-retro` — retrospective
+   - `/agile-proto` — interactive prototypes
+   - `/agile-router` — guidance on which skill to use
 
 ### Day 2: Practical exercise — intake and planning
 
@@ -71,9 +71,9 @@ Use this skill to guide new team members through the agile + AI flow, in a pract
 Suggested exercise:
 
 1. The new member chooses a small, real problem (bug, improvement, task)
-2. Uses the `/intake` skill to structure the problem
+2. Uses the `/agile-intake` skill to structure the problem
 3. Decides the correct artifact with the decision tree
-4. Uses `/router` to validate the choice, then creates the plan with `/task` or `/epic`
+4. Uses `/agile-router` to validate the choice, then creates the plan with `/agile-task` or `/agile-epic`
 5. The mentor/tech lead reviews and gives feedback
 
 ### Day 3: Practical exercise — execution with TDD
@@ -89,15 +89,15 @@ Suggested exercise:
    - AI implements (green)
    - Dev requests refactoring if necessary
 3. Run verifications (lint, types, tests)
-4. Run `/refinement` (code review mode) to review the diff before committing
+4. Run `/agile-refinement` (code review mode) to review the diff before committing
 
 ### Day 4: Practical exercise — tracking
 
 **Objective:** generate status updates and close with a report.
 
-1. Use `/status` (checkpoint mode) to generate a progress update
-2. Simulate a `/status` (consolidation mode) report for the period
-3. Close the delivery with `/status` (closure mode)
+1. Use `/agile-status` (checkpoint mode) to generate a progress update
+2. Simulate a `/agile-status` (consolidation mode) report for the period
+3. Close the delivery with `/agile-status` (closure mode)
 4. Review the complete chain: task -> execution -> status -> closure
 
 ### Day 5: Reflection and autonomy
@@ -133,7 +133,7 @@ Suggested exercise:
 
 ### For tech leads
 - Both focuses: planning and execution
-- Extra exercise: review AI-generated code with `/refinement` and give constructive feedback
+- Extra exercise: review AI-generated code with `/agile-refinement` and give constructive feedback
 
 ## Rules
 
@@ -144,4 +144,4 @@ Suggested exercise:
 
 ## Relationship with the flow
 
-This skill acts as the entry point to all others. After onboarding, the member should be able to invoke `/router`, `/task`, `/status`, `/planning`, and `/retro` autonomously.
+This skill acts as the entry point to all others. After onboarding, the member should be able to invoke `/agile-router`, `/agile-task`, `/agile-status`, `/agile-planning`, and `/agile-retro` autonomously.

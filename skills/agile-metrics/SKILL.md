@@ -133,11 +133,11 @@ The summary must be short enough to read in 2 minutes.
 
 ```mermaid
 flowchart LR
-    A["/planning"] --> B[execution]
-    B --> C["/status"]
-    C --> D["/metrics"]
-    D --> E["/review"]
-    E --> F["/retro"]
+    A["/agile-planning"] --> B[execution]
+    B --> C["/agile-status"]
+    C --> D["/agile-metrics"]
+    D --> E["/agile-review"]
+    E --> F["/agile-retro"]
 ```
 
-Sprint metrics feeds `/review` and `/retro`. Use `/status` for tracking during the sprint.
+Sprint metrics feeds `/agile-review` and `/agile-retro`. Use `/agile-status` for tracking during the sprint.

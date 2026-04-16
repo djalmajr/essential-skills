@@ -59,10 +59,10 @@ When the team has 2+ developers, the roadmap should:
 
 ## Chaining
 
-At the end of the roadmap, offer **only** `/epic`:
-- "Do you want me to run `/epic` to decompose the first initiative into stories?"
+At the end of the roadmap, offer **only** `/agile-epic`:
+- "Do you want me to run `/agile-epic` to decompose the first initiative into stories?"
 
-> **Important:** The roadmap identifies initiatives at a macro level. Each initiative should be decomposed via `/epic` before execution.
+> **Important:** The roadmap identifies initiatives at a macro level. Each initiative should be decomposed via `/agile-epic` before execution.
 
 ## Template
 
@@ -72,11 +72,11 @@ Use `~/.agents/templates/roadmap.md` as base.
 
 ```mermaid
 flowchart LR
-    A["/intake"] --> B["/roadmap"]
-    B --> C["/epic"]
-    C --> D["/task"]
+    A["/agile-intake"] --> B["/agile-roadmap"]
+    B --> C["/agile-epic"]
+    C --> D["/agile-task"]
     D --> E[execution]
-    E --> F["/status"]
+    E --> F["/agile-status"]
 ```
 
-This skill connects strategy and execution. For decomposition, use `/epic`. For execution planning, use `/task`.
+This skill connects strategy and execution. For decomposition, use `/agile-epic`. For execution planning, use `/agile-task`.

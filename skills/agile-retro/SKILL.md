@@ -33,16 +33,16 @@ Write the artifact in the user's language. If the user communicates in Portugues
 - A sprint or delivery cycle has ended
 - The team needs to reflect on what worked and what needs to change
 - Before starting the next sprint — retro feeds sprint planning
-- After closing a significant delivery (via `/status` closure mode)
+- After closing a significant delivery (via `/agile-status` closure mode)
 - Per-delivery reflection (what the old `/post-impl` reflection covered)
 - Per-sprint reflection (standard retrospective)
 
 ## When NOT to use
 
-- Mid-sprint status — use `/status` (checkpoint mode) instead
-- Planning the next sprint — use `/planning` instead (but retro should feed into it)
-- Closing a delivery with verification — use `/status` (closure mode) first, then retro
-- You need metrics/data — use `/metrics` first, then retro
+- Mid-sprint status — use `/agile-status` (checkpoint mode) instead
+- Planning the next sprint — use `/agile-planning` instead (but retro should feed into it)
+- Closing a delivery with verification — use `/agile-status` (closure mode) first, then retro
+- You need metrics/data — use `/agile-metrics` first, then retro
 
 ## Process
 
@@ -95,9 +95,9 @@ When running after a delivery closure:
 
 ## Chaining
 
-- If actions generate new tasks: suggest `/task` or `/epic`
+- If actions generate new tasks: suggest `/agile-task` or `/agile-epic`
 - If actions change process: suggest updating rules or skills
-- If the cycle restarts: suggest `/planning`
+- If the cycle restarts: suggest `/agile-planning`
 
 ## Reference template
 
@@ -115,9 +115,9 @@ Use `~/.agents/templates/retro.md` as base.
 
 ```mermaid
 flowchart LR
-    A["/status<br>(closure)"] --> B["/retro"]
+    A["/agile-status<br>(closure)"] --> B["/agile-retro"]
     B --> C[improvement actions]
-    C --> D["/planning"]
+    C --> D["/agile-planning"]
 ```
 
-This skill closes the feedback loop. For closing deliveries, use `/status` (closure mode) first. For metrics data, use `/metrics` first. The next cycle starts with `/planning`.
+This skill closes the feedback loop. For closing deliveries, use `/agile-status` (closure mode) first. For metrics data, use `/agile-metrics` first. The next cycle starts with `/agile-planning`.

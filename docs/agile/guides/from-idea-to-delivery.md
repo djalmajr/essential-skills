@@ -24,17 +24,17 @@ The skill asks clarifying questions. You provide:
 
 The intake structures: context (security bug), objective (tokens expire after 1h), value signal (close vulnerability).
 
-**Recommendation:** "This is small, clear, and localized -> `/task` directly."
+**Recommendation:** "This is small, clear, and localized -> `/agile-task` directly."
 
 ### Step 2: Route to the right artifact
 
-Since intake already recommended `/task`, you skip the router. But if unsure:
+Since intake already recommended `/agile-task`, you skip the router. But if unsure:
 
 ```
 /router password reset token expiry
 ```
 
-The router evaluates: "1 area, few files, simple validation. This is a small, localized change -> `/task`."
+The router evaluates: "1 area, few files, simple validation. This is a small, localized change -> `/agile-task`."
 
 ### Step 3: Create the execution plan
 
@@ -104,7 +104,7 @@ Clarifying questions reveal:
 - Constraint: must not slow down order processing (async)
 - Out of scope: SMS, push notifications, notification preferences
 
-**Recommendation:** "This is a vertical delivery with several files and moderate validation -> `/epic` to structure it."
+**Recommendation:** "This is a vertical delivery with several files and moderate validation -> `/agile-epic` to structure it."
 
 ### Step 2: Structure with epic
 
@@ -195,7 +195,7 @@ Implement, verify, commit. No status tracking, no closure -- proportional to the
 
 A PM asks: "We need a `DiscountService` that calculates discounts based on customer tier and promo codes."
 
-### Step 1: Plan with `/task`
+### Step 1: Plan with `/agile-task`
 
 ```
 /task discount service with tier + promo codes
@@ -283,7 +283,7 @@ The router asks: "What type of tracking? Quick checkpoint, period consolidation,
 
 You explain: "We're 1 week into a 2-week effort and the PM asked where we are."
 
-**Recommendation:** `/status` (consolidation mode) -- this is a mid-flight consolidation, not a daily checkpoint.
+**Recommendation:** `/agile-status` (consolidation mode) -- this is a mid-flight consolidation, not a daily checkpoint.
 
 ```
 /status report auth-refactor

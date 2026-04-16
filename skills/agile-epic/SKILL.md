@@ -30,18 +30,18 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 ## When to use
 
-- After an `/intake` or `/roadmap` identified a large initiative
+- After an `/agile-intake` or `/agile-roadmap` identified a large initiative
 - When the initiative requires multiple coordinated stories
 - When there are dependencies between deliveries that need sequencing
 - When a roadmap is needed to guide the delivery order
-- For medium-to-large work that needs richer structure than a simple `/task`
+- For medium-to-large work that needs richer structure than a simple `/agile-task`
 
 ## When NOT to use
 
-- The work is small and localized — use `/task` directly
-- The problem hasn't been captured yet — use `/intake` first
-- You need strategic direction — use `/roadmap` first
-- You need to validate existing artifacts — use `/refinement`
+- The work is small and localized — use `/agile-task` directly
+- The problem hasn't been captured yet — use `/agile-intake` first
+- You need strategic direction — use `/agile-roadmap` first
+- You need to validate existing artifacts — use `/agile-refinement`
 
 ## Process
 
@@ -134,8 +134,8 @@ Each story file includes:
 
 At the end of the epic, offer:
 
-- "Do you want me to create the execution plan for Story 1 with `/task`?"
-- "Do you want me to validate the artifacts with `/refinement`?"
+- "Do you want me to create the execution plan for Story 1 with `/agile-task`?"
+- "Do you want me to validate the artifacts with `/agile-refinement`?"
 
 Ask the user which story they want to detail first.
 
@@ -145,7 +145,7 @@ Use `~/.agents/templates/epic.md` as base for the overview artifact.
 
 ## Rules
 
-- The epic now handles decomposition directly — there is no separate refinement step for decomposing. Use `/refinement` only for validation/lint.
+- The epic now handles decomposition directly — there is no separate refinement step for decomposing. Use `/agile-refinement` only for validation/lint.
 - Break by behavior/delivery (vertical slices), not by technical layer.
 - Each story in the backlog must have a clear objective and be executable separately.
 - The roadmap must show dependencies, not just chronological order.
@@ -173,12 +173,12 @@ Use `~/.agents/templates/epic.md` as base for the overview artifact.
 
 ```mermaid
 flowchart LR
-    A["/intake"] --> B["/roadmap"]
-    B --> C["/epic"]
-    C --> D["/task"]
+    A["/agile-intake"] --> B["/agile-roadmap"]
+    B --> C["/agile-epic"]
+    C --> D["/agile-task"]
     D --> E[execution]
-    E --> F["/status"]
-    F --> G["/retro"]
+    E --> F["/agile-status"]
+    F --> G["/agile-retro"]
 ```
 
-This skill acts after intake/roadmap and before task-level execution. For validating artifacts, use `/refinement`. For execution plans, use `/task`.
+This skill acts after intake/roadmap and before task-level execution. For validating artifacts, use `/agile-refinement`. For execution plans, use `/agile-task`.

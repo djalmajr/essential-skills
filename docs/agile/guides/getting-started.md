@@ -13,24 +13,24 @@ How to onboard into the agile + AI workflow, choose the right skill, and validat
 ```mermaid
 flowchart TD
     A[New problem or request] --> B{Is the problem clear?}
-    B -- No --> C["/intake"]
+    B -- No --> C["/agile-intake"]
     B -- Yes --> D{What size?}
-    D -- "Small, localized" --> E["/task"]
-    D -- "Medium, several files" --> F["/epic"]
+    D -- "Small, localized" --> E["/agile-task"]
+    D -- "Medium, several files" --> F["/agile-epic"]
     D -- "Large, needs decomposition" --> F
     C --> H{Intake recommends...}
-    H -- Strategic --> I["/roadmap"]
+    H -- Strategic --> I["/agile-roadmap"]
     I --> F
     H -- Needs decomposition --> F
     H -- Clear enough --> D
 
     L[Need to track progress?] --> M{What kind?}
-    M -- Quick checkpoint --> N["/status<br>(checkpoint)"]
-    M -- Period consolidation --> O["/status<br>(consolidation)"]
-    M -- Delivery closure --> P["/status<br>(closure)"]
+    M -- Quick checkpoint --> N["/agile-status<br>(checkpoint)"]
+    M -- Period consolidation --> O["/agile-status<br>(consolidation)"]
+    M -- Delivery closure --> P["/agile-status<br>(closure)"]
 
     Q[Need a ceremony?] --> R{Where in cycle?}
-    R -- Starting sprint --> S["/planning"]
+    R -- Starting sprint --> S["/agile-planning"]
     R -- Sprint ended --> T["/review then /retro"]
     R -- Backlog unclear --> F
 ```
@@ -39,22 +39,22 @@ flowchart TD
 
 | I need to... | Use |
 |---|---|
-| Capture a vague problem | `/intake` |
-| Decide which skill to use | `/router` |
-| Plan a small, localized change | `/task` |
-| Decompose and structure a large initiative | `/epic` |
-| Set strategic direction | `/roadmap` (then `/epic`) |
-| Validate planning artifacts | `/refinement` (planning lint mode) |
-| Review code before committing | `/refinement` (code review mode) |
-| Quick daily checkpoint | `/status` (checkpoint mode) |
-| Period/milestone consolidation | `/status` (consolidation mode) |
-| Close a delivery formally | `/status` (closure mode) |
-| Plan a sprint | `/planning` |
-| Demo deliveries to stakeholders | `/review` |
-| Get sprint numbers | `/metrics` |
-| Reflect and improve | `/retro` |
-| Validate a UI flow interactively | `/proto` |
-| Onboard a new team member | `/onboarding` |
+| Capture a vague problem | `/agile-intake` |
+| Decide which skill to use | `/agile-router` |
+| Plan a small, localized change | `/agile-task` |
+| Decompose and structure a large initiative | `/agile-epic` |
+| Set strategic direction | `/agile-roadmap` (then `/agile-epic`) |
+| Validate planning artifacts | `/agile-refinement` (planning lint mode) |
+| Review code before committing | `/agile-refinement` (code review mode) |
+| Quick daily checkpoint | `/agile-status` (checkpoint mode) |
+| Period/milestone consolidation | `/agile-status` (consolidation mode) |
+| Close a delivery formally | `/agile-status` (closure mode) |
+| Plan a sprint | `/agile-planning` |
+| Demo deliveries to stakeholders | `/agile-review` |
+| Get sprint numbers | `/agile-metrics` |
+| Reflect and improve | `/agile-retro` |
+| Validate a UI flow interactively | `/agile-proto` |
+| Onboard a new team member | `/agile-onboarding` |
 
 ---
 
@@ -77,19 +77,19 @@ A new backend dev joins the team and needs to learn the flow.
 **Day 2 -- Practical exercise (intake + planning):**
 - Pick a real small problem (e.g., "add rate limiting to the API")
 - Run `/intake rate limiting` -> skill asks questions, structures the problem
-- Use `/router` to decide: it's a small change -> `/task`
+- Use `/agile-router` to decide: it's a small change -> `/agile-task`
 - Create the plan. Mentor reviews.
 
 **Day 3 -- Practical exercise (TDD + execution):**
 - Implement the rate limiting plan using TDD with AI as pair
 - Write failing test (red), implement (green), refactor
 - Run lint, typecheck, tests
-- Run `/refinement` (code review mode) -- review the diff together
+- Run `/agile-refinement` (code review mode) -- review the diff together
 
 **Day 4 -- Practical exercise (tracking):**
-- Generate a `/status` checkpoint for the rate limiting work
-- Simulate a `/status` consolidation for the week
-- Close with `/status` closure mode
+- Generate a `/agile-status` checkpoint for the rate limiting work
+- Simulate a `/agile-status` consolidation for the week
+- Close with `/agile-status` closure mode
 
 **Day 5 -- Full solo cycle:**
 - The dev picks a new problem and runs the entire cycle independently:
@@ -119,10 +119,10 @@ A new scrum master joins and needs to learn the ceremony skills.
 
 The trail adapts for a management profile:
 
-- **Focus:** `/roadmap`, `/epic`, `/planning`, `/retro`, `/status`
+- **Focus:** `/agile-roadmap`, `/agile-epic`, `/agile-planning`, `/agile-retro`, `/agile-status`
 - **Less:** TDD implementation details
 - **More:** Structuring backlogs, running ceremonies, tracking progress
-- **Exercise:** Conduct a real `/epic` decomposition for a backlog item, then run `/planning` with AI support
+- **Exercise:** Conduct a real `/agile-epic` decomposition for a backlog item, then run `/agile-planning` with AI support
 - **Same checklist** but with management emphasis
 
 ---
@@ -179,7 +179,7 @@ Don't know which skill to use?
 /router add multi-language support to onboarding
 ```
 
-The router evaluates: "Multi-language touches i18n, translation files, UI components, content management. This is a large initiative -- I recommend structuring it as an `/epic`."
+The router evaluates: "Multi-language touches i18n, translation files, UI components, content management. This is a large initiative -- I recommend structuring it as an `/agile-epic`."
 
 The router covers three areas:
 - **Planning:** What artifact do I need? (task, epic, roadmap, intake)
@@ -193,6 +193,6 @@ The router covers three areas:
 1. **Onboarding is practice, not reading:** The new member does real work from Day 2
 2. **Adapt by role:** Devs focus on TDD, managers focus on ceremonies
 3. **Prototype before implementing:** Validate UI flows interactively, then transition to real epics
-4. **When in doubt, use the router:** `/router` guides you to the right skill
+4. **When in doubt, use the router:** `/agile-router` guides you to the right skill
 5. **The decision tree is your compass:** Print it, bookmark it, reference it until it's second nature
-6. **Epic handles decomposition:** Large items go through `/epic` for decomposition into stories
+6. **Epic handles decomposition:** Large items go through `/agile-epic` for decomposition into stories

@@ -198,7 +198,7 @@ The router asks: "Where are you in the cycle?"
 
 "We don't have a sprint yet. We have a backlog but some items are vague."
 
-**Recommendation:** "Start with `/epic` to decompose and clarify scope, then `/planning` to define the first sprint."
+**Recommendation:** "Start with `/agile-epic` to decompose and clarify scope, then `/agile-planning` to define the first sprint."
 
 ### First epic decomposition
 
@@ -229,24 +229,24 @@ The typical cycle follows this order:
 
 ```mermaid
 flowchart LR
-    A["/metrics"] --> B["/review"]
-    B --> C["/retro"]
-    C --> D["/planning"]
-    D --> E["/status<br>(checkpoints)"]
-    E --> F["/status<br>(closure)"]
+    A["/agile-metrics"] --> B["/agile-review"]
+    B --> C["/agile-retro"]
+    C --> D["/agile-planning"]
+    D --> E["/agile-status<br>(checkpoints)"]
+    E --> F["/agile-status<br>(closure)"]
     F --> A
 ```
 
 | Ceremony | When | What it produces | Skill |
 |----------|------|-----------------|-------|
-| Sprint Metrics | End of sprint, before review | Quantitative data for review and retro | `/metrics` |
-| Sprint Review | End of sprint, after metrics | Delivery demo + stakeholder feedback | `/review` |
-| Retrospective | After review, before planning | 2-3 improvement actions with owners | `/retro` |
-| Sprint Planning | Start of new sprint | Sprint objective + selected items + order | `/planning` |
-| Status (checkpoint) | Every day during sprint | Progress, blockers, next step | `/status` |
-| Status (closure) | When a delivery closes | Formal closure with verification | `/status` |
+| Sprint Metrics | End of sprint, before review | Quantitative data for review and retro | `/agile-metrics` |
+| Sprint Review | End of sprint, after metrics | Delivery demo + stakeholder feedback | `/agile-review` |
+| Retrospective | After review, before planning | 2-3 improvement actions with owners | `/agile-retro` |
+| Sprint Planning | Start of new sprint | Sprint objective + selected items + order | `/agile-planning` |
+| Status (checkpoint) | Every day during sprint | Progress, blockers, next step | `/agile-status` |
+| Status (closure) | When a delivery closes | Formal closure with verification | `/agile-status` |
 
-**Not sure which ceremony?** Use `/router` -- it asks where you are in the cycle and points to the right one.
+**Not sure which ceremony?** Use `/agile-router` -- it asks where you are in the cycle and points to the right one.
 
 ---
 

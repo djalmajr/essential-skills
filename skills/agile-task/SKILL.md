@@ -36,10 +36,10 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 ## When NOT to use
 
-- Large work needing decomposition — use `/epic`
-- Problem not yet clear — use `/intake`
-- Multiple dependent deliveries — use `/epic`
-- Need strategic direction — use `/roadmap`
+- Large work needing decomposition — use `/agile-epic`
+- Problem not yet clear — use `/agile-intake`
+- Multiple dependent deliveries — use `/agile-epic`
+- Need strategic direction — use `/agile-roadmap`
 
 ## Process
 
@@ -86,7 +86,7 @@ If the plan comes from an epic, include at the top:
 
 After plan confirmation:
 - Implement following the checklist
-- At the end, suggest `/status` (closure mode) to close the delivery
+- At the end, suggest `/agile-status` (closure mode) to close the delivery
 
 ## Reference template
 
@@ -115,11 +115,11 @@ Every plan must contain:
 
 ```mermaid
 flowchart LR
-    A["/intake"] --> B["/epic"]
-    B --> C["/task"]
+    A["/agile-intake"] --> B["/agile-epic"]
+    B --> C["/agile-task"]
     C --> D[execution]
-    D --> E["/status"]
-    E --> F["/retro"]
+    D --> E["/agile-status"]
+    E --> F["/agile-retro"]
 ```
 
-This skill is the last step before execution. For larger problems, use `/epic`. To close the delivery, use `/status` (closure mode).
+This skill is the last step before execution. For larger problems, use `/agile-epic`. To close the delivery, use `/agile-status` (closure mode).
