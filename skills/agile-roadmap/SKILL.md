@@ -1,6 +1,6 @@
 ---
 name: agile-roadmap
-description: Structures quarterly roadmaps and roadmaps by epic. Use when you need to organize direction, priorities, phases, dependencies, and connection between roadmap, epics, and stories.
+description: Maps multi-phase trajectories with dependencies into clear, sequenced roadmaps. Use when work has multiple phases that need sequencing, when decisions today affect future decisions, when stakeholders need to see the whole journey, or when external dependencies exist. Applicable regardless of total duration — a 4-week multi-phase initiative benefits as much as a quarterly roadmap.
 compatibility: opencode
 metadata:
   audience: engineering
@@ -20,24 +20,50 @@ If empty, ask for the roadmap objective.
 
 Write the artifact in the user's language. If the user communicates in Portuguese, write in Portuguese with correct grammar and accents. If in English, write in English. When in doubt, ask the user which language to use. Templates are in English — translate headers and content to match.
 
-## Scope
-- `quarterly roadmap`: direction alignment, period objectives, and macro priorities
-- `roadmap by epic`: phases, stories, unblocks, and delivery order for an initiative
+## When to use
+
+Roadmap is defined by **trajectory complexity**, not by duration. Use this skill when 2+ apply:
+
+- Multiple initiatives/phases need sequencing (can't all run in parallel)
+- Decisions today affect future decisions (local optimization can become tech debt)
+- Stakeholders need to see the whole journey before approving individual steps
+- External dependencies (other teams, vendors, deadlines)
+- Total complexity exceeds what fits in a single epic
+
+A 4-week initiative with 5 sequenced phases **also benefits** from a roadmap — don't dismiss it as "too short".
+
+## When NOT to use
+
+- Isolated, self-contained initiative (single epic covers it)
+- Single epic with no ramifications — go straight to `/agile-epic`
+- Team already has the trajectory clear in mind and no stakeholder needs the map
+
+## Scope (types of roadmap)
+
+- **Trajectory roadmap:** multi-phase initiative with dependencies between phases (any duration)
+- **Initiative roadmap:** phases, stories, unblocks, and delivery order for a named initiative
+- **Quarterly roadmap:** direction alignment, period objectives, and macro priorities (one specific type — not the only one)
 
 ## Operating rules
+
 - Roadmap must focus on results and capabilities, not extensive technical lists.
 - Every roadmap item must indicate expected value, dependencies, and progress signal.
 - The roadmap must show what is a commitment, what is a risk, and what is outside the period.
 - Whenever possible, each initiative should point to a corresponding epic.
 
-## How to build quarterly roadmap
-1. Declare the period objective.
-2. List 2-5 main initiatives.
-3. Order initiatives by dependency and value.
-4. Register risks, constraints, and items outside commitment.
-5. Validate that the quarter's narrative is observable.
+## How to build a trajectory roadmap (default)
+1. Declare the overarching objective of the journey.
+2. List 2-5 phases or initiatives (sequenced or parallel).
+3. Order by dependency and value — make sequencing explicit.
+4. For each phase: expected outcome, dependencies, progress signal, risks.
+5. Register what is a commitment, what is a risk, and what is out of scope.
+6. Validate that the narrative is observable and stakeholder-ready.
 
-## How to build roadmap by epic
+## How to build a quarterly roadmap (specific type)
+Same as above, with period objective (quarter) as the time boundary.
+Use when stakeholders expect a period-based view (common for product/exec audiences).
+
+## How to build a roadmap by epic
 1. Declare the epic objective.
 2. Define phases or delivery waves.
 3. Relate stories by phase.
@@ -46,8 +72,8 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 ## Where to save
 
+- Initiative/trajectory roadmap: `planning/<initiative>/roadmap.md`
 - Quarterly roadmap: `planning/roadmaps/Q<N>-YYYY.md`
-- Initiative roadmap: `planning/<initiative>/roadmap.md`
 
 ## Collaborative work
 

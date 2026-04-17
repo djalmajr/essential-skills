@@ -64,12 +64,20 @@ Fill in the template with collected information:
 
 ### 3. Define next step
 
-Based on size and clarity:
+Based on trajectory complexity (not duration):
 
-- Large and strategic problem → `/agile-roadmap` → then `/agile-epic`
-- Large but operational problem with broad scope → `/agile-epic`
-- Medium problem with reasonable scope → `/agile-epic` (to decompose into stories)
-- Small and clear problem → `/agile-task`
+- **Multi-phase trajectory with dependencies** (regardless of total duration) → `/agile-roadmap` → then `/agile-epic`
+  Indicators — if 2+ apply, use roadmap:
+  - Multiple initiatives that need sequencing (can't run all in parallel)
+  - Decisions today affect future decisions (local optimization can become tech debt)
+  - Stakeholders need to see the whole journey before approving individual steps
+  - External dependencies (other teams, vendors, deadlines)
+  - Total complexity exceeds what fits in a single epic
+- **Single coordinated initiative** with broad scope → `/agile-epic`
+- **Medium problem** with reasonable scope → `/agile-epic` (to decompose into stories)
+- **Small and clear problem** → `/agile-task`
+
+> **Important:** Roadmap is not defined by time horizon (e.g., "3-12 months"). A 4-week initiative with 5 distinct phases and critical ordering also benefits from a roadmap. The criterion is trajectory complexity, not duration.
 
 Register the recommendation in the intake and confirm with the user.
 
@@ -85,8 +93,8 @@ Register the recommendation in the intake and confirm with the user.
 
 After user confirmation, offer to generate the next artifact following the official flow:
 
-- Large/strategic → "Do you want me to create the `/agile-roadmap`?"
-- Large/operational → "Do you want me to run `/agile-epic` to decompose into stories?"
+- Multi-phase trajectory → "Do you want me to create the `/agile-roadmap`?"
+- Single coordinated initiative → "Do you want me to run `/agile-epic` to decompose into stories?"
 - Small/clear → "Do you want me to create the `/agile-task`?"
 
 ### 6. Validate
