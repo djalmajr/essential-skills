@@ -8,7 +8,7 @@ Skills for agile delivery management powered by AI agents.
 flowchart TD
     A["/agile-intake"] --> B["/agile-roadmap"]
     B --> C["/agile-epic"]
-    C --> D["/agile-task"]
+    C --> D["/agile-story"]
     D --> E[execution]
     E --> F["/agile-status<br>(checkpoint)"]
     F --> G["/agile-status<br>(consolidation)"]
@@ -16,7 +16,7 @@ flowchart TD
     H --> I["/agile-metrics"]
     I --> J["/agile-review"]
     J --> K["/agile-retro"]
-    K --> L["/agile-planning"]
+    K --> L["/agile-sprint"]
     L --> D
 
     M["/agile-refinement"] -.-> C
@@ -50,7 +50,7 @@ Each skill README contains full documentation with examples, tips, and chaining 
 | [intake](../../skills/agile-intake/README.md) | Vague problems -> structured intake document |
 | [roadmap](../../skills/agile-roadmap/README.md) | Quarterly or initiative roadmap |
 | [epic](../../skills/agile-epic/README.md) | Large initiative -> story backlog + roadmap |
-| [task](../../skills/agile-task/README.md) | Small, localized change -> execution plan |
+| [task](../../skills/agile-story/README.md) | Small, localized change -> execution plan |
 
 ### Validation & Review
 
@@ -69,7 +69,7 @@ Each skill README contains full documentation with examples, tips, and chaining 
 
 | Skill | Usage |
 |-------|-------|
-| [planning](../../skills/agile-planning/README.md) | Plan cycle: objective, items, capacity |
+| [planning](../../skills/agile-sprint/README.md) | Plan cycle: objective, items, capacity |
 | [review](../../skills/agile-review/README.md) | Review + demo for stakeholders |
 | [metrics](../../skills/agile-metrics/README.md) | Objective sprint metrics |
 | [retro](../../skills/agile-retro/README.md) | Retrospective with improvement actions |

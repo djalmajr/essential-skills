@@ -100,7 +100,7 @@ Formal delivery closure — plan vs result, verification, remaining risks, hando
 
 - Checkpoint: if critical blocker → escalate or adjust the plan. If delivery closing → switch to closure mode.
 - Consolidation: if period closed a delivery → suggest closure mode. If sprint ended → suggest `/agile-review` or `/agile-retro`.
-- Closure: if next steps become new tasks → suggest `/agile-task`. If cycle ended → suggest `/agile-retro`. If part of an epic → update story status.
+- Closure: if next steps become new tasks → suggest `/agile-story`. If cycle ended → suggest `/agile-retro`. If part of an epic → update story status.
 
 ## Reference template
 
@@ -119,11 +119,11 @@ Use `~/.agents/templates/status.md` as base.
 
 ```mermaid
 flowchart LR
-    A["/agile-task"] --> B[execution]
+    A["/agile-story"] --> B[execution]
     B --> C["/agile-status<br>(checkpoint)"]
     C --> D["/agile-status<br>(consolidation)"]
     D --> E["/agile-status<br>(closure)"]
     E --> F["/agile-retro"]
 ```
 
-This skill handles all delivery tracking. For planning, use `/agile-intake`, `/agile-epic`, or `/agile-task`. For ceremonies, use `/agile-planning`, `/agile-review`, or `/agile-retro`.
+This skill handles all delivery tracking. For planning, use `/agile-intake`, `/agile-epic`, or `/agile-story`. For ceremonies, use `/agile-sprint`, `/agile-review`, or `/agile-retro`.

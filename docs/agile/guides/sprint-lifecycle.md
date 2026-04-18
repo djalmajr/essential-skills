@@ -198,7 +198,7 @@ The router asks: "Where are you in the cycle?"
 
 "We don't have a sprint yet. We have a backlog but some items are vague."
 
-**Recommendation:** "Start with `/agile-epic` to decompose and clarify scope, then `/agile-planning` to define the first sprint."
+**Recommendation:** "Start with `/agile-epic` to decompose and clarify scope, then `/agile-sprint` to define the first sprint."
 
 ### First epic decomposition
 
@@ -231,7 +231,7 @@ The typical cycle follows this order:
 flowchart LR
     A["/agile-metrics"] --> B["/agile-review"]
     B --> C["/agile-retro"]
-    C --> D["/agile-planning"]
+    C --> D["/agile-sprint"]
     D --> E["/agile-status<br>(checkpoints)"]
     E --> F["/agile-status<br>(closure)"]
     F --> A
@@ -242,7 +242,7 @@ flowchart LR
 | Sprint Metrics | End of sprint, before review | Quantitative data for review and retro | `/agile-metrics` |
 | Sprint Review | End of sprint, after metrics | Delivery demo + stakeholder feedback | `/agile-review` |
 | Retrospective | After review, before planning | 2-3 improvement actions with owners | `/agile-retro` |
-| Sprint Planning | Start of new sprint | Sprint objective + selected items + order | `/agile-planning` |
+| Sprint Planning | Start of new sprint | Sprint objective + selected items + order | `/agile-sprint` |
 | Status (checkpoint) | Every day during sprint | Progress, blockers, next step | `/agile-status` |
 | Status (closure) | When a delivery closes | Formal closure with verification | `/agile-status` |
 

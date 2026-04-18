@@ -12,9 +12,9 @@ Transforms vague problems, initial ideas, or unstructured requests into clear in
 
 ## When NOT to use
 
-- The problem is already clear with defined scope -- use `/agile-epic` or `/agile-task` directly
-- The work has already been decomposed with stories identified -- use `/agile-epic` or `/agile-task`
-- It's a trivial fix (rename a variable, fix a typo) -- use `/agile-task` directly
+- The problem is already clear with defined scope -- use `/agile-epic` or `/agile-story` directly
+- The work has already been decomposed with stories identified -- use `/agile-epic` or `/agile-story`
+- It's a trivial fix (rename a variable, fix a typo) -- use `/agile-story` directly
 - You need to track delivery progress -- use `/agile-status`
 
 ## How to use
@@ -59,7 +59,7 @@ A designer asks "can we add dark mode to the settings page?":
 
 1. Start by invoking: `/agile-intake dark mode settings page`
 2. The skill asks clarifying questions. The answers are straightforward -- it's a small, clear UX change.
-3. The skill recommends: "This is small and clear -> `/agile-task` directly. No need for an epic."
+3. The skill recommends: "This is small and clear -> `/agile-story` directly. No need for an epic."
 4. Presented inline (no file saved -- too small for a folder).
 
 ## Workflow integration
@@ -69,7 +69,7 @@ flowchart LR
     A["/agile-intake"] --> B{next artifact}
     B --> C["/agile-roadmap"]
     B --> D["/agile-epic"]
-    B --> E["/agile-task"]
+    B --> E["/agile-story"]
 ```
 
 ## Tips & pitfalls
@@ -82,4 +82,4 @@ flowchart LR
 ## Chaining
 
 - **Before:** Nothing -- intake is the entry point.
-- **After:** Routes to `/agile-roadmap` (large/strategic), `/agile-epic` (large/operational or medium), or `/agile-task` (small/obvious).
+- **After:** Routes to `/agile-roadmap` (large/strategic), `/agile-epic` (large/operational or medium), or `/agile-story` (small/obvious).

@@ -22,8 +22,8 @@ This skill replaces both the planning router and the ceremonies router. It cover
 
 | Area | Question | Skills |
 |---|---|---|
-| What to create | What planning artifact fits this work? | `/agile-intake`, `/agile-roadmap`, `/agile-epic`, `/agile-task` |
-| What ceremony to run | Where are we in the sprint cycle? | `/agile-planning`, `/agile-review`, `/agile-retro` |
+| What to create | What planning artifact fits this work? | `/agile-intake`, `/agile-roadmap`, `/agile-epic`, `/agile-story` |
+| What ceremony to run | Where are we in the sprint cycle? | `/agile-sprint`, `/agile-review`, `/agile-retro` |
 | What to track | How should I report progress? | `/agile-status` (checkpoint, consolidation, closure) |
 
 ## Decision tree
@@ -38,7 +38,7 @@ flowchart TD
     D -- Yes --> I["/agile-roadmap"]
     I --> G["/agile-epic"]
     D -- "No, single initiative" --> E{What size?}
-    E -- "Small, localized" --> F["/agile-task"]
+    E -- "Small, localized" --> F["/agile-story"]
     E -- "Medium/large, needs decomposition" --> G
     C --> H{Intake recommends...}
     H -- Multi-phase trajectory --> I
@@ -48,11 +48,11 @@ flowchart TD
 
 > **Note on `/agile-roadmap`:** Roadmap is NOT defined by time horizon (e.g., "3-12 months"). It is defined by **trajectory complexity**. Even a 4-week initiative benefits from a roadmap if it has multiple sequenced phases with dependencies between them.
 
-> **Note on `/agile-epic`:** Handles both the epic overview and story decomposition. There is no separate story skill. Medium work that needs richer acceptance criteria goes through `/agile-epic` for structure, or directly to `/agile-task` if it's a single vertical delivery.
+> **Note on `/agile-epic`:** Handles both the epic overview and story decomposition. There is no separate story skill. Medium work that needs richer acceptance criteria goes through `/agile-epic` for structure, or directly to `/agile-story` if it's a single vertical delivery.
 
 ### Ceremonies: Where am I in the cycle?
 
-- **Starting a sprint?** → `/agile-planning`
+- **Starting a sprint?** → `/agile-sprint`
 - **Sprint just ended?** → `/agile-review` (demo deliveries) then `/agile-retro` (reflect on process)
 - **Backlog items unclear?** → `/agile-epic` (decompose) or run `/agile-refinement` (validate)
 - **Need metrics?** → `/agile-metrics` (before review or retro)
@@ -69,9 +69,9 @@ flowchart TD
 
 | Size | Description | Artifact | Skill |
 |---|---|---|---|
-| Extra small | Localized adjustment, 1 file, low risk | Task | `/agile-task` |
-| Small | Small delivery, few files, simple validation | Task | `/agile-task` |
-| Medium | Vertical delivery, several files, moderate validation | Epic story file or Task | `/agile-epic` or `/agile-task` |
+| Extra small | Localized adjustment, 1 file, low risk | Task | `/agile-story` |
+| Small | Small delivery, few files, simple validation | Task | `/agile-story` |
+| Medium | Vertical delivery, several files, moderate validation | Epic story file or Task | `/agile-epic` or `/agile-story` |
 | Large | Multiple coordinated stories, needs decomposition | Epic | `/agile-epic` |
 | Extra large | Multi-story initiative, coordination needed | Epic | `/agile-epic` |
 
@@ -115,10 +115,10 @@ Sizing alone is not enough to decide between roadmap and epic. Use this checklis
 | `/agile-intake` | Capture vague problems |
 | `/agile-roadmap` | Map multi-phase trajectories with dependencies (any duration) |
 | `/agile-epic` | Structure initiatives, decompose into stories |
-| `/agile-task` | Execution plan for localized changes |
+| `/agile-story` | Execution plan for localized changes |
 | `/agile-refinement` | Validate planning artifacts and review code |
 | `/agile-status` | Track progress (checkpoint, consolidation, closure) |
-| `/agile-planning` | Sprint planning ceremony |
+| `/agile-sprint` | Sprint planning ceremony |
 | `/agile-review` | Sprint review and demo |
 | `/agile-metrics` | Quantitative sprint metrics |
 | `/agile-retro` | Retrospective with improvement actions |
@@ -132,7 +132,7 @@ Sizing alone is not enough to decide between roadmap and epic. Use this checklis
 flowchart LR
     A["/agile-intake"] --> B["/agile-roadmap"]
     B --> C["/agile-epic"]
-    C --> D["/agile-task"]
+    C --> D["/agile-story"]
     D --> E[execution]
     E --> F["/agile-status"]
     F --> G["/agile-retro"]

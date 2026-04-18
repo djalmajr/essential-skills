@@ -38,10 +38,10 @@ Write any report output in the user's language. If the user communicates in Port
 
 ## When NOT to use
 
-- Creating planning artifacts — use `/agile-intake`, `/agile-epic`, `/agile-task`, `/agile-roadmap`
+- Creating planning artifacts — use `/agile-intake`, `/agile-epic`, `/agile-story`, `/agile-roadmap`
 - Decomposing work into stories — use `/agile-epic` (which now handles decomposition)
 - Tracking delivery progress — use `/agile-status`
-- Planning a sprint — use `/agile-planning`
+- Planning a sprint — use `/agile-sprint`
 
 ## Mode 1: Planning Lint
 
@@ -159,9 +159,9 @@ This skill does NOT produce a saved artifact. It produces an inline report with:
 ```mermaid
 flowchart LR
     A["/agile-epic"] --> B["/agile-refinement<br>(planning lint)"]
-    C["/agile-task"] --> D[execution]
+    C["/agile-story"] --> D[execution]
     D --> E["/agile-refinement<br>(code review)"]
     E --> F["/agile-status"]
 ```
 
-This skill validates artifacts and code at any point in the flow. For creating planning artifacts, use `/agile-epic` or `/agile-task`. For tracking delivery, use `/agile-status`.
+This skill validates artifacts and code at any point in the flow. For creating planning artifacts, use `/agile-epic` or `/agile-story`. For tracking delivery, use `/agile-status`.

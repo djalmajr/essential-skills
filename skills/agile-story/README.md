@@ -1,4 +1,4 @@
-# agile-task
+# agile-story
 
 Creates a clear, proportionally-sized execution plan for small and localized changes. It maps exact files, defines verifiable tasks, and produces a checklist-ready artifact that can be implemented immediately. It's the last step before writing code. Also used for individual story execution from an epic.
 
@@ -19,10 +19,10 @@ Creates a clear, proportionally-sized execution plan for small and localized cha
 ## How to use
 
 ```
-/agile-task
+/agile-story
 ```
 
-Example: `/agile-task add-button-component`
+Example: `/agile-story add-button-component`
 
 ## End-to-end examples
 
@@ -30,7 +30,7 @@ Example: `/agile-task add-button-component`
 
 A bug report shows password reset tokens never expire:
 
-1. Start by invoking: `/agile-task password reset tokens not expiring`
+1. Start by invoking: `/agile-story password reset tokens not expiring`
 2. The skill explores the code and identifies the relevant files.
 3. It builds the plan with context, files, tasks, and verification.
 4. Save to: `.agents/plans/password-reset-expiry.md`
@@ -41,7 +41,7 @@ A bug report shows password reset tokens never expire:
 
 A story from the payments epic needs an execution plan:
 
-1. Start by invoking: `/agile-task planning/payment-migration/epics/01-payment-overhaul/02-webhook-handler.md`
+1. Start by invoking: `/agile-story planning/payment-migration/epics/01-payment-overhaul/02-webhook-handler.md`
 2. The skill reads the story file and adds detailed execution tasks and file mappings.
 3. The tasks and verification sections are added to the existing story file.
 4. Implement following the checklist.
@@ -56,7 +56,7 @@ A story from the payments epic needs an execution plan:
 ```mermaid
 flowchart LR
     A["/agile-intake"] --> B["/agile-epic"]
-    B --> C["/agile-task"]
+    B --> C["/agile-story"]
     C --> D[execution]
     D --> E["/agile-status"]
     E --> F["/agile-retro"]

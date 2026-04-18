@@ -34,11 +34,11 @@ Write the artifact in the user's language. If the user communicates in Portugues
 - When the initiative requires multiple coordinated stories
 - When there are dependencies between deliveries that need sequencing
 - When a roadmap is needed to guide the delivery order
-- For medium-to-large work that needs richer structure than a simple `/agile-task`
+- For medium-to-large work that needs richer structure than a simple `/agile-story`
 
 ## When NOT to use
 
-- The work is small and localized — use `/agile-task` directly
+- The work is small and localized — use `/agile-story` directly
 - The problem hasn't been captured yet — use `/agile-intake` first
 - You need strategic direction — use `/agile-roadmap` first
 - You need to validate existing artifacts — use `/agile-refinement`
@@ -134,7 +134,7 @@ Each story file includes:
 
 At the end of the epic, offer:
 
-- "Do you want me to create the execution plan for Story 1 with `/agile-task`?"
+- "Do you want me to create the execution plan for Story 1 with `/agile-story`?"
 - "Do you want me to validate the artifacts with `/agile-refinement`?"
 
 Ask the user which story they want to detail first.
@@ -175,10 +175,10 @@ Use `~/.agents/templates/epic.md` as base for the overview artifact.
 flowchart LR
     A["/agile-intake"] --> B["/agile-roadmap"]
     B --> C["/agile-epic"]
-    C --> D["/agile-task"]
+    C --> D["/agile-story"]
     D --> E[execution]
     E --> F["/agile-status"]
     F --> G["/agile-retro"]
 ```
 
-This skill acts after intake/roadmap and before task-level execution. For validating artifacts, use `/agile-refinement`. For execution plans, use `/agile-task`.
+This skill acts after intake/roadmap and before task-level execution. For validating artifacts, use `/agile-refinement`. For execution plans, use `/agile-story`.

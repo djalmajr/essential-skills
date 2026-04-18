@@ -1,13 +1,13 @@
 ---
-name: agile-task
-description: Creates execution task plan for localized changes. Use when the work is small and localized, involves few files, and can be executed in a single implementation cycle. Also used for individual story execution from an epic.
+name: agile-story
+description: Creates execution plan with tasks for a single story or a localized standalone change. Use when the work fits in one cycle — either a story already scoped by an epic, or a small/localized change that doesn't need decomposition.
 compatibility: opencode
 metadata:
   audience: engineering
-  workflow: task
+  workflow: story
 ---
 
-# Task
+# Story
 
 Use this skill to create a clear execution plan, ready to implement.
 
@@ -90,7 +90,7 @@ After plan confirmation:
 
 ## Reference template
 
-Use `~/.agents/templates/task.md` as base.
+Use `~/.agents/templates/story.md` as base.
 
 ## Required sections
 
@@ -116,7 +116,7 @@ Every plan must contain:
 ```mermaid
 flowchart LR
     A["/agile-intake"] --> B["/agile-epic"]
-    B --> C["/agile-task"]
+    B --> C["/agile-story"]
     C --> D[execution]
     D --> E["/agile-status"]
     E --> F["/agile-retro"]

@@ -11,7 +11,7 @@ Structures quarterly roadmaps and initiative-level roadmaps that connect strateg
 
 ## When NOT to use
 
-- Creating a detailed execution plan -- use `/agile-task` instead
+- Creating a detailed execution plan -- use `/agile-story` instead
 - Decomposing a large item into stories -- use `/agile-epic` instead
 - Tracking in-progress deliveries -- use `/agile-status`
 
@@ -52,7 +52,7 @@ After the intake, the payments initiative needs a phased delivery plan:
 flowchart LR
     A["/agile-intake"] --> B["/agile-roadmap"]
     B --> C["/agile-epic"]
-    C --> D["/agile-task"]
+    C --> D["/agile-story"]
     D --> E[execution]
 ```
 

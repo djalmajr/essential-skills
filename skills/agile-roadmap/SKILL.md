@@ -100,9 +100,9 @@ Use `~/.agents/templates/roadmap.md` as base.
 flowchart LR
     A["/agile-intake"] --> B["/agile-roadmap"]
     B --> C["/agile-epic"]
-    C --> D["/agile-task"]
+    C --> D["/agile-story"]
     D --> E[execution]
     E --> F["/agile-status"]
 ```
 
-This skill connects strategy and execution. For decomposition, use `/agile-epic`. For execution planning, use `/agile-task`.
+This skill connects strategy and execution. For decomposition, use `/agile-epic`. For execution planning, use `/agile-story`.

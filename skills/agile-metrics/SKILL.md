@@ -133,7 +133,7 @@ The summary must be short enough to read in 2 minutes.
 
 ```mermaid
 flowchart LR
-    A["/agile-planning"] --> B[execution]
+    A["/agile-sprint"] --> B[execution]
     B --> C["/agile-status"]
     C --> D["/agile-metrics"]
     D --> E["/agile-review"]

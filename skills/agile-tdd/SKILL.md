@@ -128,7 +128,7 @@ Run coverage and check against targets. Fill gaps in critical areas first.
 
 ## Chaining
 
-- During feature implementation: work inside the `/agile-task` checklist
+- During feature implementation: work inside the `/agile-story` checklist
 - After implementation: `/agile-refinement` to review test quality
 - Before closing: ensure tests are part of `/agile-status` (closure mode) verification
 
@@ -136,7 +136,7 @@ Run coverage and check against targets. Fill gaps in critical areas first.
 
 ```mermaid
 flowchart LR
-    A["/agile-task"] --> B[TDD cycle]
+    A["/agile-story"] --> B[TDD cycle]
     B --> C[Red: failing test]
     C --> D[Green: minimum code]
     D --> E[Refactor]
@@ -145,4 +145,4 @@ flowchart LR
     F -->|No| G["/agile-refinement"]
 ```
 
-This skill operates during execution. It pairs with `/agile-task` (which defines what to build) and feeds into `/agile-refinement` (which validates the result).
+This skill operates during execution. It pairs with `/agile-story` (which defines what to build) and feeds into `/agile-refinement` (which validates the result).

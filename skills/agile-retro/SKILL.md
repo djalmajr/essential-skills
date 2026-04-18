@@ -40,7 +40,7 @@ Write the artifact in the user's language. If the user communicates in Portugues
 ## When NOT to use
 
 - Mid-sprint status — use `/agile-status` (checkpoint mode) instead
-- Planning the next sprint — use `/agile-planning` instead (but retro should feed into it)
+- Planning the next sprint — use `/agile-sprint` instead (but retro should feed into it)
 - Closing a delivery with verification — use `/agile-status` (closure mode) first, then retro
 - You need metrics/data — use `/agile-metrics` first, then retro
 
@@ -95,9 +95,9 @@ When running after a delivery closure:
 
 ## Chaining
 
-- If actions generate new tasks: suggest `/agile-task` or `/agile-epic`
+- If actions generate new tasks: suggest `/agile-story` or `/agile-epic`
 - If actions change process: suggest updating rules or skills
-- If the cycle restarts: suggest `/agile-planning`
+- If the cycle restarts: suggest `/agile-sprint`
 
 ## Reference template
 
@@ -117,7 +117,7 @@ Use `~/.agents/templates/retro.md` as base.
 flowchart LR
     A["/agile-status<br>(closure)"] --> B["/agile-retro"]
     B --> C[improvement actions]
-    C --> D["/agile-planning"]
+    C --> D["/agile-sprint"]
 ```
 
-This skill closes the feedback loop. For closing deliveries, use `/agile-status` (closure mode) first. For metrics data, use `/agile-metrics` first. The next cycle starts with `/agile-planning`.
+This skill closes the feedback loop. For closing deliveries, use `/agile-status` (closure mode) first. For metrics data, use `/agile-metrics` first. The next cycle starts with `/agile-sprint`.

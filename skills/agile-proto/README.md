@@ -12,7 +12,7 @@ Create standalone interactive UI prototypes with a zero-build CDN stack: **z-pro
 
 ## When NOT to use
 
-- You need production code — prototypes are throwaway. Use `/agile-epic` then `/agile-task`.
+- You need production code — prototypes are throwaway. Use `/agile-epic` then `/agile-story`.
 - You need static documentation — use a wiki or design tool.
 - You're tracking delivery — use `/agile-status`.
 - You need to test business logic or real APIs — prototypes mock data, not backends.
@@ -82,7 +82,7 @@ flowchart LR
     A[agile-intake] --> B[agile-proto]
     B --> C{Flow validated?}
     C -- Yes --> D[agile-epic]
-    D --> E[agile-task]
+    D --> E[agile-story]
     C -- No --> F[Iterate proto]
     F --> B
 ```
@@ -100,4 +100,4 @@ flowchart LR
 ## Chaining
 
 - **Before:** `/agile-intake` (capture the need), `/agile-epic` (if the prototype validates a story).
-- **After:** Once the flow is validated, use `/agile-epic` or `/agile-task` to plan the real implementation.
+- **After:** Once the flow is validated, use `/agile-epic` or `/agile-story` to plan the real implementation.

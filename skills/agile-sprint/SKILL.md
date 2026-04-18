@@ -1,5 +1,5 @@
 ---
-name: agile-planning
+name: agile-sprint
 description: Plans sprint by selecting items from backlog, defining objective, capacity, and execution order. Use at the beginning of a work cycle to align what will be done.
 compatibility: opencode
 metadata:
@@ -87,13 +87,13 @@ When 2+ developers are available:
 
 ## Chaining
 
-- To detail the first item: suggest `/agile-task` for the first story in the backlog
+- To detail the first item: suggest `/agile-story` for the first story in the backlog
 - For items that need decomposition: suggest `/agile-epic`
 - For items that need validation: suggest `/agile-refinement`
 
 ## Reference template
 
-Use `~/.agents/templates/planning.md` as base.
+Use `~/.agents/templates/sprint.md` as base.
 
 ## Rules
 
@@ -107,12 +107,12 @@ Use `~/.agents/templates/planning.md` as base.
 
 ```mermaid
 flowchart LR
-    A["/agile-retro"] --> B["/agile-planning"]
-    B --> C["/agile-task"]
+    A["/agile-retro"] --> B["/agile-sprint"]
+    B --> C["/agile-story"]
     C --> D[execution]
     D --> E["/agile-status"]
     E --> F["/agile-review"]
     F --> G["/agile-retro"]
 ```
 
-This skill starts the sprint cycle. For decomposing work, use `/agile-epic`. For execution plans, use `/agile-task`. For tracking during the sprint, use `/agile-status`.
+This skill starts the sprint cycle. For decomposing work, use `/agile-epic`. For execution plans, use `/agile-story`. For tracking during the sprint, use `/agile-status`.

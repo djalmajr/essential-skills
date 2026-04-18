@@ -13,9 +13,9 @@ Tracks delivery progress in three modes -- checkpoint (quick daily update), cons
 
 ## When NOT to use
 
-- Planning new work -- use `/agile-task` or `/agile-epic` instead
+- Planning new work -- use `/agile-story` or `/agile-epic` instead
 - Decomposing large items -- use `/agile-epic` instead
-- Running a ceremony -- use `/agile-planning`, `/agile-review`, or `/agile-retro`
+- Running a ceremony -- use `/agile-sprint`, `/agile-review`, or `/agile-retro`
 - Reviewing code -- use `/agile-refinement` instead
 
 ## How to use
@@ -62,7 +62,7 @@ The rate limiting feature is done:
 
 ```mermaid
 flowchart LR
-    A["/agile-task"] --> B[execution]
+    A["/agile-story"] --> B[execution]
     B --> C["/agile-status<br>(checkpoint)"]
     C --> D["/agile-status<br>(consolidation)"]
     D --> E["/agile-status<br>(closure)"]

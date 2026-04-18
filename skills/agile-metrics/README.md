@@ -14,7 +14,7 @@ Consolidates objective, quantitative metrics from sprint artifacts -- delivery r
 
 - During the sprint for status updates -- use `/agile-status` instead
 - Closing a specific delivery -- use `/agile-status` (closure mode) instead
-- Planning the next sprint -- use `/agile-planning` instead (though metrics feed into it)
+- Planning the next sprint -- use `/agile-sprint` instead (though metrics feed into it)
 - Qualitative reflection -- use `/agile-retro` instead (but metrics provide the data for it)
 
 ## How to use
@@ -48,7 +48,7 @@ After 6 sprints, the team wants to see if velocity is improving:
 
 ```mermaid
 flowchart LR
-    A["/agile-planning"] --> B[execution]
+    A["/agile-sprint"] --> B[execution]
     B --> C["/agile-status"]
     C --> D["/agile-metrics"]
     D --> E["/agile-review"]
@@ -66,4 +66,4 @@ flowchart LR
 ## Chaining
 
 - **Before:** Sprint planning, status checkpoints, closure reports (these are the data sources)
-- **After:** Feeds into `/agile-review` (show what was delivered), `/agile-retro` (discuss what to improve), and `/agile-planning` (calibrate capacity).
+- **After:** Feeds into `/agile-review` (show what was delivered), `/agile-retro` (discuss what to improve), and `/agile-sprint` (calibrate capacity).

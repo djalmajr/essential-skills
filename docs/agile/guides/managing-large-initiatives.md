@@ -85,7 +85,7 @@ Save to: `planning/payment-migration/epics/01-payment-overhaul/`
 
 ### Step 4: Execute stories
 
-For each story in the epic, create execution plans with `/agile-task`:
+For each story in the epic, create execution plans with `/agile-story`:
 
 ```
 /task planning/payment-migration/epics/01-payment-overhaul/02-webhook-handler.md
@@ -157,7 +157,7 @@ Decomposed by user value slice:
 
 **Critical path:** Stories 1+2 first (quick wins, no deps), then Story 3, then Story 4.
 
-With 4 stories, 2 of which are trivial, Stories 1 and 2 go directly to `/agile-task`. Stories 3 and 4 have richer acceptance criteria in their story files.
+With 4 stories, 2 of which are trivial, Stories 1 and 2 go directly to `/agile-story`. Stories 3 and 4 have richer acceptance criteria in their story files.
 
 **Key insight:** Not every initiative needs every artifact. Use proportional tooling.
 

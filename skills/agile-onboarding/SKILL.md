@@ -36,7 +36,7 @@ Use this skill to guide new team members through the agile + AI flow, in a pract
    flowchart LR
        A["/agile-intake"] --> B["/agile-roadmap"]
        B --> C["/agile-epic"]
-       C --> D["/agile-task"]
+       C --> D["/agile-story"]
        D --> E[execution]
        E --> F["/agile-status"]
        F --> G["/agile-retro"]
@@ -54,10 +54,10 @@ Use this skill to guide new team members through the agile + AI flow, in a pract
    - `/agile-intake` — capture problems
    - `/agile-roadmap` — strategic direction
    - `/agile-epic` — decompose and structure initiatives
-   - `/agile-task` — execution plans
+   - `/agile-story` — execution plans
    - `/agile-refinement` — validate artifacts and review code
    - `/agile-status` — track progress (checkpoint, consolidation, closure)
-   - `/agile-planning` — sprint planning
+   - `/agile-sprint` — sprint planning
    - `/agile-review` — sprint review and demo
    - `/agile-metrics` — sprint metrics
    - `/agile-retro` — retrospective
@@ -73,7 +73,7 @@ Suggested exercise:
 1. The new member chooses a small, real problem (bug, improvement, task)
 2. Uses the `/agile-intake` skill to structure the problem
 3. Decides the correct artifact with the decision tree
-4. Uses `/agile-router` to validate the choice, then creates the plan with `/agile-task` or `/agile-epic`
+4. Uses `/agile-router` to validate the choice, then creates the plan with `/agile-story` or `/agile-epic`
 5. The mentor/tech lead reviews and gives feedback
 
 ### Day 3: Practical exercise — execution with TDD
@@ -144,4 +144,4 @@ Suggested exercise:
 
 ## Relationship with the flow
 
-This skill acts as the entry point to all others. After onboarding, the member should be able to invoke `/agile-router`, `/agile-task`, `/agile-status`, `/agile-planning`, and `/agile-retro` autonomously.
+This skill acts as the entry point to all others. After onboarding, the member should be able to invoke `/agile-router`, `/agile-story`, `/agile-status`, `/agile-sprint`, and `/agile-retro` autonomously.

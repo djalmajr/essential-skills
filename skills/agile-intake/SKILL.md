@@ -24,7 +24,7 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 - Make the problem or opportunity explicit before planning
 - Identify constraints, premises, and open questions
-- Define the next step in the flow: `/agile-roadmap`, `/agile-epic`, or `/agile-task`
+- Define the next step in the flow: `/agile-roadmap`, `/agile-epic`, or `/agile-story`
 - Avoid work starting without clarity about what is being solved
 
 ## When to use
@@ -36,9 +36,9 @@ Write the artifact in the user's language. If the user communicates in Portugues
 
 ## When NOT to use
 
-- The problem is already clear and scope is defined — use `/agile-epic` or `/agile-task` directly
-- The work has already been decomposed — go to `/agile-epic` or `/agile-task`
-- It's a trivial fix — use `/agile-task` directly
+- The problem is already clear and scope is defined — use `/agile-epic` or `/agile-story` directly
+- The work has already been decomposed — go to `/agile-epic` or `/agile-story`
+- It's a trivial fix — use `/agile-story` directly
 
 ## Intake process
 
@@ -75,13 +75,13 @@ Based on trajectory complexity (not duration):
   - Total complexity exceeds what fits in a single epic
 - **Single coordinated initiative** with broad scope → `/agile-epic`
 - **Medium problem** with reasonable scope → `/agile-epic` (to decompose into stories)
-- **Small and clear problem** → `/agile-task`
+- **Small and clear problem** → `/agile-story`
 
 > **Important:** Roadmap is not defined by time horizon (e.g., "3-12 months"). A 4-week initiative with 5 distinct phases and critical ordering also benefits from a roadmap. The criterion is trajectory complexity, not duration.
 
 Register the recommendation in the intake and confirm with the user.
 
-> **Flow rule:** For large or complex items, decomposition via `/agile-epic` is mandatory before execution. Only small, localized items can skip directly to `/agile-task`.
+> **Flow rule:** For large or complex items, decomposition via `/agile-epic` is mandatory before execution. Only small, localized items can skip directly to `/agile-story`.
 
 ### 4. Save the intake
 
@@ -95,7 +95,7 @@ After user confirmation, offer to generate the next artifact following the offic
 
 - Multi-phase trajectory → "Do you want me to create the `/agile-roadmap`?"
 - Single coordinated initiative → "Do you want me to run `/agile-epic` to decompose into stories?"
-- Small/clear → "Do you want me to create the `/agile-task`?"
+- Small/clear → "Do you want me to create the `/agile-story`?"
 
 ### 6. Validate
 
@@ -123,7 +123,7 @@ flowchart LR
     A["/agile-intake"] --> B{next step}
     B --> C["/agile-roadmap"]
     B --> D["/agile-epic"]
-    B --> E["/agile-task"]
+    B --> E["/agile-story"]
 ```
 
 This skill is the entry point of the flow. It captures the problem and directs to the correct skill. For guidance on which skill to use, you can also use `/agile-router`.

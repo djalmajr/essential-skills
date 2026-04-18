@@ -11,7 +11,7 @@ Guides new team members through the agile + AI workflow in a progressive, hands-
 
 ## When NOT to use
 
-- You just need to plan work -- use `/agile-planning` or `/agile-task` instead
+- You just need to plan work -- use `/agile-sprint` or `/agile-story` instead
 - You need to create an artifact -- use the specific skill (intake, epic, etc.)
 - You want to track progress -- use `/agile-status` instead
 - You need a code review -- use `/agile-refinement` instead
@@ -33,7 +33,7 @@ A new backend dev joins the team:
 1. Start by invoking: `/agile-onboarding`
 2. The skill presents the 5-day trail:
    - **Day 1:** Walk through the complete flow (intake -> roadmap -> epic -> task -> execution -> status -> retro). Show the decision tree and available skills.
-   - **Day 2:** Pick a real small problem. Run `/agile-intake`, use `/agile-router` to decide, create the plan with `/agile-task`. Mentor reviews.
+   - **Day 2:** Pick a real small problem. Run `/agile-intake`, use `/agile-router` to decide, create the plan with `/agile-story`. Mentor reviews.
    - **Day 3:** Implement using TDD with AI as pair. Run `/agile-refinement` (code review mode).
    - **Day 4:** Generate `/agile-status` checkpoints and closure.
    - **Day 5:** Full solo cycle. Mentor validates.
@@ -43,7 +43,7 @@ A new backend dev joins the team:
 A new scrum master joins:
 
 1. Start by invoking: `/agile-onboarding`
-2. Trail adapts for management: focus on `/agile-roadmap`, `/agile-epic`, `/agile-planning`, `/agile-retro`, `/agile-status`.
+2. Trail adapts for management: focus on `/agile-roadmap`, `/agile-epic`, `/agile-sprint`, `/agile-retro`, `/agile-status`.
 
 ## Workflow integration
 
@@ -51,7 +51,7 @@ A new scrum master joins:
 flowchart LR
     A["/agile-intake"] --> B["/agile-roadmap"]
     B --> C["/agile-epic"]
-    C --> D["/agile-task"]
+    C --> D["/agile-story"]
     D --> E[execution]
     E --> F["/agile-status"]
     F --> G["/agile-retro"]
@@ -68,4 +68,4 @@ flowchart LR
 ## Chaining
 
 - **Before:** Nothing -- onboarding is the entry point before any other skill.
-- **After:** The new member should be able to use `/agile-router`, `/agile-task`, `/agile-status`, `/agile-planning`, and `/agile-refinement` autonomously.
+- **After:** The new member should be able to use `/agile-router`, `/agile-story`, `/agile-status`, `/agile-sprint`, and `/agile-refinement` autonomously.

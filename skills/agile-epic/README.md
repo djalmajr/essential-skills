@@ -8,11 +8,11 @@ Structures large initiatives into a decomposed story backlog with a roadmap, dep
 - An initiative is large, requiring multiple stories that can't be a single task
 - There are dependencies between deliveries that need explicit sequencing
 - A roadmap is needed to show phases, unblocks, and intermediate validations
-- Medium work that needs richer structure than a simple `/agile-task`
+- Medium work that needs richer structure than a simple `/agile-story`
 
 ## When NOT to use
 
-- The work is small and localized -- use `/agile-task` instead
+- The work is small and localized -- use `/agile-story` instead
 - The problem hasn't been captured yet -- use `/agile-intake` first
 - You need strategic direction -- use `/agile-roadmap` first
 - You need to validate existing artifacts or review code -- use `/agile-refinement`
@@ -42,7 +42,7 @@ The team needs to overhaul the payment system, touching billing, invoices, and p
    - `05-legacy-decommission.md` -- Story 5 (small, depends on 1-4)
 4. Each story file contains context, acceptance criteria, files, tasks, and verification.
 5. Save to: `planning/payment-system-overhaul/epics/01-payment-overhaul/`
-6. The skill suggests: "Do you want to create the execution plan for Story 1 with `/agile-task`?"
+6. The skill suggests: "Do you want to create the execution plan for Story 1 with `/agile-story`?"
 
 ### Example 2: Decomposing an onboarding optimization
 
@@ -50,7 +50,7 @@ A quarterly objective needs to be broken into deliverable stories:
 
 1. Start by invoking: `/agile-epic onboarding-optimization`
 2. The skill decomposes into 4 stories with sizes and dependencies.
-3. Quick-win stories (small, no deps) can go directly to `/agile-task`.
+3. Quick-win stories (small, no deps) can go directly to `/agile-story`.
 4. Larger stories have richer acceptance criteria in their story files.
 
 ## File structure
@@ -69,7 +69,7 @@ planning/<initiative>/epics/NN-<epic-name>/
 flowchart LR
     A["/agile-intake"] --> B["/agile-roadmap"]
     B --> C["/agile-epic"]
-    C --> D["/agile-task"]
+    C --> D["/agile-story"]
     D --> E[execution]
     E --> F["/agile-status"]
 ```
@@ -85,4 +85,4 @@ flowchart LR
 ## Chaining
 
 - **Before:** `/agile-intake` (capture the problem), `/agile-roadmap` (strategic direction)
-- **After:** `/agile-task` (create execution plans for individual stories), `/agile-refinement` (validate artifacts)
+- **After:** `/agile-story` (create execution plans for individual stories), `/agile-refinement` (validate artifacts)

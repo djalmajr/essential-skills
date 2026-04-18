@@ -13,7 +13,7 @@ Consolidates sprint deliveries into a clear, objective review and demo format fo
 
 - Mid-sprint status -- use `/agile-status` instead
 - Reflecting on process -- use `/agile-retro` instead (review shows results, retro discusses process)
-- Planning the next sprint -- use `/agile-planning` instead
+- Planning the next sprint -- use `/agile-sprint` instead
 - Getting quantitative metrics -- use `/agile-metrics` instead (review shows value, metrics show numbers)
 
 ## How to use
@@ -46,7 +46,7 @@ A solo dev finished a 1-week cycle:
 
 ```mermaid
 flowchart LR
-    A["/agile-planning"] --> B[execution]
+    A["/agile-sprint"] --> B[execution]
     B --> C["/agile-status"]
     C --> D["/agile-metrics"]
     D --> E["/agile-review"]
@@ -64,4 +64,4 @@ flowchart LR
 ## Chaining
 
 - **Before:** `/agile-status` (closure reports), `/agile-metrics` (quantitative data)
-- **After:** `/agile-retro` (discuss process), `/agile-planning` (feedback feeds next sprint)
+- **After:** `/agile-retro` (discuss process), `/agile-sprint` (feedback feeds next sprint)

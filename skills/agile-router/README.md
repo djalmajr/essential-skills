@@ -13,7 +13,7 @@ Routes to the appropriate agile skill based on context. Covers three areas: plan
 
 - You already know which skill you need -- invoke it directly
 - You need to create an artifact -- use the specific skill
-- You need to implement code -- use `/agile-task` for the plan first
+- You need to implement code -- use `/agile-story` for the plan first
 
 ## How to use
 
@@ -39,7 +39,7 @@ Example: `/agile-router add multi-language support to onboarding`
 
 1. Start by invoking: `/agile-router`
 2. The router asks where you are in the cycle.
-3. Recommends the sequence: `/agile-review` -> `/agile-retro` -> `/agile-planning`
+3. Recommends the sequence: `/agile-review` -> `/agile-retro` -> `/agile-sprint`
 
 ### Example 3: Deciding the tracking mode
 
@@ -56,10 +56,10 @@ Example: `/agile-router add multi-language support to onboarding`
 | `/agile-intake` | Capture vague problems |
 | `/agile-roadmap` | Strategic direction |
 | `/agile-epic` | Decompose and structure initiatives |
-| `/agile-task` | Execution plan for localized changes |
+| `/agile-story` | Execution plan for localized changes |
 | `/agile-refinement` | Validate artifacts and review code |
 | `/agile-status` | Track progress (checkpoint, consolidation, closure) |
-| `/agile-planning` | Sprint planning |
+| `/agile-sprint` | Sprint planning |
 | `/agile-review` | Sprint review and demo |
 | `/agile-metrics` | Sprint metrics |
 | `/agile-retro` | Retrospective |
@@ -72,7 +72,7 @@ Example: `/agile-router add multi-language support to onboarding`
 flowchart LR
     A["/agile-intake"] --> B["/agile-roadmap"]
     B --> C["/agile-epic"]
-    C --> D["/agile-task"]
+    C --> D["/agile-story"]
     D --> E[execution]
     E --> F["/agile-status"]
     F --> G["/agile-retro"]

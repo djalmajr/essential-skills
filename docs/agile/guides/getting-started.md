@@ -15,7 +15,7 @@ flowchart TD
     A[New problem or request] --> B{Is the problem clear?}
     B -- No --> C["/agile-intake"]
     B -- Yes --> D{What size?}
-    D -- "Small, localized" --> E["/agile-task"]
+    D -- "Small, localized" --> E["/agile-story"]
     D -- "Medium, several files" --> F["/agile-epic"]
     D -- "Large, needs decomposition" --> F
     C --> H{Intake recommends...}
@@ -30,7 +30,7 @@ flowchart TD
     M -- Delivery closure --> P["/agile-status<br>(closure)"]
 
     Q[Need a ceremony?] --> R{Where in cycle?}
-    R -- Starting sprint --> S["/agile-planning"]
+    R -- Starting sprint --> S["/agile-sprint"]
     R -- Sprint ended --> T["/review then /retro"]
     R -- Backlog unclear --> F
 ```
@@ -41,7 +41,7 @@ flowchart TD
 |---|---|
 | Capture a vague problem | `/agile-intake` |
 | Decide which skill to use | `/agile-router` |
-| Plan a small, localized change | `/agile-task` |
+| Plan a small, localized change | `/agile-story` |
 | Decompose and structure a large initiative | `/agile-epic` |
 | Set strategic direction | `/agile-roadmap` (then `/agile-epic`) |
 | Validate planning artifacts | `/agile-refinement` (planning lint mode) |
@@ -49,7 +49,7 @@ flowchart TD
 | Quick daily checkpoint | `/agile-status` (checkpoint mode) |
 | Period/milestone consolidation | `/agile-status` (consolidation mode) |
 | Close a delivery formally | `/agile-status` (closure mode) |
-| Plan a sprint | `/agile-planning` |
+| Plan a sprint | `/agile-sprint` |
 | Demo deliveries to stakeholders | `/agile-review` |
 | Get sprint numbers | `/agile-metrics` |
 | Reflect and improve | `/agile-retro` |
@@ -77,7 +77,7 @@ A new backend dev joins the team and needs to learn the flow.
 **Day 2 -- Practical exercise (intake + planning):**
 - Pick a real small problem (e.g., "add rate limiting to the API")
 - Run `/intake rate limiting` -> skill asks questions, structures the problem
-- Use `/agile-router` to decide: it's a small change -> `/agile-task`
+- Use `/agile-router` to decide: it's a small change -> `/agile-story`
 - Create the plan. Mentor reviews.
 
 **Day 3 -- Practical exercise (TDD + execution):**
@@ -119,10 +119,10 @@ A new scrum master joins and needs to learn the ceremony skills.
 
 The trail adapts for a management profile:
 
-- **Focus:** `/agile-roadmap`, `/agile-epic`, `/agile-planning`, `/agile-retro`, `/agile-status`
+- **Focus:** `/agile-roadmap`, `/agile-epic`, `/agile-sprint`, `/agile-retro`, `/agile-status`
 - **Less:** TDD implementation details
 - **More:** Structuring backlogs, running ceremonies, tracking progress
-- **Exercise:** Conduct a real `/agile-epic` decomposition for a backlog item, then run `/agile-planning` with AI support
+- **Exercise:** Conduct a real `/agile-epic` decomposition for a backlog item, then run `/agile-sprint` with AI support
 - **Same checklist** but with management emphasis
 
 ---

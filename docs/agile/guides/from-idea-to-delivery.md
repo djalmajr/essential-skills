@@ -24,17 +24,17 @@ The skill asks clarifying questions. You provide:
 
 The intake structures: context (security bug), objective (tokens expire after 1h), value signal (close vulnerability).
 
-**Recommendation:** "This is small, clear, and localized -> `/agile-task` directly."
+**Recommendation:** "This is small, clear, and localized -> `/agile-story` directly."
 
 ### Step 2: Route to the right artifact
 
-Since intake already recommended `/agile-task`, you skip the router. But if unsure:
+Since intake already recommended `/agile-story`, you skip the router. But if unsure:
 
 ```
 /router password reset token expiry
 ```
 
-The router evaluates: "1 area, few files, simple validation. This is a small, localized change -> `/agile-task`."
+The router evaluates: "1 area, few files, simple validation. This is a small, localized change -> `/agile-story`."
 
 ### Step 3: Create the execution plan
 
@@ -195,7 +195,7 @@ Implement, verify, commit. No status tracking, no closure -- proportional to the
 
 A PM asks: "We need a `DiscountService` that calculates discounts based on customer tier and promo codes."
 
-### Step 1: Plan with `/agile-task`
+### Step 1: Plan with `/agile-story`
 
 ```
 /task discount service with tier + promo codes

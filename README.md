@@ -9,7 +9,7 @@ Skills for agile delivery management powered by AI agents.
 npx skills add zomme/essential-skills --all
 
 # Specific skills
-npx skills add zomme/essential-skills --skill agile-epic --skill agile-task
+npx skills add zomme/essential-skills --skill agile-epic --skill agile-story
 ```
 
 ## Skills (17)
@@ -21,10 +21,10 @@ npx skills add zomme/essential-skills --skill agile-epic --skill agile-task
 | agile-intake | Capture vague problems into structured intake documents |
 | agile-roadmap | Quarterly or initiative roadmap |
 | agile-epic | Decompose initiative into stories with tasks |
-| agile-task | Detail a task with context and execution checklist |
+| agile-story | Detail a task with context and execution checklist |
 | agile-refinement | Validate planning artifacts + review code |
 | agile-status | Track progress: checkpoint, consolidation, or closure |
-| agile-planning | Plan a sprint: objective, items, capacity |
+| agile-sprint | Plan a sprint: objective, items, capacity |
 | agile-review | Sprint review and demo for stakeholders |
 | agile-metrics | Objective sprint metrics |
 | agile-retro | Retrospective with improvement actions |
@@ -103,7 +103,7 @@ Each skill is invoked with `/skill-name`:
 ```
 /agile-intake
 /agile-epic
-/agile-task
+/agile-story
 /agile-refinement
 /agile-status
 /wiki-query

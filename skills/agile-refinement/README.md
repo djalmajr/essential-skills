@@ -13,10 +13,10 @@ Validates planning artifacts and reviews code for quality, consistency, and comp
 
 ## When NOT to use
 
-- Creating planning artifacts -- use `/agile-intake`, `/agile-epic`, `/agile-task`, or `/agile-roadmap`
+- Creating planning artifacts -- use `/agile-intake`, `/agile-epic`, `/agile-story`, or `/agile-roadmap`
 - Decomposing work into stories -- use `/agile-epic` (which handles decomposition directly)
 - Tracking delivery progress -- use `/agile-status`
-- Planning a sprint -- use `/agile-planning`
+- Planning a sprint -- use `/agile-sprint`
 
 ## How to use
 
@@ -61,7 +61,7 @@ This skill does NOT produce a saved artifact. It produces an inline report with:
 ```mermaid
 flowchart LR
     A["/agile-epic"] --> B["/agile-refinement<br>(planning lint)"]
-    C["/agile-task"] --> D[execution]
+    C["/agile-story"] --> D[execution]
     D --> E["/agile-refinement<br>(code review)"]
     E --> F["/agile-status"]
 ```

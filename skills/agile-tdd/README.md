@@ -13,7 +13,7 @@ Guides the TDD (Test-Driven Development) cycle and pragmatic testing strategy. F
 
 - Quick prototypes -- use `/agile-proto` instead
 - Throwaway scripts or documentation-only changes
-- You need to plan the feature first -- use `/agile-task` or `/agile-epic`
+- You need to plan the feature first -- use `/agile-story` or `/agile-epic`
 
 ## How to use
 
@@ -53,7 +53,7 @@ Building a new `NotificationService` from scratch:
 
 ```mermaid
 flowchart LR
-    A["/agile-task"] --> B[TDD cycle]
+    A["/agile-story"] --> B[TDD cycle]
     B --> C[Red: failing test]
     C --> D[Green: minimum code]
     D --> E[Refactor]
@@ -72,6 +72,6 @@ flowchart LR
 
 ## Chaining
 
-- **Before:** `/agile-task` (plan what to build), `/agile-epic` (for larger initiatives)
+- **Before:** `/agile-story` (plan what to build), `/agile-epic` (for larger initiatives)
 - **During:** TDD cycle runs alongside implementation
 - **After:** `/agile-refinement` (review test quality), `/agile-status` (closure mode to verify coverage)
