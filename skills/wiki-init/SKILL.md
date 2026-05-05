@@ -19,14 +19,29 @@ The user may use natural language. Route intent like this:
 ## Workflow
 
 1. Run `scripts/wiki-init.ts doctor --project <path>` first.
-2. Read the report: wiki layout, AGENTS/CLAUDE, harnesses, hooks, drift, QMD status.
+2. Read the report: wiki layout, AGENTS/CLAUDE, harnesses, hooks, **cache migration**, **installed drift**, and QMD status.
 3. For changes, run `install` or `migrate` without `--write` and show the planned file actions plus the suggested topology.
-4. Ask the user in plain language to confirm where the wiki will live and what QMD index will be used. Do not require the user to know the preset name.
-5. Only run with `--write` after passing explicit `--wiki` and `--index`. The script blocks writes without those flags.
-6. Re-run `doctor` after writes.
-7. `--write` prepares the managed QMD checkout under the skill cache (`~/.local/share/skills/qmd/checkouts/qmd`) and points project wrappers at that checkout. It clones `https://github.com/tobi/qmd.git` when missing and installs dependencies there.
-8. If the target project needs an index, initialize QMD with the generated wrapper: `<wrapper> collection add <wiki-path> --name <index> --mask "**/*.md"`, then `<wrapper> update` and `<wrapper> embed`.
-9. Run `scripts/validate-wiki-init.ts` before changing reusable templates or scripts.
+4. **Ask the user explicitly: local wiki or shared wiki?** Do not silently default to a sibling path.
+   - **Local** — wiki lives inside this repo at `wiki/`. Default for standalone projects and private experiments.
+   - **Shared** — wiki lives outside this repo (sibling, central knowledge base, monorepo location). When the user picks shared, **ask for the absolute or relative path** they want to use; only use detected siblings (`../knowledge-base`, etc.) as a *suggestion* the user must confirm.
+5. Confirm the QMD index name with the user. Suggest a sensible default (project basename for local, organization or product name for shared) but let the user override.
+6. Only run with `--write` after passing explicit `--wiki` and `--index`. The script blocks writes without those flags.
+7. Re-run `doctor` after writes.
+8. `--write` prepares the managed QMD checkout under the skill cache (`~/.local/share/skills/qmd/checkouts/qmd`) and points project wrappers at that checkout. It clones `https://github.com/tobi/qmd.git` when missing and installs dependencies there.
+9. If the target project needs an index, initialize QMD with the generated wrapper: `<wrapper> collection add <wiki-path> --name <index> --mask "**/*.md"`, then `<wrapper> update` and `<wrapper> embed`.
+10. Run `scripts/validate-wiki-init.ts` before changing reusable templates or scripts.
+
+## What the doctor reports
+
+`doctor` is the always-safe entry point. It reports:
+
+- **wiki_path**, **qmd_index**, recommended topology, and harness coverage.
+- Presence of canonical files (`AGENTS.md`, `CLAUDE.md`, `.wiki-guardrails.yml`, MCP/agent configs).
+- **Markdown drift** — tracked `.md` files outside the configured wiki path.
+- **Cache migration** — detects a legacy `~/.local/share/essential-skills/qmd` cache and reports whether `--write` will copy it to the current `~/.local/share/skills/qmd` location. The legacy directory is preserved (never deleted) for safety.
+- **Installed drift** — for every file the latest templates would generate, compares the on-disk content against the desired content. Reports stale paths (e.g., references to the legacy cache), outdated managed blocks in `AGENTS.md`/`CLAUDE.md`, and hooks/configs that fall behind the templates. The recommended fix is `wiki-init update-hooks --write`.
+- **QMD status** — managed checkout location, version, patch report, index status.
+- **Planned actions** — every file the next `install`/`migrate`/`update-hooks` run would create or update.
 
 ## Script
 
