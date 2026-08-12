@@ -31,6 +31,13 @@ Human-facing notes moved out of individual skill folders.
 |---|---|
 | [figma-capture](figma-capture.md) | Rendered page → clipboard capture for Figma paste |
 
+## Media (2)
+
+| Skill | One-liner |
+|---|---|
+| [create-audio](create-audio.md) | Spoken audio (podcast / tutorial / VO); asks which engine |
+| [create-video](create-video.md) | Screencast (Playwright) or composed video (Remotion) |
+
 ## Workflow / Quality (9)
 
 Ultracode-style multi-agent quality system — overview in [work.md](work.md).

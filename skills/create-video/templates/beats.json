@@ -1,0 +1,49 @@
+{
+  "viewport": { "width": 1440, "height": 900 },
+  "hydration": "html[data-hydrated='true']",
+  "voDir": "default-vo",
+  "outDir": "demo-record",
+  "forbiddenLabel": "notif|bell|account|profile|logout|inbox|settings",
+  "signIn": {
+    "path": "/sign-in",
+    "emailSelector": "#email",
+    "passwordSelector": "#password",
+    "submitName": "/^sign in$|^entrar$/i"
+  },
+  "beats": [
+    {
+      "id": "01-open",
+      "wav": "01-open.wav",
+      "breath": 0.35,
+      "route": "/",
+      "actions": []
+    },
+    {
+      "id": "02-main",
+      "wav": "02-main.wav",
+      "breath": 0.3,
+      "route": "/",
+      "actions": [{ "type": "scroll", "dy": 80 }]
+    },
+    {
+      "id": "03-action",
+      "wav": "03-action.wav",
+      "breath": 0.3,
+      "route": "/example",
+      "actions": [
+        {
+          "type": "click",
+          "role": "button",
+          "name": "/start|começar/i"
+        }
+      ]
+    },
+    {
+      "id": "04-close",
+      "wav": "04-close.wav",
+      "breath": 0.45,
+      "route": "/",
+      "actions": []
+    }
+  ]
+}

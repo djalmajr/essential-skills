@@ -1,0 +1,22 @@
+{
+  "language": "pt-BR",
+  "tone": "calm tutorial",
+  "proofId": "02-main",
+  "lines": [
+    {
+      "id": "01-open",
+      "text": "This is a short spoken introduction.",
+      "breath": 0.35
+    },
+    {
+      "id": "02-main",
+      "text": "Each line is one idea, spoken calmly.",
+      "breath": 0.3
+    },
+    {
+      "id": "03-close",
+      "text": "That is the whole episode.",
+      "breath": 0.45
+    }
+  ]
+}

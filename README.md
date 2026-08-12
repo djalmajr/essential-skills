@@ -49,7 +49,7 @@ These skills are written for the common `SKILL.md` format used by `skills.sh`, C
 
 Keep frontmatter portable. Avoid agent-specific fields unless the skill truly needs them and the behavior is documented in `SKILL.md`.
 
-## Skills (27)
+## Skills (29)
 
 ### Agile (16)
 
@@ -78,6 +78,13 @@ Keep frontmatter portable. Avoid agent-specific fields unless the skill truly ne
 |-------|---------|
 | figma-capture | Copy a rendered local page to the clipboard for pasting into Figma |
 | excalidraw | Author & edit raw `.excalidraw` scene files by hand (element JSON, binding, updating sections) |
+
+### Media (2)
+
+| Skill | Purpose |
+|-------|---------|
+| create-audio | Spoken audio (podcast / tutorial / voiceover); asks which engine to use |
+| create-video | Video: Playwright screencast or Remotion motion/promo/intro |
 
 ### Workflow / Quality (9)
 
@@ -150,6 +157,8 @@ Each skill is invoked with `/skill-name`:
 /agile-status
 /agile-skill-feedback
 /figma-capture
+/create-audio
+/create-video
 ```
 
 Not sure which skill to use? Try `/agile-router`.

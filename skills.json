@@ -22,6 +22,8 @@
     "aim-init",
     "aim-query",
     "aim-write",
+    "create-audio",
+    "create-video",
     "excalidraw",
     "figma-capture",
     "minions",
