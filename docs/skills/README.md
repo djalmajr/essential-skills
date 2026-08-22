@@ -38,6 +38,12 @@ Human-facing notes moved out of individual skill folders.
 | [create-audio](create-audio.md) | Spoken audio (podcast / tutorial / VO); asks which engine |
 | [create-video](create-video.md) | Screencast (Playwright) or composed video (Remotion) |
 
+## Planning (1)
+
+| Skill | One-liner |
+|---|---|
+| [plan-goal](plan-goal.md) | Long plan + `*.goal.md` + paste-ready `/goal` text |
+
 ## Workflow / Quality (9)
 
 Ultracode-style multi-agent quality system — overview in [work.md](work.md).

@@ -49,7 +49,7 @@ These skills are written for the common `SKILL.md` format used by `skills.sh`, C
 
 Keep frontmatter portable. Avoid agent-specific fields unless the skill truly needs them and the behavior is documented in `SKILL.md`.
 
-## Skills (29)
+## Skills (30)
 
 ### Agile (16)
 
@@ -85,6 +85,12 @@ Keep frontmatter portable. Avoid agent-specific fields unless the skill truly ne
 |-------|---------|
 | create-audio | Spoken audio (podcast / tutorial / voiceover); asks which engine to use |
 | create-video | Video: Playwright screencast or Remotion motion/promo/intro |
+
+### Planning (1)
+
+| Skill | Purpose |
+|-------|---------|
+| plan-goal | Long plan + `*.goal.md` + paste-ready `/goal` text for the Grok TUI |
 
 ### Workflow / Quality (9)
 
@@ -159,6 +165,7 @@ Each skill is invoked with `/skill-name`:
 /figma-capture
 /create-audio
 /create-video
+/plan-goal
 ```
 
 Not sure which skill to use? Try `/agile-router`.

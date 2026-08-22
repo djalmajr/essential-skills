@@ -80,6 +80,7 @@ A few patterns recur across real sessions:
 | Multi-phase initiative with dependencies | `/agile-roadmap` |
 | An initiative decomposed into stories | `/agile-epic` |
 | One executable plan for a single change | `/agile-story` |
+| Long plan plus paste-ready Grok `/goal` | `/plan-goal` |
 | TDD coaching or enforcement install | `/agile-tdd` |
 | Validate a planning artifact or review code | `/agile-refinement` |
 | Daily / period / closure status | `/agile-status` |
