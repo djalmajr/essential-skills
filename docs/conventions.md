@@ -89,7 +89,7 @@ A few patterns recur across real sessions:
 | Decide which skill to use | `/agile-router` |
 | Prototype a static browser UI with HTM UI | `/agile-proto` |
 | Prototype screens and states in Pen.dev | `/agile-pen` |
-| Copy a rendered local page into Figma | `/figma-capture` |
+| UI de produção sob contrato do DESIGN.md raiz (contrato/audit/bootstrap) | `/design-workflow` |
 | Generate spoken audio (podcast / tutorial / VO) | `/create-audio` |
 | Record a live UI tutorial or compose a Remotion video | `/create-video` |
 | Onboard a new team member | `/agile-onboarding` |

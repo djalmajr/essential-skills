@@ -25,8 +25,8 @@ After applying all 11 feedback artifacts to the skills repo source (`skills/skil
 When the skill loaded, its SKILL.md body was the **pre-refinement version** — none of the changes applied earlier today were visible in the loaded text. A `diff -q` between source and installed confirmed:
 
 ```
-Files /Users/djalmajr/.claude/skills/agile-story/SKILL.md
-  and /Users/djalmajr/Developer/acmecorp/skills/skills/agile-story/SKILL.md differ
+Files ~/.claude/skills/agile-story/SKILL.md
+  and <skills-repo>/skills/agile-story/SKILL.md differ
 ```
 
 Per `docs/distribution.md`, skill installation flows through `bunx skills add djalmajr/skills --skill '*'`. There is no local sync mechanism that propagates source edits into the installed location. So refinements landed in source but the running agent kept reading the cached/installed version.

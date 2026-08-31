@@ -6,7 +6,7 @@
 
 ## Auditability
 
-- Source skill version/commit: worktree de `/Users/djalmajr/Developer/djalmajr/skills`
+- Source skill version/commit: worktree local deste repo
 - Model/provider (if AI-generated): Codex / OpenAI
 - Originating session/journal: teste do Trello Clone em Pen.dev
 - Related findings/proposals: `feedback/2026-07-21-agile-pen-registry-blocks.md`
@@ -22,7 +22,7 @@
 
 - Expected behavior: a skill instalada em qualquer máquina resolve uma versão auditável do CLI sem depender de outro checkout local.
 - Actual behavior: a skill orientava o agente a procurar o CLI em uma skill instalada ou repositório irmão.
-- Evidence: o E2E precisou usar `/Users/djalmajr/Developer/djalmajr/pencil-capture/bin/pen-capture.mjs`.
+- Evidence: o E2E precisou usar `<pencil-capture>/bin/pen-capture.mjs` (checkout local).
 - Impact: a instalação da `agile-pen` isoladamente não reproduzia o fluxo de captura.
 
 ## Diagnosis

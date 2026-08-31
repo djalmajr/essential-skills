@@ -76,7 +76,7 @@ Keep frontmatter portable. Avoid agent-specific fields unless the skill truly ne
 
 | Skill | Purpose |
 |-------|---------|
-| figma-capture | Copy a rendered local page to the clipboard for pasting into Figma |
+| design-workflow | Root DESIGN.md contract for production UI: precedence, closed vocabulary, visual review, deterministic parity gate, project bootstrap |
 | excalidraw | Author & edit raw `.excalidraw` scene files by hand (element JSON, binding, updating sections) |
 
 ### Media (2)
@@ -162,7 +162,6 @@ Each skill is invoked with `/skill-name`:
 /agile-refinement
 /agile-status
 /agile-skill-feedback
-/figma-capture
 /create-audio
 /create-video
 /plan-goal

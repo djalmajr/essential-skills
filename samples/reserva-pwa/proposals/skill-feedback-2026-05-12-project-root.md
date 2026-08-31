@@ -25,7 +25,7 @@
   - `skills/wiki-lint/SKILL.md` (pending)
   - `skills/wiki-query/SKILL.md` (pending)
   - `skills/wiki-policy-check/SKILL.md` (pending)
-- **Skill version/source, if known:** current HEAD of the repo at `/Users/djalmajr/Developer/acmecorp/skills` on branch `main`.
+- **Skill version/source, if known:** current HEAD of the repo at `<skills-repo>` on branch `main`.
 
 ## Observation
 
