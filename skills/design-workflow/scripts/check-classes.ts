@@ -24,6 +24,11 @@ function arg(flag: string, fallback?: string) {
 }
 
 const root = arg("--project", process.cwd())!;
+if (typeof Bun === "undefined" || !("YAML" in Bun)) {
+  console.error("check-classes: requer Bun >= 1.2.21 (Bun.YAML nativo)");
+  process.exit(2);
+}
+
 const designPath = join(root, arg("--design", "DESIGN.md")!);
 
 const design = readFileSync(designPath, "utf8");

@@ -97,7 +97,7 @@ eyeballed. Never mark UI work complete with a failing step.
 ## Mode: audit
 
 Deterministic parity gate between code and `DESIGN.md`. No LLM judgment in
-the gate. Scripts require **Bun >= 1.2** (they use `Bun.YAML`).
+the gate. Scripts require **Bun >= 1.2.21** (they use the native `Bun.YAML`).
 
 Run the bundled scripts **relative to this SKILL.md's own directory** (the
 skill may be installed under any harness/user skill root — never assume they

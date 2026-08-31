@@ -15,6 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
+        with:
+          # Bun.YAML (usado pelos checks) existe a partir de 1.2.21
+          bun-version: ">=1.2.21"
 
       # Estrutura/refs/contraste do próprio DESIGN.md (formato Google)
       - name: Lint DESIGN.md

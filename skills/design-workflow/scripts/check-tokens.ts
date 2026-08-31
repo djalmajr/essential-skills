@@ -36,6 +36,11 @@ function arg(flag: string, fallback?: string) {
   return i >= 0 ? process.argv[i + 1] : fallback;
 }
 
+if (typeof Bun === "undefined" || !("YAML" in Bun)) {
+  console.error("check-tokens: requer Bun >= 1.2.21 (Bun.YAML nativo)");
+  process.exit(2);
+}
+
 const root = arg("--project", process.cwd())!;
 const designPath = join(root, arg("--design", "DESIGN.md")!);
 

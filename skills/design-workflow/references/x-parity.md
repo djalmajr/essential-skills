@@ -53,6 +53,6 @@ Regras:
   `--primary`. E só profundidade relativa 0 conta: `--primary` dentro de
   regra aninhada (`:root { .child { … } }`) não é declaração do escopo-alvo.
 - Divergiu → ou o CSS ou o token está errado; decida com o dono e alinhe.
-- Requisito de runtime: **Bun >= 1.2** (`Bun.YAML`). No consumidor, os
+- Requisito de runtime: **Bun >= 1.2.21** (`Bun.YAML` nativo). No consumidor, os
   scripts são VENDORIZADOS em `scripts/design/` pelo bootstrap; CI usa essas
   cópias (runner não acessa o checkout privado de skills).
