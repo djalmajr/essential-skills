@@ -11,7 +11,25 @@ skill. `agile-pen` cobre o lado protótipo (Pen.dev) do mesmo arquivo.
 |---|---|---|
 | `contract` (default) | Qualquer implementação/revisão de UI | Precedência em conflitos (instrução do usuário > DESIGN.md > padrões locais > defaults), vocabulário fechado (só tokens/exceções declarados), revisão pré-handoff obrigatória (render real, todos os temas declarados pelo projeto, reflow, a11y, medidas) |
 | `audit` | Gate local ou CI | `check-classes.ts` (classes proibidas fora do allowlist) + `check-tokens.ts` (paridade exata YAML↔CSS var), ambos configurados só pelo bloco `x-parity` do DESIGN.md do projeto — determinísticos, zero LLM |
-| `bootstrap` | Projeto novo/adotante | DESIGN.md do template (rascunho sintetizado é permitido, mas revisado por humano antes de virar canônico), regra de agente, `x-parity`, CI, rota opcional `/design.md` |
+| `bootstrap` | Projeto novo/adotante | Convergência reexecutável: DESIGN.md do template (rascunho sintetizado é permitido, mas revisado por humano antes de virar canônico), regra de agente, `x-parity`, scripts vendorizados e CI |
+
+## Bootstrap e CI
+
+O bootstrap detecta a configuração já versionada: `.gitlab-ci.yml` seleciona
+GitLab CI; `.github/workflows/` seleciona GitHub Actions. A skill não prefere
+um provedor. Se ambos existirem, o dono escolhe qual recebe o gate obrigatório;
+se nenhum existir, o gate local continua disponível e a integração de CI é
+reportada como pendente, sem inventar infraestrutura.
+
+Templates separados vivem em `templates/ci/gitlab-ci.yml` e
+`templates/ci/github-actions.yml`. Ambos executam o mesmo contrato com
+Bun >= 1.2.21: lint do Google DESIGN.md e os dois checks vendorizados em
+`scripts/design/`.
+
+Reexecutar bootstrap preserva o `DESIGN.md`, a regra equivalente e o pipeline
+do projeto; apenas completa peças ausentes e compara/atualiza os scripts
+vendorizados. Ao final, reporta o estado de contrato, regra, `x-parity`,
+scripts, provedor/job de CI e execução local.
 
 ## Origem
 

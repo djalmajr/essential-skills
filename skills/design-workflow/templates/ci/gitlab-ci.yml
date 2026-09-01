@@ -1,0 +1,14 @@
+# Merge this job into .gitlab-ci.yml; preserve the repository's stages and rules.
+# The vendored scripts under scripts/design/ are the CI source of truth.
+design-gate:
+  stage: test
+  image: oven/bun:1.2.21-alpine
+  before_script: []
+  cache: {}
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  script:
+    - bunx @google/design.md@0.4.0 lint DESIGN.md
+    - bun scripts/design/check-classes.ts --project .
+    - bun scripts/design/check-tokens.ts --project .

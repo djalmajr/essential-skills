@@ -5,7 +5,7 @@
  *
  * Config (front matter do DESIGN.md):
  *   x-parity:
- *     include: ["src"]                      # dirs/globs varridos (relativos à raiz)
+ *     include: ["src"]                      # dirs varridos (relativos à raiz)
  *     exclude: ["**\/renderer/**"]          # sempre soma .test., locales por conta do projeto
  *     forbidden:
  *       - "text-(sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl)(?![-\\w])"
@@ -58,7 +58,10 @@ const extensions = new Set([".ts", ".tsx", ".jsx", ".vue", ".svelte", ".astro", 
 
 function globToRegExp(pattern: string) {
   const escaped = pattern.replace(/[.+^${}()|[\]\\]/g, "\\$&");
-  const withGlobs = escaped.replaceAll("**", "\u0000").replaceAll("*", "[^/]*").replaceAll("\u0000", ".*");
+  const withGlobs = escaped
+    .replaceAll("**", "\u0000")
+    .replaceAll("*", "[^/]*")
+    .replaceAll("\u0000", ".*");
   return new RegExp(`^${withGlobs}$`);
 }
 
@@ -80,16 +83,25 @@ function* walk(dir: string): Generator<string> {
   }
 }
 
-const violations: string[] = [];
+const includeDirs: string[] = [];
 for (const base of include) {
   const dir = join(root, base);
   let stats: Stats;
   try {
     stats = statSync(dir);
   } catch {
-    continue;
+    console.error(`x-parity.include aponta para diretório ausente: ${base}`);
+    process.exit(2);
   }
-  if (!stats.isDirectory()) continue;
+  if (!stats.isDirectory()) {
+    console.error(`x-parity.include não é diretório: ${base}`);
+    process.exit(2);
+  }
+  includeDirs.push(dir);
+}
+
+const violations: string[] = [];
+for (const dir of includeDirs) {
   for (const file of walk(dir)) {
     if (excluded(file)) continue;
     const lines = readFileSync(file, "utf8").split("\n");

@@ -31,6 +31,10 @@ x-parity:
 
 Regras:
 
+- Cada entrada de `include` deve ser um diretório existente relativo à raiz;
+  caminho ausente ou arquivo é erro de configuração (exit 2), nunca gate verde.
+- Higiene fixa do scanner (não configurável): `node_modules`, diretórios
+  iniciados por ponto e arquivos `*.test.*` / `*.spec.*` não são varridos.
 - `forbidden`/`allowed` codificam o vocabulário fechado do projeto; toda
   entrada em `allowed` corresponde a uma exceção indicada pelo dono na prosa
   do `DESIGN.md` (seção de exceções / Do's & Don'ts).

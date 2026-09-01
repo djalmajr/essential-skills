@@ -41,7 +41,14 @@ bunx skills add djalmajr/skills --skill design-workflow
 ```
 
 **Adopt in a project** — new or existing, the path is the same:
-`--mode=bootstrap`. The difference is only the starting material:
+`--mode=bootstrap`. Bootstrap is a convergent operation, not a one-time
+scaffold: inventory the existing contract, equivalent agent rule, `x-parity`
+configuration, vendored scripts, and CI provider before changing anything.
+Re-running it MUST NOT replace the project-owned `DESIGN.md`, duplicate an
+equivalent rule/job, or change CI provider. It only fills missing pieces and
+refreshes vendored scripts after showing their diff.
+
+The starting material differs:
 
 - *New project*: fill the template from the owner's decisions; `forbidden`/
   `allowed` start empty and grow as the owner sets policy.
@@ -56,8 +63,10 @@ bunx skills add djalmajr/skills --skill design-workflow
 - Skill itself: `bunx skills add djalmajr/skills --skill design-workflow`
   again (re-installs the current version).
 - Consumers: the gate scripts are VENDORED (`scripts/design/`), so consumer
-  repos do not auto-update. After a skill update, re-run bootstrap step 4
-  (re-copy both scripts) in each consumer; drift check:
+  repos do not auto-update. After a skill update, re-run bootstrap to compare
+  and refresh both scripts. Drift checks:
+  `diff <this-skill-dir>/scripts/check-classes.ts scripts/design/check-classes.ts`
+  and
   `diff <this-skill-dir>/scripts/check-tokens.ts scripts/design/check-tokens.ts`.
   Re-run both checks green before committing the refresh.
 - `DESIGN.md` itself never "updates" from the skill — it is owned by the
@@ -113,7 +122,10 @@ In a bootstrapped consumer, prefer the vendored copies at
 
 - `check-classes.ts` — scans source for utility classes forbidden by the
   project's `x-parity` front-matter block (e.g. font-size utilities outside
-  the declared allowlist). Exits non-zero listing `file:line:token`.
+  the declared allowlist). Exits non-zero listing `file:line:token`. Fixed
+  traversal hygiene (not project configuration): skips `node_modules`,
+  dot-directories, and `*.test.*` / `*.spec.*`; every configured `include`
+  must be an existing directory or the scanner exits 2.
 - `check-tokens.ts` — asserts each front-matter token mapped in
   `x-parity.cssVars` is declared with the exact value **in the exact CSS
   scope** (`{selector, var}`; `.dark` mappings for `darkColors`). Semantics:
@@ -137,14 +149,21 @@ gate.
 
 ## Mode: bootstrap
 
-Set a project up as a consumer:
+Set a project up as a consumer. First detect the CI provider from checked-in
+configuration: `.gitlab-ci.yml` means GitLab CI; `.github/workflows/` means
+GitHub Actions. The skill has **no provider preference**. If both are present,
+ask which provider owns the required gate; if neither is present, vendor and
+run the local gate but report CI as skipped rather than inventing a provider.
+
+Then converge these pieces:
 
 1. `DESIGN.md` at the root from
    [templates/DESIGN.template.md](templates/DESIGN.template.md) — Google
    DESIGN.md format. For an existing codebase, a synthesized draft is allowed
    as a starting point but MUST be human-reviewed before becoming canonical.
    Seed the project-specific sections: visual priorities, exception lists,
-   and Do's & Don'ts (this is where product aesthetics live).
+   and Do's & Don'ts (this is where product aesthetics live). Never overwrite
+   an existing project-owned contract during bootstrap.
 2. Agent rule from [templates/rule-snippet.md](templates/rule-snippet.md)
    into the project's rules dir (`.agents/rules/design-workflow.md` or the
    project's canonical location) — unless an equivalent "read root DESIGN.md
@@ -154,13 +173,24 @@ Set a project up as a consumer:
 4. **Vendor the gate**: copy `scripts/check-classes.ts` and
    `scripts/check-tokens.ts` from this skill into the consumer repo at
    `scripts/design/` (versioned — CI runners have no access to the private
-   skills checkout) and add the CI job from
-   [templates/design-gate.yml](templates/design-gate.yml) (it installs Bun
-   via `oven-sh/setup-bun`). Run both once and fix or allowlist findings
-   with the owner before enabling the gate. Re-running bootstrap refreshes
-   the vendored copies.
-5. Optional: serve `DESIGN.md` at a dev-server route (e.g. `/design.md`) so
+   skills checkout). Re-running bootstrap compares and refreshes these copies.
+5. **Integrate the detected CI provider** without replacing its existing
+   pipeline conventions:
+   - GitHub Actions:
+     [templates/ci/github-actions.yml](templates/ci/github-actions.yml).
+   - GitLab CI:
+     [templates/ci/gitlab-ci.yml](templates/ci/gitlab-ci.yml).
+
+   The templates share one contract: Bun >= 1.2.21, Google DESIGN.md lint,
+   then both vendored parity checks. Merge/adapt the job; never overwrite an
+   existing workflow. Run the commands locally and fix or allowlist findings
+   with the owner BEFORE enabling the CI job — never turn a red gate on.
+6. Optional: serve `DESIGN.md` at a dev-server route (e.g. `/design.md`) so
    external tools fetch the live contract.
+
+Finish with an explicit status for all six pieces: canonical contract,
+equivalent agent rule, `x-parity`, vendored scripts, detected CI provider/job,
+and local gate result. This status is what makes bootstrap safely repeatable.
 
 ## Prompting
 

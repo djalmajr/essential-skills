@@ -1,0 +1,30 @@
+# Copy to .github/workflows/design-gate.yml, then adapt only repository conventions.
+# The vendored scripts under scripts/design/ are the CI source of truth.
+name: design-gate
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  design-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          # Bun.YAML is available from Bun 1.2.21.
+          bun-version: "1.2.21"
+
+      - name: Lint DESIGN.md
+        run: bunx @google/design.md@0.4.0 lint DESIGN.md
+
+      - name: Check forbidden classes
+        run: bun scripts/design/check-classes.ts --project .
+
+      - name: Check token mapping
+        run: bun scripts/design/check-tokens.ts --project .
