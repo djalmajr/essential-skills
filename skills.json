@@ -3,18 +3,16 @@
   {
    "source": "djalmajr/skills",
    "skills": [
+    "agile-design",
     "agile-epic",
     "agile-intake",
-    "agile-metrics",
     "agile-onboarding",
-    "agile-pen",
     "agile-proto",
     "agile-refinement",
     "agile-retro",
     "agile-review",
     "agile-roadmap",
     "agile-router",
-    "agile-skill-feedback",
     "agile-sprint",
     "agile-status",
     "agile-story",
@@ -28,16 +26,7 @@
     "excalidraw",
     "plan-goal",
     "ux-flows",
-    "ux-persona",
-    "work",
-    "work-check",
-    "work-exhaust",
-    "work-gaps",
-    "work-judge",
-    "work-refute",
-    "work-review",
-    "work-sweep",
-    "work-tournament"
+    "ux-persona"
    ]
   }
  ]

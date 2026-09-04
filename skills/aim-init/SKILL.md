@@ -17,10 +17,10 @@ durable knowledge. Works greenfield or brownfield (incl. migrating off the old
 
 ## Route intent
 
-- "como está?", "preciso migrar?", "doctor" → run **doctor** (read-only diagnosis).
-- "configura ai-memory aqui", "liga a captura", "init" → **install** (greenfield).
-- "migra do qmd", "tira o qmd e põe ai-memory" → **migrate** (brownfield).
-- "atualiza/pareia o CLI", "refresca os hooks", "tá numa versão velha", "upgrade" → **refresh**
+- "how's it looking?", "do I need to migrate?", "doctor" (also PT: "como está?", "preciso migrar?") → run **doctor** (read-only diagnosis).
+- "set up ai-memory here", "turn on capture", "init" (also PT: "configura ai-memory aqui", "liga a captura") → **install** (greenfield).
+- "migrate off qmd", "drop qmd and use ai-memory" (also PT: "migra do qmd", "tira o qmd e põe ai-memory") → **migrate** (brownfield).
+- "update/pair the CLI", "refresh the hooks", "it's on an old version", "upgrade" (also PT: "atualiza/pareia o CLI", "refresca os hooks", "tá numa versão velha") → **refresh**
   (detect the environment + bring the local CLI and hooks to parity with the server — no
   marker/snippet/MCP changes).
 

@@ -6,14 +6,15 @@ description: >
   code-vs-tokens parity audit, and per-project bootstrap. Modes:
   --mode=contract (default; load before implementing, restyling, or reviewing
   production UI), --mode=audit (run the parity gate), --mode=bootstrap (set up
-  DESIGN.md + rule + CI in a project). Triggers: "contrato de design",
-  "auditoria de design", "paridade de tokens", "bootstrap do design workflow",
-  /design-workflow. Prototype-side DESIGN.md work (Pen.dev) belongs to
-  agile-pen; browser prototypes to agile-proto.
+  DESIGN.md + rule + CI in a project). Triggers: "design contract",
+  "design audit", "token parity", "bootstrap the design workflow"
+  (also PT: "contrato de design", "auditoria de design", "paridade de tokens"),
+  /design-workflow. Design-tool prototypes (Paper, Figma, Pen.dev, Penpot…)
+  belong to agile-design; browser prototypes to agile-proto.
 argument-hint: "[--mode=contract|audit|bootstrap] [--project <path>]"
 user-invocable: true
 metadata:
-  short-description: Contrato de UI, paridade código↔DESIGN.md e bootstrap
+  short-description: UI contract, code↔DESIGN.md parity, and bootstrap
 ---
 
 # /design-workflow
@@ -22,7 +23,7 @@ The project's root `DESIGN.md` is the single canonical design source
 (front-matter tokens are normative; prose sections explain application). This
 skill is **process-only and project-agnostic**: every token value, visual
 priority, exception, and anti-pattern lives in the consumer project's
-`DESIGN.md`, never here. `agile-pen` consumes the same file on the prototype
+`DESIGN.md`, never here. `agile-design` consumes the same file on the prototype
 side; this skill owns the production-code side.
 
 ## Project root

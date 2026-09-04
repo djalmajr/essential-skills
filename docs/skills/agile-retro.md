@@ -15,7 +15,7 @@ Conducts a retrospective that transforms reflection into concrete improvement ac
 - Mid-sprint status -- use `/agile-status` (checkpoint mode) instead
 - Planning the next sprint -- use `/agile-sprint` instead (but retro should feed into it)
 - Closing a delivery with verification -- use `/agile-status` (closure mode) first, then retro
-- You need metrics/data -- use `/agile-metrics` first, then retro
+- You need metrics/data -- run `/agile-review` first (its metrics section), then retro
 
 ## How to use
 
@@ -67,5 +67,5 @@ flowchart LR
 
 ## Chaining
 
-- **Before:** `/agile-status` (closure mode), `/agile-metrics` (get data for the retro)
+- **Before:** `/agile-status` (closure mode), `/agile-review` (demo + metrics for the retro)
 - **After:** Improvement actions may become `/agile-story` or `/agile-epic` items. Process changes feed back into `/agile-sprint`. The next cycle starts with `/agile-sprint`.

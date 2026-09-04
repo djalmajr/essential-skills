@@ -14,7 +14,7 @@ Plans a sprint by selecting backlog items, declaring an objective, recording cap
 - Mid-sprint status -- use `/agile-status` instead
 - Decomposing large items -- use `/agile-epic` first
 - Closing a delivery -- use `/agile-status` (closure mode) instead
-- Reflecting on a past sprint -- use `/agile-retro` or `/agile-metrics`
+- Reflecting on a past sprint -- use `/agile-review` (metrics) or `/agile-retro`
 
 ## How to use
 

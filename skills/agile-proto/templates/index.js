@@ -2,15 +2,7 @@ import { html, render } from "htm/preact";
 import { createPortal } from "preact/compat";
 import { useEffect } from "preact/hooks";
 import { LocationProvider, Route, Router, useLocation } from "preact-iso";
-import { AppShell } from "./components/app-shell.js";
-import { Button } from "htm-ui/button.js";
-import { Icon } from "htm-ui/icon.js";
-import { ComponentsPage } from "./routes/components.js";
-import { DashboardPage } from "./routes/dashboard.js";
 import { HomePage } from "./routes/home.js";
-import { MusicPage } from "./routes/music.js";
-import { SettingsPage } from "./routes/settings.js";
-import { TasksPage } from "./routes/tasks.js";
 
 const BASE = new URL(document.baseURI).pathname.replace(/\/$/, "");
 const ROOT_PATH = `${BASE}/` || "/";
@@ -25,61 +17,16 @@ function normalizePath(path = "/") {
   return normalized || "/";
 }
 
-// Scenes — one per file in routes/. Each scene defines the preact-iso path,
-// active sidebar URL, and optional pageLabel/breadcrumbs/actions.
-
-function DashboardActions() {
-  return html`
-    <${Button} size="sm">
-      <${Icon} icon="lucide:plus" size=${14} />
-      New item
-    <//>
-  `;
-}
+// Product scenes — one per file in routes/. Official UI examples
+// (dashboard, tasks, music, …) live in the HTM UI repository, not in this skeleton.
 
 const SCENES = [
-  {
-    id: "dashboard",
-    path: withBase("/dashboard"),
-    label: "Dashboard",
-    Component: DashboardPage,
-    pageLabel: "Dashboard",
-    actions: DashboardActions(),
-  },
   {
     id: "home",
     path: withBase("/home"),
     label: "Home",
     Component: HomePage,
     pageLabel: "Home",
-  },
-  {
-    id: "tasks",
-    path: withBase("/tasks"),
-    label: "Tasks (data table demo)",
-    Component: TasksPage,
-    pageLabel: "Tasks",
-  },
-  {
-    id: "music",
-    path: withBase("/music"),
-    label: "Music (rich layout demo)",
-    Component: MusicPage,
-    pageLabel: "Music",
-  },
-  {
-    id: "settings",
-    path: withBase("/settings"),
-    label: "Settings",
-    Component: SettingsPage,
-    pageLabel: "Settings",
-  },
-  {
-    id: "components",
-    path: withBase("/components"),
-    label: "Components reference",
-    Component: ComponentsPage,
-    pageLabel: "Components",
   },
 ];
 
@@ -159,27 +106,8 @@ function SceneNav() {
 }
 
 function SceneFrame({ scene }) {
-  const { route } = useLocation();
   const Scene = scene.Component;
-
-  if (scene.noShell) {
-    return html`<${Scene} />`;
-  }
-
-  return html`
-    <${AppShell}
-      activeUrl=${scene.path}
-      basePath=${BASE}
-      onNavigate=${route}
-      pageLabel=${scene.pageLabel}
-      title=${scene.title}
-      description=${scene.description}
-      breadcrumbs=${scene.breadcrumbs}
-      actions=${scene.actions}
-    >
-      <${Scene} />
-    <//>
-  `;
+  return html`<${Scene} />`;
 }
 
 function AppRoutes() {
@@ -211,10 +139,8 @@ function App() {
 
 render(html`<${App} />`, document.getElementById("app"));
 
-// Force z-proto to recompute window dimensions after first render.
-// Without this, on first render in desktop preset the vcRect is measured
-// before flex layout settles (Preact hasn't mounted yet) and content gets
-// clipped at the bottom until the user manually switches preset.
+// Recompute the z-proto viewport after the first render (flex has not
+// settled yet and content may clip in the desktop preset until the preset changes).
 requestAnimationFrame(() => {
   requestAnimationFrame(() => {
     const presetSelect = document.querySelector("z-proto [data-ref='preset']");

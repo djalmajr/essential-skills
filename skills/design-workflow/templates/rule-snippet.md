@@ -1,14 +1,13 @@
 # Design workflow
 
-Antes de implementar, reestilizar ou revisar qualquer UI deste projeto:
+Before implementing, restyling, or reviewing any UI in this project:
 
-1. Leia o `DESIGN.md` na raiz — tokens do front matter são normativos; as
-   seções de exceções, prioridades visuais e Do's & Don'ts são política do
-   produto.
-2. Carregue e siga a skill `design-workflow` (modo contract): precedência em
-   conflitos, vocabulário fechado e revisão visual obrigatória (render real,
-   todos os temas que o projeto declara, reflow, a11y, medidas).
-3. Correção visual do dono = nova indicação: aplique E registre no
-   `DESIGN.md` na mesma mudança.
-4. Antes do handoff, rode o gate: `check-classes` e `check-tokens` (modo
-   audit) devem sair verdes.
+1. Read the root `DESIGN.md` — front-matter tokens are normative; exception
+   sections, visual priorities, and Do's & Don'ts are product policy.
+2. Load and follow the `design-workflow` skill (contract mode): conflict
+   precedence, closed vocabulary, and mandatory visual review (real render,
+   every theme the project declares, reflow, a11y, measurements).
+3. An owner visual correction is a new indication: apply it AND record it in
+   `DESIGN.md` in the same change.
+4. Before handoff, run the gate: `check-classes` and `check-tokens` (audit
+   mode) must come back green.

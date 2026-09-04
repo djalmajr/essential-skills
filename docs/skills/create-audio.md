@@ -5,7 +5,7 @@ Create spoken audio: podcast, tutorial, or voiceover. The skill **asks how** the
 ## When to use
 
 - Narration for a later video
-- Aula só em áudio
+- Audio-only lesson
 - Podcast / spoken newsletter
 
 ## How to use

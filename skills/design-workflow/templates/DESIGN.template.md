@@ -1,29 +1,29 @@
 ---
-name: <Nome do produto>
-description: Identidade visual de <produto>; tokens normativos no front matter.
+name: <Product name>
+description: Visual identity of <product>; normative tokens in the front matter.
 colors:
   primary: "#000000"
   neutral: "#ffffff"
 typography:
   body-md:
-    fontFamily: <Fonte>
+    fontFamily: <Font>
     fontSize: 1rem
 rounded:
   md: 8px
 spacing:
   md: 16px
 
-# Gate determinístico (skill design-workflow) — ver references/x-parity.md
+# Deterministic gate (design-workflow skill) — see references/x-parity.md
 x-parity:
   include: ["src"]
   exclude: []
-  # Vocabulário proibido é POLÍTICA DO PROJETO — comece vazio e adicione
-  # regex conforme o dono decidir (ver presets/typography-default-everywhere.md
-  # para um exemplo opt-in de política "tamanho herdado em tudo").
+  # Forbidden vocabulary is PROJECT POLICY — start empty and add regex as
+  # the owner decides (see presets/typography-default-everywhere.md for an
+  # opt-in "inherited size everywhere" example).
   forbidden: []
   allowed: []
   cssFile: "src/index.css"
-  # valor exato NO escopo exato; atalho string = ":root"
+  # exact value IN the exact scope; string shortcut = ":root"
   cssVars: {}
   # cssVars:
   #   colors.primary: { selector: ":root", var: "--primary" }
@@ -32,45 +32,45 @@ x-parity:
 
 ## Overview
 
-<Direção estética em 2–4 frases: o que o produto deve evocar.>
+<Aesthetic direction in 2–4 sentences: what the product should evoke.>
 
 ## Colors
 
-<Papel de cada token de cor; quando usar; o que é proibido (hex inline etc.).>
+<Role of each color token; when to use it; what is forbidden (inline hex, etc.).>
 
 ## Typography
 
-<OBRIGATÓRIO — política de tamanhos DESTE produto: escala livre por token?
-tamanho herdado com exceções? Defina aqui e espelhe em `x-parity.forbidden`/
-`allowed`. Um preset opt-in de "texto padrão em tudo" existe em
-`presets/typography-default-everywhere.md` — só adote se for a política do
-dono, nunca por default.>
+<REQUIRED — size policy for THIS product: free scale per token? inherited size
+with exceptions? Define it here and mirror it in `x-parity.forbidden` /
+`allowed`. An opt-in "inherited size everywhere" preset lives in
+`presets/typography-default-everywhere.md` — adopt it only if it is the owner's
+policy, never by default.>
 
 ## Layout
 
-<Ritmo de espaçamento, gutters padrão, geometria do shell.>
+<Spacing rhythm, default gutters, shell geometry.>
 
-### Prioridades visuais em conflito
+### Conflicting visual priorities
 
-<Ordene as preferências DESTE produto, ex.: espaçamento antes de borda;
-borda antes de sombra; geometria por conteúdo antes de altura fixa.>
+<Order THIS product's preferences, e.g. spacing before border; border before
+shadow; content-driven geometry before fixed height.>
 
 ## Elevation & Depth
 
-<Quando sombra/borda/superfície são permitidas.>
+<When shadow/border/surface are allowed.>
 
 ## Shapes
 
-<Escala de radius e onde cada nível se aplica.>
+<Radius scale and where each level applies.>
 
 ## Components
 
-<Contratos por componente quando divergirem do kit base.>
+<Per-component contracts when they diverge from the base kit.>
 
 ## Do's and Don'ts
 
-<Anti-padrões DESTE produto — inclua os "reflexos de design gerado" que o
-dono já rejeitou em revisões (cada correção visual do dono vira uma linha
-aqui, na mesma mudança que a aplica).>
+<Anti-patterns for THIS product — include the "generated-design reflexes" the
+owner already rejected in reviews (each owner visual correction becomes a line
+here, in the same change that applies it).>
 - Do ...
 - Don't ...

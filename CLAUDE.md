@@ -25,7 +25,7 @@ Skills are expected to improve from real project usage.
 
 - Prefer small, evidence-backed changes over broad rewrites.
 - Capture the observed problem, affected skill/template, proposed change, and validation artifact.
-- Use `/agile-skill-feedback` when evidence suggests a skill should be refined, merged, split, deprecated, removed, or created.
+- Draft proposals under `samples/<project>/proposals/` (journal → findings → proposals) when evidence suggests a skill should be refined, merged, split, deprecated, removed, or created.
 - Check for overlap before adding a new skill. Prefer improving or merging existing skills when that keeps routing clearer.
 - Keep `SKILL.md` concise; move reusable detail into local `templates/`, `references/`, or `scripts/` only when it directly supports the skill.
 - Validate changed skills against at least one realistic artifact before treating the change as ready.

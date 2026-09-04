@@ -36,7 +36,7 @@ Follow the project-wide convention in `CLAUDE.md` / `AGENTS.md` ("Skill Promptin
 |---|---|---|
 | Mode | Picks template + flow | Checkpoint · Consolidation · Closure |
 | Chaining next step (per-story closure) | Branches the next action | Next /agile-story · Consolidation later · None |
-| Chaining next step (cycle-end closure) | Branches the next action | /agile-retro · /agile-metrics · /agile-review |
+| Chaining next step (cycle-end closure) | Branches the next action | /agile-review · /agile-retro |
 
 Free-form prompts (no structured tool):
 
@@ -113,7 +113,7 @@ Formal delivery closure — plan vs result, verification, remaining risks, hando
 
 **Scope of closure (affects chaining):**
 - **Per-story closure** — single story complete inside an ongoing epic/sprint. Do **not** trigger `/agile-retro`; recommend the next `/agile-story` or a consolidation later.
-- **Cycle-end closure** — epic complete, sprint ended, or initiative finished. Recommend `/agile-retro` and `/agile-metrics`.
+- **Cycle-end closure** — epic complete, sprint ended, or initiative finished. Recommend `/agile-review` (demo + metrics) and then `/agile-retro`.
 
 **Where to save:**
 - `planning/<initiative>/status/<mode>-YYYY-MM-DD-<slug>.md` — `<slug>` disambiguates multiple closures on the same day (e.g., `closure-2026-05-12-story-01.md`).
@@ -131,7 +131,7 @@ Formal delivery closure — plan vs result, verification, remaining risks, hando
 - Checkpoint: if critical blocker → escalate or adjust the plan. If delivery closing → switch to closure mode.
 - Consolidation: if period closed a delivery → suggest closure mode. If sprint ended → suggest `/agile-review` or `/agile-retro`.
 - Closure (per-story): suggest the next `/agile-story` or a consolidation later. Do **not** trigger `/agile-retro` for a single story.
-- Closure (cycle-end): suggest `/agile-retro` and `/agile-metrics`. If part of an epic, also update the story status in the epic overview.
+- Closure (cycle-end): suggest `/agile-review` and then `/agile-retro`. If part of an epic, also update the story status in the epic overview.
 
 ## Reference template
 

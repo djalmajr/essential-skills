@@ -141,4 +141,4 @@ When the optional enforcement is installed, the file-pair check fires automatica
 
 - **Before:** `/agile-story` (plan what to build), `/agile-epic` (for larger initiatives).
 - **During:** TDD cycle runs alongside implementation. Enforcement hooks (if installed) fire automatically.
-- **After:** `/agile-refinement` (review test quality), `/agile-status` (closure mode to verify coverage), `/agile-skill-feedback` if TDD exposed a repeatable process gap.
+- **After:** `/agile-refinement` (review test quality), `/agile-status` (closure mode to verify coverage); draft a proposal for human review if TDD exposed a repeatable process gap.

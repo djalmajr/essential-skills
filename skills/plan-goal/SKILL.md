@@ -1,20 +1,24 @@
 ---
 name: plan-goal
 description: >
-  Write a long implementation plan plus a Grok /goal harness file, then give a
-  paste-ready /goal command. Use when the user runs /plan-goal, or asks for
-  "plano e goal", "prepara o /goal", or "texto para colar no TUI".
-argument-hint: "<objetivo>"
+  Write one implementation plan (with a sequential checklist) under
+  .agents/plans/, copy that plan to the clipboard, then give a paste-ready
+  prompt to execute the goal. Use when the user runs /plan-goal, or asks for
+  "plan and goal", "prepare the goal", or paste-ready goal text
+  (also PT: "plano e goal", "prepara o goal").
+argument-hint: "<objective>"
 user-invocable: true
 metadata:
-  short-description: Plano + arquivo de /goal + texto para colar
+  short-description: One plan with checklist + paste-ready goal prompt
 ---
 
 # /plan-goal
 
-Prepara o par de arquivos e o texto do `/goal`. Não implementa. Não dispara `/goal` (só o usuário cola no TUI).
+Write **one** plan file, copy it to the clipboard, and return paste-ready goal
+text. Do not implement. Do not start execution.
 
-`$ARGUMENTS` é o objetivo. Se vier vazio, pergunta em uma frase o que planejar e espera.
+`$ARGUMENTS` is the objective. If it is empty, ask in one sentence what to
+plan and wait.
 
 ## Project root
 
@@ -22,39 +26,60 @@ Write artifacts in the repo where the work will happen, not the agent's current
 working directory if they differ. Paths below are relative to that project root.
 If the root is ambiguous, ask before writing.
 
-## Arquivos
+## Files
 
-Dois markdowns, nomes estáveis a partir do slug do objetivo:
+One markdown, named from a stable slug of the objective:
+`.agents/plans/<slug>.md`
 
-1. **Plano longo** — contexto, decisões, AS-IS/TO-BE, arquivos, fases, testes, aceite.
-2. **Plano de goal** (`*.goal.md`) — `Goal kind`, `Acceptance criteria` numerados, `Verification plan` (gating/evidence), `Non-goals`, `Assumed scope`, `Implementation approach`, `Task checklist`, `Risks`.
+Create `.agents/plans/` if it is missing. If `.agents/plans/` is not yet in the
+repo `.gitignore`, add that line (do not ignore the rest of `.agents/`). Do not
+commit the plan unless the user asks.
 
-Pasta **já no .gitignore** do repo. Preferência:
+The plan includes, in this order:
 
-1. `plans/sketches/` se o ignore cobrir
-2. senão outro path ignorado (`tmp/`, `plans/local/`)
-3. senão cria `plans/sketches/` **e** adiciona essa linha no `.gitignore` do repo
+1. Context, decisions, AS-IS/TO-BE, files, phases, tests.
+2. `Goal kind`, numbered `Acceptance criteria`, `Verification plan`
+   (gating/evidence), `Non-goals`, `Assumed scope`, `Implementation approach`.
+3. `Task checklist` — the progress machine.
+4. `Risks`.
 
-Não commitar esses arquivos a menos que o usuário peça.
+Do not write a second `*.goal.md`.
+
+## Clipboard
+
+After writing the plan, copy **that file's contents** to the system clipboard
+and say that it is there. Prefer, in order:
+
+- macOS: `pbcopy < .agents/plans/<slug>.md`
+- Linux: `wl-copy < .agents/plans/<slug>.md` or `xclip -selection clipboard`
+- Windows: `clip < .agents/plans/<slug>.md` (or `Get-Content … | Set-Clipboard`)
+
+If the copy fails, say so. Still print the closing fence.
 
 ## Prompting
 
-- Objetivo vazio: pergunta em texto livre (uma frase) e espera. Não use a ferramenta
-  estruturada — o objetivo é livre.
-- Path de pasta ignorada vs criar `plans/sketches/`: só pergunta se o ignore não cobrir
-  nenhum candidato óbvio.
+- Empty objective: ask in free-form text (one sentence) and wait. Do not use
+  the structured question tool — the objective is free-form.
 
-## Conteúdo
+## Content
 
-- Idioma do usuário. Identificadores de código em inglês.
-- Critérios de aceite verificáveis pelo agente no ambiente local (testes, curl, browser já logado). Não depender de clique humano se der para evitar.
-- Git só o que esta conversa autorizou. Sem merge em `main` a menos que peçam.
-- Fases curtas (≤5 arquivos de código, fora locales/CHANGELOG/migration gerada).
+- Language of the generated plan: the user's language. Code identifiers in English.
+- Acceptance criteria the agent can verify locally (tests, curl, an already-logged-in
+  browser). Do not depend on a human click if it can be avoided.
+- Git only what this conversation authorized. No merge to `main` unless asked.
+- **One goal per objective.** Phases and cycles are `Task checklist` items
+  (`- [ ]`), in order, each with its done-when in the item itself. The
+  implementer marks `[x]` and continues without waiting and without a new goal.
+  The first open box is the next step; the goal is reached only when the
+  checklist and the gates are `[x]`.
+- Each checklist item touches at most 5 code files (locales, CHANGELOG, and
+  generated migrations extra). That limits the step, not the number of goals.
+  `Implementation approach` must walk the checklist in that order.
 
-## Fecho obrigatório
+## Required closing
 
-Um único fence, pronto para colar, começando com `/goal` e citando os dois paths, a branch, o entregável, os non-goals e o aceite. Sem pedir ao usuário para reescrever o objetivo.
-
-O `/goal` do TUI o agente **não** dispara — só devolve o texto. Em harnesses sem TUI `/goal`, os dois markdowns continuam sendo o entregável.
-
-Standing preference: ai-memory `default` / `_global` → `_rules/grok-tui-goal.md`.
+One fence, ready to paste into any agent, citing **the plan path**, the branch,
+the deliverable, the non-goals, and acceptance. Do not ask the user to rewrite
+the objective. The fence is a self-contained prompt. If the product has a goal
+runner (`/goal` or equivalent), the user may prefix it — whoever ran
+`/plan-goal` does not start that run.

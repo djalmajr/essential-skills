@@ -2,7 +2,7 @@
 
 How to onboard into the agile + AI workflow, choose the right skill, and validate ideas with prototypes before committing to implementation.
 
-**Skills covered:** onboarding, proto, router
+**Skills covered:** onboarding, proto, design, router
 
 ---
 
@@ -50,11 +50,10 @@ flowchart TD
 | Period/milestone consolidation | `/agile-status` (consolidation mode) |
 | Close a delivery formally | `/agile-status` (closure mode) |
 | Plan a sprint | `/agile-sprint` |
-| Demo deliveries to stakeholders | `/agile-review` |
-| Get sprint numbers | `/agile-metrics` |
+| Demo deliveries and sprint numbers to stakeholders | `/agile-review` |
 | Reflect and improve | `/agile-retro` |
-| Validate a UI flow in a static HTM UI browser prototype | `/agile-proto` |
-| Validate a UI flow as explicit Pen.dev states | `/agile-pen` |
+| Validate a UI flow in a static browser prototype | `/agile-proto` |
+| Validate a UI flow as screens and states in a design tool | `/agile-design` |
 | Onboard a new team member | `/agile-onboarding` |
 
 ---
@@ -135,14 +134,14 @@ The design team wants to validate a 4-step onboarding wizard before engineering 
 ### Create the prototype
 
 ```
-/agile-pen onboarding wizard with 4 steps
+/agile-design onboarding wizard with 4 steps
 ```
 
-The skill creates the flow in a project `.pen` document with separate frames for account info, team setup, integration preferences, confirmation, and any behavior-changing alternate states. Every frame receives a paired note and a stable ID shared with planning artifacts.
+The skill creates the flow in the project's design tool (Paper, Figma, Pen.dev, Penpot…) with separate frames for account info, team setup, integration preferences, confirmation, and any behavior-changing alternate states. Every frame receives a paired note and a stable ID shared with planning artifacts, and `planning/<initiative>/design/README.md` indexes them.
 
-**Surface:** Pen.dev with the project-local ADS library configured from the root `DESIGN.md`.
+**Identity:** the project's root `DESIGN.md` when it exists; otherwise a short brief recorded in the index.
 
-Use realistic mock data, inspect the states in Pen.dev, and review the documented transitions with stakeholders.
+Use realistic mock data, inspect the states in the tool, and review the documented transitions with stakeholders. For a clickable browser prototype with real interactions, use `/agile-proto` instead.
 
 ### Validate and transition to real implementation
 
@@ -160,11 +159,11 @@ The epic references the prototype as the validated design. Story acceptance crit
 
 ### Key rules for prototypes
 
-- **Self-contained:** `client-proto/` has its own files, no build tools
-- **daisyUI components:** Use the component wrappers provided
-- **Icons via `<Icon>`:** Use `<Icon icon="lucide:search" />`, never `lucide-react`
-- **Mock data inline:** Forms pre-filled, lists hardcoded
-- **Prototypes are throwaway:** Don't architect for reuse
+- **Stable IDs:** screens and states get IDs before drawing; stories cite them under Prototype refs
+- **One note per frame:** trigger, actions with destination IDs, visible rules, open questions
+- **No design-to-code mapping:** component choice belongs to the product's component system and `/design-workflow`
+- **Mock data inline:** Forms pre-filled, lists realistic
+- **Browser prototypes (`/agile-proto`):** zero-build, components from `htm-ui/<module>.js`, icons via `<Icon icon="lucide:search" />`
 
 ---
 

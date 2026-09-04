@@ -87,6 +87,6 @@ retrospectively.
 ## Recommended next step
 - Checkpoint -> continue execution or escalate blockers
 - Consolidation -> `/agile-status` (closure) if delivery finished, `/agile-review` if sprint ended
-- Closure -> for a **single story** closure: next `/agile-story` or none. For a **cycle-end** closure (epic complete, sprint ended): `/agile-retro` and `/agile-metrics`.
+- Closure -> for a **single story** closure: next `/agile-story` or none. For a **cycle-end** closure (epic complete, sprint ended): `/agile-review` and then `/agile-retro`.
 
 <!-- Save to: planning/<initiative>/status/<mode>-YYYY-MM-DD-<slug>.md (slug disambiguates multi-delivery days, e.g. closure-2026-05-12-story-01.md) -->

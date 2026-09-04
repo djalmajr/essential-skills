@@ -49,9 +49,9 @@ These skills are written for the common `SKILL.md` format used by `skills.sh`, C
 
 Keep frontmatter portable. Avoid agent-specific fields unless the skill truly needs them and the behavior is documented in `SKILL.md`.
 
-## Skills (30)
+## Skills (24)
 
-### Agile (16)
+### Agile (14)
 
 | Skill | Purpose |
 |-------|---------|
@@ -62,15 +62,13 @@ Keep frontmatter portable. Avoid agent-specific fields unless the skill truly ne
 | agile-refinement | Validate planning artifacts + review code |
 | agile-status | Track progress: checkpoint, consolidation, or closure |
 | agile-sprint | Plan a sprint: objective, items, capacity |
-| agile-review | Sprint review and demo for stakeholders |
-| agile-metrics | Objective sprint metrics |
+| agile-review | Sprint review, metrics, and demo for stakeholders |
 | agile-retro | Retrospective with improvement actions |
 | agile-router | Guidance on which skill to use |
 | agile-onboarding | New member onboarding guide |
-| agile-proto | Static browser prototypes powered by HTM UI |
-| agile-pen | Traceable Pen.dev prototypes, components, states, and notes |
+| agile-proto | Static browser prototype process; UI via the `htm-ui` skill |
+| agile-design | Screens, states, and flows in any design tool (Paper, Figma, Pen.dev, Penpot…) |
 | agile-tdd | TDD cycle + pragmatic testing strategy |
-| agile-skill-feedback | Improve, merge, split, deprecate, or remove skills from real usage evidence |
 
 ### Design (2)
 
@@ -90,33 +88,31 @@ Keep frontmatter portable. Avoid agent-specific fields unless the skill truly ne
 
 | Skill | Purpose |
 |-------|---------|
-| plan-goal | Long plan + `*.goal.md` + paste-ready `/goal` text for the Grok TUI |
+| plan-goal | One plan with checklist + clipboard copy + paste-ready goal prompt |
 
-### Workflow / Quality (9)
-
-The ultracode-style multi-agent quality system. `/work` (aliases `/ultracode`,
-`/quality-orchestrator`) is the entry point that composes the eight focused patterns.
-Portable across Claude Code / Grok / Codex / OpenCode — overview in
-[docs/skills/work.md](docs/skills/work.md).
+### UX (2)
 
 | Skill | Purpose |
 |-------|---------|
-| work | Entry-point orchestrator: assess complexity, pick phases, compose patterns, prefer direct oracles |
-| work-refute | Adversarial verification — N evidence-weighted refuters with perspective-diverse lenses |
-| work-judge | Generative judge-panel — N candidate approaches, parallel judges, synthesize the winner |
-| work-sweep | Multi-modal blind discovery across independent angles; dedup against a persistent seen-set |
-| work-exhaust | Loop-until-dry: repeat finders until K quiet rounds (unknown-cardinality discovery) |
-| work-gaps | Completeness critic — "what did the list/scope NOT cover?"; fail-closed gate |
-| work-tournament | best-of-n implementation tournament in isolated worktrees, oracle-gated, diff-graded |
-| work-check | Oracle-first code verifier (schema-validated PASS/FAIL); delegates the quality lens to work-review |
-| work-review | Maintainability / structural review specialist (invoke-by-name) |
+| ux-flows | Usage-flow catalog and E2E orchestration |
+| ux-persona | Walk one flow through the UI as a persona |
+
+### Memory (3)
+
+| Skill | Purpose |
+|-------|---------|
+| aim-init | Wire ai-memory into a repo (marker, snippet, MCP, hooks) |
+| aim-query | Explicit recall from the wiki |
+| aim-write | Durable page (decision, rule, gotcha) |
 
 ## Flow
 
 ```
-intake → roadmap → epic → task → execution → status → retro
+intake → roadmap → epic → story → execution → status → retro
                     ↑                           ↑
                 refinement                  refinement
+
+ceremonies: sprint → status → review (includes metrics) → retro
 ```
 
 ## Template convention
@@ -129,7 +125,7 @@ External repo references should use full GitHub links in documentation when prac
 
 Treat these skills as a living process library. Improvements should come from real usage evidence: confusing instructions, missing fields, weak templates, repeated manual fixes, or artifacts that fail refinement. Keep changes small and traceable, update the affected `SKILL.md` and its local `templates/` together, and validate the revised skill against at least one realistic artifact before considering the change ready.
 
-Use `/agile-skill-feedback` when the evidence suggests a skill should be refined, merged, split, deprecated, removed, or created. The goal is to keep the library useful and small enough to route reliably.
+Proposals live under `samples/<project>/proposals/` (journal → findings → proposals) and enter the package only with human approval. The goal is to keep the library useful and small enough to route reliably.
 
 ## Checklist before publishing
 
@@ -161,7 +157,8 @@ Each skill is invoked with `/skill-name`:
 /agile-story
 /agile-refinement
 /agile-status
-/agile-skill-feedback
+/agile-proto
+/agile-design
 /create-audio
 /create-video
 /plan-goal

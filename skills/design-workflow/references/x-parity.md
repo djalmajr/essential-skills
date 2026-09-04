@@ -1,27 +1,27 @@
-# `x-parity` — configuração do gate de paridade
+# `x-parity` — parity-gate configuration
 
-Bloco opcional no front matter do `DESIGN.md` raiz do projeto (chave
-estendida; consumidores do formato Google DESIGN.md ignoram chaves
-desconhecidas). É a ÚNICA fonte de configuração dos scripts — nada
-específico de projeto vive na skill.
+Optional block in the project's root `DESIGN.md` front matter (extended key;
+consumers of the Google DESIGN.md format ignore unknown keys). It is the ONLY
+configuration source for the scripts — nothing project-specific lives in the
+skill.
 
 ```yaml
 x-parity:
   # check-classes.ts
-  include: ["src"]                # dirs varridos, relativos à raiz
-  exclude:                        # padrões de caminho ignorados
-    - "**/renderer/**"            # ex.: saída de app do usuário
-    - "src/locales/**"            # strings traduzidas
-  forbidden:                      # regex (flag g) de utilitários proibidos
+  include: ["src"]                # scanned dirs, relative to the root
+  exclude:                        # ignored path patterns
+    - "**/renderer/**"            # e.g. user-app output
+    - "src/locales/**"            # translated strings
+  forbidden:                      # regex (g flag) of forbidden utilities
     - "text-(sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl)(?![-\\w])"
     - "text-\\[[0-9.]+(px|rem)\\]"
-  allowed:                        # matches exatos liberados (exceções do dono)
+  allowed:                        # exact matches released (owner exceptions)
     - "text-xs"
     - "text-[11px]"
     - "text-[0.625rem]"
     - "text-[0.5625rem]"
 
-  # check-tokens.ts — valor exato NO escopo exato (atalho string = ":root")
+  # check-tokens.ts — exact value IN the exact scope (string shortcut = ":root")
   cssFile: "src/index.css"
   cssVars:
     colors.primary: { selector: ":root", var: "--primary" }
@@ -29,34 +29,35 @@ x-parity:
     darkColors.primary: { selector: ".dark", var: "--primary" }
 ```
 
-Regras:
+Rules:
 
-- Cada entrada de `include` deve ser um diretório existente relativo à raiz;
-  caminho ausente ou arquivo é erro de configuração (exit 2), nunca gate verde.
-- Higiene fixa do scanner (não configurável): `node_modules`, diretórios
-  iniciados por ponto e arquivos `*.test.*` / `*.spec.*` não são varridos.
-- `forbidden`/`allowed` codificam o vocabulário fechado do projeto; toda
-  entrada em `allowed` corresponde a uma exceção indicada pelo dono na prosa
-  do `DESIGN.md` (seção de exceções / Do's & Don'ts).
-- `cssVars` compara o valor EXATO (normalizado por espaços/caixa) da ÚLTIMA
-  declaração da var dentro do bloco de NÍVEL SUPERIOR do seletor indicado
-  (semântica CSS de last-wins) — nunca "em qualquer lugar do arquivo": um
-  tema alternativo com o mesmo valor não mascara um `:root` quebrado.
-- Seletor-alvo aninhado em `@layer`/`@media` é REJEITADO com erro explícito:
-  o scanner não resolve contexto de at-rules. Mova as vars mapeadas para o
-  nível superior ou troque o gate por um parser CSS real.
-- Comentários e strings são neutralizados só para a varredura ESTRUTURAL e a
-  localização de declarações; o VALOR é extraído do CSS original com leitura
-  quote-aware (valores com `;`/`{` dentro de aspas não cortam cedo). A
-  comparação é LÉXICA EXATA após trim/caixa/espaços: `serif` (família
-  genérica) ≠ `"serif"` (nome literal). Se o CSS declara aspas, o valor do
-  token as inclui — em YAML: `fontFamily: '"Inter"'` (os delimitadores YAML
-  não contam; as aspas internas sim).
-- O nome da var é ancorado em fronteira de declaração (início de bloco ou
-  `;`/`{`/`}`): `--alias--primary:` NUNCA satisfaz um mapeamento de
-  `--primary`. E só profundidade relativa 0 conta: `--primary` dentro de
-  regra aninhada (`:root { .child { … } }`) não é declaração do escopo-alvo.
-- Divergiu → ou o CSS ou o token está errado; decida com o dono e alinhe.
-- Requisito de runtime: **Bun >= 1.2.21** (`Bun.YAML` nativo). No consumidor, os
-  scripts são VENDORIZADOS em `scripts/design/` pelo bootstrap; CI usa essas
-  cópias (runner não acessa o checkout privado de skills).
+- Every `include` entry must be an existing directory relative to the root;
+  a missing path or a file is a configuration error (exit 2), never a green gate.
+- Fixed scanner hygiene (not configurable): `node_modules`, dot-directories,
+  and `*.test.*` / `*.spec.*` files are not scanned.
+- `forbidden`/`allowed` encode the project's closed vocabulary; every
+  `allowed` entry corresponds to an owner-indicated exception in the
+  `DESIGN.md` prose (exceptions / Do's & Don'ts).
+- `cssVars` compares the EXACT value (normalized for whitespace/case) of the
+  LAST declaration of the var inside the TOP-LEVEL block of the indicated
+  selector (CSS last-wins) — never "anywhere in the file": an alternate theme
+  with the same value does not mask a broken `:root`.
+- A target selector nested in `@layer`/`@media` is REJECTED with an explicit
+  error: this scanner does not resolve at-rule context. Move the mapped vars
+  to the top level or swap the gate for a real CSS parser.
+- Comments and strings are masked only for STRUCTURAL scanning and declaration
+  lookup; the VALUE is extracted from the original CSS with quote-aware
+  reading (values with `;`/`{` inside quotes do not cut early). Comparison is
+  lexically EXACT after trim/case/whitespace: `serif` (generic family) ≠
+  `"serif"` (literal name). If CSS declares quotes, the token value includes
+  them — in YAML: `fontFamily: '"Inter"'` (YAML delimiters do not count;
+  inner quotes do).
+- The var name is anchored at a declaration boundary (block start or
+  `;`/`{`/`}`): `--alias--primary:` NEVER satisfies a `--primary` mapping.
+  Only relative depth 0 counts: `--primary` inside a nested rule
+  (`:root { .child { … } }`) is not a declaration of the target scope.
+- On mismatch → either the CSS or the token is wrong; decide with the owner
+  and align them.
+- Runtime requirement: **Bun >= 1.2.21** (native `Bun.YAML`). In the consumer,
+  scripts are VENDORED into `scripts/design/` by bootstrap; CI uses those
+  copies (the runner has no access to the private skills checkout).

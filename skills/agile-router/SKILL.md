@@ -1,6 +1,6 @@
 ---
 name: agile-router
-description: Routes to the appropriate agile skill based on context. Use when you need guidance on which skill to use — whether for planning, ceremonies, or tracking.
+description: Routes to the appropriate agile skill based on context. Use when you need guidance on which skill to use — planning, ceremonies, tracking, prototype/UX, TDD, or memory.
 compatibility: opencode
 metadata:
   audience: engineering
@@ -32,16 +32,27 @@ No-pause mode: if the user has explicitly disabled mid-skill clarification, pick
 
 ## Scope
 
-This skill replaces both the planning router and the ceremonies router. It covers three areas:
+This skill covers these areas. **Resolve UI / test / memory first**, then fall through to planning:
 
 | Area | Question | Skills |
 |---|---|---|
+| UI / flow | Need to validate a screen, mockup, or journey? | `/agile-proto` (+ `htm-ui` skill), `/agile-design`, `/ux-flows`, `/ux-persona` |
+| Test | Need TDD, coverage, or red-green? | `/agile-tdd` |
+| Memory | Wire or query project knowledge? | `/aim-init`, `/aim-query`, `/aim-write` |
 | What to create | What planning artifact fits this work? | `/agile-intake`, `/agile-roadmap`, `/agile-epic`, `/agile-story` |
 | What ceremony to run | Where are we in the sprint cycle? | `/agile-sprint`, `/agile-review`, `/agile-retro` |
 | What to track | How should I report progress? | `/agile-status` (checkpoint, consolidation, closure) |
-| What to improve in the process | Did real usage expose a skill/template gap or overlap? | `/agile-skill-feedback` |
 
 ## Decision tree
+
+### First: UI, test, or memory?
+
+- **Clickable browser prototype / validate a flow without a backend** → `/agile-proto` (complement: `htm-ui` skill)
+- **Screens and states in a design tool (Paper, Figma, Pen.dev, Penpot…)** → `/agile-design`
+- **Walk the app (or the served proto) as a user** → `/ux-flows`, `/ux-persona`
+- **TDD, coverage, red-green, test enforcement** → `/agile-tdd`
+- **Wire ai-memory, recall, durable annotation** → `/aim-init`, `/aim-query`, `/aim-write`
+- **Otherwise** → planning, ceremony, or tracking below
 
 ### Planning: What artifact do I need?
 
@@ -70,15 +81,13 @@ flowchart TD
 - **Starting a sprint?** → `/agile-sprint`
 - **Sprint just ended?** → `/agile-review` (demo deliveries) then `/agile-retro` (reflect on process)
 - **Backlog items unclear?** → `/agile-epic` (decompose) or run `/agile-refinement` (validate)
-- **Need metrics?** → `/agile-metrics` (before review or retro)
-- **A skill/template caused friction or overlaps with another?** → `/agile-skill-feedback`
+- **Need metrics?** → `/agile-review` (metrics are a section of the review artifact)
 
 ### Tracking: How do I report progress?
 
 - **Quick daily checkpoint?** → `/agile-status` (checkpoint mode)
 - **Period or milestone consolidation?** → `/agile-status` (consolidation mode)
 - **Delivery finished?** → `/agile-status` (closure mode)
-- **Skill library needs merge, split, deprecation, removal, or template refinement?** → `/agile-skill-feedback`
 
 ## Light sizing
 
@@ -113,7 +122,7 @@ Sizing alone is not enough to decide between roadmap and epic. Use this checklis
 ## Process
 
 1. Listen to the user's context.
-2. Determine which area applies: planning, ceremony, or tracking.
+2. Determine which area applies: UI/test/memory, planning, ceremony, or tracking.
 3. Apply the decision tree for that area.
 4. Recommend the specific skill with a brief explanation.
 5. Confirm with the user before they proceed.
@@ -136,13 +145,14 @@ Sizing alone is not enough to decide between roadmap and epic. Use this checklis
 | `/agile-refinement` | Validate planning artifacts and review code |
 | `/agile-status` | Track progress (checkpoint, consolidation, closure) |
 | `/agile-sprint` | Sprint planning ceremony |
-| `/agile-review` | Sprint review and demo |
-| `/agile-metrics` | Quantitative sprint metrics |
+| `/agile-review` | Sprint review, metrics, and demo |
 | `/agile-retro` | Retrospective with improvement actions |
-| `/agile-proto` | Static browser prototypes powered by HTM UI |
-| `/agile-pen` | Pen.dev `.pen` prototypes and explicit UI states |
+| `/agile-tdd` | TDD coaching and optional enforcement |
+| `/agile-proto` | Static browser prototype process (complement: `htm-ui` skill) |
+| `/agile-design` | Screens, states, and flows in any design tool |
 | `/agile-onboarding` | New team member onboarding |
-| `/agile-skill-feedback` | Improve, merge, split, deprecate, or remove skills from real usage evidence |
+| `/ux-flows` / `/ux-persona` | Usage-flow catalog and persona walkthroughs |
+| `/aim-init` / `/aim-query` / `/aim-write` | Wire and use ai-memory |
 | `/agile-router` | This skill — guidance on which skill to use |
 
 ## Relationship with the flow
@@ -154,7 +164,8 @@ flowchart LR
     C --> D["/agile-story"]
     D --> E[execution]
     E --> F["/agile-status"]
-    F --> G["/agile-retro"]
+    F --> G["/agile-review"]
+    G --> H["/agile-retro"]
 ```
 
 This skill is a router. It evaluates and directs, but does not produce the final artifact. For specific work, use the recommended skill directly.

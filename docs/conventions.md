@@ -37,10 +37,10 @@ samples/<project>/
 ├── README.md         # context of the sample + scope
 ├── journal/          # one entry per significant session
 ├── findings/         # consolidated patterns (mature/draft)
-└── proposals/        # formal /agile-skill-feedback artifacts
+└── proposals/        # drafted skill-library changes, pending human review
 ```
 
-The current sample is [`samples/reserva-pwa/`](../samples/reserva-pwa/) — a PWA for restaurant table reservations that exercises the full agile flow. The sample's journals are the primary source of `[[finding-candidate]]` items that drive refinements via [`/agile-skill-feedback`](skills/agile-skill-feedback.md).
+The current sample is [`samples/reserva-pwa/`](../samples/reserva-pwa/) — a PWA for restaurant table reservations that exercises the full agile flow. The sample's journals are the primary source of `[[finding-candidate]]` items that drive refinements through `proposals/` and human review.
 
 Promotion criteria:
 - **2+ evidences across sessions** → finding with `status: mature`.
@@ -80,16 +80,15 @@ A few patterns recur across real sessions:
 | Multi-phase initiative with dependencies | `/agile-roadmap` |
 | An initiative decomposed into stories | `/agile-epic` |
 | One executable plan for a single change | `/agile-story` |
-| Long plan plus paste-ready Grok `/goal` | `/plan-goal` |
+| One plan with checklist, clipboard copy, and paste-ready goal prompt | `/plan-goal` |
 | TDD coaching or enforcement install | `/agile-tdd` |
 | Validate a planning artifact or review code | `/agile-refinement` |
 | Daily / period / closure status | `/agile-status` |
-| Sprint ceremony | `/agile-sprint`, `/agile-review`, `/agile-retro`, `/agile-metrics` |
-| Improve the skill library | `/agile-skill-feedback` |
+| Sprint ceremony | `/agile-sprint`, `/agile-review` (includes metrics), `/agile-retro` |
 | Decide which skill to use | `/agile-router` |
-| Prototype a static browser UI with HTM UI | `/agile-proto` |
-| Prototype screens and states in Pen.dev | `/agile-pen` |
-| UI de produção sob contrato do DESIGN.md raiz (contrato/audit/bootstrap) | `/design-workflow` |
+| Prototype a static browser UI | `/agile-proto` (+ `htm-ui` skill for components) |
+| Prototype screens and states in a design tool (Paper, Figma, Pen.dev, Penpot…) | `/agile-design` |
+| Production UI under the root DESIGN.md contract (contract/audit/bootstrap) | `/design-workflow` |
 | Generate spoken audio (podcast / tutorial / VO) | `/create-audio` |
 | Record a live UI tutorial or compose a Remotion video | `/create-video` |
 | Onboard a new team member | `/agile-onboarding` |

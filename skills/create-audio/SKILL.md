@@ -1,6 +1,6 @@
 ---
 name: create-audio
-description: "Create spoken audio (podcast, tutorial, voiceover) with a locked voice. Ask how to generate it: local VoxCPM2 or CosyVoice3 (clone an approved ref), Grok/xAI Voice, OpenAI TTS, or a timing placeholder. Use when the user asks to generate audio, narração, podcast, aula em áudio, VO, TTS, clone de voz, or runs /create-audio. Types: --type=podcast|tutorial|voiceover. Sibling of /create-video."
+description: "Create spoken audio (podcast, tutorial, voiceover) with a locked voice. Ask how to generate it: local VoxCPM2 or CosyVoice3 (clone an approved ref), Grok/xAI Voice, OpenAI TTS, or a timing placeholder. Use when the user asks to generate audio, narration, podcast, audio lesson, VO, TTS, voice clone (also PT: narração, aula em áudio, clone de voz), or runs /create-audio. Types: --type=podcast|tutorial|voiceover. Sibling of /create-video."
 ---
 
 # Create audio

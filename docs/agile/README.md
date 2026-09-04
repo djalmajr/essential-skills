@@ -13,19 +13,15 @@ flowchart TD
     E --> F["/agile-status<br>(checkpoint)"]
     F --> G["/agile-status<br>(consolidation)"]
     G --> H["/agile-status<br>(closure)"]
-    H --> I["/agile-metrics"]
-    I --> J["/agile-review"]
-    J --> K["/agile-retro"]
-    K --> L["/agile-sprint"]
-    L --> D
+    H --> I["/agile-review"]
+    I --> J["/agile-retro"]
+    J --> K["/agile-sprint"]
+    K --> D
 
     M["/agile-refinement"] -.-> C
     M -.-> E
-    N["/agile-skill-feedback"] -.-> K
-    N -.-> M
 
     style M fill:#f9f,stroke:#333,stroke-width:2px
-    style N fill:#ffd,stroke:#333,stroke-width:2px
     style F fill:#bbf,stroke:#333,stroke-width:2px
     style G fill:#bbf,stroke:#333,stroke-width:2px
     style H fill:#bbf,stroke:#333,stroke-width:2px
@@ -39,7 +35,7 @@ Scenario-based guides showing how skills chain together in real situations.
 | ------------------------------------------------------------------ | ----------------------------------------------------------------- |
 | [From Idea to Delivery](guides/from-idea-to-delivery.md)           | End-to-end: intake -> epic/task -> refinement -> status           |
 | [Managing Large Initiatives](guides/managing-large-initiatives.md) | Epic-scale: roadmap -> epic -> task -> status                     |
-| [Sprint Lifecycle](guides/sprint-lifecycle.md)                     | Ceremonies: planning -> status -> review -> metrics -> retro      |
+| [Sprint Lifecycle](guides/sprint-lifecycle.md)                     | Ceremonies: planning -> status -> review (with metrics) -> retro |
 | [Getting Started](guides/getting-started.md)                       | Onboarding, prototyping, decision trees, and cheat sheet          |
 
 ## Skills
@@ -61,7 +57,6 @@ Each skill README contains full documentation with examples, tips, and chaining 
 |-------|-------|
 | [refinement](../skills/agile-refinement.md) | Validate planning artifacts + review code |
 | [tdd](../skills/agile-tdd.md) | TDD cycle + pragmatic testing strategy |
-| [skill-feedback](../skills/agile-skill-feedback.md) | Improve, merge, split, deprecate, or remove skills from real usage evidence |
 
 ### Delivery & Tracking
 
@@ -74,8 +69,7 @@ Each skill README contains full documentation with examples, tips, and chaining 
 | Skill | Usage |
 |-------|-------|
 | [planning](../skills/agile-sprint.md) | Plan cycle: objective, items, capacity |
-| [review](../skills/agile-review.md) | Review + demo for stakeholders |
-| [metrics](../skills/agile-metrics.md) | Objective sprint metrics |
+| [review](../skills/agile-review.md) | Review, metrics, and demo for stakeholders |
 | [retro](../skills/agile-retro.md) | Retrospective with improvement actions |
 
 ### Routing & Prototyping
@@ -83,8 +77,8 @@ Each skill README contains full documentation with examples, tips, and chaining 
 | Skill | Usage |
 |-------|-------|
 | [router](../skills/agile-router.md) | Guidance on which skill to use |
-| [proto](../skills/agile-proto.md) | Static browser prototypes powered by HTM UI |
-| [pen](../skills/agile-pen.md) | Traceable Pen.dev prototypes and explicit UI states |
+| [proto](../skills/agile-proto.md) | Static browser prototype process (UI via `htm-ui` skill) |
+| [design](../skills/agile-design.md) | Screens, states, and flows in any design tool |
 
 ### Onboarding
 

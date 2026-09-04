@@ -35,4 +35,4 @@ How would we know the change worked? What signal should we watch for in upcoming
 - [ ] Collected 2+ evidences
 - [ ] Hypothesis described
 - [ ] Ready to become `proposals/<slug>.md`
-- [ ] Forwarded via `/agile-skill-feedback`
+- [ ] Proposal drafted under `proposals/` for human review

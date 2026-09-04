@@ -115,7 +115,7 @@ When 2+ developers are available:
 - To detail the first item: suggest `/agile-story` for the first story in the backlog
 - For items that need decomposition: suggest `/agile-epic`
 - For items that need validation: suggest `/agile-refinement`
-- For process or skill friction discovered while planning: suggest `/agile-skill-feedback`
+- For process or skill friction discovered while planning: record it for the retro and human review
 
 ## Reference template
 

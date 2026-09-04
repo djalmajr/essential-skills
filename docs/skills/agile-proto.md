@@ -1,6 +1,14 @@
 # agile-proto
 
-Create static, browser-based prototypes with **z-proto + HTM UI + Tailwind CSS v4 + Preact/htm + preact-iso**. The prototype consumes HTM UI directly from its public ES modules instead of maintaining a copied component catalog. Static means directly servable without a backend or required build pipeline; client-side interactions remain supported.
+Process for static browser prototypes (**z-proto + HTM UI + Tailwind CSS v4 + Preact/htm + preact-iso**). Static means directly servable, with no backend and no required build pipeline; client-side interactions remain supported.
+
+Component, theme, API, and **UI example** implementation does not live in this package — it belongs to the complementary [`htm-ui`](https://github.com/djalmajr/htm-ui) skill. If `/agile-proto` is installed and `htm-ui` is not, install the complement:
+
+```bash
+bunx skills add djalmajr/htm-ui --skill htm-ui
+```
+
+Docs and official examples: `https://djalmajr.github.io/htm-ui/`, [`apps/docs`](https://github.com/djalmajr/htm-ui/tree/main/apps/docs), [`apps/todo`](https://github.com/djalmajr/htm-ui/tree/main/apps/todo).
 
 ## Use it when
 
@@ -9,7 +17,7 @@ Create static, browser-based prototypes with **z-proto + HTM UI + Tailwind CSS v
 - exploring responsive behavior and real interactions;
 - sending verified running screens to Figma.
 
-Do not use it for production code, backend integration, delivery tracking, Pen.dev, or `.pen` artifacts. Use `/agile-pen` for Pen.dev.
+Do not use it for production code, backend integration, delivery tracking, or design-tool prototypes (use `/agile-design` for Paper, Figma, Pen.dev, Penpot).
 
 ## Invoke
 
@@ -31,19 +39,23 @@ The default target is `planning/<initiative>/proto/`; existing projects may use 
 - Iconify through HTM UI's `Icon` component;
 - semantic theme tokens, not raw product colors.
 
+The template bundled in this skill is only the proto glue (z-proto, routes, Figma). Theme, components, and official examples come from HTM UI live (`THEMING.md` + CDN). Do not copy the demo catalog or the `AppShell` from `apps/docs`.
+
 ## Example flow
 
-1. Copy the bundled template.
-2. Inspect HTM UI docs/source for the needed components.
-3. Compose scenes with per-file imports such as `htm-ui/button.js` and `htm-ui/card.js`.
-4. Implement observable interaction state; do not ship inert examples.
-5. Register scenes in `SCENES` and keep one scroll owner per view.
-6. Serve with `bunx serve -s .`.
-7. Validate every route with pointer, keyboard, narrow/wide viewports, and overlay dismissal/positioning.
-8. If requested, capture the running `#app` surface into Figma.
+1. Run `templates/scripts/bootstrap.sh` on the target (injects the `@theme` from `THEMING.md`).
+2. Confirm the `htm-ui` skill is installed; if not, install it or follow the docs/CDN.
+3. Inspect HTM UI docs/source for the needed components.
+4. Compose the **product** scenes with per-file imports (`htm-ui/button.js`, `htm-ui/card.js`, …).
+5. Implement observable interaction state; do not ship inert examples.
+6. Register scenes in `SCENES` and keep one scroll owner per view.
+7. Serve with `bunx serve -s .`.
+8. Validate every route with pointer, keyboard, narrow/wide viewports, and overlay dismissal/positioning.
+9. If requested, capture the running `#app` surface into Figma.
 
-## Key quality gates
+## Quality gates
 
+- `htm-ui` skill located, or explicit CDN/docs fallback;
 - no `~/components/ui/` imports or copied primitive catalog;
 - every multi-line component expression is on its own line;
 - basic and variant examples use meaningfully different states;
@@ -52,4 +64,9 @@ The default target is `planning/<initiative>/proto/`; existing projects may use 
 - input, select, and button height variants remain consistent;
 - long content uses intentional `ScrollArea`/scroll ownership rather than clipping.
 
-See `skills/agile-proto/SKILL.md` for the full workflow, interaction sweep, and Figma capture procedure. HTM UI remains an external runtime library documented at `https://djalmajr.github.io/htm-ui/`.
+See `skills/agile-proto/SKILL.md` for the full workflow, interaction sweep, and Figma capture procedure.
+
+## Chaining
+
+- **After a validated prototype:** `/agile-epic` (or `/agile-story` for one screen). Put the scene IDs under Prototype refs.
+- **Optional:** `/ux-flows new` from the proto routes, then `/ux-persona` against the served proto.

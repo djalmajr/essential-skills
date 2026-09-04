@@ -6,30 +6,17 @@ This repository is the distribution source for the Skills package.
 
 - Source repository: https://github.com/djalmajr/skills
 - Skill installation tool: `skills` CLI, normally invoked with `bunx skills ...`
-- Agile Design System tool: bundled `skills/agile-pen/scripts/ads.mjs`
 - Portable contract: `skills/<skill-name>/SKILL.md`
 - Vendored third-party skills: explicitly allowlisted directories under `.agents/skills/`
 - Human documentation: `README.md` and `docs/`
 - Optional manifest: `skills.json`
 
-The GitHub repository is the release artifact. Skill installation remains delegated to `skills.sh`; `agile-pen` carries its own `scripts/ads.mjs` for installing and configuring Pen.dev design assets without a global binary. `agile-proto` remains the static HTM UI browser-prototype skill.
+The GitHub repository is the release artifact. Skill installation remains delegated to `skills.sh`. `agile-proto` is the static browser-prototype **process** skill; components and UI examples come from the `htm-ui` skill (`bunx skills add djalmajr/htm-ui --skill htm-ui`). `agile-design` covers prototypes in any design tool without bundled scripts or catalogs.
 
 Project-authored skills are distributed from `skills/` and listed in
 `skills.json`. Third-party skills are never copied into that namespace or added
 to the manifest: approved vendored copies remain in `.agents/skills/`, while
 all other local agent-skill installations stay ignored.
-
-## Agile Design System CLI
-
-After cloning this repository or installing its package bin, inspect the neutral preset with:
-
-```bash
-node <agile-pen-skill>/scripts/ads.mjs list
-node <agile-pen-skill>/scripts/ads.mjs info nova
-node <agile-pen-skill>/scripts/ads.mjs components
-```
-
-`node <agile-pen-skill>/scripts/ads.mjs install nova --project <path>` installs project-local Pen.dev design configuration from the project's root `DESIGN.md`. The script preserves an existing design contract and creates a neutral starter only when the file is absent. Bun may be used in place of Node; only the Pen.dev/Pencil MCP tools may write `.pen` files.
 
 ## Install all skills
 

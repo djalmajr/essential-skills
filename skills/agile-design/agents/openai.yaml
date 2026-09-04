@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agile Design"
+  short_description: "Prototype screens, states, and flows in any design tool"
+  default_prompt: "Use $agile-design to prototype this product flow in the project's design tool with stable screen IDs and paired notes."

@@ -2,7 +2,7 @@
 
 End-to-end scenarios showing how to run Scrum ceremonies from sprint planning through retrospective. Each scenario covers a different team size and maturity level.
 
-**Skills covered:** router, planning, status, review, metrics, retro
+**Skills covered:** router, planning, status, review (includes metrics), retro
 
 ---
 
@@ -12,13 +12,13 @@ The payments team (3 devs, 1 tech lead) just finished Sprint 23. Time to close a
 
 ### Closing Sprint 23
 
-#### 1. Gather metrics
+#### 1. Sprint review — metrics section
 
 ```
-/metrics Sprint 23
+/agile-review Sprint 23
 ```
 
-The skill collects data from sprint artifacts:
+The review starts by collecting the sprint numbers from the sprint artifacts:
 
 | Metric | Value |
 |--------|-------|
@@ -36,13 +36,9 @@ The skill collects data from sprint artifacts:
 
 **Highlights for retro:** No post-delivery bugs (positive), but blockers caused 3-day delays and completion rate dropped 20pp.
 
-#### 2. Sprint review
+#### 2. Sprint review — demo and feedback
 
-```
-/review Sprint 23
-```
-
-The skill organizes by business value:
+The same review artifact then organizes deliveries by business value:
 
 **Deliveries:**
 - Stripe provider integration -- delivered as planned
@@ -65,10 +61,10 @@ Save to: `planning/sprints/sprint-23-review.md`
 #### 3. Retrospective
 
 ```
-/retro Sprint 23
+/agile-retro Sprint 23
 ```
 
-**Facts (from metrics):**
+**Facts (from the review metrics):**
 - 3 of 5 stories delivered (60%)
 - 2 blockers averaging 3 days each (infra dependency, API contract change)
 - 1 story added mid-sprint (scope creep)
@@ -162,19 +158,13 @@ Quick inline checkpoints -- no file saved for a solo cycle:
 ### Review + retro (Friday)
 
 ```
-/review week of April 14
+/agile-review week of April 14
 ```
 
-Lean review: 2 of 2 selected items delivered. Dependency update postponed.
+Lean review: 2 of 2 selected items delivered. Dependency update postponed. Quick metrics in the same artifact: 100% completion, 1 blocker (flaky tests, 0.5 day), no scope creep.
 
 ```
-/metrics week of April 14
-```
-
-Quick metrics: 100% completion, 1 blocker (flaky tests, 0.5 day), no scope creep.
-
-```
-/retro week of April 14
+/agile-retro week of April 14
 ```
 
 Lightweight retro:
@@ -229,18 +219,16 @@ The typical cycle follows this order:
 
 ```mermaid
 flowchart LR
-    A["/agile-metrics"] --> B["/agile-review"]
-    B --> C["/agile-retro"]
-    C --> D["/agile-sprint"]
-    D --> E["/agile-status<br>(checkpoints)"]
-    E --> F["/agile-status<br>(closure)"]
-    F --> A
+    A["/agile-review<br>(demo + metrics)"] --> B["/agile-retro"]
+    B --> C["/agile-sprint"]
+    C --> D["/agile-status<br>(checkpoints)"]
+    D --> E["/agile-status<br>(closure)"]
+    E --> A
 ```
 
 | Ceremony | When | What it produces | Skill |
 |----------|------|-----------------|-------|
-| Sprint Metrics | End of sprint, before review | Quantitative data for review and retro | `/agile-metrics` |
-| Sprint Review | End of sprint, after metrics | Delivery demo + stakeholder feedback | `/agile-review` |
+| Sprint Review | End of sprint | Sprint metrics + delivery demo + stakeholder feedback | `/agile-review` |
 | Retrospective | After review, before planning | 2-3 improvement actions with owners | `/agile-retro` |
 | Sprint Planning | Start of new sprint | Sprint objective + selected items + order | `/agile-sprint` |
 | Status (checkpoint) | Every day during sprint | Progress, blockers, next step | `/agile-status` |
@@ -252,7 +240,7 @@ flowchart LR
 
 ## Key takeaways
 
-1. **Metrics before retro:** Ground discussions in data, not impressions
+1. **Metrics before retro:** Ground discussions in the review's numbers, not impressions
 2. **Review shows results, retro discusses process:** Don't mix them
 3. **Retro actions need owners and deadlines:** "Improve communication" is not an action
 4. **DoR gates prevent mid-sprint surprises:** If it's not ready, it doesn't enter the sprint

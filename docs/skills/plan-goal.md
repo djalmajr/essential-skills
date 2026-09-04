@@ -1,36 +1,47 @@
 # plan-goal
 
-Write a long implementation plan plus a Grok `/goal` harness file, then return a
-paste-ready `/goal` command. The skill does **not** implement and does **not**
-fire `/goal` — the user pastes the text into the TUI.
+Write **one** implementation plan (with a sequential checklist) under
+`.agents/plans/`, copy that plan to the clipboard, then return a paste-ready
+prompt to execute the goal. The skill does **not** implement and does **not**
+start execution.
 
 ## When to use
 
-- Non-trivial work that can become a `/goal`: multi-phase, MCP, migration, verifiable acceptance.
-- The user runs `/plan-goal`, or asks for "plano e goal" / "prepara o /goal" / "texto para colar no TUI".
+- Non-trivial work that can become a goal: multi-phase, MCP, migration, verifiable acceptance.
+- The user runs `/plan-goal`, or asks for "plan and goal" / "prepare the goal" / paste-ready goal text (also PT: "plano e goal").
 
 ## How to use
 
 ```text
-/plan-goal <objetivo>
+/plan-goal <objective>
 ```
 
 Example:
 
 ```text
-/plan-goal fechar o gap de readiness do apigate com aceite verificável
+/plan-goal close the apigate readiness gap with verifiable acceptance
 ```
 
 If the objective is omitted, the skill asks once and waits.
 
 ## Deliverables
 
-Two gitignored markdowns, named from a stable slug of the objective, usually under `plans/sketches/`:
+One gitignored markdown, `.agents/plans/<slug>.md`. Create that directory if
+needed and add `.agents/plans/` to the repo `.gitignore` when missing (do not
+ignore the rest of `.agents/`).
 
-1. Long plan — context, decisions, AS-IS/TO-BE, files, phases, tests, acceptance.
-2. `*.goal.md` — Goal kind, numbered acceptance criteria, verification plan, non-goals, assumed scope, approach, checklist, risks.
+The file holds context, decisions, AS-IS/TO-BE, files, phases, acceptance,
+verification, non-goals, and the `Task checklist`. Do not write a second
+`*.goal.md`.
 
-Closing message: one fence starting with `/goal`, citing both paths, branch, deliverable, non-goals, and acceptance. Do not ask the user to rewrite the objective.
+Copy the plan file to the system clipboard after writing it (`pbcopy` /
+`wl-copy` / `clip`). Then print one self-contained fence citing that path,
+branch, deliverable, non-goals, and acceptance. If the product has a goal
+runner (`/goal` or equivalent), the user may prefix the fence; `/plan-goal`
+never starts that run.
+
+One goal per objective. Phases are ordered checklist items; the implementer
+marks `[x]` and continues.
 
 ## Install
 

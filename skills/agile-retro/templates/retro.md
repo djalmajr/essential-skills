@@ -20,7 +20,7 @@
 - Skills/templates that helped:
 - Skills/templates that caused friction:
 - Merge/split/deprecation candidates:
-- Proposed `/agile-skill-feedback` items:
+- Proposed skill/template changes (for human review):
 
 ## Improvement actions
 

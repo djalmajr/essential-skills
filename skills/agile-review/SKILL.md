@@ -1,6 +1,6 @@
 ---
 name: agile-review
-description: Prepares sprint review and demo of deliveries for stakeholders. Use when the sprint has ended and it is necessary to present what was delivered, what changed in scope, what is pending, and what decisions are needed.
+description: Prepares sprint review and demo of deliveries for stakeholders, including the sprint's quantitative metrics. Use when the sprint has ended and it is necessary to present what was delivered, the numbers, what changed in scope, what is pending, and what decisions are needed.
 compatibility: opencode
 metadata:
   audience: engineering
@@ -46,6 +46,7 @@ No-pause mode: if the user has explicitly disabled mid-skill clarification, conv
 - Highlight scope changes, deviations, and decisions made
 - Prepare objective demonstration of delivered value
 - Collect stakeholder feedback to feed the next cycle
+- Ground the demo and the following retro in quantitative sprint metrics (delivery, quality, flow, process)
 
 ## When to use
 
@@ -53,6 +54,7 @@ No-pause mode: if the user has explicitly disabled mid-skill clarification, conv
 - When stakeholders need to see the result of deliveries
 - When it is necessary to validate that the product is on the right track
 - To close the cycle between sprint planning and retrospective
+- When the team needs the sprint numbers (velocity, blockers, completion rate) — collect them here
 
 ## Process
 
@@ -84,16 +86,29 @@ For each planned item that was not delivered:
 - Reason: blocker, priority change, scope larger than expected
 - Destination: returns to backlog, enters next sprint, was discarded
 
-### 4. Collect feedback
+### 4. Collect sprint metrics
+
+Fill the metrics section of the review from the sprint artifacts (planning, status checkpoints, closures, issues, git). Do not invent or round numbers.
+
+- **Delivery:** planned vs delivered, added mid-sprint, postponed
+- **Quality:** bugs during the sprint / post-delivery, lint/typecheck/tests at closing
+- **Flow:** blockers (count and average duration), average time per story, reopenings
+- **Process:** status checkpoints held vs expected, closures vs deliveries
+- **Trend:** vs previous sprint when data exists
+- **Highlights for the retro:** one positive point, one attention point, one action suggestion
+
+Lean reviews (solo week) may keep this section short, but still include planned/delivered/blockers.
+
+### 5. Collect feedback
 
 Register stakeholder questions and feedback:
 - Necessary adjustments
 - New needs identified
 - Priority changes
 
-### 5. Generate artifact
+### 6. Generate artifact
 
-Use the template below to document the review.
+Use the template below to document the review. Save to `planning/sprints/sprint-review-YYYY-MM-DD.md` (or present inline for a lean solo cycle).
 
 ## Template
 
@@ -106,6 +121,7 @@ Use `templates/review.md` from this skill as base for the artifact.
 - The demo must be verifiable — stakeholders must be able to confirm the result is real.
 - Collected feedback must become backlog item or action, never just meeting notes.
 - The sprint review feeds the retro. If the review doesn't happen, the retro loses important inputs.
+- Metrics in this artifact are reflection tools, not judgment tools. Never manipulate numbers to look better.
 
 ## Relationship with the flow
 
@@ -113,11 +129,10 @@ Use `templates/review.md` from this skill as base for the artifact.
 flowchart LR
     A["/agile-sprint"] --> B[execution]
     B --> C["/agile-status"]
-    C --> D["/agile-metrics"]
-    D --> E["/agile-review"]
-    E --> F["/agile-retro"]
+    C --> D["/agile-review"]
+    D --> E["/agile-retro"]
 ```
 
-In the stitched flow, the sprint review connects execution to feedback: planning -> execution -> status -> metrics -> review -> retro.
+In the stitched flow, the sprint review connects execution to feedback: planning -> execution -> status -> review (demo + metrics) -> retro.
 
-For status tracking during the sprint, use `/agile-status`. For quantitative data, use `/agile-metrics`.
+For status tracking during the sprint, use `/agile-status`. The sprint's quantitative numbers live in this review artifact.

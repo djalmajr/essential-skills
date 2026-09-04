@@ -74,11 +74,10 @@ No-pause mode: if the user has explicitly disabled mid-skill clarification, conv
    - `/agile-refinement` — validate artifacts and review code
    - `/agile-status` — track progress (checkpoint, consolidation, closure)
    - `/agile-sprint` — sprint planning
-   - `/agile-review` — sprint review and demo
-   - `/agile-metrics` — sprint metrics
+   - `/agile-review` — sprint review, metrics, and demo
    - `/agile-retro` — retrospective
-   - `/agile-proto` — static HTM UI browser prototypes
-   - `/agile-pen` — Pen.dev `.pen` prototypes
+   - `/agile-proto` — static browser prototypes (UI via the `htm-ui` skill)
+   - `/agile-design` — screens, states, and flows in any design tool
    - `/agile-router` — guidance on which skill to use
 
 ### Day 2: Practical exercise — intake and planning

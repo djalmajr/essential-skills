@@ -9,7 +9,7 @@ Skills evolve from real usage (`CLAUDE.md` → "Skill Evolution"). To refine the
 1. Every significant skill invocation produces a `journal/` entry.
 2. Patterns that repeat get promoted to `findings/`.
 3. Mature findings become `proposals/`.
-4. Approved proposals drive skill changes through `/agile-skill-feedback`.
+4. Proposals enter the skill package only after human review and approval.
 
 ## Layout
 
@@ -25,7 +25,7 @@ samples/
     │   └── YYYY-MM-DD-<slug>.md
     ├── findings/          # consolidated patterns
     │   └── <slug>.md
-    └── proposals/         # drafts for /agile-skill-feedback
+    └── proposals/         # drafted skill-library changes, pending human review
         └── <slug>.md
 ```
 
@@ -83,7 +83,7 @@ session uses skill → journal/ entry
                         ↓
                    draft a proposals/ file
                         ↓
-                   /agile-skill-feedback (formalize)
+                   human review → apply to skills/ (approved)
 ```
 
 ## Conventions

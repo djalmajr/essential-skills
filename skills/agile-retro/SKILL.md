@@ -66,7 +66,7 @@ No-pause mode: if the user has explicitly disabled mid-skill clarification, conv
 - Mid-sprint status — use `/agile-status` (checkpoint mode) instead
 - Planning the next sprint — use `/agile-sprint` instead (but retro should feed into it)
 - Closing a delivery with verification — use `/agile-status` (closure mode) first, then retro
-- You need metrics/data — use `/agile-metrics` first, then retro
+- You need metrics/data — run `/agile-review` first (its metrics section), then retro
 
 ## Process
 
@@ -120,7 +120,7 @@ When running after a delivery closure:
 ## Chaining
 
 - If actions generate new tasks: suggest `/agile-story` or `/agile-epic`
-- If actions change process or expose skill/template gaps: suggest `/agile-skill-feedback`
+- If actions change process or expose skill/template gaps: record them in the retro for human review
 - If the cycle restarts: suggest `/agile-sprint`
 
 ## Reference template
@@ -144,4 +144,4 @@ flowchart LR
     C --> D["/agile-sprint"]
 ```
 
-This skill closes the feedback loop. For closing deliveries, use `/agile-status` (closure mode) first. For metrics data, use `/agile-metrics` first. The next cycle starts with `/agile-sprint`.
+This skill closes the feedback loop. For closing deliveries, use `/agile-status` (closure mode) first. For the demo and sprint numbers, use `/agile-review` first. The next cycle starts with `/agile-sprint`.

@@ -17,7 +17,7 @@ Guides showing how skills chain together in real delivery scenarios.
 |-------|-------------------|
 | [From Idea to Delivery](agile/guides/from-idea-to-delivery.md) | End-to-end: intake -> epic/task -> refinement -> status |
 | [Managing Large Initiatives](agile/guides/managing-large-initiatives.md) | Epic-scale: roadmap -> epic -> task -> status |
-| [Sprint Lifecycle](agile/guides/sprint-lifecycle.md) | Ceremonies: planning -> status -> review -> metrics -> retro |
+| [Sprint Lifecycle](agile/guides/sprint-lifecycle.md) | Ceremonies: planning -> status -> review (with metrics) -> retro |
 | [Getting Started](agile/guides/getting-started.md) | Onboarding, prototyping, decision trees, and cheat sheet |
 
 Full skill reference and workflow diagram: [agile/](agile/README.md)

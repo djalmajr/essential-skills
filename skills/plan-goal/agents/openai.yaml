@@ -1,4 +1,4 @@
 interface:
   display_name: "Plan + Goal"
-  short_description: "Long plan, *.goal.md, and paste-ready /goal text"
-  default_prompt: "Write a long implementation plan plus a Grok /goal harness file, then give a paste-ready /goal command."
+  short_description: "One plan with checklist, clipboard copy, paste-ready goal prompt"
+  default_prompt: "Write one implementation plan with a sequential checklist, copy it to the clipboard, then give a paste-ready prompt to execute that goal."

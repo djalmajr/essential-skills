@@ -1,6 +1,6 @@
 # agile-router
 
-Routes to the appropriate agile skill based on context. Covers three areas: planning (what artifact to create), ceremonies (where in the sprint cycle), and tracking (how to report progress). Use when you need guidance on which skill to use.
+Routes to the appropriate agile skill based on context. Covers planning (what artifact to create), ceremonies (where in the sprint cycle), tracking (how to report progress), and UI/test/memory entry points (prototype, TDD, ai-memory). Use when you need guidance on which skill to use.
 
 ## When to use
 
@@ -60,12 +60,14 @@ Example: `/agile-router add multi-language support to onboarding`
 | `/agile-refinement` | Validate artifacts and review code |
 | `/agile-status` | Track progress (checkpoint, consolidation, closure) |
 | `/agile-sprint` | Sprint planning |
-| `/agile-review` | Sprint review and demo |
-| `/agile-metrics` | Sprint metrics |
+| `/agile-review` | Sprint review, metrics, and demo |
 | `/agile-retro` | Retrospective |
-| `/agile-proto` | Static browser prototypes powered by HTM UI |
-| `/agile-pen` | Pen.dev `.pen` prototypes and explicit UI states |
+| `/agile-tdd` | TDD coaching and optional enforcement |
+| `/agile-proto` | Static browser prototype process (+ `htm-ui` skill) |
+| `/agile-design` | Screens, states, and flows in any design tool |
 | `/agile-onboarding` | New member onboarding |
+| `/ux-flows` / `/ux-persona` | Usage-flow catalog and persona walkthroughs |
+| `/aim-init` / `/aim-query` / `/aim-write` | Wire and use ai-memory |
 
 ## Workflow integration
 

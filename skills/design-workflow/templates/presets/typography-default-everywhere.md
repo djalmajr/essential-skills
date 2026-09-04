@@ -1,26 +1,26 @@
-# Preset opt-in: "texto padrão em tudo"
+# Opt-in preset: "inherited size everywhere"
 
-Política de tipografia OPCIONAL — só adote se o dono do produto decidir por
-ela explicitamente. Bootstrap NUNCA a aplica por default; a identidade de
-cada produto vive no DESIGN.md dele, não nesta skill.
+OPTIONAL typography policy — adopt it only if the product owner chooses it
+explicitly. Bootstrap NEVER applies it by default; each product's identity
+lives in its DESIGN.md, not in this skill.
 
-## Prosa (colar na seção Typography do DESIGN.md, ajustando exceções)
+## Prose (paste into the DESIGN.md Typography section, adjusting exceptions)
 
-- **Texto padrão em tudo:** a UI usa o tamanho herdado; nenhuma classe
-  utilitária de tamanho fora das exceções abaixo.
-- **Exceções indicadas pelo dono:** <liste cada exceção aprovada, ex.:
-  `text-xs` para hints/metadados; caps 11px para labels de seção>. Toda
-  entrada em `x-parity.allowed` corresponde a um item desta lista.
+- **Inherited size everywhere:** the UI uses the inherited size; no size
+  utility class outside the exceptions below.
+- **Owner-indicated exceptions:** <list each approved exception, e.g.
+  `text-xs` for hints/metadata; 11px caps for section labels>. Every
+  `x-parity.allowed` entry corresponds to an item on this list.
 
-## Bloco `x-parity` correspondente
+## Matching `x-parity` block
 
 ```yaml
 forbidden:
   - "text-(sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl)(?![-\\w])"
   - "text-\\[[0-9.]+(px|rem)\\]"
-allowed: [] # preencha com as exceções aprovadas pelo dono
+allowed: [] # fill with owner-approved exceptions
 ```
 
-Origem: política adotada pelo primeiro consumidor (UI densa de ferramenta interna); mantida aqui
-como exemplo pronto porque é comum em UIs densas de ferramenta — mas é uma
-escolha estética do produto, não parte do processo.
+Origin: policy adopted by the first consumer (dense internal-tool UI); kept
+here as a ready example because it is common in dense tool UIs — but it is a
+product aesthetic choice, not part of the process.
