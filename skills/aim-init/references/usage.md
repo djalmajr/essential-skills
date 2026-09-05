@@ -143,7 +143,7 @@ No-infra fallback: use a native-OAuth client (Claude Code) for that instance and
   on `memory_query`, **not** `memory_briefing` (briefing stays per-(workspace, project)); and in
   parallel-agent / scope-bleed setups reach them **deterministically** via explicit
   `memory_query scopes:[{workspace:"default", project:"_global"}]`. Pre-v1.9.0 fallback: a shared
-  `default`/`development` project under `_rules/`, fetched cross-scope. See `aim-write` / `aim-query`.
+  `default`/`_global` project under `_rules/`, fetched cross-scope. See `aim-write` / `aim-query`.
 
 ## The `aim-*` skills (manual entry points)
 

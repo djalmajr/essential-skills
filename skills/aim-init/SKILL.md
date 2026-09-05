@@ -14,6 +14,8 @@ durable knowledge. Works greenfield or brownfield (incl. migrating off the old
 > ai-memory replaces the qmd `wiki/` + local-index stack: knowledge lives server-side
 > in the ai-memory instance (recalled via the MCP), not in a per-repo `wiki/` folder.
 > Full usage model in [references/usage.md](references/usage.md).
+> **Server side** (install a new instance, upgrade the engine, providers, consumer keys,
+> backup/restore) is [aim-ops](../aim-ops/SKILL.md) — this skill only wires clients to it.
 
 ## Route intent
 
@@ -141,12 +143,18 @@ AI_MEMORY_SERVER_URL=https://memory.example.dev AI_MEMORY_AUTH_TOKEN=<token-or-e
    Install or refresh them per agent with the capture base URL, not the `/mcp` URL.
    **Hook auth — pick the mode that matches the server. This is the #1 cause of silent
    capture failure: the wrong mode 401s on every drain, the spool fills, captures are lost.**
-   There are three modes:
+   There are four modes:
    - **Open hook routes** (no auth on `/hook`+`/handoff`) → install with **no** `--auth-token`.
    - **Static bearer** — the server accepts a shared/per-user token on `/hook`+`/handoff`
      (e.g. `AI_MEMORY_AUTH_TOKEN` on a single-tenant engine, or a token from
      `ai-memory user add`) → pass it via `--auth-token`. Embedded in each agent's hook config,
      so treat that file as sensitive (`chmod 600`).
+   - **Consumer key (`amk_`, keys-only gateway)** — the `mcp-auth` sidecar runs without an
+     identity provider and resolves per-consumer keys locally (`KEYS_DB`). Each agent/CLI gets
+     its **own** key (`POST /keys` with an `admin`-scoped key; issued by `aim-ops keys`), scoped
+     `read,write`; pass it via `--auth-token` for hooks and as the MCP `Authorization` header.
+     Attribution comes from the key's `actor_user`. Expect **403 on `/admin/*`** with a
+     non-admin key — by design, not a server fault. Rotation = issue new + revoke old.
    - **OIDC / Keycloak gateway** — a forwardAuth sidecar (`mcp-auth`) that validates a **JWT**
      and answers `401 WWW-Authenticate: Bearer resource_metadata=…` (RFC 9728). A static hex
      token is **rejected (401)** here — the gateway only accepts a Keycloak JWT, and the
@@ -159,6 +167,8 @@ AI_MEMORY_SERVER_URL=https://memory.example.dev AI_MEMORY_AUTH_TOKEN=<token-or-e
    Quick test of which mode a server is in: `curl -sI <server>/hook` → `401` with a
    `WWW-Authenticate: Bearer resource_metadata=` header means OIDC/Keycloak (device flow);
    a plain `401`/`200` without that header means static-bearer/open.
+   `GET <server>/keys/whoami` → `200` with `{identity, can_issue}` means the keys-only gateway
+   is present (consumer keys); `404` means the sidecar has no `KEYS_DB`.
 
    Add `--hooks-dir <ai-memory/hooks>` when the binary can't locate its vendored scripts
    (e.g. a `cargo install` build):
@@ -489,6 +499,12 @@ server upgrades. No marker/snippet/MCP changes; **detect what's installed and br
 4. **Verify:** `ai-memory --version` matches the server; `ai-memory auth status` → logged in; the
    agent configs still call `ai-memory hook --event` natively; `<data_dir>/hook-spool` is well
    below the 10000 cap.
+5. **≥ 2.0 notes:** `install-hooks --apply` now stores the bearer in `<data_dir>/auth-token`
+   (0600) and renders a `resolveToken()` helper in generated TypeScript integrations; the
+   managed Agent Skills changed — refresh them with `memory_install_self_routing` (or
+   `ai-memory install-instructions`). Codex prompts *Hooks need review* on next start: trust
+   them. A CLI ≥ 2.0 talks fine to a 1.3x server for hooks (`/hook/batch` unchanged), but
+   upgrade the **server first** (`aim-ops upgrade`) and then clients, on the same day.
 
 `refresh` does **not** touch the marker, routing snippet, or MCP entry (version-agnostic, and the
 snippet is binary-owned) — run **install** / **migrate** for those. Hooks are **global** (one data

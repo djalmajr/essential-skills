@@ -33,8 +33,8 @@ those, and do not use a handoff for a permanent annotation.
    never `rules/`.
 
    **Shared / cross-project rules** (e.g. global agent conventions reused
-   across every repo) belong in a dedicated scope — a shared project such
-   as `default`/`development` — under `_rules/` there. Recall is
+   across every repo) belong in a dedicated scope — the reserved
+   `default`/`_global` scope — under `_rules/` there (write with `scope: "global"`). Recall is
    per-(workspace, project), so other projects reach them **cross-scope**
    via `memory_query scopes:[…]` / `memory_read_page` (see `aim-query`),
    not automatically.

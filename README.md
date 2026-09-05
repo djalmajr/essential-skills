@@ -102,6 +102,7 @@ Keep frontmatter portable. Avoid agent-specific fields unless the skill truly ne
 | Skill | Purpose |
 |-------|---------|
 | aim-init | Wire ai-memory into a repo (marker, snippet, MCP, hooks) |
+| aim-ops | Install, upgrade and operate an ai-memory server (compose stack, providers, keys, backups) |
 | aim-query | Explicit recall from the wiki |
 | aim-write | Durable page (decision, rule, gotcha) |
 
