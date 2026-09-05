@@ -18,8 +18,8 @@ Explicit recall from an ai-memory instance (complements the automatic session-st
    widen it: a different project, a partial scope, or multi-`scopes` for cross-project recall.
    `scopes` carries `{ workspace, project }` per entry, so recall can span **other workspaces**
    too (e.g. a shared rules project); `global: true` searches every project at once.
-   - **Shared / global rules** live in a dedicated scope (commonly `default`/`development`,
-     under `_rules/`), separate from the repo's own project. ai-memory's auto-recall is
+   - **Shared / global rules** live in a dedicated scope (the reserved `default`/`_global` scope,
+     under `_rules/`; ≥1.9 the server unions it into default-scoped queries as `global_scope_hits`), separate from the repo's own project. ai-memory's auto-recall is
      per-(workspace, project) and will **not** surface them — pull them explicitly:
      `memory_read_page` with that workspace/project/path, or `memory_query` with
      `scopes:[{ workspace, project }]`. Do this when the task needs the agent's standing

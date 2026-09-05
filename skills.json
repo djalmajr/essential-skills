@@ -1,33 +1,34 @@
 {
- "skills": [
-  {
-   "source": "djalmajr/skills",
-   "skills": [
-    "agile-design",
-    "agile-epic",
-    "agile-intake",
-    "agile-onboarding",
-    "agile-proto",
-    "agile-refinement",
-    "agile-retro",
-    "agile-review",
-    "agile-roadmap",
-    "agile-router",
-    "agile-sprint",
-    "agile-status",
-    "agile-story",
-    "agile-tdd",
-    "aim-init",
-    "aim-query",
-    "aim-write",
-    "create-audio",
-    "create-video",
-    "design-workflow",
-    "excalidraw",
-    "plan-goal",
-    "ux-flows",
-    "ux-persona"
-   ]
-  }
- ]
+  "skills": [
+    {
+      "source": "djalmajr/skills",
+      "skills": [
+        "agile-design",
+        "agile-epic",
+        "agile-intake",
+        "agile-onboarding",
+        "agile-proto",
+        "agile-refinement",
+        "agile-retro",
+        "agile-review",
+        "agile-roadmap",
+        "agile-router",
+        "agile-sprint",
+        "agile-status",
+        "agile-story",
+        "agile-tdd",
+        "aim-init",
+        "aim-ops",
+        "aim-query",
+        "aim-write",
+        "create-audio",
+        "create-video",
+        "design-workflow",
+        "excalidraw",
+        "plan-goal",
+        "ux-flows",
+        "ux-persona"
+      ]
+    }
+  ]
 }
